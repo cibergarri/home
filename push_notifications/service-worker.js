@@ -28,6 +28,15 @@ self.addEventListener('push', function(event) {
     notificationTitle = 'Received Payload';
     notificationOptions.body = `Push data: '${dataText}'`;
   }
+  if (event.data) {
+    console.log("data received:" + JSON.stringify(event.data));
+    const dataObject = event.data.json();
+
+    notificationTitle = dataObject.title;
+    notificationOptions.body = dataObject.body;
+    notificationOptions.data.url = dataObject.url;
+  }
+
 
   event.waitUntil(
     Promise.all([
