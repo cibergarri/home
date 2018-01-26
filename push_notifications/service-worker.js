@@ -21,6 +21,9 @@ self.addEventListener('push', function(event) {
   };
 
   if (event.data) {
+
+    console.log("data received" + JSON.stringify(event.data));
+    //console.log("notification" + JSON.stringify(event.notification));
     const dataText = event.data.text();
     notificationTitle = 'Received Payload';
     notificationOptions.body = `Push data: '${dataText}'`;
@@ -37,8 +40,6 @@ self.addEventListener('push', function(event) {
 
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
-  console.log("data received" + JSON.stringify(event.notification.data));
-  console.log("notification" + JSON.stringify(event.notification));
   let clickResponsePromise = Promise.resolve();
   if (event.notification.data && event.notification.data.url) {
     clickResponsePromise = clients.openWindow(event.notification.data.url);
