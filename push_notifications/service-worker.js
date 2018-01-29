@@ -21,14 +21,6 @@ self.addEventListener('push', function(event) {
   };
 
   if (event.data) {
-
-    console.log("data received" + JSON.stringify(event.data));
-    //console.log("notification" + JSON.stringify(event.notification));
-    const dataText = event.data.text();
-    notificationTitle = 'Received Payload';
-    notificationOptions.body = `Push data: '${dataText}'`;
-  }
-  if (event.data) {
     console.log("data received:" + JSON.stringify(event.data));
     const dataObject = event.data.json();
 
@@ -36,7 +28,6 @@ self.addEventListener('push', function(event) {
     notificationOptions.body = dataObject.body;
     notificationOptions.data.url = dataObject.url;
   }
-
 
   event.waitUntil(
     Promise.all([
