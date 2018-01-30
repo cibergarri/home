@@ -150,9 +150,10 @@ class AppController {
       this._sendPushOptions.style.opacity = 0;
       return;
     }
-
-    this._subscriptionJSONCode.textContent =
-      JSON.stringify(subscription, null, 2);
+    if(this._subscriptionJSONCode){
+      this._subscriptionJSONCode.textContent =
+        JSON.stringify(subscription, null, 2);
+    }
 
     // This is too handle old versions of Firefox where keys would exist
     // but auth wouldn't
