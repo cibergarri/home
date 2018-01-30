@@ -73,10 +73,13 @@ class AppController {
 
     const sendPushViaXHRButton = document.querySelector('.js-send-push-button');
     sendPushViaXHRButton.addEventListener('click', () => {
-      if (this._currentSubscription) {
-        this.sendPushMessage(this._currentSubscription,
-          this._payloadTextField.value);
-      }
+      // if (this._currentSubscription) {
+      //   this.sendPushMessage(this._currentSubscription,
+      //     this._payloadTextField.value);
+      // }JSON.parse(JSON.stringify(subscription))
+      const subscription = document.querySelector('.subscription-textfield').value;
+      this.sendPushMessage(JSON.parse(subscription), this._payloadTextField.value);
+
     });
 
     // allow snippets to be copied via click
@@ -262,7 +265,7 @@ class AppController {
 
   sendPushMessage(subscription, payloadText) {
     return this._encryptionHelper.getRequestDetails(
-      this._currentSubscription, payloadText)
+      subscription, payloadText)
     .then((requestDetails) => {
       // Some push services don't allow CORS so have to forward
       // it to a different server to make the request which does support
