@@ -21,7 +21,7 @@ self.addEventListener('push', function(event) {
   };
 
   if (event.data) {
-    console.log("data received:" + JSON.stringify(event.data));
+    console.log("data received: %o", event.data.json());
     const dataObject = event.data.json();
 
     notificationTitle = dataObject.subject;
