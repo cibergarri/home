@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "26dfb12fac632a832df6",
+    "revision": "40a6e7bf57a098fab731",
     "url": "/react_authorquizz/static/css/main.dc12abec.chunk.css"
   },
   {
-    "revision": "26dfb12fac632a832df6",
-    "url": "/react_authorquizz/static/js/main.26dfb12f.chunk.js"
+    "revision": "40a6e7bf57a098fab731",
+    "url": "/react_authorquizz/static/js/main.40a6e7bf.chunk.js"
   },
   {
     "revision": "4cf2a3c2febd79979c5e",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/react_authorquizz/static/js/runtime~main.6b4de26d.js"
   },
   {
-    "revision": "0f391ee4bd4e606c0711fe173134582b",
+    "revision": "76cbc55addfff6f2491d1eea3da78d9c",
     "url": "/react_authorquizz/index.html"
   }
 ];
