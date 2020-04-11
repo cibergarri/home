@@ -1,23 +1,32 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import reduxCookiesMiddleware, { getStateFromCookies } from 'redux-cookies-middleware';
 import thunk from 'redux-thunk';
+
 import rootReducer from './reducers/rootReducer';
 
+const defaultTheme = 'normal';
+
 const defaultState = () => ({
-  config: {
-    theme: {
-      main: {
-        primary: "blue",
-        background: "#ffffff",
-      },
-    },
-  },
+  config: {},
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default function configureStore(initialState = defaultState()) {
+// state to persist in cookies
+const paths = {
+  'config.theme': { name: 'my_theme' },
+};
+
+const initialState = getStateFromCookies(defaultState, paths);
+
+initialState.config.theme = initialState.config.theme || defaultTheme;
+
+export default function configureStore() {
  return createStore(
    rootReducer,
    initialState,
-   composeEnhancers(applyMiddleware(thunk))
+   composeEnhancers(applyMiddleware(
+     thunk,
+     reduxCookiesMiddleware(paths)
+    ))
  );
 }

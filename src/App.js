@@ -7,6 +7,9 @@ import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { ThemeProvider } from 'styled-components';
 
+//Themes
+import { themes } from './styles/themes.js';
+
 // Routes
 import Landing from './views/landing/index.js';
 
@@ -20,7 +23,7 @@ const mapStateToProps = state => {
 
 function App(props) {
   return (
-    <ThemeProvider theme={props.theme}>
+    <ThemeProvider theme={themes[props.theme]}>
     <Router history={hist}>
       <Switch>
         <Route path="/" component={Landing} />
