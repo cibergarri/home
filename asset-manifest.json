@@ -1,15 +1,23 @@
 {
-  "main.css": "/static/css/main.c413f138.chunk.css",
-  "main.js": "/static/js/main.0489f58b.chunk.js",
-  "main.js.map": "/static/js/main.0489f58b.chunk.js.map",
-  "static/css/1.9e9b2e84.chunk.css": "/static/css/1.9e9b2e84.chunk.css",
-  "static/js/1.cbf7a9e1.chunk.js": "/static/js/1.cbf7a9e1.chunk.js",
-  "static/js/1.cbf7a9e1.chunk.js.map": "/static/js/1.cbf7a9e1.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/main.c413f138.chunk.css.map": "/static/css/main.c413f138.chunk.css.map",
-  "static/css/1.9e9b2e84.chunk.css.map": "/static/css/1.9e9b2e84.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.092444d18dacbdd5e59ee1688f7fb3e2.js": "/precache-manifest.092444d18dacbdd5e59ee1688f7fb3e2.js",
-  "service-worker.js": "/service-worker.js"
+  "files": {
+    "main.css": "/cibergarri.github.io/react-gh-pages/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/cibergarri.github.io/react-gh-pages/static/js/main.694f52ff.chunk.js",
+    "main.js.map": "/cibergarri.github.io/react-gh-pages/static/js/main.694f52ff.chunk.js.map",
+    "runtime-main.js": "/cibergarri.github.io/react-gh-pages/static/js/runtime-main.efa0154e.js",
+    "runtime-main.js.map": "/cibergarri.github.io/react-gh-pages/static/js/runtime-main.efa0154e.js.map",
+    "static/js/2.c8603f15.chunk.js": "/cibergarri.github.io/react-gh-pages/static/js/2.c8603f15.chunk.js",
+    "static/js/2.c8603f15.chunk.js.map": "/cibergarri.github.io/react-gh-pages/static/js/2.c8603f15.chunk.js.map",
+    "index.html": "/cibergarri.github.io/react-gh-pages/index.html",
+    "precache-manifest.c816c475857a2c250d82d20aab10af9f.js": "/cibergarri.github.io/react-gh-pages/precache-manifest.c816c475857a2c250d82d20aab10af9f.js",
+    "service-worker.js": "/cibergarri.github.io/react-gh-pages/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/cibergarri.github.io/react-gh-pages/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.c8603f15.chunk.js.LICENSE.txt": "/cibergarri.github.io/react-gh-pages/static/js/2.c8603f15.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/cibergarri.github.io/react-gh-pages/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.efa0154e.js",
+    "static/js/2.c8603f15.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.694f52ff.chunk.js"
+  ]
 }
