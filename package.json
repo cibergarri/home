@@ -2,7 +2,7 @@
   "name": "javier-garrido",
   "version": "0.1.0",
   "private": true,
-  "homepage": "cibergarri.github.io/react-gh-pages",
+  "homepage": "home",
   "dependencies": {
     "@material-ui/core": "4.9.9",
     "@testing-library/jest-dom": "^4.2.4",
@@ -11,8 +11,11 @@
     "history": "4.10.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "7.2.0",
     "react-router-dom": "5.1.2",
     "react-scripts": "3.4.1",
+    "redux": "4.0.5",
+    "redux-thunk": "2.3.0",
     "styled-components": "5.1.0"
   },
   "devDependencies": {

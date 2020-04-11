@@ -1,34 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Switch } from "react-router-dom";
-import { createBrowserHistory } from "history";
-import { ThemeProvider } from 'styled-components';
-
+import { Provider } from 'react-redux'
+import configureStore from './store';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
 
-import App from './views/app/App.js';
-import Landing from './views/landing/index.js';
-
-const hist = createBrowserHistory();
-
-const theme = {
-  main: {
-    primary: "white",
-    background: "#282c34",
-  },
-};
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Router history={hist}>
-        <Switch>
-          <Route path="/app" component={App} />
-          <Route path="/" component={Landing} />
-        </Switch>
-      </Router>,
-    </ThemeProvider>
+    <Provider store={configureStore()}>
+      <App/>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
