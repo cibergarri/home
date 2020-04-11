@@ -1,29 +1,22 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
-
-import { setThemeAction } from '../../actions/setThemeAction';
-import { THEMES } from '../../constants/config';
 
 import {
-  Main, Header, Link, Body, CustomButton, CustomSwitch,
+  Main, Link, Body,
 } from './style';
 
-function Landing(props) {
-  const theme = useSelector(state => state.config.theme);
-  const dispatch = useDispatch();
+import CustomHeader from '../../components/CustomHeader/';
 
-  const toggleTheme = (event) => {
-    const theme = event.target.checked ? THEMES.NIGHT : THEMES.NORMAL;
-    dispatch(setThemeAction(theme));
-  }
+function Landing(props) {
+  
 
   return (
     <Main>
-      <Header>
-        <CustomSwitch checked={ theme === THEMES.NIGHT } onChange={toggleTheme}/>
-        <Link href='https://cibergarri.github.io/playground'>Playground</Link>
-      </Header>
+      <CustomHeader/>
       <Body>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        This is a work in progress
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <Link href='https://cibergarri.github.io/playground'>Playground</Link>
         {/* <CustomButton>Hello World</CustomButton> */}
       </Body>
     </Main>

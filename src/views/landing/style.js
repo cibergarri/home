@@ -4,6 +4,9 @@ import { Button, Switch } from '@material-ui/core';
 
 export const Main = styled.div`
   text-align: center;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  min-height: 100vh;
 `;
 
 export const Header = styled.header`
@@ -54,6 +57,7 @@ export const Link = styled.a.attrs(props => ({
 export const Body = styled.div`
   background-color: ${props => props.theme.main.background};
   color: ${props => props.theme.main.primary};
+  min-height: 100vh;
 `;
 
 export const CustomButton = styled(Button).attrs(props => ({
