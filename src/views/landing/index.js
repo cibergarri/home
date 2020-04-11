@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
 import { setThemeAction } from '../../actions/setThemeAction';
 import { THEMES } from '../../constants/config';
@@ -9,30 +9,34 @@ import {
 } from './style';
 
 function Landing(props) {
+  const theme = useSelector(state => state.config.theme);
+  const dispatch = useDispatch();
+
   const toggleTheme = (event) => {
     const theme = event.target.checked ? THEMES.NIGHT : THEMES.NORMAL;
-    props.setThemeAction(theme);
+    dispatch(setThemeAction(theme));
   }
 
   return (
     <Main>
       <Header>
-        <CustomSwitch checked={ props.theme === THEMES.NIGHT } onChange={toggleTheme}/>
+        <CustomSwitch checked={ theme === THEMES.NIGHT } onChange={toggleTheme}/>
         <Link href='https://cibergarri.github.io/playground'>Playground</Link>
       </Header>
       <Body>
-        <CustomButton>Hello World</CustomButton>
+        {/* <CustomButton>Hello World</CustomButton> */}
       </Body>
     </Main>
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  setThemeAction: (theme) => dispatch(setThemeAction(theme))
-});
 
-const mapStateToProps = state => ({
-  ...state.config,
-});
+// const mapDispatchToProps = dispatch => ({
+//   setThemeAction: (theme) => dispatch(setThemeAction(theme))
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Landing);
+// const mapStateToProps = state => ({
+//   ...state.config,
+// });
+
+export default Landing;
