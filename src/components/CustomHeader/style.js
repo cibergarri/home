@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { AppBar, Switch, Toolbar, Typography } from '@material-ui/core';
 
 export const Header = styled.header`
-  background-color: transparent;
   color: ${props => props.theme.main.primary};
   max-height: 300px;
   display: flex;
@@ -11,6 +10,7 @@ export const Header = styled.header`
   align-items: center;
   text-align: center;
   font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-weight: bold;
   z-index: 1100;
   position: fixed;
   width: 100%;
@@ -36,6 +36,7 @@ export const CustomToolbar = styled(Toolbar)`
 
 export const Title = styled(Typography)`
   alignSelf: 'flex-end';
+  font-weight: bold !important;
 `;
 
 export const Blank = styled.div`
@@ -62,6 +63,7 @@ export const SVG =  styled.svg`
 
 export const NightModeContainer = styled(Typography)`
   transition: fill 2s;
+  font-weight: bold !important;
 `;
 
 export const CustomSwitch = styled(Switch).attrs(props => ({
@@ -72,8 +74,8 @@ export const CustomSwitch = styled(Switch).attrs(props => ({
 `;
 
 export const BackgroundImage = styled.div.attrs(props => ({}))`
-  background-image: ${props => `url( ${require(`../../assets/img/bg-${props.theme.main.name}.png`)})`};
+  background: ${props => `linear-gradient(${props.theme.main.background}FF 10%, ${props.theme.main.background}00 15%, ${props.theme.main.background}00 85%, ${props.theme.main.background}FF 90%), url( ${require(`../../assets/img/bg-${props.theme.main.name}.png`)})`};
   background-position: center bottom;
   background-repeat: no-repeat;
-  height: 780px
+  height: 780px;
 `;

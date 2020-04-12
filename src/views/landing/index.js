@@ -13,7 +13,6 @@ function Landing(props) {
     <Main>
       <CustomHeader/>
       <Body>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
         This is a work in progress
         <br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <Link href='https://cibergarri.github.io/playground'>Playground</Link>
