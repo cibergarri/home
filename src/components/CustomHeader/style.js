@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { AppBar, Switch, Toolbar, Typography } from '@material-ui/core';
 
 export const Header = styled.header`
+  background: ${props => `linear-gradient(${props.theme.main.background}DD 80%, ${props.theme.main.background}00 100%)`};
   color: ${props => props.theme.main.primary};
   max-height: 300px;
   display: flex;
