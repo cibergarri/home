@@ -26,7 +26,7 @@ export const CustomAppBar = styled(AppBar).attrs(props => ({
   }};
   box-shadow: none !important; 
   max-width: 90%;
-  padding: 25px
+  padding: 1vh 1vw 1vh 1vw;
 `;
 
 export const CustomToolbar = styled(Toolbar)`
@@ -44,7 +44,7 @@ export const Blank = styled.div`
 `;
 
 export const LinksContainer = styled.div`
-  margin-right: 10px;
+  margin-right: 1vw;
 `;
 
 export const Link = styled.a.attrs(props => ({
@@ -57,7 +57,7 @@ export const SVG =  styled.svg`
   transition: fill 2s;
   width: 24px;
   height: 24px;
-  margin-left: 15px;
+  margin-left: 1vw;
   fill: ${props => props.theme.main.primary};
 `;
 
@@ -74,8 +74,34 @@ export const CustomSwitch = styled(Switch).attrs(props => ({
 `;
 
 export const BackgroundImage = styled.div.attrs(props => ({}))`
-  background: ${props => `linear-gradient(${props.theme.main.background}FF 10%, ${props.theme.main.background}00 15%, ${props.theme.main.background}00 85%, ${props.theme.main.background}FF 90%), url( ${require(`../../assets/img/bg-${props.theme.main.name}.png`)})`};
+  background: ${props => `linear-gradient(${props.theme.main.background}FF 10%, ${props.theme.main.background}88 15%, ${props.theme.main.background}88 85%, ${props.theme.main.background}FF 90%), url( ${require(`../../assets/img/bg-${props.theme.main.name}.png`)})`};
   background-position: center bottom;
   background-repeat: no-repeat;
-  height: 780px;
+  transition: fill 2s;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right
 `;
+
+export const BackgroundTitle = styled.p`
+  color: ${props => props.theme.main.primary};
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  transition: fill 2s;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  font-size: 10vw;
+  padding: 0vh 3vw 0vh 0vw;
+`
+
+export const BackgroundSubtitle = styled.p`
+  color: ${props => props.theme.main.primary};
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  transition: fill 2s;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  font-size: 3vw;
+  padding: 0vh 3vw 3vh 0vw;
+  margin: 0vh 0vw 20vh 0vw;
+`
