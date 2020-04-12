@@ -2,16 +2,18 @@ import styled from 'styled-components';
 import { AppBar, Switch, Toolbar, Typography } from '@material-ui/core';
 
 export const Header = styled.header`
-  background-color: ${props => props.theme.main.background};
+  background-color: transparent;
   color: ${props => props.theme.main.primary};
   max-height: 300px;
   display: flex;
   flex-direction: row;
-  align-items: right;
-  justify-content: right;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   font-family: Roboto,Helvetica,Arial,sans-serif;
-  font-size: 16px:
+  z-index: 1100;
+  position: fixed;
+  width: 100%;
 `;
 
 export const CustomAppBar = styled(AppBar).attrs(props => ({
@@ -22,6 +24,9 @@ export const CustomAppBar = styled(AppBar).attrs(props => ({
   color: ${props => {
     return props.theme.main.primary;
   }};
+  box-shadow: none !important; 
+  max-width: 90%;
+  padding: 25px
 `;
 
 export const CustomToolbar = styled(Toolbar)`
@@ -52,7 +57,7 @@ export const SVG =  styled.svg`
   width: 24px;
   height: 24px;
   margin-left: 15px;
-  fill: ${props => props.theme.main.primary};;
+  fill: ${props => props.theme.main.primary};
 `;
 
 export const NightModeContainer = styled(Typography)`
@@ -66,6 +71,9 @@ export const CustomSwitch = styled(Switch).attrs(props => ({
   alignSelf: 'flex-end';
 `;
 
-
-
-
+export const BackgroundImage = styled.div.attrs(props => ({}))`
+  background-image: ${props => `url( ${require(`../../assets/img/bg-${props.theme.main.name}.png`)})`};
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  height: 780px
+`;

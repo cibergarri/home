@@ -3,14 +3,16 @@ import { THEMES } from '../constants/config';
 export const themes = {
   [THEMES.NORMAL]: {
     main: {
+      name: 'normal',
       primary: "#2f3337",
-      background: "#ffffff",
+      background: "#dedede",
     },
   },
   [THEMES.NIGHT]: {
     main: {
-      primary: "#cfd2d6",
-      background: "#2f3337",
+      name: 'night',
+      primary: "#de990f",
+      background: "#010012",
     },    
   },
 };
