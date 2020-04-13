@@ -80,29 +80,41 @@ export const BackgroundImage = styled.div.attrs(props => ({}))`
   background-repeat: no-repeat;
   transition: fill 2s;
   height: 100vh;
+  max-height: 780px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  text-align: right
+  text-align: right;
 `;
 
-export const BackgroundTitle = styled.p`
+export const BackgroundTitle = styled.div`
   color: ${props => props.theme.main.primary};
   font-family: Roboto,Helvetica,Arial,sans-serif;
   transition: fill 2s;
   font-family: Roboto,Helvetica,Arial,sans-serif;
   font-weight: bold;
-  font-size: 10vw;
-  padding: 0vh 3vw 0vh 0vw;
+  font-size: 6vw;
+  padding: 0vh 3vw 20px 0vw;
+  margin: 0px;
+  max-width: 400px;
+  align-self: flex-end;
+  @media (min-width: 768px) {
+    font-size: 70px;
+  }
 `
 
-export const BackgroundSubtitle = styled.p`
+export const BackgroundSubtitle = styled.div`
   color: ${props => props.theme.main.primary};
   font-family: Roboto,Helvetica,Arial,sans-serif;
   transition: fill 2s;
   font-family: Roboto,Helvetica,Arial,sans-serif;
   font-weight: bold;
   font-size: 3vw;
-  padding: 0vh 3vw 3vh 0vw;
-  margin: 0vh 0vw 20vh 0vw;
+  padding: 0vh 3vw 0px 0vw;
+  height: 200px;
+  max-width: 500px;
+  align-self: flex-end;
+  @media (min-width: 768px) {
+    font-size: 35px;
+  }
 `
