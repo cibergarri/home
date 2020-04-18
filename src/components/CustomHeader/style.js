@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { AppBar, Switch, Toolbar, Typography } from '@material-ui/core';
+import {
+  AppBar, Switch, Toolbar, Typography,
+} from '@material-ui/core';
+
+import { Heart, Sun, Moon } from '../../icons/';
 
 export const Header = styled.header`
   background: ${props => `linear-gradient(${props.theme.main.background}DD 80%, ${props.theme.main.background}00 100%)`};
@@ -36,8 +40,11 @@ export const CustomToolbar = styled(Toolbar)`
 `;
 
 export const Title = styled(Typography)`
-  alignSelf: 'flex-end';
   font-weight: bold !important;
+  transition: all 4s;
+  @media (max-width: 470px) {
+    font-size: 0.75rem !important;
+  }
 `;
 
 export const Blank = styled.div`
@@ -46,6 +53,8 @@ export const Blank = styled.div`
 
 export const LinksContainer = styled.div`
   margin-right: 1vw;
+  display: inline-block;
+  min-width: 100px;
 `;
 
 export const Link = styled.a.attrs(props => ({
@@ -55,16 +64,18 @@ export const Link = styled.a.attrs(props => ({
 }))``;
 
 export const SVG =  styled.svg`
-  transition: fill 2s;
+  transition: all 2s;
   width: 24px;
   height: 24px;
   margin-left: 1vw;
   fill: ${props => props.theme.main.primary};
 `;
 
-export const NightModeContainer = styled(Typography)`
-  transition: fill 2s;
-  font-weight: bold !important;
+export const NightModeContainer = styled.div`
+  transition: all 2s;
+  padding-bottom: 10px;
+  min-width: 110px;
+  displa: inline-block;
 `;
 
 export const CustomSwitch = styled(Switch).attrs(props => ({
@@ -72,6 +83,26 @@ export const CustomSwitch = styled(Switch).attrs(props => ({
 }))`
   flex-grow: 1;
   alignSelf: 'flex-end';
+`;
+
+export const StyledSunIcon = styled(Sun).attrs(props => ({
+  fill: props.theme.main.primary,
+  height:"20px",
+  width:"20px",
+}))`
+  transition: fill 2s;
+  padding: 0px 0.5vw 0vh 0.5vw;
+  vertical-align: middle;
+`;
+
+export const StyledMoonIcon = styled(Moon).attrs(props => ({
+  fill: props.theme.main.primary,
+  height:"20px",
+  width:"18px",
+}))`
+  transition: fill 2s;
+  padding: 0px 0.5vw 0vh 0.5vw;
+  vertical-align: middle;
 `;
 
 export const BackgroundImage = styled.div.attrs(props => ({}))`
@@ -90,23 +121,27 @@ export const BackgroundImage = styled.div.attrs(props => ({}))`
 export const BackgroundTitle = styled.div`
   color: ${props => props.theme.main.primary};
   font-family: Roboto,Helvetica,Arial,sans-serif;
-  transition: fill 2s;
+  transition: all 2s;
   font-family: Roboto,Helvetica,Arial,sans-serif;
   font-weight: bold;
   font-size: 6vw;
   padding: 0vh 3vw 20px 0vw;
   margin: 0px;
-  max-width: 400px;
+  max-width: 500px;
   align-self: flex-end;
   @media (min-width: 768px) {
-    font-size: 70px;
+    font-size: 60px;
   }
 `
+export const ColoredText = styled.div`
+  color: #ff0000;
+  display:inline;
+`;
 
 export const BackgroundSubtitle = styled.div`
   color: ${props => props.theme.main.primary};
   font-family: Roboto,Helvetica,Arial,sans-serif;
-  transition: fill 2s;
+  transition: all 2s;
   font-family: Roboto,Helvetica,Arial,sans-serif;
   font-weight: bold;
   font-size: 3vw;

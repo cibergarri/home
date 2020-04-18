@@ -5,6 +5,7 @@ import {
 } from './style';
 
 import CustomHeader from '../../components/CustomHeader/';
+import CustomFooter from '../../components/CustomFooter/';
 
 function Landing(props) {
   
@@ -18,6 +19,7 @@ function Landing(props) {
         <Link href='https://cibergarri.github.io/playground'>Playground</Link>
         {/* <CustomButton>Hello World</CustomButton> */}
       </Body>
+      <CustomFooter/>
     </Main>
   );
 }

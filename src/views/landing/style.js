@@ -56,6 +56,7 @@ export const Link = styled.a.attrs(props => ({
 
 export const Body = styled.div`
   background-color: ${props => props.theme.main.background};
+  transition: all 0.5s;
   color: ${props => props.theme.main.primary};
   min-height: 100vh;
 `;

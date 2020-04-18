@@ -1,6 +1,6 @@
 import { THEMES } from '../constants/config';
 
-export const themes = {
+const themes = {
   [THEMES.NORMAL]: {
     main: {
       name: 'normal',
@@ -16,3 +16,5 @@ export const themes = {
     },    
   },
 };
+
+export default themes;

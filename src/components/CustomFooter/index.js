@@ -1,47 +1,31 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import MenuIcon from '@material-ui/icons/Menu';
 
 import { setThemeAction } from '../../actions/setThemeAction';
 import { THEMES } from '../../constants/config';
 
-import {
-  Header,
-  CustomSwitch,
-  CustomAppBar,
-  CustomToolbar,
-  Title,
-  NightModeContainer,
-  Blank,
-  SVG,
-  LinksContainer,
-  Link,
-  BackgroundImage,
-  BackgroundTitle,
-  ColoredText,
-  BackgroundSubtitle,
-  StyledMoonIcon,
-  StyledSunIcon,
+
+import { 
+  Footer, Copyright, StyledCopyLeftIcon, StyledHeartIcon, StyledJSIcon,
 } from './style';
 
-function CustomHeader() {
+function CustomFooter() {
   const theme = useSelector(state => state.config.theme);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const toggleTheme = (event) => {
-    const theme = event.target.checked ? THEMES.NIGHT : THEMES.NORMAL;
-    dispatch(setThemeAction(theme));
-  }
+  // const toggleTheme = (event) => {
+  //   const theme = event.target.checked ? THEMES.NIGHT : THEMES.NORMAL;
+  //   dispatch(setThemeAction(theme));
+  // }
 
   return (
     <>
-      <Header>
-        <CustomAppBar>
+      <Footer>
+        {/* <CustomAppBar>
           <CustomToolbar variant="dense">
-            {/* <IconButton edge="start" color="inherit" aria-label="menu">
-              <MenuIcon />
-            </IconButton> */}
-            <Title>cibergarri.github.io</Title>
+            <Title>
+              cibergarri.github.io
+            </Title>
             <Blank/>
             <LinksContainer>
               <Link href='https://www.linkedin.com/in/javiergarridoiglesias/'>
@@ -61,17 +45,16 @@ function CustomHeader() {
               </Link>
             </LinksContainer>
             <NightModeContainer>
-            <StyledSunIcon /><CustomSwitch checked={ theme === THEMES.NIGHT } onChange={toggleTheme}/><StyledMoonIcon />
+              Night Mode<CustomSwitch checked={ theme === THEMES.NIGHT } onChange={toggleTheme}/>
             </NightModeContainer>
           </CustomToolbar>
-        </CustomAppBar>
-      </Header>
-      <BackgroundImage>
-        <BackgroundTitle>I <ColoredText>&lt;heart \&gt;</ColoredText> coding</BackgroundTitle>
-        <BackgroundSubtitle>...At least most of the time.</BackgroundSubtitle>
-      </BackgroundImage>
-    </>
+        </CustomAppBar> */}
+        <Copyright><StyledCopyLeftIcon/>
+        {1900 + new Date().getYear()} Made with{" "} <StyledHeartIcon /> and <StyledJSIcon /> by Javier Garrido
+        </Copyright>
+      </Footer>
+      </>
   );
 }
 
-export default CustomHeader;
+export default CustomFooter;

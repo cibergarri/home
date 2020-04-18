@@ -1,0 +1,5 @@
+export { default as Copyleft } from './Copyleft'
+export { default as Heart } from './Heart'
+export { default as Javascript } from './Javascript'
+export { default as Moon } from './Moon'
+export { default as Sun } from './Sun'
