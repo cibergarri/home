@@ -3,7 +3,9 @@ import { useDispatch } from "react-redux";
 import { setLoadingAction } from '../../actions/config';
 
 import {
-  Main, Link, Body,
+  Main, Link, Body, MainContainer,
+  TextTitle, Paragraph, Span,
+  StyledWorldIcon, StyledNodeJsIcon, StyledConstructionIcon, StyledDotNetIcon, StyledReactIcon,
 } from './style';
 
 import CustomHeader from '../../components/CustomHeader/';
@@ -13,15 +15,26 @@ function Landing(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setLoadingAction(false));
-  }, []);
+  }, [dispatch]);
   return (
     <Main>
       <CustomHeader/>
       <Body>
-        This is a work in progress
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <Link href='https://cibergarri.github.io/playground'>Playground</Link>
-        {/* <CustomButton>Hello World</CustomButton> */}
+        <MainContainer>
+          <TextTitle>Hello <StyledWorldIcon />, welcome to my site!</TextTitle>
+          <Paragraph>I am a Web developer who is passionate about his job and embraces learning as a way of life.</Paragraph>
+          <Paragraph>Having more expertise in the backend development -specially with <StyledNodeJsIcon />- but also targeting frontend technologies -as <StyledReactIcon />-</Paragraph>
+          <Paragraph>In one of my -not so far away- past lifes I also worked with <StyledDotNetIcon title='.Net'/> technologies -like MVC, WebAPI-</Paragraph>
+          <Paragraph>Some of the companies I have worked for are <Span color="#f98004">Thomson Reuters</Span>, <Span color="#1f399a">Cognizant</Span> and <Span color="#fa3334">Bag On Board</Span>.</Paragraph>
+          <Paragraph>During my workin years on those companies I have been part of international teams.</Paragraph>
+          <Paragraph>Feel free to check my social networks -on the top- to more detailed info or to contact me.</Paragraph>
+          <br/>
+          <Paragraph>Amongst any other interests I am a big fan of Star Wars, Board Games, TV Series, Movies, History and travelling</Paragraph>  
+          <br/><br/><br/><br/>
+          <Paragraph>Please, remember this site will be always under <StyledConstructionIcon /></Paragraph>
+          <br/><br/><br/><br/>
+          <Link href='https://cibergarri.github.io/playground'>Playground</Link>
+        </MainContainer>
       </Body>
       <CustomFooter/>
     </Main>

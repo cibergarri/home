@@ -6,6 +6,8 @@ const themes = {
       name: 'normal',
       primary: "#0d0469",
       background: "#dedede",
+      canvas: "#ffffff",
+      textColor: "#110469",
     },
   },
   [THEMES.NIGHT]: {
@@ -13,6 +15,8 @@ const themes = {
       name: 'night',
       primary: "#dedede",
       background: "#010012",
+      canvas: "#060627",
+      textColor: "#ffffff",
     },    
   },
 };
