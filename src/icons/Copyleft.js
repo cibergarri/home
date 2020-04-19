@@ -8,7 +8,7 @@ function SvgCopyleft(props) {
         cy={490}
         r={440}
         fill="none"
-        stroke={props.fill}
+        stroke="#000"
         strokeWidth={100}
       />
       <path d="M219 428h131a150 150 0 110 125H219a275 275 0 100-125z" />
