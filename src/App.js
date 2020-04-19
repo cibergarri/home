@@ -15,12 +15,13 @@ import Landing from './views/landing';
 
 const hist = createBrowserHistory();
 
-const mapStateToProps = (state) => ({
-  theme: state.config.theme,
+const mapStateToProps = ({config}) => ({
+  theme: config.theme,
 });
 
 function App(props) {
   const { theme } = props;
+  document.getElementById('loader').style.transition = 'all 2s ease-in';
   return (
     <ThemeProvider theme={themes[theme]}>
       <Router history={hist}>
@@ -28,7 +29,7 @@ function App(props) {
           <Route path="/" component={Landing} />
         </Switch>
       </Router>
-    </ThemeProvider>
+    </ThemeProvider>  
   );
 }
 export default connect(mapStateToProps)(App);

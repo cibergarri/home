@@ -4,10 +4,13 @@ import thunk from 'redux-thunk';
 
 import rootReducer from './reducers/rootReducer';
 
-const defaultTheme = 'normal';
+const DEFAULT_THEME = 'normal';
 
-const defaultState = () => ({
-  config: {},
+const getDefaultState = () => ({
+  config: {
+    theme: DEFAULT_THEME,
+    loading: true,
+  },
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -16,9 +19,8 @@ const paths = {
   'config.theme': { name: 'my_theme' },
 };
 
-const initialState = getStateFromCookies(defaultState, paths);
-
-initialState.config.theme = initialState.config.theme || defaultTheme;
+const initialState = getStateFromCookies(getDefaultState(), paths);
+initialState.config.theme = initialState.config.theme || DEFAULT_THEME;
 
 export default function configureStore() {
  return createStore(

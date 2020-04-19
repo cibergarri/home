@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Button, Switch } from '@material-ui/core';
-// import logo from './logo.svg';
 
 export const Main = styled.div`
   background-color: ${props => props.theme.main.background};
@@ -22,26 +21,6 @@ export const Header = styled.header`
   font-size: calc(10px + 2vmin);
   color: ${props => props.theme.main.primary};
 `;
-
-// const rotate = keyframes`
-//   from {
-//     transform: rotate(0deg);
-//   }
-//   to {
-//     transform: rotate(360deg);
-//   }
-// `;
-
-// export const RotatingLogo = styled.img.attrs({
-//   src: logo,
-//   alt: 'logo',
-// })`
-//   height: 40vmin;
-//   pointer-events: none;
-//   @media (prefers-reduced-motion: no-preference) {
-//     animation: ${rotate} infinite 20s linear;
-//   }
-// `;
 
 export const CustomSwitch = styled(Switch).attrs(props => ({
   color: 'primary',

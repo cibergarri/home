@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import configureStore from './store';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
 
-import App from './App';
+// Deferred load of the App so the static html with the css animation loads very fast
+const App = React.lazy(() => import('./App'));
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={configureStore()}>
-      <App/>
+      <Suspense fallback={<div>Loading...</div>}><App /></Suspense>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

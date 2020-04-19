@@ -3,7 +3,7 @@ import {
   AppBar, Switch, Toolbar, Typography,
 } from '@material-ui/core';
 
-import { Heart, Sun, Moon } from '../../icons/';
+import { Sun, Moon } from '../../icons/';
 
 export const Header = styled.header`
   background: ${props => `linear-gradient(${props.theme.main.background}DD 80%, ${props.theme.main.background}00 100%)`};

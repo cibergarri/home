@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from "react-redux";
+import { setLoadingAction } from '../../actions/config';
 
 import {
   Main, Link, Body,
@@ -8,8 +10,10 @@ import CustomHeader from '../../components/CustomHeader/';
 import CustomFooter from '../../components/CustomFooter/';
 
 function Landing(props) {
-  
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setLoadingAction(false));
+  }, []);
   return (
     <Main>
       <CustomHeader/>

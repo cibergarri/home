@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import MenuIcon from '@material-ui/icons/Menu';
+// import MenuIcon from '@material-ui/icons/Menu';
 
-import { setThemeAction } from '../../actions/setThemeAction';
+import { setThemeAction } from '../../actions/config';
 import { THEMES } from '../../constants/config';
 
 import {
