@@ -3,6 +3,7 @@ import { Button, Switch } from '@material-ui/core';
 // import logo from './logo.svg';
 
 export const Main = styled.div`
+  background-color: ${props => props.theme.main.background};
   text-align: center;
   font-family: Roboto,Helvetica,Arial,sans-serif;
   font-size: 16px;
@@ -55,7 +56,6 @@ export const Link = styled.a.attrs(props => ({
 `;
 
 export const Body = styled.div`
-  background-color: ${props => props.theme.main.background};
   transition: all 0.5s;
   color: ${props => props.theme.main.primary};
   min-height: 100vh;

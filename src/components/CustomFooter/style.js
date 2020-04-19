@@ -27,6 +27,7 @@ export const StyledCopyLeftIcon = styled(Copyleft).attrs(props => ({
   width:"1.5vh",
 }))`
   padding: 0px 0.5vw 0vh 0.5vw;
+  transition: all 0.5s;
 `;
 
 export const StyledHeartIcon = styled(Heart).attrs(props => ({
