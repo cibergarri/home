@@ -54,15 +54,17 @@ export const MainContainer = styled(Container)`
   font-size: max(1.2vw, 12px);
   color:  ${props => props.theme.main.primary};
   display: block;
-  margin: -60px 30px 0px 30px;
-  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  margin: -60px 30px 40px 30px;
+  -webkit-box-shadow: 0 16px 24px 2px ${props => props.theme.main.primary}14, 0 6px 30px 5px ${props => props.theme.main.primary}12, 0 8px 10px -5px ${props => props.theme.main.primary}20;
+  -moz-box-shadow: 0 16px 24px 2px ${props => props.theme.main.primary}14, 0 6px 30px 5px ${props => props.theme.main.primary}12, 0 8px 10px -5px ${props => props.theme.main.primary}20;
+  box-shadow: 0 16px 24px 2px ${props => props.theme.main.primary}14, 0 6px 30px 5px ${props => props.theme.main.primary}12, 0 8px 10px -5px ${props => props.theme.main.primary}20;
   border-radius: 6px;
   padding: 70px 0px
 `;
 
 export const TextTitle = styled.h1`
   color: ${props => props.theme.main.primary};
-  margin: max(3vw, 40px);
+  margin: max(4vw, 40px);
 `;
 
 export const Paragraph = styled.p`
