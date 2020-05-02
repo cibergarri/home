@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/cibergarri/home/compare/v1.0.1...v1.0.2) (2020-05-02)
+
+
+### Bug Fixes
+
+* **ci:** fix gh pages deploy ([7b1c89e](https://github.com/cibergarri/home/commit/7b1c89e14ff1661329ec4698305201556ebd44ad))
+
 ## [1.0.1](https://github.com/cibergarri/home/compare/v1.0.0...v1.0.1) (2020-05-02)
 
 
