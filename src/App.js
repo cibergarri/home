@@ -2,6 +2,7 @@
  src/App.js
 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
@@ -15,7 +16,7 @@ import Landing from './views/landing';
 
 const hist = createBrowserHistory();
 
-const mapStateToProps = ({config}) => ({
+const mapStateToProps = ({ config }) => ({
   theme: config.theme,
 });
 
@@ -29,7 +30,14 @@ function App(props) {
           <Route path="/" component={Landing} />
         </Switch>
       </Router>
-    </ThemeProvider>  
+    </ThemeProvider>
   );
 }
+
+App.propTypes = {
+  theme: PropTypes.shape({}).isRequired,
+};
+
+App.defaultProps = {};
+
 export default connect(mapStateToProps)(App);

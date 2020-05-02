@@ -1,9 +1,11 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 import styled from 'styled-components';
 import {
   AppBar, Switch, Toolbar, Typography,
 } from '@material-ui/core';
 
-import { Sun, Moon } from '../../icons/';
+import { Sun, Moon } from '../../icons';
 
 export const Header = styled.header`
   background: ${props => `linear-gradient(${props.theme.main.background}DD 80%, ${props.theme.main.background}00 100%)`};
@@ -21,14 +23,12 @@ export const Header = styled.header`
   width: 100%;
 `;
 
-export const CustomAppBar = styled(AppBar).attrs(props => ({
+export const CustomAppBar = styled(AppBar).attrs(() => ({
   color: 'inherit',
   position: 'static',
 }))`
   background-color: transparent !important;
-  color: ${props => {
-    return props.theme.main.primary;
-  }};
+  color: ${props => props.theme.main.primary};
   box-shadow: none !important; 
   max-width: 90%;
   padding: 1vh 1vw 1vh 1vw;
@@ -63,7 +63,7 @@ export const Link = styled.a.attrs(props => ({
   rel: 'noopener noreferrer',
 }))``;
 
-export const SVG =  styled.svg`
+export const SVG = styled.svg`
   transition: all 2s;
   width: 24px;
   height: 24px;
@@ -78,7 +78,7 @@ export const NightModeContainer = styled.div`
   displa: inline-block;
 `;
 
-export const CustomSwitch = styled(Switch).attrs(props => ({
+export const CustomSwitch = styled(Switch).attrs(() => ({
   color: 'primary',
 }))`
   flex-grow: 1;
@@ -87,8 +87,8 @@ export const CustomSwitch = styled(Switch).attrs(props => ({
 
 export const StyledSunIcon = styled(Sun).attrs(props => ({
   fill: props.theme.main.primary,
-  height:"20px",
-  width:"20px",
+  height: '20px',
+  width: '20px',
 }))`
   transition: fill 2s;
   padding: 0px 0.5vw 0vh 0.5vw;
@@ -97,15 +97,15 @@ export const StyledSunIcon = styled(Sun).attrs(props => ({
 
 export const StyledMoonIcon = styled(Moon).attrs(props => ({
   fill: props.theme.main.primary,
-  height:"20px",
-  width:"18px",
+  height: '20px',
+  width: '18px',
 }))`
   transition: fill 2s;
   padding: 0px 0.5vw 0vh 0.5vw;
   vertical-align: middle;
 `;
 
-export const BackgroundImage = styled.div.attrs(props => ({}))`
+export const BackgroundImage = styled.div.attrs(() => ({}))`
   background: ${props => `linear-gradient(${props.theme.main.background}FF 10%, ${props.theme.main.background}88 15%, ${props.theme.main.background}88 85%, ${props.theme.main.background}FF 90%), url( ${require(`../../assets/img/bg-${props.theme.main.name}.png`)})`};
   background-position: center bottom;
   background-repeat: no-repeat;
@@ -132,7 +132,7 @@ export const BackgroundTitle = styled.div`
   @media (min-width: 768px) {
     font-size: 60px;
   }
-`
+`;
 export const ColoredText = styled.div`
   color: #ff0000;
   display:inline;
@@ -152,4 +152,4 @@ export const BackgroundSubtitle = styled.div`
   @media (min-width: 768px) {
     font-size: 35px;
   }
-`
+`;

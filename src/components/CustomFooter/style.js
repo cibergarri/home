@@ -23,25 +23,25 @@ export const Copyright = styled.div`
 
 export const StyledCopyLeftIcon = styled(Copyleft).attrs(props => ({
   fill: props.theme.main.primary,
-  height:"1.5vh",
-  width:"1.5vh",
+  height: '1.5vh',
+  width: '1.5vh',
 }))`
   padding: 0px 0.5vw 0vh 0.5vw;
   transition: all 0.5s;
 `;
 
-export const StyledHeartIcon = styled(Heart).attrs(props => ({
+export const StyledHeartIcon = styled(Heart).attrs(() => ({
   fill: '#ff0000',
-  height:"1.5vh",
-  width:"1.5vh",
+  height: '1.5vh',
+  width: '1.5vh',
 }))`
   padding: 0px 0.5vw 0vh 0.5vw;
 `;
 
-export const StyledJSIcon = styled(Javascript).attrs(props => ({
+export const StyledJSIcon = styled(Javascript).attrs(() => ({
   fill: '#000000',
-  height:"1.5vh",
-  width:"1.5vh",
+  height: '1.5vh',
+  width: '1.5vh',
 }))`
   padding: 0px 0.5vw 0vh 0.5vw;
 `;

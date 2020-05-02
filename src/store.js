@@ -23,12 +23,12 @@ const initialState = getStateFromCookies(getDefaultState(), paths);
 initialState.config.theme = initialState.config.theme || DEFAULT_THEME;
 
 export default function configureStore() {
- return createStore(
-   rootReducer,
-   initialState,
-   composeEnhancers(applyMiddleware(
-     thunk,
-     reduxCookiesMiddleware(paths)
-    ))
- );
+  return createStore(
+    rootReducer,
+    initialState,
+    composeEnhancers(applyMiddleware(
+      thunk,
+      reduxCookiesMiddleware(paths),
+    )),
+  );
 }

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { Button, Container, Switch } from '@material-ui/core';
 
 import {
-  World, Nodejs, React, DotNet, Construction
-} from '../../icons'
+  World, Nodejs, React, DotNet, Construction,
+} from '../../icons';
 
 export const Main = styled.div`
   background-color: ${props => props.theme.main.background};
@@ -14,9 +14,7 @@ export const Main = styled.div`
 `;
 
 export const Header = styled.header`
-  background-color: ${props => {
-    return props.theme.main.background;
-  }};
+  background-color: ${props => props.theme.main.background};
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,7 +24,7 @@ export const Header = styled.header`
   color: ${props => props.theme.main.primary};
 `;
 
-export const CustomSwitch = styled(Switch).attrs(props => ({
+export const CustomSwitch = styled(Switch).attrs(() => ({
   color: 'primary',
 }))``;
 
@@ -42,7 +40,7 @@ export const Body = styled(Container)`
   transition: all 0.5s;
 `;
 
-export const CustomButton = styled(Button).attrs(props => ({
+export const CustomButton = styled(Button).attrs(() => ({
   color: 'primary',
 }))``;
 
@@ -78,31 +76,31 @@ export const Span = styled.span`
 
 export const StyledWorldIcon = styled(World).attrs(props => ({
   fill: props.theme.main.primary,
-  height:"max(3vw, 20px)",
-  width:"max(3vw, 20px)",
-  viewBox: "0 0 600 600",
+  height: 'max(3vw, 20px)',
+  width: 'max(3vw, 20px)',
+  viewBox: '0 0 600 600',
 }))`
   transition: fill 2s;
 `;
 
 export const StyledNodeJsIcon = styled(Nodejs).attrs(() => ({
-  height:"max(2vw, 20px)",
-  width:"max(2vw, 20px)",
+  height: 'max(2vw, 20px)',
+  width: 'max(2vw, 20px)',
 }))``;
 
 export const StyledReactIcon = styled(React).attrs(() => ({
-  height:"max(2vw, 20px)",
-  width:"max(2vw, 20px)",
+  height: 'max(2vw, 20px)',
+  width: 'max(2vw, 20px)',
 }))``;
 
 export const StyledDotNetIcon = styled(DotNet).attrs(() => ({
-  height:"max(2vw, 20px)",
-  width:"max(2vw, 20px)",
+  height: 'max(2vw, 20px)',
+  width: 'max(2vw, 20px)',
 }))``;
 
 export const StyledConstructionIcon = styled(Construction).attrs((props) => ({
   fill: props.theme.main.primary,
-  height:"max(3vw, 40px)",
-  width:"max(3vw, 40px)",
-  viewBox: "0 0 60 30",
+  height: 'max(3vw, 40px)',
+  width: 'max(3vw, 40px)',
+  viewBox: '0 0 60 30',
 }))``;

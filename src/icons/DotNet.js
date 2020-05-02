@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 function SvgDotNet(props) {
   return (
@@ -11,7 +11,7 @@ function SvgDotNet(props) {
       {...props}
     >
       <title>.Net</title>
-      <style>{".dotNet_svg__st1{fill:#fff}"}</style>
+      <style>{'.dotNet_svg__st1{fill:#fff}'}</style>
       <g id="dotNet_svg__XMLID_1_">
         <path
           id="dotNet_svg__XMLID_5_"
