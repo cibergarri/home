@@ -22,7 +22,10 @@ const mapStateToProps = ({ config }) => ({
 
 function App(props) {
   const { theme } = props;
-  document.getElementById('loader').style.transition = 'all 2s ease-in';
+  if (document.getElementById('loader')) {
+    document.getElementById('loader').style.transition = 'all 2s ease-in';
+  }
+
   return (
     <ThemeProvider theme={themes[theme]}>
       <Router history={hist}>
