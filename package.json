@@ -1,0 +1,87 @@
+{
+  "name": "javier-garrido",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "home",
+  "dependencies": {
+    "@material-ui/core": "4.9.12",
+    "@material-ui/icons": "4.9.1",
+    "@testing-library/jest-dom": "5.5.0",
+    "@testing-library/react": "10.0.4",
+    "@testing-library/user-event": "10.1.0",
+    "history": "4.10.1",
+    "prop-types": "15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "7.2.0",
+    "react-router-dom": "5.1.2",
+    "react-scripts": "3.4.1",
+    "redux": "4.0.5",
+    "redux-cookies-middleware": "0.2.1",
+    "redux-thunk": "2.3.0",
+    "styled-components": "5.1.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-conventional": "8.3.4",
+    "@semantic-release/changelog": "5.0.1",
+    "@semantic-release/commit-analyzer": "8.0.1",
+    "@semantic-release/exec": "5.0.0",
+    "@semantic-release/git": "9.0.0",
+    "@semantic-release/github": "7.0.5",
+    "@semantic-release/npm": "7.0.5",
+    "@semantic-release/release-notes-generator": "9.0.1",
+    "@svgr/cli": "5.4.0",
+    "babel-eslint": "10.1.0",
+    "commitizen": "4.0.5",
+    "cz-customizable": "6.2.0",
+    "eslint": "6.8.0",
+    "eslint-config-airbnb": "18.1.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-react": "7.19.0",
+    "eslint-plugin-react-hooks": "4.0.0",
+    "gh-pages": "2.2.0",
+    "husky": "4.2.5",
+    "semantic-release": "17.0.7"
+  },
+  "scripts": {
+    "commit": "git-cz",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "lint": "eslint --ext .js .",
+    "deploy": "gh-pages -d build",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --no-ci -d",
+    "svgr": "svgr -d src/icons/ src/assets/icons"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS && echo $HUSKY_GIT_PARAMS",
+      "pre-push": "npm run lint"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
