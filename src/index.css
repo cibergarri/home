@@ -18,6 +18,23 @@ code {
     monospace;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+  
+::-webkit-scrollbar-track {
+  width: 5px;
+  background: #1f3898;
+  border-radius: 3px;
+}
+/* #dedede40 */
+/* #0d0469; */
+::-webkit-scrollbar-thumb {
+  background :#ababab; 
+  border-radius: 3px;
+  min-height: 50px;
+}
+
 #root {
   min-height: 100vh;
 }
