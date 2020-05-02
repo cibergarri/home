@@ -45,20 +45,24 @@ function Landing() {
             {' '}
             technologies -like MVC, WebAPI-
           </Paragraph>
+          <Paragraph>My working experience includes...</Paragraph>
           <Paragraph>
-            Some of the companies I have worked for are
+            Some Tech mulitnationals -like
             {' '}
             <Span color="#f98004">Thomson Reuters</Span>
-            ,
-            {' '}
-            <Span color="#1f399a">Cognizant</Span>
             {' '}
             and
+            {' '}
+            <Span color="#1f399a">Cognizant</Span>
+            -
+          </Paragraph>
+          <Paragraph>
+            But also some companies in the startup ecosystem with
             {' '}
             <Span color="#fa3334">Bag On Board</Span>
             .
           </Paragraph>
-          <Paragraph>During my workin years on those companies I have been part of international teams.</Paragraph>
+          <Paragraph>During my working years on those companies I have been part of international teams.</Paragraph>
           <Paragraph>Feel free to check my social networks -on the top- to find out more info or to contact me.</Paragraph>
           <br />
           <Paragraph>Amongst any other interests I am a big fan of Star Wars, Board Games, TV Series, Movies, History and travelling</Paragraph>
