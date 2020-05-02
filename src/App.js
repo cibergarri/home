@@ -38,7 +38,7 @@ function App(props) {
 }
 
 App.propTypes = {
-  theme: PropTypes.shape({}).isRequired,
+  theme: PropTypes.string.isRequired,
 };
 
 App.defaultProps = {};
