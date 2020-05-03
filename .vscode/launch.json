@@ -23,7 +23,7 @@
           "--runInBand",
           "--no-cache",
           "--watchAll=false",
-          "${file}",
+          "${file}"
         ],
         "cwd": "${workspaceRoot}",
         "protocol": "inspector",
