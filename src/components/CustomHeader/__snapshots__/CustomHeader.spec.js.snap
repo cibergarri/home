@@ -41,26 +41,8 @@ exports[`CustomHeader should render as expected 1`] = `
             </styled.svg>
           </styled.a>
         </styled.div>
-        <styled.div>
-          <Styled(SvgSun) />
-          <Styled(WithStyles(ForwardRef(Switch)))
-            checked={false}
-            onChange={[Function]}
-          />
-          <Styled(SvgMoon) />
-        </styled.div>
-        <styled.div>
-          <styled.button>
-            <Styled(SvgEs)
-              onClick={[Function]}
-            />
-          </styled.button>
-          <styled.button>
-            <Styled(SvgUk)
-              onClick={[Function]}
-            />
-          </styled.button>
-        </styled.div>
+        <styled.div />
+        <RightButtonsContainer />
       </Styled(WithStyles(ForwardRef(Toolbar)))>
     </Styled(WithStyles(ForwardRef(AppBar)))>
   </styled.header>
@@ -75,7 +57,7 @@ exports[`CustomHeader should render as expected 1`] = `
       coding
     </styled.div>
     <styled.div>
-      ...At least most of the time.
+      ...At least most of the time ;)
     </styled.div>
   </styled.div>
 </Fragment>
