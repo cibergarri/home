@@ -5,7 +5,9 @@ import {
   AppBar, Switch, Toolbar, Typography,
 } from '@material-ui/core';
 
-import { Sun, Moon } from '../../icons';
+import {
+  Sun, Moon, Es, Uk,
+} from '../../icons';
 
 export const Header = styled.header`
   background: ${props => `linear-gradient(${props.theme.main.background}DD 80%, ${props.theme.main.background}00 100%)`};
@@ -78,6 +80,13 @@ export const NightModeContainer = styled.div`
   displa: inline-block;
 `;
 
+export const LanguageButtonContainer = styled.div`
+  transition: all 2s;
+  padding-bottom: 10px;
+  min-width: 50px;
+  displa: inline-block;
+`;
+
 export const CustomSwitch = styled(Switch).attrs(() => ({
   color: 'primary',
 }))`
@@ -103,6 +112,37 @@ export const StyledMoonIcon = styled(Moon).attrs(props => ({
   transition: fill 2s;
   padding: 0px 0.5vw 0vh 0.5vw;
   vertical-align: middle;
+`;
+
+export const StyledESFlagIcon = styled(Es).attrs(() => ({
+  height: '20px',
+  width: '18px',
+}))`
+  transition: fill 2s;
+  padding: 0px 0px;
+  vertical-align: middle;
+`;
+
+export const StyledUKFlagIcon = styled(Uk).attrs(() => ({
+  height: '20px',
+  width: '18px',
+}))`
+  transition: fill 2s;
+  padding: 0px 0px;
+  vertical-align: middle;
+`;
+
+export const LanguageButton = styled.button`
+  padding: 0px 0px;
+  height: fit-content;
+  width: fit-content;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  margin: 5px 5px
 `;
 
 export const BackgroundImage = styled.div.attrs(() => ({}))`

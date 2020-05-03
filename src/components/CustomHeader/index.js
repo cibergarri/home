@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 // import MenuIcon from '@material-ui/icons/Menu';
 
 import { setThemeAction } from '../../actions/config';
@@ -14,6 +15,8 @@ import {
   NightModeContainer,
   Blank,
   SVG,
+  LanguageButton,
+  LanguageButtonContainer,
   LinksContainer,
   Link,
   BackgroundImage,
@@ -22,15 +25,21 @@ import {
   BackgroundSubtitle,
   StyledMoonIcon,
   StyledSunIcon,
+  StyledESFlagIcon,
+  StyledUKFlagIcon,
 } from './style';
 
 function CustomHeader() {
+  const { i18n } = useTranslation(['landing']);
   const theme = useSelector(state => state.config.theme);
   const dispatch = useDispatch();
 
   const toggleTheme = (event) => {
     const newTheme = event.target.checked ? THEMES.NIGHT : THEMES.NORMAL;
     dispatch(setThemeAction(newTheme));
+  };
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
   };
 
   return (
@@ -65,6 +74,14 @@ function CustomHeader() {
               <CustomSwitch checked={theme === THEMES.NIGHT} onChange={toggleTheme} />
               <StyledMoonIcon />
             </NightModeContainer>
+            <LanguageButtonContainer>
+              <LanguageButton>
+                <StyledESFlagIcon onClick={() => changeLanguage('es')} />
+              </LanguageButton>
+              <LanguageButton>
+                <StyledUKFlagIcon onClick={() => changeLanguage('en')} />
+              </LanguageButton>
+            </LanguageButtonContainer>
           </CustomToolbar>
         </CustomAppBar>
       </Header>
