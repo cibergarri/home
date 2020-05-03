@@ -79,8 +79,8 @@ export const StyledMoonIcon = styled(Moon).attrs(props => ({
 `;
 
 export const StyledESFlagIcon = styled(Es).attrs(() => ({
-  height: '20px',
-  width: '18px',
+  height: '13px',
+  width: '19.5px',
 }))`
   transition: fill 2s;
   padding: 0px 0px;
@@ -88,8 +88,8 @@ export const StyledESFlagIcon = styled(Es).attrs(() => ({
 `;
 
 export const StyledUKFlagIcon = styled(Uk).attrs(() => ({
-  height: '20px',
-  width: '18px',
+  height: '13px',
+  width: '19.5px',
 }))`
   transition: fill 2s;
   padding: 0px 0px;
@@ -101,12 +101,13 @@ export const StyledMoreVertIcon = styled(MoreVertIcon)`
 `;
 
 export const LanguageButton = styled.button`
+  filter: ${props => (props.selected ? '' : 'brightness(40%)')};
+  border: none;
   padding: 0px 0px;
   height: fit-content;
   width: fit-content;
   background-color: Transparent;
   background-repeat:no-repeat;
-  border: none;
   cursor:pointer;
   overflow: hidden;
   outline:none;

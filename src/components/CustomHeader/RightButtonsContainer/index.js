@@ -58,10 +58,10 @@ function RightButtonsContainer() {
   );
   const languageWidget = () => (
     <>
-      <LanguageButton>
+      <LanguageButton selected={i18n.language === 'es'}>
         <StyledESFlagIcon onClick={() => changeLanguage('es')} />
       </LanguageButton>
-      <LanguageButton>
+      <LanguageButton selected={i18n.language === 'en'}>
         <StyledUKFlagIcon onClick={() => changeLanguage('en')} />
       </LanguageButton>
     </>

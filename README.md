@@ -23,8 +23,6 @@ Tooling:
  - [esLint](https://eslint.org/)
  - [styleLint](https://stylelint.io/)
 
- 
-
 Testing:
  - [jest](https://jestjs.io/)
  - [Enzyme](https://enzymejs.github.io/enzyme/)
@@ -42,9 +40,10 @@ Analytics:
  - [hotjar](https://www.hotjar.com/)
  - [google analytics](https://analytics.google.com/)
 
- ## Interesting resources
+ ## Useful resources
 
  - [React Internationalization with i18n](https://www.robinwieruch.de/react-internationalization)
  - [The Flexbox guide](https://flaviocopes.com/flexbox/)
  - [Adding coverage reports to a React Create App using Coveralls.io](https://rants.broonix.ca/adding-coverage-reports)
+ - [CSS styles generator](https://www.cssmatic.com/box-shadow)
  
