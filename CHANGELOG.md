@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/cibergarri/home/compare/v1.1.0...v1.2.0) (2020-05-03)
+
+
+### Features
+
+* **right-menu:** add swipe menu ([1aa3261](https://github.com/cibergarri/home/commit/1aa326168ad7ebba6de3d747e655e6c870ff2e33))
+
 # [1.1.0](https://github.com/cibergarri/home/compare/v1.0.2...v1.1.0) (2020-05-03)
 
 
