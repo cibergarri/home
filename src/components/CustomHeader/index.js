@@ -1,47 +1,22 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-// import MenuIcon from '@material-ui/icons/Menu';
 
-import { setThemeAction } from '../../actions/config';
-import { THEMES } from '../../constants/config';
-
+import RightButtonsContainer from './RightButtonsContainer';
 import {
   Header,
-  CustomSwitch,
   CustomAppBar,
   CustomToolbar,
   Title,
-  NightModeContainer,
   Blank,
   SVG,
-  LanguageButton,
-  LanguageButtonContainer,
   LinksContainer,
   Link,
   BackgroundImage,
   BackgroundTitle,
   ColoredText,
   BackgroundSubtitle,
-  StyledMoonIcon,
-  StyledSunIcon,
-  StyledESFlagIcon,
-  StyledUKFlagIcon,
 } from './style';
 
 function CustomHeader() {
-  const { i18n } = useTranslation(['landing']);
-  const theme = useSelector(state => state.config.theme);
-  const dispatch = useDispatch();
-
-  const toggleTheme = (event) => {
-    const newTheme = event.target.checked ? THEMES.NIGHT : THEMES.NORMAL;
-    dispatch(setThemeAction(newTheme));
-  };
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
-  };
-
   return (
     <>
       <Header>
@@ -69,19 +44,8 @@ function CustomHeader() {
                 </SVG>
               </Link>
             </LinksContainer>
-            <NightModeContainer>
-              <StyledSunIcon />
-              <CustomSwitch checked={theme === THEMES.NIGHT} onChange={toggleTheme} />
-              <StyledMoonIcon />
-            </NightModeContainer>
-            <LanguageButtonContainer>
-              <LanguageButton>
-                <StyledESFlagIcon onClick={() => changeLanguage('es')} />
-              </LanguageButton>
-              <LanguageButton>
-                <StyledUKFlagIcon onClick={() => changeLanguage('en')} />
-              </LanguageButton>
-            </LanguageButtonContainer>
+            <Blank />
+            <RightButtonsContainer />
           </CustomToolbar>
         </CustomAppBar>
       </Header>
@@ -93,7 +57,7 @@ function CustomHeader() {
           {' '}
           coding
         </BackgroundTitle>
-        <BackgroundSubtitle>...At least most of the time.</BackgroundSubtitle>
+        <BackgroundSubtitle>...At least most of the time ;)</BackgroundSubtitle>
       </BackgroundImage>
     </>
   );

@@ -2,12 +2,8 @@
 /* eslint-disable global-require */
 import styled from 'styled-components';
 import {
-  AppBar, Switch, Toolbar, Typography,
+  AppBar, Toolbar, Typography,
 } from '@material-ui/core';
-
-import {
-  Sun, Moon, Es, Uk,
-} from '../../icons';
 
 export const Header = styled.header`
   background: ${props => `linear-gradient(${props.theme.main.background}DD 80%, ${props.theme.main.background}00 100%)`};
@@ -29,9 +25,9 @@ export const CustomAppBar = styled(AppBar).attrs(() => ({
   color: 'inherit',
   position: 'static',
 }))`
-  background-color: transparent !important;
+  background-color: transparent;
   color: ${props => props.theme.main.primary};
-  box-shadow: none !important; 
+  box-shadow: none; 
   max-width: 90%;
   padding: 1vh 1vw 1vh 1vw;
 `;
@@ -41,10 +37,10 @@ export const CustomToolbar = styled(Toolbar)`
 `;
 
 export const Title = styled(Typography)`
-  font-weight: bold !important;
+  font-weight: bold;
   transition: all 4s;
   @media (max-width: 470px) {
-    font-size: 0.75rem !important;
+    font-size: 0.75rem;
   }
 `;
 
@@ -70,75 +66,6 @@ export const SVG = styled.svg`
   height: 24px;
   margin-left: 1vw;
   fill: ${props => props.theme.main.primary};
-`;
-
-export const NightModeContainer = styled.div`
-  transition: all 2s;
-  padding-bottom: 10px;
-  min-width: 110px;
-`;
-
-export const LanguageButtonContainer = styled.div`
-  transition: all 2s;
-  padding-bottom: 10px;
-  min-width: 60px;
-`;
-
-export const CustomSwitch = styled(Switch).attrs(() => ({
-  color: 'primary',
-}))`
-  flex-grow: 1;
-`;
-
-export const StyledSunIcon = styled(Sun).attrs(props => ({
-  fill: props.theme.main.primary,
-  height: '20px',
-  width: '20px',
-}))`
-  transition: fill 2s;
-  padding: 0px 0.5vw 0vh 0.5vw;
-  vertical-align: middle;
-`;
-
-export const StyledMoonIcon = styled(Moon).attrs(props => ({
-  fill: props.theme.main.primary,
-  height: '20px',
-  width: '18px',
-}))`
-  transition: fill 2s;
-  padding: 0px 0.5vw 0vh 0.5vw;
-  vertical-align: middle;
-`;
-
-export const StyledESFlagIcon = styled(Es).attrs(() => ({
-  height: '20px',
-  width: '18px',
-}))`
-  transition: fill 2s;
-  padding: 0px 0px;
-  vertical-align: middle;
-`;
-
-export const StyledUKFlagIcon = styled(Uk).attrs(() => ({
-  height: '20px',
-  width: '18px',
-}))`
-  transition: fill 2s;
-  padding: 0px 0px;
-  vertical-align: middle;
-`;
-
-export const LanguageButton = styled.button`
-  padding: 0px 0px;
-  height: fit-content;
-  width: fit-content;
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-  outline:none;
-  margin: 5px 5px
 `;
 
 export const BackgroundImage = styled.div.attrs(() => ({}))`
