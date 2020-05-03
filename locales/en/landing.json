@@ -1,0 +1,18 @@
+{
+  "hello": "Hello",
+  "welcome": "welcome to my site!",
+  "introduction": "I am a Web developer who is passionate about his job and embraces learning not only in his everyday job but as a way of life.",
+  "techs-1": "Having more expertise in the backend development -specially with",
+  "techs-2": "- but also targeting frontend technologies -as",
+  "experience-1": "In one of my -not so far away- past lifes I also worked with",
+  "experience-2": "technologies -like MVC, WebAPI-",
+  "jobs-1": "My working experience includes...",
+  "jobs-2": "Some Tech multinationals -like", 
+  "jobs-3": "and",
+  "jobs-4": "But also some companies in the startup ecosystem with",
+  "international-teams":  "During my working years on those companies I have been part of international teams.",
+  "social-networks": "Feel free to check my social networks -on the top- to find out more info or to contact me.",
+  "hobbies": "Amongst any other interests I am a big fan of Star Wars, Board Games, TV Series, Movies, History and travelling",
+  "github": "You can find the code of this website in my open repositories in Github.",
+  "construction": "Please, remember this site will be always under"
+}
