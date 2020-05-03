@@ -38,7 +38,6 @@ export const CustomAppBar = styled(AppBar).attrs(() => ({
 
 export const CustomToolbar = styled(Toolbar)`
   transition: all 0.5s;
-  alignItems: 'flex-start';
 `;
 
 export const Title = styled(Typography)`
@@ -77,21 +76,18 @@ export const NightModeContainer = styled.div`
   transition: all 2s;
   padding-bottom: 10px;
   min-width: 110px;
-  displa: inline-block;
 `;
 
 export const LanguageButtonContainer = styled.div`
   transition: all 2s;
   padding-bottom: 10px;
-  min-width: 50px;
-  displa: inline-block;
+  min-width: 60px;
 `;
 
 export const CustomSwitch = styled(Switch).attrs(() => ({
   color: 'primary',
 }))`
   flex-grow: 1;
-  alignSelf: 'flex-end';
 `;
 
 export const StyledSunIcon = styled(Sun).attrs(props => ({
@@ -162,7 +158,6 @@ export const BackgroundTitle = styled.div`
   color: ${props => props.theme.main.primary};
   font-family: Roboto,Helvetica,Arial,sans-serif;
   transition: all 2s;
-  font-family: Roboto,Helvetica,Arial,sans-serif;
   font-weight: bold;
   font-size: 6vw;
   padding: 0vh 3vw 20px 0vw;
@@ -182,7 +177,6 @@ export const BackgroundSubtitle = styled.div`
   color: ${props => props.theme.main.primary};
   font-family: Roboto,Helvetica,Arial,sans-serif;
   transition: all 2s;
-  font-family: Roboto,Helvetica,Arial,sans-serif;
   font-weight: bold;
   font-size: 3vw;
   padding: 0vh 3vw 0px 0vw;
