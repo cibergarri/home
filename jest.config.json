@@ -20,7 +20,7 @@
     }
   },
   "testMatch": [
-    "<rootDir>/**/*.test.js"
+    "<rootDir>/**/*.spec.js"
   ],
   "snapshotSerializers": [
     "enzyme-to-json/serializer"
