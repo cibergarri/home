@@ -47,6 +47,7 @@ export const CustomButton = styled(Button).attrs(() => ({
 export const MainContainer = styled(Container)`
   background:${props => props.theme.main.canvas};
   min-height: 100vh;
+  width: 90%;
   box-sizing:border-box;
   font-family: Roboto,Helvetica,Arial,sans-serif;
   font-size: max(1.2vw, 12px);
