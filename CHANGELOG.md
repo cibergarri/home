@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/cibergarri/home/compare/v1.0.2...v1.1.0) (2020-05-03)
+
+
+### Bug Fixes
+
+* **app:** fix proptype ([da09d64](https://github.com/cibergarri/home/commit/da09d64c900453df972fa55bac4a9323024ad764))
+
+
+### Features
+
+* **locales:** add i18n ([fc79aac](https://github.com/cibergarri/home/commit/fc79aacf4f6a6738f07ebb8f897bd1715969cf02))
+
 ## [1.0.2](https://github.com/cibergarri/home/compare/v1.0.1...v1.0.2) (2020-05-02)
 
 
