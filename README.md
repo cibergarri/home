@@ -46,3 +46,5 @@ Analytics:
 
  - [React Internationalization with i18n](https://www.robinwieruch.de/react-internationalization)
  - [The Flexbox guide](https://flaviocopes.com/flexbox/)
+ - [Adding coverage reports to a React Create App using Coveralls.io](https://rants.broonix.ca/adding-coverage-reports)
+ 
