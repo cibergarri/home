@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/cibergarri/home/compare/v1.2.3...v1.2.4) (2020-05-08)
+
+
+### Bug Fixes
+
+* **favicon:** fix favicon in chrome ([91d6bdf](https://github.com/cibergarri/home/commit/91d6bdfeb5d946a81e63727870444e5670dcadee))
+
 ## [1.2.3](https://github.com/cibergarri/home/compare/v1.2.2...v1.2.3) (2020-05-08)
 
 
