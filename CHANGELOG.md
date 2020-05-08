@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/cibergarri/home/compare/v1.2.1...v1.2.2) (2020-05-08)
+
+
+### Bug Fixes
+
+* **transaltions:** fix route ([e9e6a34](https://github.com/cibergarri/home/commit/e9e6a34f08f9c77ccb39376e80717a2aa2142abb))
+
 ## [1.2.1](https://github.com/cibergarri/home/compare/v1.2.0...v1.2.1) (2020-05-03)
 
 
