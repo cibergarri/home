@@ -4,7 +4,7 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Coverage Status](https://coveralls.io/repos/github/cibergarri/home/badge.svg?branch=master)](https://coveralls.io/github/cibergarri/home?branch=master)
 
-Code for [cibergarri.github.io](cibergarri.github.io) website
+Code for [javiergarrido.dev](javiergarrido.dev) website
 
 
 ## Features / Techs used:
@@ -35,6 +35,7 @@ Continuous integration/delivery:
  - [commitlint](https://commitlint.js.org/) & [commitizen](http://commitizen.github.io/cz-cli/) for [conventional commits](https://www.conventionalcommits.org/)
  - [gh pages](https://pages.github.com/)
  - [coveralls](https://coveralls.io/)
+ - [.dev domains](https://get.dev/)
 
 Analytics:
  - [hotjar](https://www.hotjar.com/)
@@ -47,4 +48,4 @@ Analytics:
  - [The Flexbox guide](https://flaviocopes.com/flexbox/)
  - [Adding coverage reports to a React Create App using Coveralls.io](https://rants.broonix.ca/adding-coverage-reports)
  - [CSS styles generator](https://www.cssmatic.com/box-shadow)
- 
+ - [Connecting a .DEV Domain to Github Pages with HTTPS](https://medium.com/@jaredpotter1/connecting-a-dev-domain-to-github-pages-with-https-f0c59fb62579)
