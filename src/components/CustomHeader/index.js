@@ -25,7 +25,7 @@ function CustomHeader() {
             {/* <IconButton edge="start" color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton> */}
-            <Title>cibergarri.github.io</Title>
+            <Title>javiergarrido.dev</Title>
             <Blank />
             <LinksContainer>
               <Link href="https://www.linkedin.com/in/javiergarridoiglesias/">

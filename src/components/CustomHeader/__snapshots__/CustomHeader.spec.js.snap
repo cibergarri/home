@@ -8,7 +8,7 @@ exports[`CustomHeader should render as expected 1`] = `
         variant="dense"
       >
         <Styled(WithStyles(ForwardRef(Typography)))>
-          cibergarri.github.io
+          JavierGarrido.dev
         </Styled(WithStyles(ForwardRef(Typography)))>
         <styled.div />
         <styled.div>
