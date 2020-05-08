@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/cibergarri/home/compare/v1.2.2...v1.2.3) (2020-05-08)
+
+
+### Bug Fixes
+
+* **open-graph:** fix image url ([315a824](https://github.com/cibergarri/home/commit/315a824b751ffe649b3f570adfceba468a9d4bdd))
+
 ## [1.2.2](https://github.com/cibergarri/home/compare/v1.2.1...v1.2.2) (2020-05-08)
 
 
