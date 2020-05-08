@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/cibergarri/home/compare/v1.2.0...v1.2.1) (2020-05-03)
+
+
+### Bug Fixes
+
+* **landing-content:** fix content width ([3a4baf7](https://github.com/cibergarri/home/commit/3a4baf7901f213fa0365251a3276a602708c4214))
+
 # [1.2.0](https://github.com/cibergarri/home/compare/v1.1.0...v1.2.0) (2020-05-03)
 
 
