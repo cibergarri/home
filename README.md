@@ -17,6 +17,7 @@ Code for [javiergarrido.dev](javiergarrido.dev) website
  - [Styled Components](https://styled-components.com/)
  - [react-i18next](https://react.i18next.com/) for translations (storing language preference in cookies)
  - [material-ui](https://material-ui.com/)
+ - [Open Graph](https://developers.facebook.com/docs/sharing/opengraph)
 
 Tooling:
  - [svgr](https://react-svgr.com/)to import svg icon Components (npm run svgr)
@@ -49,3 +50,4 @@ Analytics:
  - [Adding coverage reports to a React Create App using Coveralls.io](https://rants.broonix.ca/adding-coverage-reports)
  - [CSS styles generator](https://www.cssmatic.com/box-shadow)
  - [Connecting a .DEV Domain to Github Pages with HTTPS](https://medium.com/@jaredpotter1/connecting-a-dev-domain-to-github-pages-with-https-f0c59fb62579)
+ - [Open Graph Meta Tags: Everything You Need to Know](https://ahrefs.com/blog/open-graph-meta-tags/)
