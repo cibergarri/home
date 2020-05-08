@@ -2,6 +2,8 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { StylesProvider } from '@material-ui/core/styles';
+// eslint-disable-next-line no-unused-vars
+import webVitals from './lib/web-vitals';
 import configureStore from './store';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
