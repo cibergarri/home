@@ -39,7 +39,8 @@ Continuous integration/delivery:
 Analytics:
  - [hotjar](https://www.hotjar.com/)
  - [google analytics](https://analytics.google.com/)
-
+ - [Web vitals](https://web.dev/vitals/)
+ 
  ## Useful resources
 
  - [React Internationalization with i18n](https://www.robinwieruch.de/react-internationalization)
