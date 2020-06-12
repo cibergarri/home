@@ -8,7 +8,7 @@ import {
   Main, Body,
 } from './style';
 
-import CustomHeader from '../../components/CustomHeader';
+import Header from '../../components/CustomHeader';
 import CustomFooter from '../../components/CustomFooter';
 
 function Layout({ content }) {
@@ -18,7 +18,7 @@ function Layout({ content }) {
   }, [dispatch]);
   return (
     <Main>
-      <CustomHeader />
+      <Header />
       <Body>
         {content}
       </Body>
