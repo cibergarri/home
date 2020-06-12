@@ -50,6 +50,7 @@ export const LanguageButtonListItem = styled(ListItem)`
 export const NightModeListItem = styled(ListItem)`
   display: flex;
   justify-content: space-around;
+  white-space: nowrap;
 `;
 
 export const CustomSwitch = styled(Switch).attrs(() => ({
@@ -111,7 +112,8 @@ export const LanguageButton = styled.button`
   cursor:pointer;
   overflow: hidden;
   outline:none;
-  margin: 5px 5px
+  margin: 5px 5px;
+  white-space: nowrap;
 `;
 
 export const StyledIconButton = styled(IconButton)`

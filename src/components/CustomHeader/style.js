@@ -52,6 +52,7 @@ export const LinksContainer = styled.div`
   margin-right: 1vw;
   display: inline-block;
   min-width: 100px;
+  white-space: nowrap;
 `;
 
 export const Link = styled.a.attrs(props => ({
