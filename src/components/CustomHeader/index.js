@@ -22,7 +22,7 @@ import {
   TypeWriterContainer,
 } from './style';
 
-function CustomHeader({ theme }) {
+export function CustomHeader({ theme }) {
   useScript('/scripts/bg-animation.js', theme.main.name);
   const { t } = useTranslation('landing');
   return (
