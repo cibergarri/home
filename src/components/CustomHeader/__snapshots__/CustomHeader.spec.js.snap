@@ -7,9 +7,7 @@ exports[`CustomHeader should render as expected 1`] = `
       <Styled(WithStyles(ForwardRef(Toolbar)))
         variant="dense"
       >
-        <Styled(WithStyles(ForwardRef(Typography)))>
-          javiergarrido.dev
-        </Styled(WithStyles(ForwardRef(Typography)))>
+        <Styled(WithStyles(ForwardRef(Typography))) />
         <styled.div />
         <styled.div>
           <styled.a
@@ -46,14 +44,21 @@ exports[`CustomHeader should render as expected 1`] = `
       </Styled(WithStyles(ForwardRef(Toolbar)))>
     </Styled(WithStyles(ForwardRef(AppBar)))>
   </styled.header>
-  <styled.div>
+  <styled.div
+    id="background-image"
+  >
     <styled.div>
       I
        
       <styled.div>
-        &lt;heart \\&gt;
+        <styled.div>
+          &lt;hate \\&gt;
+        </styled.div>
+        <styled.div>
+          &lt;heart \\&gt;
+        </styled.div>
       </styled.div>
-       
+      <br />
       coding
     </styled.div>
     <styled.div>

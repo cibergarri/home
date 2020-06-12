@@ -8,7 +8,7 @@ import 'jest-styled-components';
 import CustomHeader from '.';
 
 jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ i18n: {} }),
+  useTranslation: () => ({ i18n: {}, t: () => '' }),
 }));
 jest.mock('react-redux', () => ({
   useDispatch: () => { },
