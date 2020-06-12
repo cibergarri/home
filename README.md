@@ -18,6 +18,7 @@ Code for [javiergarrido.dev](javiergarrido.dev) website
  - [react-i18next](https://react.i18next.com/) for translations (storing language preference in cookies)
  - [material-ui](https://material-ui.com/)
  - [Open Graph](https://developers.facebook.com/docs/sharing/opengraph)
+ - [CSS3 animation](https://developer.mozilla.org/es/docs/Web/CSS/animation)
 
 Tooling:
  - [svgr](https://react-svgr.com/)to import svg icon Components (npm run svgr)
@@ -45,9 +46,12 @@ Analytics:
  
  ## Useful resources
 
+ - [CSS tricks](https://css-tricks.com/)
  - [React Internationalization with i18n](https://www.robinwieruch.de/react-internationalization)
  - [The Flexbox guide](https://flaviocopes.com/flexbox/)
  - [Adding coverage reports to a React Create App using Coveralls.io](https://rants.broonix.ca/adding-coverage-reports)
  - [CSS styles generator](https://www.cssmatic.com/box-shadow)
  - [Connecting a .DEV Domain to Github Pages with HTTPS](https://medium.com/@jaredpotter1/connecting-a-dev-domain-to-github-pages-with-https-f0c59fb62579)
  - [Open Graph Meta Tags: Everything You Need to Know](https://ahrefs.com/blog/open-graph-meta-tags/)
+ - [CSS3 animation property reference](https://www.tutorialrepublic.com/css-reference/css3-animation-property.php)
+ - [CSS typewriter effect](https://css-tricks.com/snippets/css/typewriter-effect/)
