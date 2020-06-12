@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import RightButtonsContainer from './RightButtonsContainer';
 import {
@@ -12,11 +13,14 @@ import {
   Link,
   BackgroundImage,
   BackgroundTitle,
-  ColoredText,
   BackgroundSubtitle,
+  Hate,
+  Heart,
+  TypeWriterContainer,
 } from './style';
 
 function CustomHeader() {
+  const { t } = useTranslation('landing');
   return (
     <>
       <Header>
@@ -25,7 +29,7 @@ function CustomHeader() {
             {/* <IconButton edge="start" color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton> */}
-            <Title>javiergarrido.dev</Title>
+            <Title>{t('title')}</Title>
             <Blank />
             <LinksContainer>
               <Link href="https://www.linkedin.com/in/javiergarridoiglesias/">
@@ -49,12 +53,15 @@ function CustomHeader() {
           </CustomToolbar>
         </CustomAppBar>
       </Header>
-      <BackgroundImage>
+      <BackgroundImage id="background-image">
         <BackgroundTitle>
           I
           {' '}
-          <ColoredText>&lt;heart \&gt;</ColoredText>
-          {' '}
+          <TypeWriterContainer>
+            <Hate>&lt;hate \&gt;</Hate>
+            <Heart>&lt;heart \&gt;</Heart>
+          </TypeWriterContainer>
+          <br />
           coding
         </BackgroundTitle>
         <BackgroundSubtitle>...At least most of the time ;)</BackgroundSubtitle>

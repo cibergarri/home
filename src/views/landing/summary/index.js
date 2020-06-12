@@ -3,11 +3,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-  Link, TextTitle, Paragraph, Span,
+  Link, Span, Paragraph,
   StyledWorldIcon, StyledNodeJsIcon, StyledConstructionIcon, StyledDotNetIcon, StyledReactIcon,
 } from './style';
+
 import {
-  MainContainer,
+  MainContainer, TextTitle,
 } from '../../../styles';
 
 function Summary() {
@@ -73,7 +74,9 @@ function Summary() {
       <br />
       <br />
       <br />
-      <Link href="https://cibergarri.github.io/playground">Playground</Link>
+      <Paragraph>
+        <Link href="https://cibergarri.github.io/playground">Playground</Link>
+      </Paragraph>
     </MainContainer>
   );
 }

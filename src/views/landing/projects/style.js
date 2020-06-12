@@ -15,15 +15,12 @@ export const Hr = styled.hr`
   width: 50%;
 `;
 
-export const TextTitle = styled.h1`
-  color: ${props => props.theme.main.primary};
-  margin: max(4vw, 40px);
-  text-align: center;
-`;
 export const ProjectTitle = styled.h2`
-  color: ${props => props.theme.main.primary};
+  color: ${props => props.theme.main.secondary};
   margin: max(2vw, 20px);
   margin-top : max(3vw, 30px);
+  text-transform: uppercase;
+  font-weight: bolder;
 `;
 export const SectionTitle = styled.h3`
   color: ${props => props.theme.main.primary};
@@ -33,6 +30,8 @@ export const Paragraph = styled.p`
   color: ${props => props.color || props.theme.main.primary};
   margin: max(1.5vw, 40px);
   line-height: 2.6;
+  text-align: justify;
+  text-align-last: left;
 `;
 
 export const Span = styled.span`

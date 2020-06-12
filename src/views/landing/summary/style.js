@@ -25,15 +25,12 @@ export const Link = styled.a.attrs(props => ({
 `;
 
 
-export const TextTitle = styled.h1`
-  color: ${props => props.theme.main.primary};
-  margin: max(4vw, 40px);
-`;
-
-export const Paragraph = styled.p`
+export const Paragraph = styled.div`
   color: ${props => props.color || props.theme.main.primary};
   margin: max(1.5vw, 40px);
   line-height: 2.6;
+  text-align: justify;
+  text-align-last: center;
 `;
 
 export const Span = styled.span`

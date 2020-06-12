@@ -3,11 +3,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
-  Link, TextTitle, ProjectTitle, SectionTitle, Paragraph, ProjectsContainer, ListItem, Hr,
+  Link, ProjectTitle, SectionTitle, Paragraph, ProjectsContainer, ListItem, Hr,
 } from './style';
+import {
+  TextTitle,
+} from '../../../styles';
 
-
-function Summary() {
+function Projects() {
   const { t } = useTranslation('landing');
   return (
     <ProjectsContainer>
@@ -72,4 +74,4 @@ function Summary() {
 //   ...state.config,
 // });
 
-export default Summary;
+export default Projects;

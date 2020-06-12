@@ -1,6 +1,6 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import {
   AppBar, Toolbar, Typography,
 } from '@material-ui/core';
@@ -66,6 +66,12 @@ export const SVG = styled.svg`
   height: 24px;
   margin-left: 1vw;
   fill: ${props => props.theme.main.primary};
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  ${Link}:hover & {
+    transition: all 0.3s;
+    transform: scale(1.3);
+    fill: ${props => props.theme.main.secondary};
+  }
 `;
 
 export const BackgroundImage = styled.div.attrs(() => ({}))`
@@ -86,18 +92,70 @@ export const BackgroundTitle = styled.div`
   font-family: Roboto,Helvetica,Arial,sans-serif;
   transition: all 2s;
   font-weight: bold;
-  font-size: 6vw;
+  font-size: 5.5vw;
   padding: 0vh 3vw 20px 0vw;
   margin: 0px;
+  min-width: 28vw;
   max-width: 500px;
   align-self: flex-end;
+  text-align: left;
   @media (min-width: 768px) {
     font-size: 60px;
   }
 `;
-export const ColoredText = styled.div`
+
+/* The typing effect */
+const typing = keyframes`
+  from { width: 0% }
+  to { width: 50% }
+`;
+
+/* The typewriter cursor effect */
+const blinkCaret = keyframes`
+  from, to { border-color: transparent }
+  50% { border-color: #ff0000; }
+`;
+
+const disappear = keyframes`
+  from {
+    opacity: 1;
+    width: fit-content;
+  }
+  to {
+    opacity: 0;
+    width: 0%;
+  }
+`;
+
+export const TypeWriterContainer = styled.div`
+  display: inline-flex;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid #ff0000; /* The typwriter cursor */
+  white-space: nowrap;
+  animation:
+    ${typing} 1.5s steps(8, end) 3s both,
+    ${typing} 1.5s steps(8, end) 6s reverse forwards,
+    ${typing} 1.5s steps(9, end) 8s forwards,
+    ${blinkCaret} .75s step-end infinite;
+`;
+
+export const Hate = styled.div`
+  display: inline;
   color: #ff0000;
-  display:inline;
+  animation:
+    ${disappear} .5s steps(1, end) 7.5s 1 forwards;
+`;
+
+export const Heart = styled.div`
+  display: inline;
+  color: #ff0000;
+  animation:
+    ${disappear} .5s steps(1, end) 6.5s 1 reverse both;
+`;
+
+const appear = keyframes`
+  from { opacity: 0 }
+  to { opacity: 1 }
 `;
 
 export const BackgroundSubtitle = styled.div`
@@ -113,4 +171,6 @@ export const BackgroundSubtitle = styled.div`
   @media (min-width: 768px) {
     font-size: 35px;
   }
+  animation:
+    ${appear} 3s 10s both;
 `;

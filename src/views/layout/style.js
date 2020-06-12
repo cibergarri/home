@@ -3,7 +3,7 @@ import { Container } from '@material-ui/core';
 
 export const Main = styled.div`
   background-color: ${props => props.theme.main.background};
-  text-align: center;
+  text-align: justify;
   font-family: Roboto,Helvetica,Arial,sans-serif;
   font-size: 16px;
   min-height: 100vh;

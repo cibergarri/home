@@ -16,3 +16,9 @@ export const MainContainer = styled(Container)`
   border-radius: 6px;
   padding: 70px 0px;
 `;
+
+export const TextTitle = styled.h1`
+  color: ${props => props.theme.main.primary};
+  margin: max(4vw, 40px);
+  text-align: center;
+`;

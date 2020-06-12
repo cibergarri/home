@@ -1,4 +1,6 @@
 {
+  "title": "JavierGarrido.dev",
+  "settings": "Settings",
   "hello": "Hello",
   "welcome": "welcome to my site!",
   "introduction": "I am a Web developer who is passionate about his job and embraces learning not only in his everyday job but as a way of life.",
@@ -19,7 +21,7 @@
   "awards": "Awards",
   "links": "Links",
   "coconut": "Coconut",
-  "coconut-desc": "Project for helping remote working teams. Allows to share information across people working on distributed teams and to keep trace of the hours dedicated for each project the team is working on. Project made in collaboration with Ruben Antón (from https://www.obsoftware.es).",
+  "coconut-desc": "Web App for helping remote working teams. Allows to share information across people working on distributed teams and to keep trace of the hours dedicated for each project the team is working on. Project made in collaboration with Ruben Antón (from https://www.obsoftware.es).",
   "coconut-awards": "MorcillaConf '20 online hackhaton first awarded Prize.",
   "coconut-link-1": "Working version of the project (free access with linkedIn account)",
   "coconut-link-2": "Source code of the project",

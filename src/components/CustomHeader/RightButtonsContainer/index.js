@@ -27,7 +27,7 @@ import {
 } from './style';
 
 function RightButtonsContainer() {
-  const { i18n } = useTranslation(['landing']);
+  const { i18n, t } = useTranslation(['landing']);
   const theme = useSelector(state => state.config.theme);
   const dispatch = useDispatch();
 
@@ -84,7 +84,7 @@ function RightButtonsContainer() {
           onOpen={toggleDrawer(true)}
         >
           <List>
-            <RightMenuTitleListItem>Menu</RightMenuTitleListItem>
+            <RightMenuTitleListItem>{t('settings')}</RightMenuTitleListItem>
             <Divider />
             <LanguageButtonListItem>{languageWidget()}</LanguageButtonListItem>
             <Divider />
