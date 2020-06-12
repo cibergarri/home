@@ -1,0 +1,15 @@
+.bg-animation-div-normal {
+  z-index: 10000;
+  color: #dc2287;
+  position: absolute;
+  transition-property: opacity;
+  transition-duration: all 1s;
+}
+
+.bg-animation-div-night {
+  z-index: 10000;
+  color: #627e79;
+  position: absolute;
+  transition-property: opacity;
+  transition-duration: all 1s;
+}

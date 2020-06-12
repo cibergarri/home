@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { withTheme } from 'styled-components';
 
+import useScript from '../../hooks/use-script';
 import RightButtonsContainer from './RightButtonsContainer';
 import {
   Header,
@@ -19,7 +22,8 @@ import {
   TypeWriterContainer,
 } from './style';
 
-function CustomHeader() {
+function CustomHeader({ theme }) {
+  useScript('/scripts/bg-animation.js', theme.main.name);
   const { t } = useTranslation('landing');
   return (
     <>
@@ -70,4 +74,4 @@ function CustomHeader() {
   );
 }
 
-export default CustomHeader;
+export default withTheme(CustomHeader);
