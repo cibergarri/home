@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/cibergarri/home/compare/v1.2.4...v1.3.0) (2020-06-07)
+
+
+### Features
+
+* **projects:** add section ([9ede339](https://github.com/cibergarri/home/commit/9ede339074c4550fd0dcd21fa84bab8cb2019167))
+
 ## [1.2.4](https://github.com/cibergarri/home/compare/v1.2.3...v1.2.4) (2020-05-08)
 
 
