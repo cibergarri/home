@@ -24,7 +24,6 @@ export const Link = styled.a.attrs(props => ({
   color: #61dafb;
 `;
 
-
 export const Paragraph = styled.div`
   color: ${props => props.color || props.theme.main.primary};
   margin: max(1.5vw, 40px);

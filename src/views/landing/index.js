@@ -10,7 +10,6 @@ import Projects from './projects';
 
 import Layout from '../layout';
 
-
 function Landing() {
   const content = (
     <>

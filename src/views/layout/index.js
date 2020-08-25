@@ -27,7 +27,6 @@ function Layout({ content }) {
   );
 }
 
-
 Layout.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   content: PropTypes.object.isRequired,

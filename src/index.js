@@ -9,7 +9,6 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 import './i18n';
 
-
 // Deferred load of the App so the static html with the css animation loads very fast
 const App = React.lazy(() => import('./App'));
 

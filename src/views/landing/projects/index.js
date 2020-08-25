@@ -65,7 +65,6 @@ function Projects() {
   );
 }
 
-
 // const mapDispatchToProps = dispatch => ({
 //   setThemeAction: (theme) => dispatch(setThemeAction(theme))
 // });
