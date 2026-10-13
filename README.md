@@ -4,7 +4,29 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Coverage Status](https://coveralls.io/repos/github/cibergarri/home/badge.svg?branch=master)](https://coveralls.io/github/cibergarri/home?branch=master)
 
-Code for [javiergarrido.dev](javiergarrido.dev) website
+Code for [javiergarrido.dev](https://javiergarrido.dev) website
+
+## Development
+
+The build still runs on `react-scripts` 3, which needs Node 16 (see `.nvmrc`):
+
+```sh
+nvm use
+npm install
+npm start        # dev server
+npm test         # jest + enzyme
+npm run build    # production build in ./build
+npm run deploy   # publish ./build to GitHub Pages
+```
+
+The previous version of the site is kept as a static snapshot in `public/v1`
+(built from the last `master` commit before the redesign, with `homepage` set to
+`/v1`). It is served at [javiergarrido.dev/v1/](https://javiergarrido.dev/v1/) for
+comparison and can be deleted when it is no longer needed.
+
+All the page copy lives in `public/locales/{en,es}/landing.json`. The experience,
+skills, projects, education and languages sections are rendered from the arrays in
+those files, so adding a job or a project is a content change, not a code change.
 
 
 ## Features / Techs used:
@@ -12,11 +34,11 @@ Code for [javiergarrido.dev](javiergarrido.dev) website
  - [react](https://reactjs.org/) [(create-react-app)](https://create-react-app.dev/)
  - [redux](https://redux.js.org/) 
  - [redux-thunk](https://github.com/reduxjs/redux-thunk)
- - [redux-cookies-middleware](https://www.npmjs.com/package/redux-cookies-middleware) (to store the preference of night mode themung)
+ - [redux-cookies-middleware](https://www.npmjs.com/package/redux-cookies-middleware) (to store the preference of night mode theming; defaults to the OS colour scheme)
  - [Hooks](https://reactjs.org/docs/hooks-intro.html)
  - [Styled Components](https://styled-components.com/)
  - [react-i18next](https://react.i18next.com/) for translations (storing language preference in cookies)
- - [material-ui](https://material-ui.com/)
+ - [Instrument Sans](https://fonts.google.com/specimen/Instrument+Sans) from Google Fonts
  - [Open Graph](https://developers.facebook.com/docs/sharing/opengraph)
  - [CSS3 animation](https://developer.mozilla.org/es/docs/Web/CSS/animation)
 

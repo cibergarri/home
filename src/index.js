@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { StylesProvider } from '@material-ui/core/styles';
 // eslint-disable-next-line no-unused-vars
 import webVitals from './lib/web-vitals';
 import configureStore from './store';
@@ -14,11 +13,9 @@ const App = React.lazy(() => import('./App'));
 
 ReactDOM.render(
   <React.StrictMode>
-    <StylesProvider injectFirst>
-      <Provider store={configureStore()}>
-        <Suspense fallback={<div>Loading...</div>}><App /></Suspense>
-      </Provider>
-    </StylesProvider>
+    <Provider store={configureStore()}>
+      <Suspense fallback={null}><App /></Suspense>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

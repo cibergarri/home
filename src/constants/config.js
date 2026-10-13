@@ -3,4 +3,5 @@ module.exports = {
     NORMAL: 'normal',
     NIGHT: 'night',
   },
+  LANGUAGES: ['en', 'es'],
 };

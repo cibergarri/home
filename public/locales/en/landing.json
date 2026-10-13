@@ -1,43 +1,158 @@
 {
   "title": "JavierGarrido.dev",
-  "settings": "Settings",
-  "hello": "Hello",
-  "welcome": "welcome to my site!",
-  "introduction": "I am a Web developer who is passionate about his job and embraces learning not only in his everyday job but as a way of life.",
-  "techs-1": "Having more expertise in the backend development -specially with",
-  "techs-2": "- but also targeting frontend technologies -as",
-  "techs-3": "In one of my -not so far away- past lifes I also worked with",
-  "techs-4": "technologies -like MVC, WebAPI-",
-  "jobs-1": "I have worked for ",
-  "jobs-2": "some Tech multinationals -like", 
-  "jobs-3": "and",
-  "jobs-4": "But also some companies in the startup ecosystem with",
-  "international-teams":  "During my working years on those companies I have been part of international teams.",
-  "social-networks": "Feel free to check my social networks -on the top- to find out more info or to contact me.",
-  "hobbies": "Amongst any other interests I am a big fan of Star Wars, Board Games, TV Series, Movies, History and travelling",
-  "github": "You can find the code of this website in my open repositories in Github.",
-  "construction": "Please, remember this site will be always under",
-  "projects": "Side-projects",
-  "awards": "Awards",
-  "links": "Links",
-  "coconut": "Coconut",
-  "coconut-desc": "Web App for helping remote working teams. Allows to share information across people working on distributed teams and to keep trace of the hours dedicated for each project the team is working on. Project made in collaboration with Ruben Antón (from https://www.obsoftware.es).",
-  "coconut-awards": "MorcillaConf '20 online hackhaton first awarded Prize.",
-  "coconut-link-1": "Working version of the project (free access with linkedIn account)",
-  "coconut-link-2": "Source code of the project",
-  "coconut-link-3": "Hackathon projects presentation (and jury decision at the end of the video)",
-  "coconut-link-4": "MorcillaConf Twitter account",
-  "interfaz-en-pantalla": "Interfaz en Pantalla (on-screen interface)",
-  "interfaz-en-pantalla-desc": "End of Bachelor Degree Project. On-screen Keyboard and mouse interface fully customizable and with sweeping technologies for easing disabled people the use of any program on their computer. Currently being used in some primary schools in Burgos. Project made in collaboration with Ana Belén González and APACE Burgos",
-  "interfaz-en-pantalla-awards-1": "UPC first prize for equal opportunities.",
-  "interfaz-en-pantalla-awards-2": "UBU Prototypes Grant.",
-  "interfaz-en-pantalla-awards-3": "UBUEMPRENDE '12 Ideas Contest Winner",
-  "interfaz-en-pantalla-link-1": "Junta de Castilla y León online-resources",
-  "interfaz-en-pantalla-link-2": "Project presentation",
-  "interfaz-en-pantalla-link-3": "Website project Link (Unmaintaned)",
-  "interfaz-en-pantalla-link-4": "Project Youtube channel",
-  "estrenos-bot": "EstrenosBot",
-  "estrenos-bot-desc": "Bot for telegram, project-based learning for NodeJs first steps.",
-  "estrenos-bot-link-1": "Link to the bot in Telegram app",
-  "estrenos-bot-link-2": "Source code of the project"
+  "language": "Language",
+  "toggleTheme": "Switch to {{theme}} mode",
+  "themeLight": "light",
+  "themeDark": "dark",
+  "heroTitlePrefix": "I",
+  "heroTitleSuffix": "coding",
+  "heroSubtitle": "...At least most of the time ;)",
+  "introHeading": "Hi, I'm Javier Garrido.",
+  "introParagraph1": "I'm a web developer based in Burgos, Spain, working remotely for Kodify Media Group. Most of my career has been on the backend, mainly with Node.js, and I'm at home on the frontend with React too. Before JavaScript took over I built things with .NET.",
+  "introParagraph2": "These days I care a lot about how software is designed: domain-driven design, system architecture and the decisions that are hard to undo later. I like teams where people learn from each other, and I try to be the one who raises a hand when something needs doing.",
+  "experienceHeading": "Where I've worked",
+  "experienceNote": "I've been part of international teams at large companies and small startups alike.",
+  "experience": [
+    {
+      "company": "Kodify Media Group",
+      "place": "Fully remote",
+      "period": "Currently",
+      "summary": "Software engineer in a fully remote, distributed team, and team lead for the last four years. I look after a backend team working on high-traffic subscription video platforms: planning the work, reviewing designs and helping people grow, while still writing code myself, mostly on service design, domain modelling and the infrastructure that keeps everything running."
+    },
+    {
+      "company": "Bag On Board",
+      "place": "Madrid, fully remote",
+      "period": "",
+      "summary": "Developer at a Madrid startup, working fully remote and building the product from early on with a small team where everyone did a bit of everything."
+    },
+    {
+      "company": "Cognizant",
+      "place": "Spain",
+      "period": "",
+      "summary": "Developer at a global IT services company, on projects for large clients. An international, English-speaking team, and a good school for working at scale."
+    },
+    {
+      "company": "Thomson Reuters",
+      "place": "Spain",
+      "period": "",
+      "summary": "Developer in an international team at a large technology and information company. Web applications and APIs, mainly with .NET, working day to day with colleagues in several countries."
+    }
+  ],
+  "skillsHeading": "What I work with",
+  "skills": [
+    "Node.js",
+    "JavaScript and TypeScript",
+    "React",
+    "Domain-driven design",
+    "System design",
+    "Team leadership",
+    "CI/CD and DevOps",
+    "AI-assisted development",
+    "Claude and LLM tooling",
+    ".NET (earlier on)"
+  ],
+  "projectsHeading": "Side projects",
+  "projectsNote": "Things I've built outside work, mostly to learn or to help someone.",
+  "awardsLabel": "Awards",
+  "linksLabel": "Links",
+  "projects": [
+    {
+      "name": "Coconut",
+      "description": "A web app for remote teams. It lets people in distributed teams share information and keep track of the hours spent on each project. Built with Rubén Antón (obsoftware.es); I took care of the backend and DevOps.",
+      "awards": [
+        "First prize at the MorcillaConf 2019 online hackathon"
+      ],
+      "links": [
+        {
+          "label": "Source code",
+          "href": "https://github.com/cibergarri/morcilla-Back"
+        },
+        {
+          "label": "Hackathon presentations and jury decision",
+          "href": "https://youtu.be/kJYeJhajZJg?t=1805"
+        },
+        {
+          "label": "MorcillaConf on Twitter",
+          "href": "https://twitter.com/morcillaconf?lang=es"
+        }
+      ]
+    },
+    {
+      "name": "Interfaz en Pantalla",
+      "description": "My final degree project: an on-screen keyboard and mouse, fully customisable and with scanning input, so people with motor disabilities can use any program on their computer. It is still used in some primary schools in Burgos. Built with Ana Belén González and APACE Burgos.",
+      "awards": [
+        "First prize for equal opportunities, Universitat Politècnica de Catalunya (2012)",
+        "Winner of the first UBUEMPRENDE ideas contest (2012)",
+        "Grant for developing a marketable prototype, Universidad de Burgos (2010)"
+      ],
+      "links": [
+        {
+          "label": "Junta de Castilla y León online resources",
+          "href": "http://www.educa.jcyl.es/crol/es/buscar?formName=simpleSearchForm&formName=simpleSearchForm&lookForType=0&searchWeb=crol&sortIndex=0&simpleSearchPattern=DINper"
+        },
+        {
+          "label": "Project presentation",
+          "href": "https://www.ubu.es/sites/default/files/portal_page/files/cartel_interfaz_en_pantalla_vf_3.pdf"
+        },
+        {
+          "label": "Project website (no longer maintained)",
+          "href": "http://www.spia.es/iep/"
+        },
+        {
+          "label": "YouTube channel",
+          "href": "https://www.youtube.com/user/InterfazEnPantalla"
+        }
+      ]
+    },
+    {
+      "name": "EstrenosBot",
+      "description": "A Telegram bot about film releases. A small project I built to take my first steps with Node.js.",
+      "awards": [],
+      "links": [
+        {
+          "label": "Open the bot in Telegram",
+          "href": "https://web.telegram.org/#/im?p=@EstrenosBot"
+        },
+        {
+          "label": "Source code",
+          "href": "https://github.com/cibergarri/estrenosBot"
+        }
+      ]
+    }
+  ],
+  "backgroundHeading": "Background",
+  "educationLabel": "Education",
+  "education": [
+    {
+      "name": "Universidad de Burgos",
+      "detail": "Computer engineering, 2012"
+    },
+    {
+      "name": "PeopleStorming",
+      "detail": "Leadership program, 2026"
+    }
+  ],
+  "languagesLabel": "Languages",
+  "languages": [
+    {
+      "name": "Spanish",
+      "detail": "Native"
+    },
+    {
+      "name": "English",
+      "detail": "Full professional proficiency"
+    }
+  ],
+  "offWorkLabel": "Away from the keyboard",
+  "offWork": "Star Wars, board games, TV series, films, history and travelling.",
+  "contactHeading": "Get in touch",
+  "contactText": "The easiest way to reach me is LinkedIn. The code for this site is on GitHub, and I also keep a small playground of experiments there.",
+  "contactLinkedin": "LinkedIn",
+  "contactGithub": "GitHub",
+  "contactTwitter": "Twitter",
+  "contactPlayground": "Playground",
+  "contactSource": "Source of this site",
+  "footerMadeWith": "Made with",
+  "footerAnd": "and",
+  "footerBy": "by Javier Garrido"
 }

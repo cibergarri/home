@@ -1,38 +1,20 @@
 html {
   min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100%;
-  position: relative;;
+  position: relative;
+  text-rendering: optimizeLegibility;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-  
-::-webkit-scrollbar-track {
-  width: 5px;
-  background: #1f3898;
-  border-radius: 3px;
-}
-/* #dedede40 */
-/* #0d0469; */
-::-webkit-scrollbar-thumb {
-  background :#ababab; 
-  border-radius: 3px;
-  min-height: 50px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 #root {
@@ -45,7 +27,7 @@ code {
   pointer-events: none;
 }
 
-.overlay{
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -80,11 +62,22 @@ code {
   }
   100% {
     top: 33vw;
-    left: -webkit-calc(50% - 7vw);
-    left: -moz-calc(50% - 7vw);
     left: calc(50% - 7vw);
     width: 14vw;
     height: 14vw;
     opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

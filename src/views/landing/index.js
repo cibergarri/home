@@ -1,21 +1,25 @@
-/* eslint-disable max-len */
 import React from 'react';
-// import PropTypes from 'prop-types';
 
-import Summary from './summary';
-import Projects from './projects';
-// import {
-//   Main, Body,
-// } from './style';
+import Intro from './sections/Intro';
+import Experience from './sections/Experience';
+import Skills from './sections/Skills';
+import Projects from './sections/Projects';
+import Background from './sections/Background';
+import Contact from './sections/Contact';
 
 import Layout from '../layout';
+import { Page } from '../../styles';
 
 function Landing() {
   const content = (
-    <>
-      <Summary />
+    <Page>
+      <Intro />
+      <Experience />
+      <Skills />
       <Projects />
-    </>
+      <Background />
+      <Contact />
+    </Page>
   );
   return (
     <Layout content={content} />

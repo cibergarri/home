@@ -1,14 +1,12 @@
 import styled from 'styled-components';
-import { Container } from '@material-ui/core';
 
 export const Main = styled.div`
   background-color: ${props => props.theme.main.background};
-  text-align: justify;
-  font-family: Roboto,Helvetica,Arial,sans-serif;
-  font-size: 16px;
+  color: ${props => props.theme.main.textColor};
   min-height: 100vh;
+  transition: background-color 0.5s, color 0.5s;
 `;
 
-export const Body = styled(Container)`
+export const Body = styled.div`
   transition: all 0.5s;
 `;
