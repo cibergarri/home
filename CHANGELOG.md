@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/cibergarri/home/compare/v1.3.0...v1.4.0) (2026-10-13)
+
+
+### Bug Fixes
+
+* **ci:** sync the lockfile so npm ci passes, update actions ([e49ad99](https://github.com/cibergarri/home/commit/e49ad99775961899ca0167c1c02fd1008a4e4ca0))
+* **hero:** keep the title still while the typewriter runs ([af7dce0](https://github.com/cibergarri/home/commit/af7dce05d5f5cb585b1940bea069d780669c9ce6))
+* **hero:** size the typewriter to each word and add workshops ([f84dcb7](https://github.com/cibergarri/home/commit/f84dcb7d3a422bbcdcc86f718c1dacc6cf90cefd))
+
+
+### Features
+
+* **content:** workshops, Claude credit and section reorder ([b0528ea](https://github.com/cibergarri/home/commit/b0528ea2b24e5f941dd379a9c0b34e6a7663e146))
+* **site:** redesign the landing page with content from LinkedIn ([b8379ef](https://github.com/cibergarri/home/commit/b8379efb19c5ab06b1f0bcfa06902a23b7789dff))
+
 # [1.3.0](https://github.com/cibergarri/home/compare/v1.2.4...v1.3.0) (2020-06-07)
 
 
