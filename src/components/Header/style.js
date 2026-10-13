@@ -113,9 +113,12 @@ export const HeroTitle = styled.div`
   letter-spacing: -0.02em;
   font-size: clamp(30px, 7vw, 60px);
   line-height: 1.1;
-  padding: 0 clamp(40px, 8vw, 120px) 16px 0;
+  padding: 0 clamp(56px, 12vw, 200px) 16px 0;
   margin: 0;
-  max-width: 500px;
+  /* Fixed to the width of the widest final line ("I <heart \>" plus the caret),
+     so the block does not shift while the typewriter grows and shrinks. */
+  box-sizing: content-box;
+  width: 4.9em;
   align-self: flex-end;
   text-align: left;
 `;
@@ -185,7 +188,7 @@ export const HeroSubtitle = styled.div`
   font-weight: 700;
   letter-spacing: -0.01em;
   font-size: clamp(17px, 3.6vw, 32px);
-  padding: 0 clamp(40px, 8vw, 120px) 0 0;
+  padding: 0 clamp(56px, 12vw, 200px) 0 0;
   height: 140px;
   max-width: 500px;
   align-self: flex-end;
