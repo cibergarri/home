@@ -61,7 +61,6 @@ export default function Header() {
       <Hero id="background-image">
         <HeroTitle>
           {t('heroTitlePrefix')}
-          {' '}
           <TypeWriterContainer>
             <Hate>&lt;hate \&gt;</Hate>
             <Heart>&lt;heart \&gt;</Heart>
