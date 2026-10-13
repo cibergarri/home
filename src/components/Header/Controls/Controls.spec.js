@@ -1,0 +1,42 @@
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import { renderWithProviders, i18n } from '@/test-utils';
+import Controls from '.';
+
+describe('Controls', () => {
+  beforeEach(() => {
+    document.documentElement.dataset.theme = 'normal';
+    document.cookie = 'my_language=; max-age=0; path=/';
+    localStorage.clear();
+    return i18n.changeLanguage('en');
+  });
+
+  it('marks the current language as pressed', () => {
+    renderWithProviders(<Controls />);
+    expect(screen.getByRole('button', { pressed: true })).toHaveTextContent('EN');
+  });
+
+  it('changes the language and remembers it when the other option is clicked', async () => {
+    renderWithProviders(<Controls />);
+    await userEvent.click(screen.getByRole('button', { name: 'ES' }));
+    expect(i18n.language).toBe('es');
+    expect(document.cookie).toContain('my_language=es');
+    expect(screen.getByRole('button', { pressed: true })).toHaveTextContent('ES');
+  });
+
+  it('switches to night mode and back, persisting the choice', async () => {
+    renderWithProviders(<Controls />);
+    await userEvent.click(screen.getByRole('button', { name: 'Switch to dark mode' }));
+    expect(document.documentElement.dataset.theme).toBe('night');
+    expect(localStorage.getItem('theme')).toBe('night');
+    await userEvent.click(screen.getByRole('button', { name: 'Switch to light mode' }));
+    expect(document.documentElement.dataset.theme).toBe('normal');
+  });
+
+  it('starts from the theme the page already has', () => {
+    document.documentElement.dataset.theme = 'night';
+    renderWithProviders(<Controls />);
+    expect(screen.getByRole('button', { name: 'Switch to light mode' })).toBeInTheDocument();
+  });
+});
