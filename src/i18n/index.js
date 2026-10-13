@@ -1,4 +1,4 @@
-import i18n from 'i18next';
+import { createInstance } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 import en from '@/locales/en.json';
@@ -8,19 +8,20 @@ export const LANGUAGES = ['en', 'es'];
 export const DEFAULT_LANGUAGE = 'en';
 export const LANGUAGE_COOKIE = 'my_language';
 
-if (!i18n.isInitialized) {
-  i18n.use(initReactI18next).init({
-    resources: {
-      en: { translation: en },
-      es: { translation: es },
-    },
-    lng: DEFAULT_LANGUAGE,
-    fallbackLng: DEFAULT_LANGUAGE,
-    supportedLngs: LANGUAGES,
-    interpolation: { escapeValue: false },
-    react: { useSuspense: false },
-  });
-}
+// A fresh instance per module evaluation, so a hot reload of the locale files
+// in development reaches the server render too.
+const i18n = createInstance({
+  resources: {
+    en: { translation: en },
+    es: { translation: es },
+  },
+  lng: DEFAULT_LANGUAGE,
+  fallbackLng: DEFAULT_LANGUAGE,
+  supportedLngs: LANGUAGES,
+  interpolation: { escapeValue: false },
+  react: { useSuspense: false },
+});
+i18n.use(initReactI18next).init();
 
 const supported = (lang) => {
   const short = (lang || '').slice(0, 2).toLowerCase();

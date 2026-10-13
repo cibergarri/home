@@ -3,7 +3,7 @@
 import { useTranslation } from 'react-i18next';
 
 import {
-  FooterBar, FooterInner, Copyright, StyledCopyLeftIcon, StyledHeartIcon, StyledJSIcon,
+  FooterBar, FooterInner, Copyright, StyledCopyLeftIcon, StyledHeartIcon, StyledJSIcon, StyledClaudeIcon, Glued,
 } from './style';
 
 export default function Footer() {
@@ -17,9 +17,13 @@ export default function Footer() {
         </Copyright>
         <Copyright>
           {t('footerMadeWith')}
-          <StyledHeartIcon aria-label="love" />
-          {t('footerAnd')}
+          <Glued>
+            <StyledHeartIcon aria-label="love" />
+            ,
+          </Glued>
           <StyledJSIcon aria-label="JavaScript" />
+          {t('footerAnd')}
+          <StyledClaudeIcon aria-label="Claude" />
           {t('footerBy')}
         </Copyright>
       </FooterInner>

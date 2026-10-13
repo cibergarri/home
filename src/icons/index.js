@@ -10,3 +10,4 @@ export { default as Moon } from './Moon';
 export { default as Nodejs } from './Nodejs';
 export { default as Sun } from './Sun';
 export { default as Uk } from './Uk';
+export { default as Claude } from './Claude';

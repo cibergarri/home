@@ -42,9 +42,11 @@ describe('landing sections', () => {
     expect(screen.getAllByText(en.awardsLabel)).toHaveLength(withAwards);
   });
 
-  it('renders education, languages and hobbies', () => {
+  it('renders education, workshops, languages and hobbies', () => {
     renderWithProviders(<Background />);
     expect(screen.getByText('Universidad de Burgos')).toBeInTheDocument();
+    expect(screen.getByText('Workshops')).toBeInTheDocument();
+    expect(screen.getByText('PeopleStorming')).toBeInTheDocument();
     expect(screen.getByText('Spanish')).toBeInTheDocument();
     expect(screen.getByText(en.offWork)).toBeInTheDocument();
   });
