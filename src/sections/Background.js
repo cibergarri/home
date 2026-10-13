@@ -12,7 +12,7 @@ function Pairs({ items }) {
   return (
     <DetailList $flush>
       {items.map(item => (
-        <Fragment key={item.name}>
+        <Fragment key={`${item.name} ${item.detail}`}>
           <DetailLabel>{item.name}</DetailLabel>
           <DetailValue>{item.detail}</DetailValue>
         </Fragment>
@@ -24,6 +24,7 @@ function Pairs({ items }) {
 export default function Background() {
   const { t } = useTranslation();
   const education = t('education', { returnObjects: true });
+  const workshops = t('workshops', { returnObjects: true });
   const languages = t('languages', { returnObjects: true });
   return (
     <Section id="background">
@@ -32,6 +33,10 @@ export default function Background() {
         <Row>
           <RowHead>{t('educationLabel')}</RowHead>
           <RowBody>{Array.isArray(education) && <Pairs items={education} />}</RowBody>
+        </Row>
+        <Row>
+          <RowHead>{t('workshopsLabel')}</RowHead>
+          <RowBody>{Array.isArray(workshops) && <Pairs items={workshops} />}</RowBody>
         </Row>
         <Row>
           <RowHead>{t('languagesLabel')}</RowHead>

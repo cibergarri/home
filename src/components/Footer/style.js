@@ -2,7 +2,9 @@
 
 import styled from 'styled-components';
 
-import { Copyleft, Heart, Javascript } from '@/icons';
+import {
+  Copyleft, Heart, Javascript, Claude,
+} from '@/icons';
 
 export const FooterBar = styled.footer`
   background: var(--c-background);
@@ -48,4 +50,13 @@ export const StyledHeartIcon = styled(Heart).attrs({ height: '14px', width: '14p
 
 export const StyledJSIcon = styled(Javascript).attrs({ height: '14px', width: '14px' })`
   border-radius: 2px;
+`;
+
+export const StyledClaudeIcon = styled(Claude).attrs({ height: '14px', width: '14px' })`
+  fill: #d97757;
+`;
+
+export const Glued = styled.span`
+  display: inline-flex;
+  align-items: center;
 `;

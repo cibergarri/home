@@ -11,7 +11,7 @@
   "introParagraph1": "Soy desarrollador web. Vivo en Burgos y trabajo en remoto para Kodify Media Group. He pasado la mayor parte de mi carrera en el backend, sobre todo con Node.js, y también me muevo con soltura en el frontend con React. Antes de que JavaScript lo ocupara todo, construía cosas con .NET.",
   "introParagraph2": "Hoy me interesa mucho cómo se diseña el software: domain-driven design, arquitectura de sistemas y esas decisiones que luego cuesta deshacer. Me gustan los equipos donde la gente aprende de los demás, e intento ser el que levanta la mano cuando hay algo que hacer.",
   "experienceHeading": "Dónde he trabajado",
-  "experienceNote": "He formado parte de equipos internacionales tanto en grandes empresas como en startups.",
+  "experienceNote": "He formado parte de equipos internacionales en multinacionales, en startups y, en los últimos años, en una empresa de producto.",
   "experience": [
     {
       "company": "Kodify Media Group",
@@ -126,10 +126,29 @@
     {
       "name": "Universidad de Burgos",
       "detail": "Ingeniería Informática, 2012"
-    },
+    }
+  ],
+  "workshopsLabel": "Talleres",
+  "workshops": [
     {
       "name": "PeopleStorming",
       "detail": "Programa de liderazgo, 2026"
+    },
+    {
+      "name": "GOTO Copenhagen 2025",
+      "detail": "Microservice Communication, masterclass de Sam Newman"
+    },
+    {
+      "name": "GOTO Copenhagen 2025",
+      "detail": "Resilient Distributed Systems, masterclass de Sam Newman"
+    },
+    {
+      "name": "DDD Europe 2023",
+      "detail": "Domain-Driven Design in TypeScript, de Thomas Coopman"
+    },
+    {
+      "name": "DDD Europe 2022",
+      "detail": "Software Architecture: The Hard Parts, de Neal Ford"
     }
   ],
   "languagesLabel": "Idiomas",
