@@ -1,79 +1,63 @@
 # Javier Garrido WebSite
 
-![travis](https://travis-ci.org/cibergarri/home.svg?branch=master)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Coverage Status](https://coveralls.io/repos/github/cibergarri/home/badge.svg?branch=master)](https://coveralls.io/github/cibergarri/home?branch=master)
-
-Code for [javiergarrido.dev](https://javiergarrido.dev) website
+Code for [javiergarrido.dev](https://javiergarrido.dev).
 
 ## Development
 
-The build still runs on `react-scripts` 3, which needs Node 16 (see `.nvmrc`):
+Requires Node 22 (see `.nvmrc`).
 
 ```sh
 nvm use
 npm install
-npm start        # dev server
-npm test         # jest + enzyme
-npm run build    # production build in ./build
-npm run deploy   # publish ./build to GitHub Pages
+npm run dev      # dev server on http://localhost:3000
+npm test         # jest + react testing library
+npm run lint     # eslint
+npm run build    # static export in ./out
+npm run preview  # serve ./out locally
+npm run deploy   # publish ./out to the gh-pages branch by hand
 ```
 
+All the page copy lives in `src/locales/en.json` and `src/locales/es.json`. The
+experience, skills, projects, education and languages sections are rendered from
+the arrays in those files, so adding a job or a project is a content change, not
+a code change. A test checks that both languages keep the same keys.
+
 The previous version of the site is kept as a static snapshot in `public/v1`
-(built from the last `master` commit before the redesign, with `homepage` set to
-`/v1`). It is served at [javiergarrido.dev/v1/](https://javiergarrido.dev/v1/) for
+(built from the last Create React App commit, with its base path set to `/v1`).
+It is served at [javiergarrido.dev/v1/](https://javiergarrido.dev/v1/) for
 comparison and can be deleted when it is no longer needed.
 
-All the page copy lives in `public/locales/{en,es}/landing.json`. The experience,
-skills, projects, education and languages sections are rendered from the arrays in
-those files, so adding a job or a project is a content change, not a code change.
+## How it is built
 
-
-## Features / Techs used:
-  
- - [react](https://reactjs.org/) [(create-react-app)](https://create-react-app.dev/)
- - [redux](https://redux.js.org/) 
- - [redux-thunk](https://github.com/reduxjs/redux-thunk)
- - [redux-cookies-middleware](https://www.npmjs.com/package/redux-cookies-middleware) (to store the preference of night mode theming; defaults to the OS colour scheme)
- - [Hooks](https://reactjs.org/docs/hooks-intro.html)
- - [Styled Components](https://styled-components.com/)
- - [react-i18next](https://react.i18next.com/) for translations (storing language preference in cookies)
- - [Instrument Sans](https://fonts.google.com/specimen/Instrument+Sans) from Google Fonts
- - [Open Graph](https://developers.facebook.com/docs/sharing/opengraph)
- - [CSS3 animation](https://developer.mozilla.org/es/docs/Web/CSS/animation)
+- [Next.js](https://nextjs.org/) with the App Router and `output: 'export'`, so the
+  result is plain static files
+- [React 19](https://react.dev/)
+- [styled-components](https://styled-components.com/) 6, with the server-side
+  style registry so the first paint is already styled
+- Light and dark themes as CSS variables keyed off `data-theme` on `<html>`. An
+  inline script applies the saved choice (or the OS preference) before paint.
+- [react-i18next](https://react.i18next.com/) for English and Spanish. Pages are
+  prerendered in English and the visitor's language is applied after hydration;
+  the choice is kept in a cookie.
+- [Instrument Sans](https://fonts.google.com/specimen/Instrument+Sans) through
+  `next/font`, self-hosted at build time
+- The hero typewriter is a CSS animation; the digits that follow the mouse come
+  from `public/scripts/bg-animation.js`
 
 Tooling:
- - [svgr](https://react-svgr.com/)to import svg icon Components (npm run svgr)
- - [esLint](https://eslint.org/)
- - [styleLint](https://stylelint.io/)
 
-Testing:
- - [jest](https://jestjs.io/)
- - [Enzyme](https://enzymejs.github.io/enzyme/)
- - [redux-mock-store](https://github.com/reduxjs/redux-mock-store)
+- [svgr](https://react-svgr.com/) to turn the SVG icons into components (`npm run svgr`)
+- [ESLint](https://eslint.org/) with `eslint-config-next`
+- [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/)
 
-Continuous integration/delivery:
- - [Husky hooks](https://github.com/typicode/husky)
- - [travis](https://travis-ci.org/) for continuous integration
- - [semantic-release](https://semantic-release.gitbook.io/semantic-release/) to manage the releases
- - [commitlint](https://commitlint.js.org/) & [commitizen](http://commitizen.github.io/cz-cli/) for [conventional commits](https://www.conventionalcommits.org/)
- - [gh pages](https://pages.github.com/)
- - [coveralls](https://coveralls.io/)
- - [.dev domains](https://get.dev/)
+Delivery:
 
-Analytics:
- - [hotjar](https://www.hotjar.com/)
- - [google analytics](https://analytics.google.com/)
- - [Web vitals](https://web.dev/vitals/)
- 
- ## Useful resources
+- [GitHub Actions](.github/workflows/ci.yml): lint, test and build on every push and
+  pull request; on `master` it also runs semantic-release and publishes `out/` to
+  the `gh-pages` branch
+- [semantic-release](https://semantic-release.gitbook.io/) for versions and the changelog
+- [commitlint](https://commitlint.js.org/), [commitizen](http://commitizen.github.io/cz-cli/)
+  and [husky](https://typicode.github.io/husky/) for conventional commits
+- [GitHub Pages](https://pages.github.com/) on a [.dev domain](https://get.dev/)
 
- - [CSS tricks](https://css-tricks.com/)
- - [React Internationalization with i18n](https://www.robinwieruch.de/react-internationalization)
- - [The Flexbox guide](https://flaviocopes.com/flexbox/)
- - [Adding coverage reports to a React Create App using Coveralls.io](https://rants.broonix.ca/adding-coverage-reports)
- - [CSS styles generator](https://www.cssmatic.com/box-shadow)
- - [Connecting a .DEV Domain to Github Pages with HTTPS](https://medium.com/@jaredpotter1/connecting-a-dev-domain-to-github-pages-with-https-f0c59fb62579)
- - [Open Graph Meta Tags: Everything You Need to Know](https://ahrefs.com/blog/open-graph-meta-tags/)
- - [CSS3 animation property reference](https://www.tutorialrepublic.com/css-reference/css3-animation-property.php)
- - [CSS typewriter effect](https://css-tricks.com/snippets/css/typewriter-effect/)
+Analytics: [Google Analytics](https://analytics.google.com/) and [Hotjar](https://www.hotjar.com/).

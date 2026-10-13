@@ -1,37 +1,31 @@
 {
   "version": "0.2.0",
   "configurations": [
-      {
-        "name": "Debug CRA Tests",
-        "type": "node",
-        "request": "launch",
-        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/react-scripts",
-        "args": ["test", "--runInBand", "--no-cache", "--watchAll=false"],
-        "cwd": "${workspaceRoot}",
-        "protocol": "inspector",
-        "console": "integratedTerminal",
-        "internalConsoleOptions": "neverOpen",
-        // "env": { "CI": "true" },
-        "disableOptimisticBPs": true
-      },{
-        "name": "Debug These Tests",
-        "type": "node",
-        "request": "launch",
-        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/react-scripts",
-        "args": [
-          "test",
-          "--runInBand",
-          "--no-cache",
-          "--watchAll=false",
-          "${file}"
-        ],
-        "cwd": "${workspaceRoot}",
-        "protocol": "inspector",
-        "console": "integratedTerminal",
-        "internalConsoleOptions": "neverOpen",
-        // "env": { "CI": "true" },
-        "disableOptimisticBPs": true
-      }
-
+    {
+      "name": "Debug Jest tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/jest",
+      "args": ["--runInBand", "--watchAll=false"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Debug this test file",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/jest",
+      "args": ["--runInBand", "--watchAll=false", "${file}"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Next.js dev server",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev"
+    }
   ]
 }

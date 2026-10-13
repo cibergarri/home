@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+// Loads a plain script from /public once per theme so it can pick the right class names.
 const useScript = (url, theme) => {
   useEffect(() => {
     const script = document.createElement('script');
