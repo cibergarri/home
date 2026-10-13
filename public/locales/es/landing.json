@@ -1,43 +1,158 @@
 {
   "title": "JavierGarrido.dev",
-  "settings": "Configuración",
-  "hello": "Hola",
-  "welcome": "bienvenido a mi site!",
-  "introduction": "Soy un dessarollador web apasionado con su trabajo al que le encanta aprender en su día a día.",
-  "techs-1": "Tengo más experiencia en el desarrollo backend -especialmente con",
-  "techs-2": "- pero sin olvidar las tecnologías frontend -como",
-  "techs-3": "En una de mis - no tan pasadas - otras vidas también trabajé con tecnologías",
-  "techs-4": "-como MVC, WebAPI entre otras-",
-  "jobs-1": "He trabajado para ",
-  "jobs-2": "algunas multinacionales tecnológicas -como", 
-  "jobs-3": "y",
-  "jobs-4": "Pero también he trabajado en el mundo de las startups con",
-  "international-teams":  "Durante mis años de trabajo en esas compañías he tenido la suerte de formar parte de equipos internacionales.",
-  "social-networks": "Siéntente libre de visitar mis redes sociales -en la cabecera- para saber más acerca de mí o para contactarme.",
-  "hobbies": "Entre otros intereses, soy un fan de Star Wars, los juegos de mesa, series de TV, Cine, la Historia y viajar",
-  "github": "Puedes encontrar el código de este website en mi lista de repositorios abiertos en Github.",
-  "construction": "Por favor, recuerda que este site siempre estará en",
-  "projects": "Otros proyectos",
-  "awards": "Premios",
-  "links": "Links",
-  "coconut": "Coconut",
-  "coconut-desc": "Aplicación web para ayuda a equipos trabajando en remoto. Permite compartir información entre personas trabajando de manera distribuida y mantener control de las horas imputadas a cada uno de los proyectos en los que el equipo trabaja. Proyecto desarrollado en colaboración con Ruben Antón (de https://www.obsoftware.es).",
-  "coconut-awards": "Primer premio del Hackathon online MorcillaConf '20.",
-  "coconut-link-1": "Versión funcional del proyecto (acceso libre con cuenta de LinkedIn)",
-  "coconut-link-2": "Código fuente del proyecto",
-  "coconut-link-3": "Presentación de  los proyectos del Hackathon (con la decisión del jurado al final del vídeo)",
-  "coconut-link-4": "Cuenta oficial del MorcillaConf",
-  "interfaz-en-pantalla": "Interfaz en Pantalla",
-  "interfaz-en-pantalla-desc": "Proyecto de fin de carrera. Teclado y ratón en pantalla completamente customizables con tecnología de barrido para facilitar el uso del ordenador a personas con discapacidad. Está actualmente en uso en algunas escuelas de primaria de Burgos. Proyecto hecho en colaboración con Ana Belén González y APACE Burgos",
-  "interfaz-en-pantalla-awards-1": "Primer premio de igualdad de oportunidades de la UPC.",
-  "interfaz-en-pantalla-awards-2": "Becas prototipo Universidad de Burgos.",
-  "interfaz-en-pantalla-awards-3": "Ganador del concurso de ideas UBUEMPRENDE '12",
-  "interfaz-en-pantalla-link-1": "Recursos online de la Junta de Castilla y León",
-  "interfaz-en-pantalla-link-2": "Presentación del proyecto",
-  "interfaz-en-pantalla-link-3": "Link al sitio del proyecto (Sin mantenimiento)",
-  "interfaz-en-pantalla-link-4": "Canal de Youtube",
-  "estrenos-bot": "EstrenosBot",
-  "estrenos-bot-desc": "Bot para telegram, proyecto de aprendizaje para dar los primeros pasos en NodeJs.",
-  "estrenos-bot-link-1": "Link al bot en la app de Telegram",
-  "estrenos-bot-link-2": "Código fuente del proyecto"
+  "language": "Idioma",
+  "toggleTheme": "Cambiar a modo {{theme}}",
+  "themeLight": "claro",
+  "themeDark": "oscuro",
+  "heroTitlePrefix": "I",
+  "heroTitleSuffix": "coding",
+  "heroSubtitle": "...At least most of the time ;)",
+  "introHeading": "Hola, soy Javier Garrido.",
+  "introParagraph1": "Soy desarrollador web. Vivo en Burgos y trabajo en remoto para Kodify Media Group. He pasado la mayor parte de mi carrera en el backend, sobre todo con Node.js, y también me muevo con soltura en el frontend con React. Antes de que JavaScript lo ocupara todo, construía cosas con .NET.",
+  "introParagraph2": "Hoy me interesa mucho cómo se diseña el software: domain-driven design, arquitectura de sistemas y esas decisiones que luego cuesta deshacer. Me gustan los equipos donde la gente aprende de los demás, e intento ser el que levanta la mano cuando hay algo que hacer.",
+  "experienceHeading": "Dónde he trabajado",
+  "experienceNote": "He formado parte de equipos internacionales tanto en grandes empresas como en startups.",
+  "experience": [
+    {
+      "company": "Kodify Media Group",
+      "place": "Totalmente en remoto",
+      "period": "Actualmente",
+      "summary": "Ingeniero de software en un equipo distribuido y totalmente en remoto, y team lead desde hace cuatro años. Me ocupo de un equipo de backend que trabaja en plataformas de vídeo por suscripción con mucho tráfico: planificar el trabajo, revisar diseños y ayudar a la gente a crecer, sin dejar de escribir código, sobre todo en diseño de servicios, modelado del dominio y la infraestructura que lo mantiene todo en marcha."
+    },
+    {
+      "company": "Bag On Board",
+      "place": "Madrid, totalmente en remoto",
+      "period": "",
+      "summary": "Desarrollador en una startup de Madrid, trabajando totalmente en remoto y construyendo el producto desde el principio con un equipo pequeño en el que todos hacíamos un poco de todo."
+    },
+    {
+      "company": "Cognizant",
+      "place": "España",
+      "period": "",
+      "summary": "Desarrollador en una consultora tecnológica global, en proyectos para grandes clientes. Un equipo internacional, en inglés, y una buena escuela para trabajar a gran escala."
+    },
+    {
+      "company": "Thomson Reuters",
+      "place": "España",
+      "period": "",
+      "summary": "Desarrollador en un equipo internacional de una gran empresa de tecnología e información. Aplicaciones web y APIs, sobre todo con .NET, trabajando a diario con compañeros de varios países."
+    }
+  ],
+  "skillsHeading": "Con qué trabajo",
+  "skills": [
+    "Node.js",
+    "JavaScript y TypeScript",
+    "React",
+    "Domain-driven design",
+    "Diseño de sistemas",
+    "Liderazgo de equipos",
+    "CI/CD y DevOps",
+    "Desarrollo asistido por IA",
+    "Claude y herramientas LLM",
+    ".NET (hace tiempo)"
+  ],
+  "projectsHeading": "Otros proyectos",
+  "projectsNote": "Cosas que he construido fuera del trabajo, casi siempre para aprender o para ayudar a alguien.",
+  "awardsLabel": "Premios",
+  "linksLabel": "Enlaces",
+  "projects": [
+    {
+      "name": "Coconut",
+      "description": "Aplicación web para equipos en remoto. Permite compartir información entre personas que trabajan de forma distribuida y llevar el control de las horas dedicadas a cada proyecto. Hecha con Rubén Antón (obsoftware.es); yo me encargué del backend y del DevOps.",
+      "awards": [
+        "Primer premio del hackathon online de la MorcillaConf 2019"
+      ],
+      "links": [
+        {
+          "label": "Código fuente",
+          "href": "https://github.com/cibergarri/morcilla-Back"
+        },
+        {
+          "label": "Presentación de los proyectos y decisión del jurado",
+          "href": "https://youtu.be/kJYeJhajZJg?t=1805"
+        },
+        {
+          "label": "MorcillaConf en Twitter",
+          "href": "https://twitter.com/morcillaconf?lang=es"
+        }
+      ]
+    },
+    {
+      "name": "Interfaz en Pantalla",
+      "description": "Mi proyecto de fin de carrera: un teclado y un ratón en pantalla, totalmente configurables y con entrada por barrido, para que personas con discapacidad motora puedan usar cualquier programa del ordenador. Sigue en uso en algunos colegios de primaria de Burgos. Hecho con Ana Belén González y APACE Burgos.",
+      "awards": [
+        "Primer premio de igualdad de oportunidades, Universitat Politècnica de Catalunya (2012)",
+        "Ganador del I concurso de ideas UBUEMPRENDE (2012)",
+        "Beca para el desarrollo de un prototipo comercializable, Universidad de Burgos (2010)"
+      ],
+      "links": [
+        {
+          "label": "Recursos online de la Junta de Castilla y León",
+          "href": "http://www.educa.jcyl.es/crol/es/buscar?formName=simpleSearchForm&formName=simpleSearchForm&lookForType=0&searchWeb=crol&sortIndex=0&simpleSearchPattern=DINper"
+        },
+        {
+          "label": "Presentación del proyecto",
+          "href": "https://www.ubu.es/sites/default/files/portal_page/files/cartel_interfaz_en_pantalla_vf_3.pdf"
+        },
+        {
+          "label": "Web del proyecto (sin mantenimiento)",
+          "href": "http://www.spia.es/iep/"
+        },
+        {
+          "label": "Canal de YouTube",
+          "href": "https://www.youtube.com/user/InterfazEnPantalla"
+        }
+      ]
+    },
+    {
+      "name": "EstrenosBot",
+      "description": "Un bot de Telegram sobre estrenos de cine. Un proyecto pequeño con el que di mis primeros pasos en Node.js.",
+      "awards": [],
+      "links": [
+        {
+          "label": "Abrir el bot en Telegram",
+          "href": "https://web.telegram.org/#/im?p=@EstrenosBot"
+        },
+        {
+          "label": "Código fuente",
+          "href": "https://github.com/cibergarri/estrenosBot"
+        }
+      ]
+    }
+  ],
+  "backgroundHeading": "Formación",
+  "educationLabel": "Estudios",
+  "education": [
+    {
+      "name": "Universidad de Burgos",
+      "detail": "Ingeniería Informática, 2012"
+    },
+    {
+      "name": "PeopleStorming",
+      "detail": "Programa de liderazgo, 2026"
+    }
+  ],
+  "languagesLabel": "Idiomas",
+  "languages": [
+    {
+      "name": "Español",
+      "detail": "Nativo"
+    },
+    {
+      "name": "Inglés",
+      "detail": "Competencia profesional completa"
+    }
+  ],
+  "offWorkLabel": "Lejos del teclado",
+  "offWork": "Star Wars, juegos de mesa, series, cine, historia y viajar.",
+  "contactHeading": "Contacto",
+  "contactText": "La forma más fácil de localizarme es LinkedIn. El código de esta web está en GitHub, donde también tengo un pequeño playground de experimentos.",
+  "contactLinkedin": "LinkedIn",
+  "contactGithub": "GitHub",
+  "contactTwitter": "Twitter",
+  "contactPlayground": "Playground",
+  "contactSource": "Código de esta web",
+  "footerMadeWith": "Hecho con",
+  "footerAnd": "y",
+  "footerBy": "por Javier Garrido"
 }

@@ -3,12 +3,14 @@ import reduxCookiesMiddleware, { getStateFromCookies } from 'redux-cookies-middl
 import thunk from 'redux-thunk';
 
 import rootReducer from './reducers/rootReducer';
+import { THEMES } from './constants/config';
 
-const DEFAULT_THEME = 'normal';
+const prefersDark = () => typeof window.matchMedia === 'function'
+  && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 const getDefaultState = () => ({
   config: {
-    theme: DEFAULT_THEME,
+    theme: null,
     loading: true,
   },
 });
@@ -20,7 +22,9 @@ const paths = {
 };
 
 const initialState = getStateFromCookies(getDefaultState(), paths);
-initialState.config.theme = initialState.config.theme || DEFAULT_THEME;
+// Without a saved preference, follow the operating system setting.
+initialState.config.theme = initialState.config.theme
+  || (prefersDark() ? THEMES.NIGHT : THEMES.NORMAL);
 
 export default function configureStore() {
   return createStore(

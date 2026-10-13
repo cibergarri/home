@@ -1,47 +1,57 @@
 import styled from 'styled-components';
 
-import Copyleft from '../../icons/Copyleft';
-import { Heart, Javascript } from '../../icons';
+import { Copyleft, Heart, Javascript } from '../../icons';
 
-export const Footer = styled.div`
-  background: ${props => `${props.theme.main.background}`};
-  color: ${props => props.theme.main.primary};
-  font-family: Roboto,Helvetica,Arial,sans-serif;
-  padding: 2vh 1vw 2vh 1vw;
-  min-height: 50px;
-  min-width: 250px;
-  font-weight: bold;
-  font-size: min(3vw,14px);
+export const Footer = styled.footer`
+  background: ${props => props.theme.main.background};
+  color: ${props => props.theme.main.muted};
+  border-top: 1px solid ${props => props.theme.main.line};
   transition: all 0.5s;
 `;
 
-export const Copyright = styled.div`
-  float: right;
-  padding-right: 7vw;
-  height: 50px;
+export const FooterInner = styled.div`
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 28px 24px 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  font-size: 14px;
+  line-height: 1.5;
+  @media (min-width: 768px) {
+    padding: 28px 40px 48px;
+  }
+`;
+
+export const Copyright = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
 `;
 
 export const StyledCopyLeftIcon = styled(Copyleft).attrs(props => ({
-  fill: props.theme.main.primary,
-  height: '1.5vh',
-  width: '1.5vh',
+  fill: props.theme.main.muted,
+  height: '14px',
+  width: '14px',
 }))`
-  padding: 0px 0.5vw 0vh 0.5vw;
   transition: all 0.5s;
+  circle {
+    stroke: ${props => props.theme.main.muted};
+  }
 `;
 
 export const StyledHeartIcon = styled(Heart).attrs(() => ({
   fill: '#ff0000',
-  height: '1.5vh',
-  width: '1.5vh',
-}))`
-  padding: 0px 0.5vw 0vh 0.5vw;
-`;
+  height: '14px',
+  width: '14px',
+}))``;
 
 export const StyledJSIcon = styled(Javascript).attrs(() => ({
-  fill: '#000000',
-  height: '1.5vh',
-  width: '1.5vh',
+  height: '14px',
+  width: '14px',
 }))`
-  padding: 0px 0.5vw 0vh 0.5vw;
+  border-radius: 2px;
 `;

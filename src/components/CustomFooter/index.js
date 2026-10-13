@@ -1,29 +1,28 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
-  Footer, Copyright, StyledCopyLeftIcon, StyledHeartIcon, StyledJSIcon,
+  Footer, FooterInner, Copyright, StyledCopyLeftIcon, StyledHeartIcon, StyledJSIcon,
 } from './style';
 
 function CustomFooter() {
+  const { t } = useTranslation('landing');
   return (
-    <>
-      <Footer>
+    <Footer>
+      <FooterInner>
         <Copyright>
-          <StyledCopyLeftIcon />
-          {1900 + new Date().getYear()}
-          {' '}
-          Made with
-          {' '}
-          <StyledHeartIcon />
-          {' '}
-          and
-          {' '}
-          <StyledJSIcon />
-          {' '}
-          by Javier Garrido
+          <StyledCopyLeftIcon aria-label="Copyleft" />
+          {new Date().getFullYear()}
         </Copyright>
-      </Footer>
-    </>
+        <Copyright>
+          {t('footerMadeWith')}
+          <StyledHeartIcon aria-label="love" />
+          {t('footerAnd')}
+          <StyledJSIcon aria-label="JavaScript" />
+          {t('footerBy')}
+        </Copyright>
+      </FooterInner>
+    </Footer>
   );
 }
 

@@ -1,46 +1,48 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 import styled, { keyframes } from 'styled-components';
-import {
-  AppBar, Toolbar, Typography,
-} from '@material-ui/core';
 
 export const Header = styled.header`
   background: ${props => `linear-gradient(${props.theme.main.background}DD 80%, ${props.theme.main.background}00 100%)`};
   color: ${props => props.theme.main.primary};
-  max-height: 300px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-family: Roboto,Helvetica,Arial,sans-serif;
-  font-weight: bold;
   z-index: 1100;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  box-sizing: border-box;
+  padding: 10px 16px 24px;
+  @media (min-width: 768px) {
+    padding: 16px 40px 32px;
+  }
 `;
 
-export const CustomAppBar = styled(AppBar).attrs(() => ({
-  color: 'inherit',
-  position: 'static',
-}))`
-  background-color: transparent;
+export const Toolbar = styled.div`
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  @media (min-width: 768px) {
+    gap: 24px;
+  }
+`;
+
+export const Title = styled.a`
   color: ${props => props.theme.main.primary};
-  box-shadow: none; 
-  max-width: 90%;
-  padding: 1vh 1vw 1vh 1vw;
-`;
-
-export const CustomToolbar = styled(Toolbar)`
-  transition: all 0.5s;
-`;
-
-export const Title = styled(Typography)`
-  font-weight: bold;
-  transition: all 4s;
-  @media (max-width: 470px) {
-    font-size: 0.75rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: color 2s;
+  @media (min-width: 768px) {
+    font-size: 17px;
+  }
+  &:focus-visible {
+    outline: 2px solid ${props => props.theme.main.accent};
+    outline-offset: 4px;
+    border-radius: 2px;
   }
 `;
 
@@ -48,29 +50,41 @@ export const Blank = styled.div`
   flex-grow: 1;
 `;
 
-export const LinksContainer = styled.div`
-  margin-right: 1vw;
-  display: inline-block;
-  min-width: 100px;
-  white-space: nowrap;
+export const LinksContainer = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: 0;
+  @media (min-width: 768px) {
+    gap: 10px;
+  }
 `;
 
 export const Link = styled.a.attrs(props => ({
   href: props.href,
   target: '_blank',
   rel: 'noopener noreferrer',
-}))``;
+}))`
+  display: inline-flex;
+  padding: 5px;
+  border-radius: 6px;
+  &:focus-visible {
+    outline: 2px solid ${props => props.theme.main.accent};
+  }
+`;
 
 export const SVG = styled.svg`
   transition: all 2s;
-  width: 24px;
-  height: 24px;
-  margin-left: 1vw;
+  width: 20px;
+  height: 20px;
+  @media (min-width: 768px) {
+    width: 22px;
+    height: 22px;
+  }
   fill: ${props => props.theme.main.primary};
   /* stylelint-disable-next-line selector-type-no-unknown */
   ${Link}:hover & {
     transition: all 0.3s;
-    transform: scale(1.3);
+    transform: scale(1.2);
     fill: ${props => props.theme.main.secondary};
   }
 `;
@@ -90,18 +104,19 @@ export const BackgroundImage = styled.div.attrs(() => ({}))`
 
 export const BackgroundTitle = styled.div`
   color: ${props => props.theme.main.primary};
-  font-family: Roboto,Helvetica,Arial,sans-serif;
   transition: all 2s;
-  font-weight: bold;
-  font-size: 5.5vw;
-  padding: 0vh 3vw 20px 0vw;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: clamp(30px, 7vw, 60px);
+  line-height: 1.1;
+  padding: 0 24px 16px 0;
   margin: 0px;
   min-width: 28vw;
   max-width: 500px;
   align-self: flex-end;
   text-align: left;
   @media (min-width: 768px) {
-    font-size: 60px;
+    padding-right: 40px;
   }
 `;
 
@@ -161,16 +176,16 @@ const appear = keyframes`
 
 export const BackgroundSubtitle = styled.div`
   color: ${props => props.theme.main.primary};
-  font-family: Roboto,Helvetica,Arial,sans-serif;
   transition: all 2s;
-  font-weight: bold;
-  font-size: 3vw;
-  padding: 0vh 3vw 0px 0vw;
-  height: 200px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: clamp(17px, 3.6vw, 32px);
+  padding: 0 24px 0 0;
+  height: 140px;
   max-width: 500px;
   align-self: flex-end;
   @media (min-width: 768px) {
-    font-size: 35px;
+    padding-right: 40px;
   }
   animation:
     ${appear} 3s 10s both;
