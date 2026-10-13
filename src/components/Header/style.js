@@ -113,21 +113,23 @@ export const HeroTitle = styled.div`
   letter-spacing: -0.02em;
   font-size: clamp(30px, 7vw, 60px);
   line-height: 1.1;
-  padding: 0 24px 16px 0;
+  padding: 0 clamp(40px, 8vw, 120px) 16px 0;
   margin: 0;
-  min-width: 28vw;
   max-width: 500px;
   align-self: flex-end;
   text-align: left;
-  @media (min-width: 768px) {
-    padding-right: 40px;
-  }
 `;
 
-/* The typing effect */
-const typing = keyframes`
-  from { width: 0% }
-  to { width: 50% }
+/* The typing effect. The end widths are the measured widths of each word in
+   Instrument Sans, in em so they scale with the title. */
+const typeHate = keyframes`
+  from { width: 0 }
+  to { width: 3.75em }
+`;
+
+const typeHeart = keyframes`
+  from { width: 0 }
+  to { width: 4.2em }
 `;
 
 /* The typewriter cursor effect */
@@ -152,10 +154,11 @@ export const TypeWriterContainer = styled.div`
   overflow: hidden; /* Ensures the content is not revealed until the animation */
   border-right: .15em solid #ff0000; /* The typewriter cursor */
   white-space: nowrap;
+  margin-left: 0.25em;
   animation:
-    ${typing} 1.5s steps(8, end) 3s both,
-    ${typing} 1.5s steps(8, end) 6s reverse forwards,
-    ${typing} 1.5s steps(9, end) 8s forwards,
+    ${typeHate} 1.5s steps(8, end) 3s both,
+    ${typeHate} 1.5s steps(8, end) 6s reverse forwards,
+    ${typeHeart} 1.5s steps(9, end) 8s forwards,
     ${blinkCaret} .75s step-end infinite;
 `;
 
@@ -182,12 +185,9 @@ export const HeroSubtitle = styled.div`
   font-weight: 700;
   letter-spacing: -0.01em;
   font-size: clamp(17px, 3.6vw, 32px);
-  padding: 0 24px 0 0;
+  padding: 0 clamp(40px, 8vw, 120px) 0 0;
   height: 140px;
   max-width: 500px;
   align-self: flex-end;
   animation: ${appear} 3s 10s both;
-  @media (min-width: 768px) {
-    padding-right: 40px;
-  }
 `;
