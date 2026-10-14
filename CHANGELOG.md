@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/cibergarri/home/compare/v1.4.0...v1.5.0) (2026-10-14)
+
+
+### Features
+
+* **hero:** fade the sides, settle the title, justify body copy ([fdd49cd](https://github.com/cibergarri/home/commit/fdd49cde28d0b44a781da00f95af3a02cac38365))
+
 # [1.4.0](https://github.com/cibergarri/home/compare/v1.3.0...v1.4.0) (2026-10-13)
 
 
