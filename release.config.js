@@ -1,23 +1,11 @@
+// Releases are tags plus GitHub Releases only. Nothing is committed back to
+// master, which only accepts changes through pull requests.
 module.exports = {
   branches: ['master'],
   plugins: [
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',
-    [
-      '@semantic-release/changelog',
-      {
-        changelogTitle: '# Changelog\n\nAll notable changes to this project will be documented in this file. See\n[Conventional Commits](https://conventionalcommits.org) for commit guidelines.',
-      },
-    ],
-    ['@semantic-release/npm', { npmPublish: false }],
     '@semantic-release/github',
-    [
-      '@semantic-release/git',
-      {
-        assets: ['package.json', 'package-lock.json', 'CHANGELOG.md'],
-        message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
-      },
-    ],
   ],
   preset: 'angular',
 };
