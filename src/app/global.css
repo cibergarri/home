@@ -48,6 +48,12 @@ code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+/* Body copy only: the hero and the footer are outside <main>. */
+main {
+  text-align: justify;
+  hyphens: auto;
+}
+
 /* Digits left behind by the mouse over the hero, see public/scripts/bg-animation.js */
 .bg-animation-div-normal,
 .bg-animation-div-night {

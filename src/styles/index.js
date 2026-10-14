@@ -107,6 +107,7 @@ export const RowMeta = styled.div`
   line-height: 1.4;
   margin-top: 4px;
   font-weight: 400;
+  text-align: left; /* too short to justify */
 `;
 
 export const RowBody = styled.div`
