@@ -55,9 +55,10 @@ Delivery:
 - [GitHub Actions](.github/workflows/ci.yml): lint, test and build on every push and
   pull request; on `master` it also runs semantic-release and publishes `out/` to
   the `gh-pages` branch
-- [semantic-release](https://semantic-release.gitbook.io/) tags each release and writes its notes as a
-  [GitHub Release](https://github.com/cibergarri/home/releases); `master` only accepts pull requests,
-  so nothing is committed back and `CHANGELOG.md` stops at 1.4.0
+- [semantic-release](https://semantic-release.gitbook.io/) tags each release and publishes its notes as a
+  [GitHub Release](https://github.com/cibergarri/home/releases). Because `master` only accepts pull
+  requests, the workflow then opens a `chore(release)` PR with the updated `CHANGELOG.md` and
+  `package.json`; merge it to keep them in step with the tag
 - [commitlint](https://commitlint.js.org/), [commitizen](http://commitizen.github.io/cz-cli/)
   and [husky](https://typicode.github.io/husky/) for conventional commits
 - [GitHub Pages](https://pages.github.com/) on a [.dev domain](https://get.dev/)
