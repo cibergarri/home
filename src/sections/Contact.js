@@ -14,11 +14,15 @@ export default function Contact() {
   return (
     <Section id="contact">
       <SectionTitle>{t('contactHeading')}</SectionTitle>
-      <Prose>{t('contactText')}</Prose>
+      <Prose>
+        {t('contactText')}
+        <br />
+        {t('contactTextMore')}
+      </Prose>
       <ContactLinks>
         <ContactLink href={SOCIAL_LINKS.linkedin}>{t('contactLinkedin')}</ContactLink>
-        <ContactLink href={SOCIAL_LINKS.github}>{t('contactGithub')}</ContactLink>
         <ContactLink href={SOCIAL_LINKS.twitter}>{t('contactTwitter')}</ContactLink>
+        <ContactLink href={SOCIAL_LINKS.github}>{t('contactGithub')}</ContactLink>
         <ContactLink href={PLAYGROUND}>{t('contactPlayground')}</ContactLink>
         <ContactLink href={SITE_SOURCE}>{t('contactSource')}</ContactLink>
       </ContactLinks>
