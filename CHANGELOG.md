@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/cibergarri/home/compare/v1.6.0...v1.7.0) (2026-10-15)
+
+
+### Features
+
+* **content:** add Marsol, update the experience list and default to English and dark ([8996c73](https://github.com/cibergarri/home/commit/8996c73fd3a682b9ad39ece97cad7680cc1447d4))
+* **ui:** polish the hero, the top bar and the theme switch ([4300bd9](https://github.com/cibergarri/home/commit/4300bd95285bf8a62f6c4f49be855ca0f5f97151))
+
 # [1.6.0](https://github.com/cibergarri/home/compare/v1.5.0...v1.6.0) (2026-10-15)
 
 
