@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/cibergarri/home/compare/v1.5.0...v1.6.0) (2026-10-15)
+
+
+### Features
+
+* **mobile:** improve the layout on phones ([cbd6fe1](https://github.com/cibergarri/home/commit/cbd6fe15c79fa9785f54361088971f2fd842de98))
+
 # [1.5.0](https://github.com/cibergarri/home/compare/v1.4.0...v1.5.0) (2026-10-14)
 
 
