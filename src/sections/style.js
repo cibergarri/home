@@ -14,6 +14,12 @@ export const IntroHeading = styled.h1`
   }
 `;
 
+/* The name in the greeting, in the accent colour of the theme. */
+export const Name = styled.span`
+  color: var(--c-secondary);
+  transition: color 2s;
+`;
+
 export const SkillList = styled.ul`
   list-style: none;
   padding: 0;

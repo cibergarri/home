@@ -20,15 +20,17 @@ export const IconButton = styled.button`
   width: 34px;
   height: 34px;
   padding: 0;
-  border: 1px solid transparent;
+  border: none;
   border-radius: 999px;
   background: transparent;
   color: var(--c-primary);
   cursor: pointer;
-  transition: border-color 0.2s, background-color 0.2s;
+  /* Like the social icons: quick to colour and grow on hover, slow to settle back. */
+  transition: all 2s;
   &:hover {
-    border-color: var(--c-line);
-    background: var(--c-chip);
+    transition: all 0.3s;
+    transform: scale(1.2);
+    color: var(--c-secondary);
   }
   &:focus-visible {
     outline: 2px solid var(--c-accent);
@@ -37,13 +39,11 @@ export const IconButton = styled.button`
 `;
 
 export const StyledSunIcon = styled(Sun).attrs({ height: '20px', width: '20px' })`
-  fill: var(--c-primary);
-  transition: fill 2s;
+  fill: currentColor;
 `;
 
 export const StyledMoonIcon = styled(Moon).attrs({ height: '18px', width: '18px' })`
-  fill: var(--c-primary);
-  transition: fill 2s;
+  fill: currentColor;
 `;
 
 export const LanguageGroup = styled.div`
@@ -52,6 +52,13 @@ export const LanguageGroup = styled.div`
   border: 1px solid var(--c-line);
   border-radius: 999px;
   padding: 2px;
+  /* The whole switch reacts to hover, like the other controls in the bar. */
+  transition: all 2s;
+  &:hover {
+    transition: all 0.3s;
+    transform: scale(1.2);
+    border-color: var(--c-secondary);
+  }
 `;
 
 export const LanguageButton = styled.button`
@@ -66,7 +73,11 @@ export const LanguageButton = styled.button`
   cursor: pointer;
   color: ${props => (props.$selected ? 'var(--c-background)' : 'var(--c-primary)')};
   background: ${props => (props.$selected ? 'var(--c-primary)' : 'transparent')};
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 2s, color 2s;
+  ${LanguageGroup}:hover & {
+    transition: background-color 0.3s, color 0.3s;
+    ${props => (props.$selected ? 'background: var(--c-secondary);' : 'color: var(--c-secondary);')}
+  }
   &:focus-visible {
     outline: 2px solid var(--c-accent);
     outline-offset: 2px;

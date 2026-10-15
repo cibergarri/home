@@ -1,7 +1,7 @@
 export const SOCIAL_LINKS = {
   linkedin: 'https://www.linkedin.com/in/javiergarridoiglesias/',
   github: 'https://www.github.com/cibergarri',
-  twitter: 'https://twitter.com/cibergarri81',
+  twitter: 'https://x.com/cibergarri81',
 };
 
 // One list for the toolbar icons and the phone drawer, so they never drift apart.

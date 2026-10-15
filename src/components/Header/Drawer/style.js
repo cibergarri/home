@@ -24,8 +24,16 @@ export const EdgeTab = styled.button`
   color: var(--c-primary);
   box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12);
   cursor: pointer;
+  transform-origin: right center; /* grow into the page, the right edge stays put */
+  /* Like the controls in the bar: quick to colour and grow on hover, slow to settle back. */
+  transition: all 2s;
   @media (min-width: 480px) {
     display: none;
+  }
+  &:hover {
+    transition: all 0.3s;
+    transform: translateY(-50%) scale(1.2);
+    color: var(--c-secondary);
   }
   &:focus-visible {
     outline: 2px solid var(--c-accent);
@@ -127,8 +135,13 @@ export const DrawerLink = styled.a.attrs({
   text-decoration: none;
   font-weight: 600;
   font-size: 16px;
+  transform-origin: left center;
+  /* Like the controls in the bar: quick to colour and grow on hover, slow to settle back. */
+  transition: all 2s;
   &:hover {
-    background: var(--c-chip);
+    transition: all 0.3s;
+    transform: scale(1.2);
+    color: var(--c-secondary);
   }
   &:focus-visible {
     outline: 2px solid var(--c-accent);

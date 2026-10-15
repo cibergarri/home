@@ -3,13 +3,17 @@
 import { useTranslation } from 'react-i18next';
 
 import { Section, Prose } from '@/styles';
-import { IntroHeading } from './style';
+import { IntroHeading, Name } from './style';
 
 export default function Intro() {
   const { t } = useTranslation();
   return (
     <Section id="about">
-      <IntroHeading>{t('introHeading')}</IntroHeading>
+      <IntroHeading>
+        {t('introGreeting')}
+        {' '}
+        <Name>{t('introName')}</Name>
+      </IntroHeading>
       <Prose>{t('introParagraph1')}</Prose>
       <Prose>{t('introParagraph2')}</Prose>
     </Section>

@@ -35,9 +35,17 @@ export const Title = styled.a`
   font-size: 14px;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  transition: color 2s;
+  display: inline-block; /* a transform needs a box, inline text has none */
+  transform-origin: left center;
+  /* Like the social icons: quick to colour and grow on hover, slow to settle back. */
+  transition: all 2s;
   @media (min-width: 768px) {
     font-size: 17px;
+  }
+  &:hover {
+    transition: all 0.3s;
+    transform: scale(1.2);
+    color: var(--c-secondary);
   }
   &:focus-visible {
     outline: 2px solid var(--c-accent);
@@ -92,13 +100,12 @@ export const SVG = styled.svg`
 `;
 
 export const Hero = styled.div`
-  /* Two fades over the image: top and bottom edges, then left and right edges. */
+  /* Two fades over the image: the bottom edge, then the left and right edges. */
   background:
     linear-gradient(
-      var(--c-background) 10%,
-      color-mix(in srgb, var(--c-background) 53%, transparent) 15%,
-      color-mix(in srgb, var(--c-background) 53%, transparent) 85%,
-      var(--c-background) 90%
+      color-mix(in srgb, var(--c-background) 53%, transparent) 0%,
+      color-mix(in srgb, var(--c-background) 53%, transparent) 55%,
+      var(--c-background) 100%
     ),
     linear-gradient(
       to right,
@@ -108,9 +115,10 @@ export const Hero = styled.div`
       var(--c-background) 100%
     ),
     var(--hero-image);
-  /* The image is 1920px wide; on wider screens scale it up so it never shows its edges. */
+  /* The image is 1920px wide; on wider screens scale it up so it never shows its edges.
+     The word in the picture sits in its middle, so centring keeps it in view at every width. */
   background-size: auto, auto, max(100%, 1920px) auto;
-  background-position: center bottom;
+  background-position: center center;
   background-repeat: no-repeat;
   height: 100vh;
   max-height: 780px;
@@ -125,14 +133,13 @@ export const Hero = styled.div`
     min-height: 520px;
     text-align: left;
     /* A fixed 1000px picture, centred, so it looks the same on every phone and only its sides get
-       clipped on narrower ones. It is 16:9, so it is 563px tall; the vertical fade ends exactly
+       clipped on narrower ones. It is 16:9, so it is 563px tall; the bottom fade ends exactly
        at its bottom edge so the smaller image has no hard border. */
     --hero-image-height: 563px;
     background:
       linear-gradient(
-        var(--c-background) 10%,
-        color-mix(in srgb, var(--c-background) 53%, transparent) 15%,
-        color-mix(in srgb, var(--c-background) 53%, transparent) calc(var(--hero-image-height) - 120px),
+        color-mix(in srgb, var(--c-background) 53%, transparent) 0%,
+        color-mix(in srgb, var(--c-background) 53%, transparent) calc(var(--hero-image-height) - 260px),
         var(--c-background) var(--hero-image-height)
       ),
       linear-gradient(
@@ -157,10 +164,10 @@ export const HeroTitle = styled.div`
   line-height: 1.1;
   padding: 0 clamp(48px, 10vw, 160px) 16px 0;
   margin: 0;
-  /* Fixed to the width of the widest final line ("I <heart \>" plus the caret),
+  /* Fixed to the width of the widest final line ("I <heart \>", the gap and the caret),
      so the block does not shift while the typewriter grows and shrinks. */
   box-sizing: content-box;
-  width: 4.6em;
+  width: 5.2em;
   white-space: nowrap; /* the typed word must never drop below the "I" */
   align-self: flex-end;
   text-align: left;
@@ -173,21 +180,21 @@ export const HeroTitle = styled.div`
 `;
 
 /* The typing effect. The end widths are the measured widths of each word in
-   Instrument Sans, in em so they scale with the title. */
+   Instrument Sans plus a 0.5em gap before the caret, in em so they scale with the title. */
 const typeHate = keyframes`
   from { width: 0 }
-  to { width: 3.75em }
+  to { width: 4.25em }
 `;
 
 const typeHeart = keyframes`
   from { width: 0 }
-  to { width: 4.2em }
+  to { width: 4.7em }
 `;
 
 /* The typewriter cursor effect */
 const blinkCaret = keyframes`
-  from, to { border-color: transparent }
-  50% { border-color: #ff0000; }
+  from, to { background-color: transparent }
+  50% { background-color: #ff0000; }
 `;
 
 const disappear = keyframes`
@@ -201,17 +208,46 @@ const disappear = keyframes`
   }
 `;
 
+/* The cursor fades away once the typing is over. It works on opacity while the blink works on
+   colour, so the cursor keeps blinking as it goes. */
+const fadeCaret = keyframes`
+  from { opacity: 1 }
+  to { opacity: 0 }
+`;
+
+/* Two beats, then a rest, every 3 seconds. */
+const heartbeat = keyframes`
+  0%, 40%, 100% { transform: scale(1) }
+  10%, 30% { transform: scale(1.12) }
+  20% { transform: scale(1) }
+`;
+
 export const TypeWriterContainer = styled.div`
   display: inline-flex;
   overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid #ff0000; /* The typewriter cursor */
+  /* Room inside the clipped box for the beating word to grow into: above, below and to the
+     left; the gap before the caret covers the right. The margins give the room back. */
+  padding: 0.1em 0 0.1em 0.3em;
+  margin: -0.1em 0 -0.1em -0.05em;
+  position: relative; /* anchors the cursor */
   white-space: nowrap;
-  margin-left: 0.25em;
   animation:
     ${typeHate} 1.5s steps(8, end) 3s both,
     ${typeHate} 1.5s steps(8, end) 6s reverse forwards,
-    ${typeHeart} 1.5s steps(9, end) 8s forwards,
-    ${blinkCaret} .75s step-end infinite;
+    ${typeHeart} 1.5s steps(9, end) 8s forwards;
+  /* The typewriter cursor: a bar on the right edge of the revealed box. */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: .15em;
+    background-color: #ff0000;
+    animation:
+      ${blinkCaret} 1.1s step-end infinite,
+      ${fadeCaret} 4.5s ease 10s forwards; /* same timing as the subtitle fading in */
+  }
 `;
 
 export const Hate = styled.div`
@@ -220,10 +256,29 @@ export const Hate = styled.div`
   animation: ${disappear} .5s steps(1, end) 7.5s 1 forwards;
 `;
 
+/* The opposite of disappear, for the second word. */
+const reveal = keyframes`
+  from {
+    opacity: 0;
+    width: 0;
+  }
+  to {
+    opacity: 1;
+    width: fit-content;
+  }
+`;
+
 export const Heart = styled.div`
   display: inline;
   color: #ff0000;
-  animation: ${disappear} .5s steps(1, end) 6.5s 1 reverse both;
+  /* Hidden outright until "hate" has gone, not through an animation fill: its "<" sits in the
+     gap right after "hate", and browsers differ on how they fill a reversed animation. */
+  opacity: 0;
+  width: 0;
+  transform-origin: center;
+  animation:
+    ${reveal} .5s steps(1, start) 6.5s forwards,
+    ${heartbeat} 3s ease-in-out 10.5s infinite; /* a beat after the word is typed */
 `;
 
 const appear = keyframes`

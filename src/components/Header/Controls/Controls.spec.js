@@ -34,6 +34,23 @@ describe('Controls', () => {
     expect(document.documentElement.dataset.theme).toBe('normal');
   });
 
+  it('changes the theme under a veil that is removed once it has faded', async () => {
+    const finish = [];
+    Element.prototype.animate = jest.fn(() => {
+      const animation = {};
+      finish.push(() => animation.onfinish());
+      return animation;
+    });
+    renderWithProviders(<Controls />);
+    await userEvent.click(screen.getByRole('button', { name: 'Switch to dark mode' }));
+    expect(document.documentElement.dataset.theme).toBe('night');
+    expect(document.querySelector('[data-theme-veil]')).toBeInTheDocument();
+    expect(document.documentElement.classList.contains('theme-switching')).toBe(false);
+    finish.forEach(f => f());
+    expect(document.querySelector('[data-theme-veil]')).not.toBeInTheDocument();
+    delete Element.prototype.animate;
+  });
+
   it('starts from the theme the page already has', () => {
     document.documentElement.dataset.theme = 'night';
     renderWithProviders(<Controls />);

@@ -4,6 +4,8 @@ import {
   createContext, useCallback, useContext, useMemo, useSyncExternalStore,
 } from 'react';
 
+import { fadeThemeChange } from './veil';
+
 export const THEMES = {
   NORMAL: 'normal',
   NIGHT: 'night',
@@ -30,7 +32,9 @@ export function ThemeProvider({ children }) {
 
   const toggleTheme = useCallback(() => {
     const next = readTheme() === THEMES.NIGHT ? THEMES.NORMAL : THEMES.NIGHT;
-    document.documentElement.dataset.theme = next;
+    fadeThemeChange(() => {
+      document.documentElement.dataset.theme = next;
+    });
     try {
       localStorage.setItem(THEME_STORAGE_KEY, next);
     } catch {

@@ -77,6 +77,14 @@ h3 {
   color: var(--c-secondary);
 }
 
+/* While a theme change lands, nothing transitions: a veil in the old colour fades out over the
+   finished page instead, see src/theme/veil.js. */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
