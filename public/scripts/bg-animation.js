@@ -5,7 +5,9 @@
   
   let coordinates = { pageX: 0, pageY: 0 };
   const animationEvent = (event) => {
-    const { pageX, pageY } = event;
+    // A touch event carries its coordinates on the touch point, not on the event itself.
+    const point = event.touches ? event.touches[0] : event;
+    const { pageX, pageY } = point;
     // calculate distance between last animated and new points:
     if(Math.hypot(pageX-coordinates.pageX, pageY-coordinates.pageY)< 15){
       return;
@@ -29,6 +31,14 @@
     }, 1000);
   }
   
-  bg.onmousemove = animationEvent;
-  bg.ontouchmove = animationEvent;
+  // The script is loaded again on every theme change, so drop the previous run's listeners
+  // first or every move would leave several digits.
+  if (bg.bgAnimationHandler) {
+    bg.removeEventListener('mousemove', bg.bgAnimationHandler);
+    bg.removeEventListener('touchmove', bg.bgAnimationHandler);
+  }
+  bg.bgAnimationHandler = animationEvent;
+  bg.addEventListener('mousemove', animationEvent, { passive: true });
+  // Passive: the finger is scrolling the page, the digits must never get in the way of that.
+  bg.addEventListener('touchmove', animationEvent, { passive: true });
 })();

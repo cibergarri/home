@@ -54,6 +54,20 @@ main {
   hyphens: auto;
 }
 
+/* Headings are too short to justify; a stretched "Hi,  I'm  Javier" is the result. */
+h1,
+h2,
+h3 {
+  text-align: left;
+}
+
+/* Narrow columns justify into rivers of white space. */
+@media (max-width: 767px) {
+  main {
+    text-align: left;
+  }
+}
+
 /* Digits left behind by the mouse over the hero, see public/scripts/bg-animation.js */
 .bg-animation-div-normal,
 .bg-animation-div-night {

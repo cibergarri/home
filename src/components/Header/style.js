@@ -57,6 +57,10 @@ export const LinksContainer = styled.nav`
   @media (min-width: 768px) {
     gap: 10px;
   }
+  /* The same links live in the Contact section; the bar has no room for them on narrow phones. */
+  @media (max-width: 479px) {
+    display: none;
+  }
 `;
 
 export const SocialLink = styled.a.attrs({
@@ -114,6 +118,34 @@ export const Hero = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   text-align: right;
+  /* On phones a full-height hero is mostly empty space, and 100vh hides behind the
+     browser chrome on iOS, so use the small viewport height and a lower cap. */
+  @media (max-width: 767px) {
+    height: min(100svh, 640px);
+    min-height: 520px;
+    text-align: left;
+    /* A fixed 1000px picture, centred, so it looks the same on every phone and only its sides get
+       clipped on narrower ones. It is 16:9, so it is 563px tall; the vertical fade ends exactly
+       at its bottom edge so the smaller image has no hard border. */
+    --hero-image-height: 563px;
+    background:
+      linear-gradient(
+        var(--c-background) 10%,
+        color-mix(in srgb, var(--c-background) 53%, transparent) 15%,
+        color-mix(in srgb, var(--c-background) 53%, transparent) calc(var(--hero-image-height) - 120px),
+        var(--c-background) var(--hero-image-height)
+      ),
+      linear-gradient(
+        to right,
+        var(--c-background) 0%,
+        transparent 6%,
+        transparent 94%,
+        var(--c-background) 100%
+      ),
+      var(--hero-image);
+    background-size: auto, auto, 1000px auto;
+    background-position: center top;
+  }
 `;
 
 export const HeroTitle = styled.div`
@@ -132,6 +164,12 @@ export const HeroTitle = styled.div`
   white-space: nowrap; /* the typed word must never drop below the "I" */
   align-self: flex-end;
   text-align: left;
+  /* On phones the block sits on the body gutter, lined up with the headings below it. */
+  @media (max-width: 767px) {
+    font-size: clamp(40px, 11vw, 60px);
+    padding: 0 24px 12px;
+    align-self: flex-start;
+  }
 `;
 
 /* The typing effect. The end widths are the measured widths of each word in
@@ -204,4 +242,9 @@ export const HeroSubtitle = styled.div`
   max-width: 500px;
   align-self: flex-end;
   animation: ${appear} 4.5s 10s both;
+  @media (max-width: 767px) {
+    height: auto;
+    padding: 0 24px 56px;
+    align-self: flex-start;
+  }
 `;
