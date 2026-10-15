@@ -39,7 +39,8 @@ export const viewport = {
 
 // Runs before paint so a returning visitor never sees the wrong theme flash.
 // Visitors of the previous version kept their choice in a my_theme cookie, so it is honoured once.
-const themeInit = `(function(){try{var t=localStorage.getItem('theme');if(!t){var m=document.cookie.match(/(?:^|; )my_theme=%22(normal|night)%22/);t=m&&m[1]}if(t!=='normal'&&t!=='night'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'night':'normal'}document.documentElement.dataset.theme=t}catch(e){}})()`;
+// Without a saved choice the site is dark; the system preference is deliberately not consulted.
+const themeInit = `(function(){try{var t=localStorage.getItem('theme');if(!t){var m=document.cookie.match(/(?:^|; )my_theme=%22(normal|night)%22/);t=m&&m[1]}if(t!=='normal'&&t!=='night'){t='night'}document.documentElement.dataset.theme=t}catch(e){}})()`;
 
 export default function RootLayout({ children }) {
   return (

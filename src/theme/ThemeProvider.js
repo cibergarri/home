@@ -13,14 +13,14 @@ export const THEMES = {
 
 export const THEME_STORAGE_KEY = 'theme';
 
-const ThemeContext = createContext({ theme: THEMES.NORMAL, toggleTheme: () => {} });
+const ThemeContext = createContext({ theme: THEMES.NIGHT, toggleTheme: () => {} });
 
 // The data-theme attribute on <html> is the source of truth. The inline script in
 // the layout sets it before hydration, and the CSS variables key off it.
 const readTheme = () => (
   document.documentElement.dataset.theme === THEMES.NIGHT ? THEMES.NIGHT : THEMES.NORMAL
 );
-const serverTheme = () => THEMES.NORMAL;
+const serverTheme = () => THEMES.NIGHT; // the default, so the server render matches a first visit
 const subscribe = (onChange) => {
   const observer = new MutationObserver(onChange);
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });

@@ -21,14 +21,16 @@ describe('landing sections', () => {
           .toBe(Node.DOCUMENT_POSITION_FOLLOWING);
       }
     });
-    en.experience.forEach(job => expect(screen.getByText(job.summary)).toBeInTheDocument());
+    en.experience.flatMap(job => [].concat(job.summary))
+      .forEach(paragraph => expect(screen.getByText(paragraph)).toBeInTheDocument());
   });
 
   it('hides the period when it is empty', () => {
     renderWithProviders(<Experience />);
     expect(screen.getByText('Currently, Fully remote')).toBeInTheDocument();
-    expect(screen.queryByText(/^, Spain$/)).not.toBeInTheDocument();
-    expect(screen.getAllByText('Spain')).toHaveLength(2);
+    expect(screen.queryByText(/^, Valladolid$/)).not.toBeInTheDocument();
+    expect(screen.getByText('Valladolid')).toBeInTheDocument();
+    expect(screen.getAllByText('Burgos')).toHaveLength(2);
   });
 
   it('renders every project with its links and skips empty award lists', () => {

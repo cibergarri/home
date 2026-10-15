@@ -115,4 +115,10 @@ export const RowBody = styled.div`
   font-size: 17px;
   line-height: 1.6;
   max-width: 640px;
+  p {
+    margin: 0 0 12px;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
 `;

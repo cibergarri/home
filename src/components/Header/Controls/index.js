@@ -10,8 +10,8 @@ import {
   IconButton,
   StyledSunIcon,
   StyledMoonIcon,
-  LanguageGroup,
-  LanguageButton,
+  LanguageSwitch,
+  LanguageOption,
 } from './style';
 
 export default function Controls() {
@@ -19,27 +19,27 @@ export default function Controls() {
   const { theme, toggleTheme } = useTheme();
   const isNight = theme === THEMES.NIGHT;
   const currentLanguage = (i18n.resolvedLanguage || i18n.language || '').slice(0, 2);
+  // One tap anywhere on the switch moves to the other language.
+  const nextLanguage = LANGUAGES[(LANGUAGES.indexOf(currentLanguage) + 1) % LANGUAGES.length];
 
-  const changeLanguage = (lang) => {
-    rememberLanguage(lang);
-    i18n.changeLanguage(lang);
+  const switchLanguage = () => {
+    rememberLanguage(nextLanguage);
+    i18n.changeLanguage(nextLanguage);
   };
 
   return (
     <ControlsContainer>
-      <LanguageGroup role="group" aria-label={t('language')}>
+      <LanguageSwitch
+        type="button"
+        onClick={switchLanguage}
+        aria-label={t('switchLanguage', { language: t(`language_${nextLanguage}`) })}
+      >
         {LANGUAGES.map(lang => (
-          <LanguageButton
-            key={lang}
-            type="button"
-            $selected={currentLanguage === lang}
-            aria-pressed={currentLanguage === lang}
-            onClick={() => changeLanguage(lang)}
-          >
+          <LanguageOption key={lang} $selected={currentLanguage === lang} aria-hidden="true">
             {lang.toUpperCase()}
-          </LanguageButton>
+          </LanguageOption>
         ))}
-      </LanguageGroup>
+      </LanguageSwitch>
       <IconButton
         type="button"
         onClick={toggleTheme}

@@ -33,10 +33,9 @@ const readCookie = (name) => {
   return match ? decodeURIComponent(match[1]) : null;
 };
 
-// The preferred language: an explicit choice (cookie) wins over the browser setting.
-export const detectLanguage = () => supported(readCookie(LANGUAGE_COOKIE))
-  || (navigator.languages || [navigator.language]).map(supported).find(Boolean)
-  || DEFAULT_LANGUAGE;
+// The preferred language: an explicit choice (cookie), otherwise English for everyone.
+// The browser's language is deliberately not consulted.
+export const detectLanguage = () => supported(readCookie(LANGUAGE_COOKIE)) || DEFAULT_LANGUAGE;
 
 export const rememberLanguage = (lang) => {
   const oneYear = 60 * 60 * 24 * 365;

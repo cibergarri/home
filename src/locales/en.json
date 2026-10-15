@@ -1,6 +1,8 @@
 {
   "title": "JavierGarrido.dev",
-  "language": "Language",
+  "switchLanguage": "Switch to {{language}}",
+  "language_en": "English",
+  "language_es": "Spanish",
   "toggleTheme": "Switch to {{theme}} mode",
   "themeLight": "light",
   "themeDark": "dark",
@@ -14,32 +16,41 @@
   "introName": "Javier Garrido.",
   "introParagraph1": "I'm a web developer based in Burgos, Spain, working remotely for Kodify Media Group. Most of my career has been on the backend, mainly with Node.js, and I'm at home on the frontend with React too. Before JavaScript took over I built things with .NET.",
   "introParagraph2": "These days I care a lot about how software is designed: domain-driven design, system architecture and the decisions that are hard to undo later. I like teams where people learn from each other, and I try to be the one who raises a hand when something needs doing.",
-  "experienceHeading": "Where I've worked",
+  "experienceHeading": "Where I've created technical debt",
   "experienceNote": "I've been part of international teams at multinationals, at startups and, for the last few years, at a product company.",
   "experience": [
     {
       "company": "Kodify Media Group",
       "place": "Fully remote",
       "period": "Currently",
-      "summary": "Software engineer in a fully remote, distributed team, and team lead for the last four years. I look after a backend team working on high-traffic subscription video platforms: planning the work, reviewing designs and helping people grow, while still writing code myself, mostly on service design, domain modelling and the infrastructure that keeps everything running."
+      "summary": [
+        "Software engineer in a fully remote, distributed team, working on high-traffic subscription video platforms. Mostly backend: service design, domain modelling and the infrastructure that keeps everything running.",
+        "Team lead for the last few years. I look after a backend team: planning the work, reviewing designs and helping people grow, while still writing code myself."
+      ]
     },
     {
       "company": "Bag On Board",
-      "place": "Madrid, fully remote",
+      "place": "Fully remote",
       "period": "",
       "summary": "Developer at a Madrid startup, working fully remote and building the product from early on with a small team where everyone did a bit of everything."
     },
     {
       "company": "Cognizant",
-      "place": "Spain",
+      "place": "Valladolid",
       "period": "",
       "summary": "Developer at a global IT services company, on projects for large clients. An international, English-speaking team, and a good school for working at scale."
     },
     {
       "company": "Thomson Reuters",
-      "place": "Spain",
+      "place": "Burgos",
       "period": "",
-      "summary": "Developer in an international team at a large technology and information company. Web applications and APIs, mainly with .NET, working day to day with colleagues in several countries."
+      "summary": "Developer in an international team at a large information company, on products for the legal sector. Web applications and APIs, mainly with .NET, working day to day with colleagues in several countries."
+    },
+    {
+      "company": "Marsol",
+      "place": "Burgos",
+      "period": "",
+      "summary": "Web developer at a travel wholesaler in Burgos. I kept the internal back-office application running, connected it with partners' services and built the company's new public website, mainly with .NET."
     }
   ],
   "skillsHeading": "What I work with",

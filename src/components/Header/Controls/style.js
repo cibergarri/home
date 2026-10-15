@@ -46,12 +46,17 @@ export const StyledMoonIcon = styled(Moon).attrs({ height: '18px', width: '18px'
   fill: currentColor;
 `;
 
-export const LanguageGroup = styled.div`
+/* The whole pill is one button: a tap anywhere on it changes the language. */
+export const LanguageSwitch = styled.button`
   display: inline-flex;
   align-items: center;
+  margin: 0;
+  padding: 2px;
   border: 1px solid var(--c-line);
   border-radius: 999px;
-  padding: 2px;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
   /* The whole switch reacts to hover, like the other controls in the bar. */
   transition: all 2s;
   &:hover {
@@ -59,27 +64,24 @@ export const LanguageGroup = styled.div`
     transform: scale(1.2);
     border-color: var(--c-secondary);
   }
+  &:focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 2px;
+  }
 `;
 
-export const LanguageButton = styled.button`
-  border: none;
+export const LanguageOption = styled.span`
   border-radius: 999px;
   padding: 5px 8px;
-  font: inherit;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1;
-  cursor: pointer;
   color: ${props => (props.$selected ? 'var(--c-background)' : 'var(--c-primary)')};
   background: ${props => (props.$selected ? 'var(--c-primary)' : 'transparent')};
   transition: background-color 2s, color 2s;
-  ${LanguageGroup}:hover & {
+  ${LanguageSwitch}:hover & {
     transition: background-color 0.3s, color 0.3s;
     ${props => (props.$selected ? 'background: var(--c-secondary);' : 'color: var(--c-secondary);')}
-  }
-  &:focus-visible {
-    outline: 2px solid var(--c-accent);
-    outline-offset: 2px;
   }
 `;

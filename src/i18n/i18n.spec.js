@@ -11,9 +11,9 @@ describe('language detection', () => {
     expect(detectLanguage()).toBe('es');
   });
 
-  it('falls back to the first supported browser language', () => {
-    jest.spyOn(navigator, 'languages', 'get').mockReturnValue(['fr-FR', 'es-ES', 'en']);
-    expect(detectLanguage()).toBe('es');
+  it('ignores the browser language and defaults to English', () => {
+    jest.spyOn(navigator, 'languages', 'get').mockReturnValue(['es-ES', 'es']);
+    expect(detectLanguage()).toBe('en');
   });
 
   it('defaults to English when nothing matches', () => {

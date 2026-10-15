@@ -1,6 +1,8 @@
 {
   "title": "JavierGarrido.dev",
-  "language": "Idioma",
+  "switchLanguage": "Cambiar a {{language}}",
+  "language_en": "inglés",
+  "language_es": "español",
   "toggleTheme": "Cambiar a modo {{theme}}",
   "themeLight": "claro",
   "themeDark": "oscuro",
@@ -14,32 +16,41 @@
   "introName": "Javier Garrido.",
   "introParagraph1": "Soy desarrollador web. Vivo en Burgos y trabajo en remoto para Kodify Media Group. He pasado la mayor parte de mi carrera en el backend, sobre todo con Node.js, y también me muevo con soltura en el frontend con React. Antes de que JavaScript lo ocupara todo, construía cosas con .NET.",
   "introParagraph2": "Hoy me interesa mucho cómo se diseña el software: domain-driven design, arquitectura de sistemas y esas decisiones que luego cuesta deshacer. Me gustan los equipos donde la gente aprende de los demás, e intento ser el que levanta la mano cuando hay algo que hacer.",
-  "experienceHeading": "Dónde he trabajado",
+  "experienceHeading": "Dónde he generado deuda técnica",
   "experienceNote": "He formado parte de equipos internacionales en multinacionales, en startups y, en los últimos años, en una empresa de producto.",
   "experience": [
     {
       "company": "Kodify Media Group",
       "place": "Totalmente en remoto",
       "period": "Actualmente",
-      "summary": "Ingeniero de software en un equipo distribuido y totalmente en remoto, y team lead desde hace cuatro años. Me ocupo de un equipo de backend que trabaja en plataformas de vídeo por suscripción con mucho tráfico: planificar el trabajo, revisar diseños y ayudar a la gente a crecer, sin dejar de escribir código, sobre todo en diseño de servicios, modelado del dominio y la infraestructura que lo mantiene todo en marcha."
+      "summary": [
+        "Ingeniero de software en un equipo distribuido y totalmente en remoto, trabajando en plataformas de vídeo por suscripción con mucho tráfico. Sobre todo backend: diseño de servicios, modelado del dominio y la infraestructura que lo mantiene todo en marcha.",
+        "Team lead desde hace unos años. Me ocupo de un equipo de backend: planificar el trabajo, revisar diseños y ayudar a la gente a crecer, sin dejar de escribir código."
+      ]
     },
     {
       "company": "Bag On Board",
-      "place": "Madrid, totalmente en remoto",
+      "place": "Totalmente en remoto",
       "period": "",
       "summary": "Desarrollador en una startup de Madrid, trabajando totalmente en remoto y construyendo el producto desde el principio con un equipo pequeño en el que todos hacíamos un poco de todo."
     },
     {
       "company": "Cognizant",
-      "place": "España",
+      "place": "Valladolid",
       "period": "",
       "summary": "Desarrollador en una consultora tecnológica global, en proyectos para grandes clientes. Un equipo internacional, en inglés, y una buena escuela para trabajar a gran escala."
     },
     {
       "company": "Thomson Reuters",
-      "place": "España",
+      "place": "Burgos",
       "period": "",
-      "summary": "Desarrollador en un equipo internacional de una gran empresa de tecnología e información. Aplicaciones web y APIs, sobre todo con .NET, trabajando a diario con compañeros de varios países."
+      "summary": "Desarrollador en un equipo internacional de una gran empresa de información, en productos para el sector jurídico. Aplicaciones web y APIs, sobre todo con .NET, trabajando a diario con compañeros de varios países."
+    },
+    {
+      "company": "Marsol",
+      "place": "Burgos",
+      "period": "",
+      "summary": "Desarrollador web en un mayorista de viajes de Burgos. Mantenía la aplicación interna de back-office, la conecté con los servicios de otros proveedores y desarrollé la nueva web pública de la empresa, sobre todo con .NET."
     }
   ],
   "skillsHeading": "Con qué trabajo",

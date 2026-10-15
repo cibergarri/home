@@ -12,17 +12,18 @@ describe('Controls', () => {
     return i18n.changeLanguage('en');
   });
 
-  it('marks the current language as pressed', () => {
+  it('offers the other language as one switch', () => {
     renderWithProviders(<Controls />);
-    expect(screen.getByRole('button', { pressed: true })).toHaveTextContent('EN');
+    expect(screen.getByRole('button', { name: 'Switch to Spanish' })).toHaveTextContent('ENES');
   });
 
-  it('changes the language and remembers it when the other option is clicked', async () => {
+  it('changes the language and remembers it wherever the switch is clicked', async () => {
     renderWithProviders(<Controls />);
-    await userEvent.click(screen.getByRole('button', { name: 'ES' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Switch to Spanish' }));
     expect(i18n.language).toBe('es');
     expect(document.cookie).toContain('my_language=es');
-    expect(screen.getByRole('button', { pressed: true })).toHaveTextContent('ES');
+    await userEvent.click(screen.getByRole('button', { name: 'Cambiar a inglés' }));
+    expect(i18n.language).toBe('en');
   });
 
   it('switches to night mode and back, persisting the choice', async () => {
