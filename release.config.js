@@ -1,3 +1,7 @@
+// master only accepts pull requests, so nothing is pushed to it here: this
+// tags the release and publishes it on GitHub, and leaves the updated
+// CHANGELOG.md and package.json in the working tree for the workflow to open
+// as a "chore(release)" pull request.
 module.exports = {
   branches: ['master'],
   plugins: [
@@ -11,13 +15,6 @@ module.exports = {
     ],
     ['@semantic-release/npm', { npmPublish: false }],
     '@semantic-release/github',
-    [
-      '@semantic-release/git',
-      {
-        assets: ['package.json', 'package-lock.json', 'CHANGELOG.md'],
-        message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
-      },
-    ],
   ],
   preset: 'angular',
 };
