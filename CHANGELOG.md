@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/cibergarri/home/compare/v1.7.0...v1.8.0) (2026-10-19)
+
+
+### Features
+
+* **design:** refresh the hero, header and sections, and fix the theme flash on load ([72c9d5f](https://github.com/cibergarri/home/commit/72c9d5f8377439170ce371b668f9989a1dd24c84))
+* **mobile:** replace the social drawer with a slim dock on the right edge ([8deac5b](https://github.com/cibergarri/home/commit/8deac5b950b183a68f775a4ffcee713c053a8ae0))
+
 # [1.7.0](https://github.com/cibergarri/home/compare/v1.6.0...v1.7.0) (2026-10-15)
 
 
