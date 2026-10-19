@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import TerminalLink from '@/components/TerminalLink';
 import Intro from '@/sections/Intro';
 import Experience from '@/sections/Experience';
 import Skills from '@/sections/Skills';
@@ -21,6 +22,7 @@ export default function Home() {
         <Contact />
       </Page>
       <Footer />
+      <TerminalLink />
     </>
   );
 }

@@ -47,7 +47,8 @@ export const viewport = {
 // Without a saved choice the site is dark; the system preference is deliberately not consulted.
 // It then lifts the page veil (see global.css) once the hero picture of that theme has loaded,
 // or after 1.5 seconds on a slow connection, so the page never fades in without its hero.
-const themeInit = `(function(){var t='night';try{t=localStorage.getItem('theme');if(!t){var m=document.cookie.match(/(?:^|; )my_theme=%22(normal|night)%22/);t=m&&m[1]}if(t!=='normal'&&t!=='night'){t='night'}}catch(e){t='night'}var r=document.documentElement;r.dataset.theme=t;var done=false;function ready(){if(done)return;done=true;r.classList.add('page-ready')}var i=new Image();i.onload=i.onerror=ready;i.src='/img/bg-'+t+'.png';setTimeout(ready,1500)})()`;
+// The terminal version has no hero: it is marked so it is black from the first paint.
+const themeInit = `(function(){var t='night';try{t=localStorage.getItem('theme');if(!t){var m=document.cookie.match(/(?:^|; )my_theme=%22(normal|night)%22/);t=m&&m[1]}if(t!=='normal'&&t!=='night'){t='night'}}catch(e){t='night'}var r=document.documentElement;r.dataset.theme=t;var done=false;function ready(){if(done)return;done=true;r.classList.add('page-ready')}if(location.pathname.indexOf('/terminal')===0){r.dataset.terminal='';ready();return}var i=new Image();i.onload=i.onerror=ready;i.src='/img/bg-'+t+'.png';setTimeout(ready,1500)})()`;
 
 export default function RootLayout({ children }) {
   return (

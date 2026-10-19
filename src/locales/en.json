@@ -214,5 +214,49 @@
     "again": "Play again",
     "close": "Back to the site",
     "closeLabel": "Close the game"
+  },
+  "terminal": {
+    "open": "Open the terminal version",
+    "title": "javier@garrido: ~ — terminal version",
+    "lastLogin": "Last login: {{date}} on ttys001",
+    "hint": "Type 'help' to see the commands, or pick one below.",
+    "helpIntro": "Available commands:",
+    "help": {
+      "help": "list the commands",
+      "whoami": "who I am, in a few lines",
+      "neofetch": "system information, so to speak",
+      "experience": "where I've created technical debt",
+      "skills": "what I've been tinkering with",
+      "projects": "side projects",
+      "background": "education, workshops and languages",
+      "contact": "how to reach me",
+      "play": "a little game: squash the bugs",
+      "lang": "switch language: lang en | lang es",
+      "clear": "clear the screen",
+      "exit": "back to the regular site"
+    },
+    "tagline": "Web developer and team lead · Burgos, Spain",
+    "photoAlt": "Javier Garrido, in 8-bit pixel art",
+    "neofetch": {
+      "role": "role",
+      "location": "location",
+      "uptime": "uptime",
+      "stack": "stack",
+      "languages": "languages",
+      "shell": "shell",
+      "roleValue": "web developer, team lead",
+      "locationValue": "Burgos, Spain",
+      "uptimeValue_one": "{{count}} year coding",
+      "uptimeValue_other": "{{count}} years coding",
+      "languagesValue": "Spanish, English"
+    },
+    "notFound": "command not found: {{command}}. Type 'help' to see what you can do.",
+    "sudo": "Nice try. This incident will be reported.",
+    "langUsage": "Usage: lang en | lang es",
+    "langChanged": "Language set to English.",
+    "launching": "Launching bug squash…",
+    "exiting": "Bye! Back to the regular site…",
+    "inputLabel": "Type a command",
+    "shortcuts": "Commands"
   }
 }

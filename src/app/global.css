@@ -107,6 +107,12 @@ html.page-ready body::before {
   }
 }
 
+/* The terminal version (src/components/Terminal) is black whatever the theme, veil included. */
+[data-terminal] {
+  --c-background: #000;
+  color-scheme: dark;
+}
+
 /* Digits left behind by the mouse over the hero, see public/scripts/bg-animation.js */
 .bg-animation-div-normal,
 .bg-animation-div-night {

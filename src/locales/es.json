@@ -214,5 +214,49 @@
     "again": "Otra partida",
     "close": "Volver a la web",
     "closeLabel": "Cerrar el juego"
+  },
+  "terminal": {
+    "open": "Abrir la versión terminal",
+    "title": "javier@garrido: ~ — versión terminal",
+    "lastLogin": "Último acceso: {{date}} en ttys001",
+    "hint": "Escribe 'help' para ver los comandos, o elige uno abajo.",
+    "helpIntro": "Comandos disponibles:",
+    "help": {
+      "help": "lista los comandos",
+      "whoami": "quién soy, en pocas líneas",
+      "neofetch": "información del sistema, por así decirlo",
+      "experience": "dónde he generado deuda técnica",
+      "skills": "con qué he estado cacharreando",
+      "projects": "proyectos personales",
+      "background": "estudios, talleres e idiomas",
+      "contact": "cómo contactarme",
+      "play": "un pequeño juego: aplasta los bugs",
+      "lang": "cambia el idioma: lang en | lang es",
+      "clear": "limpia la pantalla",
+      "exit": "vuelve a la web normal"
+    },
+    "tagline": "Desarrollador web y team lead · Burgos, España",
+    "photoAlt": "Javier Garrido, en pixel art de 8 bits",
+    "neofetch": {
+      "role": "rol",
+      "location": "ubicación",
+      "uptime": "uptime",
+      "stack": "stack",
+      "languages": "idiomas",
+      "shell": "shell",
+      "roleValue": "desarrollador web, team lead",
+      "locationValue": "Burgos, España",
+      "uptimeValue_one": "{{count}} año programando",
+      "uptimeValue_other": "{{count}} años programando",
+      "languagesValue": "español, inglés"
+    },
+    "notFound": "comando no encontrado: {{command}}. Escribe 'help' para ver qué puedes hacer.",
+    "sudo": "Buen intento. Este incidente será reportado.",
+    "langUsage": "Uso: lang en | lang es",
+    "langChanged": "Idioma cambiado a español.",
+    "launching": "Arrancando Aplasta bugs…",
+    "exiting": "¡Hasta luego! Volviendo a la web normal…",
+    "inputLabel": "Escribe un comando",
+    "shortcuts": "Comandos"
   }
 }
