@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/cibergarri/home/compare/v1.8.0...v1.9.0) (2026-10-19)
+
+
+### Bug Fixes
+
+* **content:** polish the English and Spanish copy and add Agile and Scrum ([55e7a05](https://github.com/cibergarri/home/commit/55e7a055e70d8f3beab5daef2421c81c4b0932fb))
+
+
+### Features
+
+* **easter-egg:** hide a bug squash game behind five taps on the hero heart ([253a750](https://github.com/cibergarri/home/commit/253a750627b4cef89316e877d8594a3775de3e57))
+* **ui:** turn the technology bubbles into tags on hover and touch, and fix small glitches ([328881a](https://github.com/cibergarri/home/commit/328881af3a593bac3995028d3f95bb1c0adf4e36))
+
 # [1.8.0](https://github.com/cibergarri/home/compare/v1.7.0...v1.8.0) (2026-10-19)
 
 
