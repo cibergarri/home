@@ -12,6 +12,7 @@
   "heroTitlePrefix": "I",
   "heroTitleSuffix": "coding",
   "heroSubtitle": "…at least most of the time ;)",
+  "heartHint": "// tap 5 times if you feel playful",
   "introGreeting": "Hi, I'm",
   "introName": "Javier Garrido.",
   "introParagraph1": "I'm a web developer based in Burgos, Spain, working remotely for Kodify Media Group. Most of my career has been on the backend, mainly with Node.js, and I'm at home on the frontend with React too. Before JavaScript took over, I built things with .NET.",

@@ -28,6 +28,9 @@ export const metadata = {
     type: 'website',
     images: [`${SITE_URL}/javiergarrido.png`],
   },
+  // The site has its own English and Spanish versions, so browsers should not offer to translate
+  // it; that also keeps the code-like bits (<heart \>, // comments) from being "translated".
+  other: { google: 'notranslate' },
 };
 
 export const viewport = {
@@ -48,7 +51,7 @@ const themeInit = `(function(){var t='night';try{t=localStorage.getItem('theme')
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={font.variable} suppressHydrationWarning>
+    <html lang="en" translate="no" className={font.variable} suppressHydrationWarning>
       <head>
         <script id="theme-init" dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>

@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  lazy, Suspense, useCallback, useRef, useState,
+  lazy, Suspense, useCallback, useEffect, useRef, useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -23,6 +23,8 @@ import {
   HeroSubtitle,
   Hate,
   Heart,
+  HeartSpot,
+  HeartHint,
   TypeWriterContainer,
 } from './style';
 
@@ -34,19 +36,30 @@ const BugGame = lazy(() => import('./BugGame'));
 // Five quick taps on the heart, each within this long of the previous one, open the game.
 const TAPS_TO_PLAY = 5;
 const TAP_GAP_MS = 1500;
+// Touch screens have no hover, so a tap shows the hint for this long instead.
+const HINT_MS = 5000; // the hint itself waits 3s before it shows, then stays for 2s
 
 function useSecretTaps(onFound) {
   const taps = useRef({ count: 0, last: 0 });
-  return () => {
+  const hintTimer = useRef();
+  const [hinting, setHinting] = useState(false);
+  useEffect(() => () => clearTimeout(hintTimer.current), []);
+  const onTap = () => {
     const now = Date.now();
     const state = taps.current;
     state.count = now - state.last < TAP_GAP_MS ? state.count + 1 : 1;
     state.last = now;
+    clearTimeout(hintTimer.current);
     if (state.count >= TAPS_TO_PLAY) {
       state.count = 0;
+      setHinting(false);
       onFound();
+      return;
     }
+    setHinting(true);
+    hintTimer.current = setTimeout(() => setHinting(false), HINT_MS);
   };
+  return { onTap, hinting };
 }
 
 export default function Header() {
@@ -55,7 +68,7 @@ export default function Header() {
   const { t } = useTranslation();
   const [playing, setPlaying] = useState(false);
   const closeGame = useCallback(() => setPlaying(false), []);
-  const onHeartTap = useSecretTaps(() => setPlaying(true));
+  const { onTap: onHeartTap, hinting } = useSecretTaps(() => setPlaying(true));
   return (
     <>
       <HeaderBar>
@@ -84,10 +97,13 @@ export default function Header() {
       <Hero id="background-image">
         <HeroTitle>
           {t('heroTitlePrefix')}
-          <TypeWriterContainer>
-            <Hate>&lt;hate \&gt;</Hate>
-            <Heart onClick={onHeartTap}>&lt;heart \&gt;</Heart>
-          </TypeWriterContainer>
+          <HeartSpot data-hint={hinting || undefined}>
+            <TypeWriterContainer>
+              <Hate>&lt;hate \&gt;</Hate>
+              <Heart onClick={onHeartTap}>&lt;heart \&gt;</Heart>
+            </TypeWriterContainer>
+            <HeartHint aria-hidden="true">{t('heartHint')}</HeartHint>
+          </HeartSpot>
           <br />
           {t('heroTitleSuffix')}
         </HeroTitle>

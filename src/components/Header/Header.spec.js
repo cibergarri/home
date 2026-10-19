@@ -47,8 +47,10 @@ describe('Header', () => {
     renderWithProviders(<Header />);
     const heart = screen.getByText('<heart \\>');
 
+    expect(heart.closest('[data-hint]')).toBeNull();
     for (let tap = 0; tap < 4; tap += 1) fireEvent.click(heart);
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(heart.closest('[data-hint]')).toHaveTextContent('// tap 5 times if you feel playful');
 
     fireEvent.click(heart);
     const game = await screen.findByRole('dialog', { name: 'Bug squash' });

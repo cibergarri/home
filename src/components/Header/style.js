@@ -292,6 +292,53 @@ export const Heart = styled.div`
     ${heartbeat} 3s ease-in-out 10.5s infinite; /* a beat after the word is typed */
 `;
 
+/* Holds the typed word and the hint above it; the word's own box clips, so the hint lives here. */
+export const HeartSpot = styled.span`
+  position: relative;
+  display: inline-flex;
+`;
+
+/* A clue to the game behind the heart, written like a code comment: shown after a pause
+   while the heart is hovered, and for a moment after a tap on touch screens (see Header). */
+export const HeartHint = styled.span`
+  position: absolute;
+  bottom: 100%;
+  left: 0.3em;
+  margin-bottom: 4px;
+  padding: 4px 8px;
+  border: 1px solid var(--c-heart);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--c-background) 90%, transparent);
+  color: var(--c-heart);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.3;
+  /* One line where it fits; on narrow phones it wraps before it reaches the social dock. */
+  white-space: normal; /* the title it sits in never wraps */
+  width: max-content;
+  max-width: calc(100vw - 104px);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.6s, transform 0.6s;
+  @media (hover: hover) {
+    ${HeartSpot}:has(${Heart}:hover) & {
+      transition-duration: 0.25s;
+      transition-delay: 3s; /* only for someone who lingers on the heart */
+      opacity: 1;
+      transform: none;
+    }
+  }
+  ${HeartSpot}[data-hint] & {
+    transition-duration: 0.25s;
+    transition-delay: 3s; /* only for someone who lingers on the heart */
+    opacity: 1;
+    transform: none;
+  }
+`;
+
 const appear = keyframes`
   from { opacity: 0 }
   to { opacity: 1 }
