@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/cibergarri/home/compare/v1.9.0...v1.10.0) (2026-10-19)
+
+
+### Features
+
+* **easter-egg:** leave clues to the hidden game and keep browsers from translating the site ([b7db53f](https://github.com/cibergarri/home/commit/b7db53f95bdfaff930dac71f0bbdaef887684b88))
+
 # [1.9.0](https://github.com/cibergarri/home/compare/v1.8.0...v1.9.0) (2026-10-19)
 
 
