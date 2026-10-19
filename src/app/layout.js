@@ -6,7 +6,7 @@ import './global.css';
 
 const SITE_URL = 'https://javiergarrido.dev';
 const DESCRIPTION = 'Javier Garrido, web developer based in Burgos, Spain. Backend with Node.js, frontend with React, and a soft spot for domain-driven design.';
-const GA_ID = 'UA-166069840-1';
+const GA_ID = 'G-0ZC72C7EX2';
 const HOTJAR_ID = 1804773;
 
 const font = Instrument_Sans({
