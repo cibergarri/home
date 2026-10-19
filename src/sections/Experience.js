@@ -3,14 +3,15 @@
 import { useTranslation } from 'react-i18next';
 
 import {
-  Section, SectionTitle, Lede, Rows, Row, RowHead, RowMeta, RowBody,
+  SectionTitle, Lede, Rows, Row, RowHead, RowMeta, RowBody,
 } from '@/styles';
+import { UnhyphenatedSection } from './style';
 
 export default function Experience() {
   const { t } = useTranslation();
   const jobs = t('experience', { returnObjects: true });
   return (
-    <Section id="experience">
+    <UnhyphenatedSection id="experience">
       <SectionTitle>{t('experienceHeading')}</SectionTitle>
       <Lede>{t('experienceNote')}</Lede>
       <Rows>
@@ -27,6 +28,6 @@ export default function Experience() {
           </Row>
         ))}
       </Rows>
-    </Section>
+    </UnhyphenatedSection>
   );
 }

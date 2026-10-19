@@ -42,7 +42,7 @@ export const StyledSunIcon = styled(Sun).attrs({ height: '20px', width: '20px' }
   fill: currentColor;
 `;
 
-export const StyledMoonIcon = styled(Moon).attrs({ height: '18px', width: '18px' })`
+export const StyledMoonIcon = styled(Moon).attrs({ height: '20px', width: '20px' })`
   fill: currentColor;
 `;
 

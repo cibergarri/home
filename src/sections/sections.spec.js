@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
 
 import en from '@/locales/en.json';
 import es from '@/locales/es.json';
@@ -57,5 +57,31 @@ describe('landing sections', () => {
     renderWithProviders(<Skills />);
     expect(screen.getAllByRole('listitem')).toHaveLength(es.skills.length);
     expect(screen.getByText('Diseño de sistemas')).toBeInTheDocument();
+  });
+
+  it('lights the bubble under a finger sliding over them, and lets it go after the finger lifts', () => {
+    jest.useFakeTimers();
+    renderWithProviders(<Skills />);
+    const [first, second] = screen.getAllByRole('listitem');
+    const list = first.parentElement;
+    const slideOver = (bubble, type = 'touchMove') => {
+      document.elementFromPoint = () => bubble;
+      fireEvent[type](list, { touches: [{ clientX: 0, clientY: 0 }] });
+    };
+
+    slideOver(first, 'touchStart');
+    expect(first).toHaveAttribute('data-touched');
+
+    slideOver(second);
+    expect(first).not.toHaveAttribute('data-touched');
+    expect(second).toHaveAttribute('data-touched');
+
+    fireEvent.touchEnd(list);
+    expect(second).toHaveAttribute('data-touched');
+    act(() => jest.advanceTimersByTime(400));
+    expect(second).not.toHaveAttribute('data-touched');
+
+    delete document.elementFromPoint;
+    jest.useRealTimers();
   });
 });

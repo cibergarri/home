@@ -3,17 +3,17 @@
 import { useTranslation } from 'react-i18next';
 
 import {
-  Section, SectionTitle, Lede, Rows, Row, RowHead, RowBody, Link,
+  SectionTitle, Lede, Rows, Row, RowHead, RowBody, Link,
 } from '@/styles';
 import {
-  DetailList, DetailLabel, DetailValue, LinkList, AwardList,
+  UnhyphenatedSection, DetailList, DetailLabel, DetailValue, LinkList, AwardList,
 } from './style';
 
 export default function Projects() {
   const { t } = useTranslation();
   const projects = t('projects', { returnObjects: true });
   return (
-    <Section id="projects">
+    <UnhyphenatedSection id="projects">
       <SectionTitle>{t('projectsHeading')}</SectionTitle>
       <Lede>{t('projectsNote')}</Lede>
       <Rows>
@@ -46,6 +46,6 @@ export default function Projects() {
           </Row>
         ))}
       </Rows>
-    </Section>
+    </UnhyphenatedSection>
   );
 }

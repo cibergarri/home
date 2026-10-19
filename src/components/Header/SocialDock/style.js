@@ -7,7 +7,10 @@ import styled from 'styled-components';
 export const Dock = styled.nav`
   position: fixed;
   right: 0;
+  /* Centred on the small viewport height, which stays the same while the browser bars collapse
+     and expand during a scroll; with 50% the dock would jump each time the screen resizes. */
   top: 50%;
+  top: 50svh;
   transform: translateY(-50%);
   z-index: 1100;
   display: flex;
