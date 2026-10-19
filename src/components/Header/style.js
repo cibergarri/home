@@ -40,7 +40,9 @@ export const Title = styled.a`
   font-size: 14px;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  display: inline-block; /* a transform needs a box, inline text has none */
+  display: inline-flex; /* a transform needs a box, inline text has none */
+  align-items: center;
+  gap: 8px;
   transform-origin: left center;
   /* Like the social icons: quick to colour and grow on hover, slow to settle back. */
   transition: all 2s;
@@ -56,6 +58,19 @@ export const Title = styled.a`
     outline: 2px solid var(--c-accent);
     outline-offset: 4px;
     border-radius: 2px;
+  }
+`;
+
+/* The JG logo in front of the site name. Its letters sit in the bottom of the square (45% to 92%
+   of its height), so it is raised until they line up with the name rather than the square does. */
+export const TitleIcon = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  transform: translateY(-19%);
+  @media (min-width: 768px) {
+    width: 24px;
+    height: 24px;
   }
 `;
 

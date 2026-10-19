@@ -14,6 +14,7 @@ import {
   HeaderBar,
   Toolbar,
   Title,
+  TitleIcon,
   Blank,
   SVG,
   LinksContainer,
@@ -73,7 +74,10 @@ export default function Header() {
     <>
       <HeaderBar>
         <Toolbar>
-          <Title href="/">{t('title')}</Title>
+          <Title href="/">
+            <TitleIcon src="/img/jg.png" alt="" width={64} height={64} />
+            {t('title')}
+          </Title>
           <Blank />
           <LinksContainer aria-label={t('socialLinks')}>
             {SOCIAL_PROFILES.map(({ key, label, href, path }) => (
