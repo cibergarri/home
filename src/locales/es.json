@@ -6,8 +6,6 @@
   "toggleTheme": "Cambiar a modo {{theme}}",
   "themeLight": "claro",
   "themeDark": "oscuro",
-  "openMenu": "Abrir menú",
-  "closeMenu": "Cerrar menú",
   "findMe": "Sígueme en",
   "heroTitlePrefix": "I",
   "heroTitleSuffix": "coding",

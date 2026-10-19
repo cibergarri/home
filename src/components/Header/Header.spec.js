@@ -1,5 +1,4 @@
 import { screen, within } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '@/test-utils';
 import Header, { SOCIAL_LINKS } from '.';
@@ -22,32 +21,12 @@ describe('Header', () => {
     });
   });
 
-  it('opens the social links in a side drawer from the edge tab and closes it with Escape', async () => {
+  it('keeps the social links in a floating dock for phones, no menu to open', () => {
     renderWithProviders(<Header />);
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole('button', { name: 'Open menu' }));
-    const drawer = screen.getByRole('dialog', { name: 'Find me on' });
-    expect(within(drawer).getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', SOCIAL_LINKS.github);
-    expect(within(drawer).getAllByRole('link')).toHaveLength(Object.keys(SOCIAL_LINKS).length);
-    expect(screen.getByRole('button', { name: 'Close menu' })).toHaveFocus();
-    expect(document.body.style.overflow).toBe('hidden');
-
-    await userEvent.keyboard('{Escape}');
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Open menu' })).toHaveFocus();
-    expect(document.body.style.overflow).toBe('');
-  });
-
-  it('closes the drawer from its close button and from the backdrop', async () => {
-    const { container } = renderWithProviders(<Header />);
-    await userEvent.click(screen.getByRole('button', { name: 'Open menu' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Close menu' }));
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole('button', { name: 'Open menu' }));
-    await userEvent.click(container.querySelector('div[aria-hidden="true"]'));
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    const dock = screen.getByRole('navigation', { name: 'Find me on' });
+    expect(within(dock).getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', SOCIAL_LINKS.github);
+    expect(within(dock).getAllByRole('link')).toHaveLength(Object.keys(SOCIAL_LINKS).length);
+    expect(screen.queryByRole('button', { name: 'Open menu' })).not.toBeInTheDocument();
   });
 
   it('loads the hero mouse animation script for the current theme', () => {

@@ -6,8 +6,6 @@
   "toggleTheme": "Switch to {{theme}} mode",
   "themeLight": "light",
   "themeDark": "dark",
-  "openMenu": "Open menu",
-  "closeMenu": "Close menu",
   "findMe": "Find me on",
   "heroTitlePrefix": "I",
   "heroTitleSuffix": "coding",

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import useScript from '@/hooks/use-script';
 import { useTheme } from '@/theme/ThemeProvider';
 import Controls from './Controls';
-import SocialDrawer from './Drawer';
+import SocialDock from './SocialDock';
 import { SOCIAL_LINKS, SOCIAL_PROFILES } from './social';
 import {
   HeaderBar,
@@ -48,7 +48,7 @@ export default function Header() {
           <Controls />
         </Toolbar>
       </HeaderBar>
-      <SocialDrawer />
+      <SocialDock />
       <Hero id="background-image">
         <HeroTitle>
           {t('heroTitlePrefix')}
