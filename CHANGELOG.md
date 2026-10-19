@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.2](https://github.com/cibergarri/home/compare/v1.11.1...v1.11.2) (2026-10-19)
+
+
+### Bug Fixes
+
+* **analytics:** move to a GA4 measurement ID ([83cda65](https://github.com/cibergarri/home/commit/83cda65128f40a44f7f2dcbeb5e2a90bd1a7077b))
+
 ## [1.11.1](https://github.com/cibergarri/home/compare/v1.11.0...v1.11.1) (2026-10-19)
 
 
