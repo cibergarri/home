@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/cibergarri/home/compare/v1.10.0...v1.11.0) (2026-10-19)
+
+
+### Features
+
+* **header:** show the JG logo before the site name ([c8150c7](https://github.com/cibergarri/home/commit/c8150c70907417253da6e9722adf3747ae620fb3))
+* **terminal:** add a green-on-black terminal version of the site ([e9e7bf8](https://github.com/cibergarri/home/commit/e9e7bf806691c12d842d174625c30e4d1004ae9c))
+
 # [1.10.0](https://github.com/cibergarri/home/compare/v1.9.0...v1.10.0) (2026-10-19)
 
 
