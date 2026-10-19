@@ -35,7 +35,7 @@ export default function Header() {
         <Toolbar>
           <Title href="/">{t('title')}</Title>
           <Blank />
-          <LinksContainer aria-label="Social links">
+          <LinksContainer aria-label={t('socialLinks')}>
             {SOCIAL_PROFILES.map(({ key, label, href, path }) => (
               <SocialLink key={key} href={href} aria-label={label}>
                 <SVG viewBox="0 0 24 24" aria-hidden="true">

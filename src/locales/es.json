@@ -7,13 +7,15 @@
   "themeLight": "claro",
   "themeDark": "oscuro",
   "findMe": "Sígueme en",
+  "socialLinks": "Redes sociales",
+  "footerLove": "amor",
   "heroTitlePrefix": "I",
   "heroTitleSuffix": "coding",
-  "heroSubtitle": "...At least most of the time ;)",
+  "heroSubtitle": "…at least most of the time ;)",
   "introGreeting": "Hola, soy",
   "introName": "Javier Garrido.",
   "introParagraph1": "Soy desarrollador web. Vivo en Burgos y trabajo en remoto para Kodify Media Group. He pasado la mayor parte de mi carrera en el backend, sobre todo con Node.js, y también me muevo con soltura en el frontend con React. Antes de que JavaScript lo ocupara todo, construía cosas con .NET.",
-  "introParagraph2": "Hoy me interesa mucho cómo se diseña el software: domain-driven design, arquitectura de sistemas y esas decisiones que luego cuesta deshacer. Me gustan los equipos donde la gente aprende de los demás, e intento ser el que levanta la mano cuando hay algo que hacer.",
+  "introParagraph2": "Hoy me interesa mucho cómo se diseña el software: domain-driven design, arquitectura de sistemas y esas decisiones que luego cuesta deshacer. Me gustan los equipos donde la gente aprende unos de otros, e intento ser el que levanta la mano cuando hay algo que hacer.",
   "experienceHeading": "Dónde he generado deuda técnica",
   "experienceNote": "He formado parte de equipos internacionales en multinacionales, en startups y, en los últimos años, en una empresa de producto.",
   "experience": [
@@ -22,7 +24,7 @@
       "place": "Totalmente en remoto",
       "period": "nov 2020 – actualidad",
       "summary": [
-        "Ingeniero de software en un equipo distribuido y totalmente en remoto, trabajando en plataformas de vídeo por suscripción con mucho tráfico. Sobre todo backend: diseño de servicios, modelado del dominio y la infraestructura que lo mantiene todo en marcha.",
+        "Ingeniero de software en un equipo internacional, totalmente en remoto y repartido por varios países, trabajando en plataformas de vídeo por suscripción con mucho tráfico. Sobre todo backend: diseño de servicios, modelado del dominio y la infraestructura que lo mantiene todo en marcha.",
         "Team lead desde hace unos años. Me ocupo de un equipo de backend: planificar el trabajo, revisar diseños y ayudar a la gente a crecer, sin dejar de escribir código."
       ]
     },
@@ -30,19 +32,19 @@
       "company": "Bag On Board",
       "place": "Totalmente en remoto",
       "period": "jun 2019 – oct 2020",
-      "summary": "Desarrollador en una startup de Madrid, trabajando totalmente en remoto y construyendo el producto desde el principio con un equipo pequeño en el que todos hacíamos un poco de todo."
+      "summary": "Desarrollador en una startup de Madrid, trabajando totalmente en remoto. Ayudé a dar forma al producto desde sus primeras etapas y a prepararlo para escalar."
     },
     {
       "company": "Cognizant",
       "place": "Valladolid",
       "period": "oct 2017 – jun 2019",
-      "summary": "Desarrollador en una consultora tecnológica global, en proyectos para grandes clientes. Un equipo internacional, en inglés, y una buena escuela para trabajar a gran escala."
+      "summary": "Desarrollador en una consultora tecnológica global, en proyectos para grandes clientes. Un equipo internacional, con el inglés como idioma de trabajo, y la oportunidad de pasar por proyectos muy distintos, cada uno con sus propias necesidades."
     },
     {
       "company": "Thomson Reuters",
       "place": "Burgos",
       "period": "jul 2014 – may 2017",
-      "summary": "Desarrollador en un equipo internacional de una gran empresa de información, en productos para el sector jurídico. Aplicaciones web y APIs, sobre todo con .NET, trabajando a diario con compañeros de varios países."
+      "summary": "Desarrollador en un equipo internacional de una gran empresa de información, en productos para el sector jurídico. Aplicaciones web y APIs, sobre todo con .NET, trabajando a diario con compañeros de varios países. Contribuí a migrar parte de su producto principal a un modelo SaaS."
     },
     {
       "company": "Marsol",
@@ -59,19 +61,20 @@
     "Domain-driven design",
     "Diseño de sistemas",
     "Liderazgo de equipos",
+    "Agile y Scrum",
     "CI/CD y DevOps",
     "Desarrollo asistido por IA",
     "Claude y herramientas LLM",
     ".NET (hace tiempo)"
   ],
-  "projectsHeading": "Otros proyectos",
+  "projectsHeading": "Proyectos personales",
   "projectsNote": "Cosas que he construido fuera del trabajo, casi siempre para aprender o para ayudar a alguien.",
   "awardsLabel": "Premios",
   "linksLabel": "Enlaces",
   "projects": [
     {
       "name": "Coconut",
-      "description": "Aplicación web para equipos en remoto. Permite compartir información entre personas que trabajan de forma distribuida y llevar el control de las horas dedicadas a cada proyecto. Hecha con Rubén Antón (obsoftware.es); yo me encargué del backend y del DevOps.",
+      "description": "Aplicación web para equipos en remoto. Permite compartir información entre personas que trabajan de forma distribuida y llevar el control de las horas dedicadas a cada proyecto. Hecha con Rubén Antón (obsoftware.es); yo me encargué del backend y de la parte de DevOps.",
       "awards": [
         "Primer premio del hackathon online de la MorcillaConf 2019"
       ],
@@ -180,9 +183,9 @@
     }
   ],
   "offWorkLabel": "Lejos del teclado",
-  "offWork": "Star Wars, juegos de mesa, series, cine, historia y viajar.",
+  "offWork": "Star Wars, juegos de mesa, series, cine, historia y viajes.",
   "contactHeading": "Contacto",
-  "contactText": "La forma más fácil de localizarme es LinkedIn, donde puedes ver mi perfil profesional.",
+  "contactText": "La forma más fácil de contactarme es a través de LinkedIn, donde puedes ver mi perfil profesional.",
   "contactTextMore": "El código de esta web está en GitHub, donde también tengo un pequeño playground de experimentos.",
   "contactLinkedin": "LinkedIn",
   "contactGithub": "GitHub",

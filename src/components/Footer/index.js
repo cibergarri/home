@@ -18,7 +18,7 @@ export default function Footer() {
         <Copyright>
           {t('footerMadeWith')}
           <Glued>
-            <StyledHeartIcon aria-label="love" />
+            <StyledHeartIcon aria-label={t('footerLove')} />
             ,
           </Glued>
           <StyledJSIcon aria-label="JavaScript" />
