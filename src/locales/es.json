@@ -194,5 +194,24 @@
   "contactSource": "Código de esta web",
   "footerMadeWith": "Hecho con",
   "footerAnd": "y",
-  "footerBy": "por Javier Garrido"
+  "footerBy": "por Javier Garrido",
+  "game": {
+    "title": "Aplasta bugs",
+    "intro": "Los bugs van camino de producción. Aplástalos antes de que lleguen: cada uno que se cuela suma deuda técnica.",
+    "start": "Empezar",
+    "fixed": "Bugs arreglados: {{count}}",
+    "debt": "Deuda",
+    "debtLabel": "Deuda técnica: {{count}} de {{max}}",
+    "production": "producción",
+    "bug": "Bug",
+    "splat": "¡arreglado!",
+    "overTitle": "¡Quiebra por deuda técnica!",
+    "overScore_one": "Has arreglado {{count}} bug antes de que cayera producción.",
+    "overScore_other": "Has arreglado {{count}} bugs antes de que cayera producción.",
+    "best": "Tu récord: {{count}}",
+    "newBest": "¡Nuevo récord!",
+    "again": "Otra partida",
+    "close": "Volver a la web",
+    "closeLabel": "Cerrar el juego"
+  }
 }

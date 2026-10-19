@@ -43,6 +43,22 @@ describe('Header', () => {
     jest.useRealTimers();
   });
 
+  it('opens the hidden bug game after five quick taps on the heart, and closes it with Escape', async () => {
+    renderWithProviders(<Header />);
+    const heart = screen.getByText('<heart \\>');
+
+    for (let tap = 0; tap < 4; tap += 1) fireEvent.click(heart);
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+
+    fireEvent.click(heart);
+    const game = await screen.findByRole('dialog', { name: 'Bug squash' });
+    expect(game).toHaveTextContent('Bugs are heading for production');
+    expect(screen.getByRole('button', { name: 'Start' })).toHaveFocus();
+
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
   it('loads the hero mouse animation script for the current theme', () => {
     renderWithProviders(<Header />);
     const script = document.getElementById('bg-animation');

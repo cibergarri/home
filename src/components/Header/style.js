@@ -277,6 +277,11 @@ const reveal = keyframes`
 export const Heart = styled.div`
   display: inline;
   color: var(--c-heart);
+  /* Tapped five times it opens a game (see Header): no double-tap zoom, selection or flash. */
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
   /* Hidden outright until "hate" has gone, not through an animation fill: its "<" sits in the
      gap right after "hate", and browsers differ on how they fill a reversed animation. */
   opacity: 0;

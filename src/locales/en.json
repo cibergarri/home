@@ -194,5 +194,24 @@
   "contactSource": "This site's code",
   "footerMadeWith": "Made with",
   "footerAnd": "and",
-  "footerBy": "by Javier Garrido"
+  "footerBy": "by Javier Garrido",
+  "game": {
+    "title": "Bug squash",
+    "intro": "Bugs are heading for production. Squash them before they get there: every one that slips through adds to your technical debt.",
+    "start": "Start",
+    "fixed": "Bugs fixed: {{count}}",
+    "debt": "Debt",
+    "debtLabel": "Technical debt: {{count}} of {{max}}",
+    "production": "production",
+    "bug": "Bug",
+    "splat": "fixed!",
+    "overTitle": "Technical debt bankruptcy!",
+    "overScore_one": "You fixed {{count}} bug before production went down.",
+    "overScore_other": "You fixed {{count}} bugs before production went down.",
+    "best": "Your best: {{count}}",
+    "newBest": "New record!",
+    "again": "Play again",
+    "close": "Back to the site",
+    "closeLabel": "Close the game"
+  }
 }
