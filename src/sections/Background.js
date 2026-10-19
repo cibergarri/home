@@ -8,9 +8,12 @@ import {
 } from '@/styles';
 import { DetailList, DetailLabel, DetailValue } from './style';
 
+// Wide enough for the longest label, "GOTO Copenhagen 2025", so every list lines up.
+const LABEL_WIDTH = '12em';
+
 function Pairs({ items }) {
   return (
-    <DetailList $flush>
+    <DetailList $flush $labelWidth={LABEL_WIDTH}>
       {items.map(item => (
         <Fragment key={`${item.name} ${item.detail}`}>
           <DetailLabel>{item.name}</DetailLabel>

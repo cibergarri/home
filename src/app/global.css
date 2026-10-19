@@ -9,6 +9,8 @@
   --c-line-strong: rgba(13, 4, 105, 0.4);
   --c-accent: #dc2287;
   --c-chip: rgba(13, 4, 105, 0.07);
+  --c-heart: #e0102f;
+  --heart-glow: 0 0 14px rgba(224, 16, 47, 0.35);
   --hero-image: url('/img/bg-normal.png');
 }
 
@@ -23,6 +25,8 @@
   --c-line-strong: rgba(222, 222, 222, 0.4);
   --c-accent: #8fb3ad;
   --c-chip: rgba(222, 222, 222, 0.08);
+  --c-heart: #ff0000;
+  --heart-glow: 0 0 12px rgba(255, 0, 0, 0.55);
   --hero-image: url('/img/bg-night.png');
 }
 
@@ -59,12 +63,47 @@ h1,
 h2,
 h3 {
   text-align: left;
+  hyphens: manual;
 }
 
 /* Narrow columns justify into rivers of white space. */
 @media (max-width: 767px) {
   main {
     text-align: left;
+    hyphens: manual;
+  }
+}
+
+/* The page fades in on load the way it does on a theme change (src/theme/veil.js): a sheet in the
+   background colour, over everything from the first paint, fading out at the same pace once the
+   theme script in the layout marks the page ready (the hero picture has loaded). Without that
+   script it fades out on its own after a while; with reduced motion it is gone at once. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  background: var(--c-background);
+  animation: page-veil 1.6s ease-out 2s forwards;
+}
+
+/* A second name, so the fade starts from the beginning instead of jumping into the fallback. */
+html.page-ready body::before {
+  animation: page-veil-ready 1.6s ease-out forwards;
+}
+
+@keyframes page-veil {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes page-veil-ready {
+  to {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 

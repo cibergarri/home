@@ -20,7 +20,7 @@
     {
       "company": "Kodify Media Group",
       "place": "Totalmente en remoto",
-      "period": "Actualmente",
+      "period": "nov 2020 – actualidad",
       "summary": [
         "Ingeniero de software en un equipo distribuido y totalmente en remoto, trabajando en plataformas de vídeo por suscripción con mucho tráfico. Sobre todo backend: diseño de servicios, modelado del dominio y la infraestructura que lo mantiene todo en marcha.",
         "Team lead desde hace unos años. Me ocupo de un equipo de backend: planificar el trabajo, revisar diseños y ayudar a la gente a crecer, sin dejar de escribir código."
@@ -29,29 +29,29 @@
     {
       "company": "Bag On Board",
       "place": "Totalmente en remoto",
-      "period": "",
+      "period": "jun 2019 – oct 2020",
       "summary": "Desarrollador en una startup de Madrid, trabajando totalmente en remoto y construyendo el producto desde el principio con un equipo pequeño en el que todos hacíamos un poco de todo."
     },
     {
       "company": "Cognizant",
       "place": "Valladolid",
-      "period": "",
+      "period": "oct 2017 – jun 2019",
       "summary": "Desarrollador en una consultora tecnológica global, en proyectos para grandes clientes. Un equipo internacional, en inglés, y una buena escuela para trabajar a gran escala."
     },
     {
       "company": "Thomson Reuters",
       "place": "Burgos",
-      "period": "",
+      "period": "jul 2014 – may 2017",
       "summary": "Desarrollador en un equipo internacional de una gran empresa de información, en productos para el sector jurídico. Aplicaciones web y APIs, sobre todo con .NET, trabajando a diario con compañeros de varios países."
     },
     {
       "company": "Marsol",
       "place": "Burgos",
-      "period": "",
+      "period": "may 2012 – jun 2014",
       "summary": "Desarrollador web en un mayorista de viajes de Burgos. Mantenía la aplicación interna de back-office, la conecté con los servicios de otros proveedores y desarrollé la nueva web pública de la empresa, sobre todo con .NET."
     }
   ],
-  "skillsHeading": "Con qué trabajo",
+  "skillsHeading": "Con qué he estado cacharreando",
   "skills": [
     "Node.js",
     "JavaScript y TypeScript",
@@ -149,15 +149,15 @@
     },
     {
       "name": "GOTO Copenhagen 2025",
-      "detail": "Microservice Communication, masterclass de Sam Newman"
+      "detail": "Microservice Communication, masterclass\nde Sam Newman"
     },
     {
       "name": "GOTO Copenhagen 2025",
-      "detail": "Resilient Distributed Systems, masterclass de Sam Newman"
+      "detail": "Resilient Distributed Systems, masterclass\nde Sam Newman"
     },
     {
       "name": "DDD Academy",
-      "detail": "Domain-Driven Design in TypeScript, de Thomas Coopman, 2023"
+      "detail": "Domain-Driven Design in TypeScript\nde Thomas Coopman, 2023"
     },
     {
       "name": "People Collective",
@@ -165,7 +165,7 @@
     },
     {
       "name": "DDD Europe 2022",
-      "detail": "Software Architecture: The Hard Parts, de Neal Ford"
+      "detail": "Software Architecture: The Hard Parts\nde Neal Ford"
     }
   ],
   "languagesLabel": "Idiomas",
@@ -186,7 +186,7 @@
   "contactTextMore": "El código de esta web está en GitHub, donde también tengo un pequeño playground de experimentos.",
   "contactLinkedin": "LinkedIn",
   "contactGithub": "GitHub",
-  "contactTwitter": "Twitter",
+  "contactX": "X",
   "contactPlayground": "Playground",
   "contactSource": "Código de esta web",
   "footerMadeWith": "Hecho con",

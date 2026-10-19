@@ -2,17 +2,29 @@
 
 import styled from 'styled-components';
 
+import useReveal from '@/hooks/use-reveal';
+
 export const Page = styled.main`
   max-width: 1040px;
   margin: 0 auto;
   padding: 0 24px 96px;
   box-sizing: border-box;
+  /* Narrow phones keep the social dock on the right edge: leave it a lane of its own. */
+  @media (max-width: 479px) {
+    padding-right: 52px;
+  }
   @media (min-width: 768px) {
     padding: 0 40px 128px;
   }
 `;
 
-export const Section = styled.section`
+const SectionBox = styled.section`
+  /* Sections below the fold fade and rise into place as they scroll in, see useReveal. */
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  &[data-reveal='waiting'] {
+    opacity: 0;
+    transform: translateY(24px);
+  }
   padding-top: 72px;
   &:first-child {
     padding-top: 16px;
@@ -24,6 +36,11 @@ export const Section = styled.section`
     }
   }
 `;
+
+export function Section(props) {
+  const ref = useReveal();
+  return <SectionBox ref={ref} {...props} />;
+}
 
 export const SectionTitle = styled.h2`
   color: var(--c-primary);
@@ -105,7 +122,7 @@ export const RowMeta = styled.div`
   color: var(--c-muted);
   font-size: 15px;
   line-height: 1.4;
-  margin-top: 4px;
+  margin-top: ${props => (props.$tight ? '0' : '4px')}; /* a second line sits right under the first */
   font-weight: 400;
   text-align: left; /* too short to justify */
 `;

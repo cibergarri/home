@@ -16,7 +16,7 @@ export const IntroHeading = styled.h1`
 
 /* The name in the greeting, in the accent colour of the theme. */
 export const Name = styled.span`
-  color: var(--c-secondary);
+  color: var(--c-accent);
   transition: color 2s;
 `;
 
@@ -42,20 +42,33 @@ export const Skill = styled.li`
 export const DetailList = styled.dl`
   margin: ${props => (props.$flush ? '0' : '16px 0 0')};
   display: grid;
-  grid-template-columns: auto 1fr;
+  /* Lists stacked one under another share a label width so their values line up. */
+  grid-template-columns: ${props => props.$labelWidth || 'auto'} 1fr;
   gap: 6px 12px;
   font-size: 15px;
   line-height: 1.5;
+  /* Two columns squeeze the values into four-line stacks on phones: put each label above. */
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 `;
 
 export const DetailLabel = styled.dt`
   color: var(--c-muted);
   margin: 0;
+  @media (max-width: 767px) {
+    font-size: 13px;
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
 `;
 
 export const DetailValue = styled.dd`
   margin: 0;
   color: var(--c-text);
+  white-space: pre-line; /* line breaks written in the copy, like the one before an author */
 `;
 
 export const LinkList = styled.ul`

@@ -18,7 +18,8 @@ export default function Experience() {
           <Row key={job.company}>
             <RowHead>
               {job.company}
-              <RowMeta>{[job.period, job.place].filter(Boolean).join(', ')}</RowMeta>
+              {job.period && <RowMeta>{job.period}</RowMeta>}
+              {job.place && <RowMeta $tight>{job.place}</RowMeta>}
             </RowHead>
             <RowBody>
               {[].concat(job.summary).map(paragraph => <p key={paragraph}>{paragraph}</p>)}

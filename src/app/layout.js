@@ -37,16 +37,22 @@ export const viewport = {
   ],
 };
 
-// Runs before paint so a returning visitor never sees the wrong theme flash.
+// Runs before paint so a returning visitor never sees the wrong theme flash. It is a plain script
+// in <head>: an inline next/script with beforeInteractive is queued until Next's runtime loads,
+// which is after the first paint.
 // Visitors of the previous version kept their choice in a my_theme cookie, so it is honoured once.
 // Without a saved choice the site is dark; the system preference is deliberately not consulted.
-const themeInit = `(function(){try{var t=localStorage.getItem('theme');if(!t){var m=document.cookie.match(/(?:^|; )my_theme=%22(normal|night)%22/);t=m&&m[1]}if(t!=='normal'&&t!=='night'){t='night'}document.documentElement.dataset.theme=t}catch(e){}})()`;
+// It then lifts the page veil (see global.css) once the hero picture of that theme has loaded,
+// or after 1.5 seconds on a slow connection, so the page never fades in without its hero.
+const themeInit = `(function(){var t='night';try{t=localStorage.getItem('theme');if(!t){var m=document.cookie.match(/(?:^|; )my_theme=%22(normal|night)%22/);t=m&&m[1]}if(t!=='normal'&&t!=='night'){t='night'}}catch(e){t='night'}var r=document.documentElement;r.dataset.theme=t;var done=false;function ready(){if(done)return;done=true;r.classList.add('page-ready')}var i=new Image();i.onload=i.onerror=ready;i.src='/img/bg-'+t+'.png';setTimeout(ready,1500)})()`;
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={font.variable} suppressHydrationWarning>
+      <head>
+        <script id="theme-init" dangerouslySetInnerHTML={{ __html: themeInit }} />
+      </head>
       <body>
-        <Script id="theme-init" strategy="beforeInteractive">{themeInit}</Script>
         <Providers>{children}</Providers>
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">

@@ -21,6 +21,13 @@ export const Dock = styled.nav`
   background: color-mix(in srgb, var(--c-background) 85%, transparent);
   backdrop-filter: blur(8px);
   box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+  /* Dims quickly while the page scrolls and settles back slowly, like the controls in the bar.
+     Focus inside it always brings it back. */
+  opacity: ${props => (props.$dimmed ? 0.45 : 1)};
+  transition: opacity ${props => (props.$dimmed ? '0.2s' : '1.5s')} ease;
+  &:focus-within {
+    opacity: 1;
+  }
   @media (min-width: 480px) {
     display: none;
   }

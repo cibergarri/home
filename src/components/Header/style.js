@@ -3,7 +3,12 @@
 import styled, { keyframes } from 'styled-components';
 
 export const HeaderBar = styled.header`
-  background: linear-gradient(color-mix(in srgb, var(--c-background) 87%, transparent) 80%, transparent 100%);
+  /* Frosted, but see-through enough to show what passes behind; the bottom edge fades out
+     so the blur has no hard line. */
+  background: color-mix(in srgb, var(--c-background) 60%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  mask-image: linear-gradient(black calc(100% - 20px), transparent);
   color: var(--c-primary);
   z-index: 1100;
   position: fixed;
@@ -11,9 +16,9 @@ export const HeaderBar = styled.header`
   left: 0;
   width: 100%;
   box-sizing: border-box;
-  padding: 10px 16px 24px;
+  padding: 10px 16px 28px;
   @media (min-width: 768px) {
-    padding: 16px 40px 32px;
+    padding: 14px 40px 32px;
   }
 `;
 
@@ -116,22 +121,23 @@ export const Hero = styled.div`
     ),
     var(--hero-image);
   /* The image is 1920px wide; on wider screens scale it up so it never shows its edges.
-     The word in the picture sits in its middle, so centring keeps it in view at every width. */
+     The word in the picture sits in its middle, so centring keeps it in view at every width;
+     lifting it clears the bottom-left corner for the title. */
   background-size: auto, auto, max(100%, 1920px) auto;
-  background-position: center center;
+  background-position: center 80%;
   background-repeat: no-repeat;
   height: 100vh;
   max-height: 780px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  text-align: right;
+  /* Lined up with the content below, whose column is 1040px wide with 40px gutters. */
+  --hero-gutter: max(40px, calc((100% - 1040px) / 2 + 40px));
   /* On phones a full-height hero is mostly empty space, and 100vh hides behind the
      browser chrome on iOS, so use the small viewport height and a lower cap. */
   @media (max-width: 767px) {
-    height: min(100svh, 640px);
-    min-height: 520px;
-    text-align: left;
+    height: min(100svh, 600px);
+    min-height: 500px;
     /* A fixed 1000px picture, centred, so it looks the same on every phone and only its sides get
        clipped on narrower ones. It is 16:9, so it is 563px tall; the bottom fade ends exactly
        at its bottom edge so the smaller image has no hard border. */
@@ -162,20 +168,19 @@ export const HeroTitle = styled.div`
   letter-spacing: -0.02em;
   font-size: clamp(30px, 7vw, 60px);
   line-height: 1.1;
-  padding: 0 clamp(48px, 10vw, 160px) 16px 0;
+  padding: 0 0 16px var(--hero-gutter);
   margin: 0;
   /* Fixed to the width of the widest final line ("I <heart \>", the gap and the caret),
      so the block does not shift while the typewriter grows and shrinks. */
   box-sizing: content-box;
   width: 5.2em;
   white-space: nowrap; /* the typed word must never drop below the "I" */
-  align-self: flex-end;
+  align-self: flex-start;
   text-align: left;
   /* On phones the block sits on the body gutter, lined up with the headings below it. */
   @media (max-width: 767px) {
     font-size: clamp(40px, 11vw, 60px);
     padding: 0 24px 12px;
-    align-self: flex-start;
   }
 `;
 
@@ -194,7 +199,7 @@ const typeHeart = keyframes`
 /* The typewriter cursor effect */
 const blinkCaret = keyframes`
   from, to { background-color: transparent }
-  50% { background-color: #ff0000; }
+  50% { background-color: var(--c-heart); }
 `;
 
 const disappear = keyframes`
@@ -231,6 +236,7 @@ export const TypeWriterContainer = styled.div`
   margin: -0.1em 0 -0.1em -0.05em;
   position: relative; /* anchors the cursor */
   white-space: nowrap;
+  text-shadow: var(--heart-glow);
   animation:
     ${typeHate} 1.5s steps(8, end) 3s both,
     ${typeHate} 1.5s steps(8, end) 6s reverse forwards,
@@ -243,7 +249,7 @@ export const TypeWriterContainer = styled.div`
     bottom: 0;
     right: 0;
     width: .15em;
-    background-color: #ff0000;
+    background-color: var(--c-heart);
     animation:
       ${blinkCaret} 1.1s step-end infinite,
       ${fadeCaret} 4.5s ease 10s forwards; /* same timing as the subtitle fading in */
@@ -252,7 +258,7 @@ export const TypeWriterContainer = styled.div`
 
 export const Hate = styled.div`
   display: inline;
-  color: #ff0000;
+  color: var(--c-heart);
   animation: ${disappear} .5s steps(1, end) 7.5s 1 forwards;
 `;
 
@@ -270,7 +276,7 @@ const reveal = keyframes`
 
 export const Heart = styled.div`
   display: inline;
-  color: #ff0000;
+  color: var(--c-heart);
   /* Hidden outright until "hate" has gone, not through an animation fill: its "<" sits in the
      gap right after "hate", and browsers differ on how they fill a reversed animation. */
   opacity: 0;
@@ -292,14 +298,13 @@ export const HeroSubtitle = styled.div`
   font-weight: 700;
   letter-spacing: -0.01em;
   font-size: clamp(17px, 3.6vw, 32px);
-  padding: 0 clamp(16px, 2.5vw, 40px) 0 0;
+  padding: 0 0 0 var(--hero-gutter);
   height: 140px;
   max-width: 500px;
-  align-self: flex-end;
+  align-self: flex-start;
   animation: ${appear} 4.5s 10s both;
   @media (max-width: 767px) {
     height: auto;
-    padding: 0 24px 56px;
-    align-self: flex-start;
+    padding: 0 24px 40px;
   }
 `;

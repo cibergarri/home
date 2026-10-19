@@ -1,4 +1,4 @@
-import { screen, within } from '@testing-library/react';
+import { act, fireEvent, screen, within } from '@testing-library/react';
 
 import { renderWithProviders } from '@/test-utils';
 import Header, { SOCIAL_LINKS } from '.';
@@ -27,6 +27,20 @@ describe('Header', () => {
     expect(within(dock).getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', SOCIAL_LINKS.github);
     expect(within(dock).getAllByRole('link')).toHaveLength(Object.keys(SOCIAL_LINKS).length);
     expect(screen.queryByRole('button', { name: 'Open menu' })).not.toBeInTheDocument();
+  });
+
+  it('dims the dock while the page scrolls and brings it back once it settles', () => {
+    jest.useFakeTimers();
+    renderWithProviders(<Header />);
+    const dock = screen.getByRole('navigation', { name: 'Find me on' });
+    expect(dock).toHaveStyle({ opacity: '1' });
+
+    fireEvent.scroll(window);
+    expect(dock).toHaveStyle({ opacity: '0.45' });
+
+    act(() => jest.advanceTimersByTime(600));
+    expect(dock).toHaveStyle({ opacity: '1' });
+    jest.useRealTimers();
   });
 
   it('loads the hero mouse animation script for the current theme', () => {

@@ -25,12 +25,11 @@ describe('landing sections', () => {
       .forEach(paragraph => expect(screen.getByText(paragraph)).toBeInTheDocument());
   });
 
-  it('hides the period when it is empty', () => {
+  it('shows the period of each job with where it was on the line below', () => {
     renderWithProviders(<Experience />);
-    expect(screen.getByText('Currently, Fully remote')).toBeInTheDocument();
-    expect(screen.queryByText(/^, Valladolid$/)).not.toBeInTheDocument();
-    expect(screen.getByText('Valladolid')).toBeInTheDocument();
-    expect(screen.getAllByText('Burgos')).toHaveLength(2);
+    en.experience.forEach(job => expect(screen.getByText(job.period)).toBeInTheDocument());
+    const period = screen.getByText('Oct 2017 – Jun 2019');
+    expect(period.nextElementSibling).toHaveTextContent(/^Valladolid$/);
   });
 
   it('renders every project with its links and skips empty award lists', () => {

@@ -20,7 +20,7 @@
     {
       "company": "Kodify Media Group",
       "place": "Fully remote",
-      "period": "Currently",
+      "period": "Nov 2020 – Present",
       "summary": [
         "Software engineer in a fully remote, distributed team, working on high-traffic subscription video platforms. Mostly backend: service design, domain modelling and the infrastructure that keeps everything running.",
         "Team lead for the last few years. I look after a backend team: planning the work, reviewing designs and helping people grow, while still writing code myself."
@@ -29,29 +29,29 @@
     {
       "company": "Bag On Board",
       "place": "Fully remote",
-      "period": "",
+      "period": "Jun 2019 – Oct 2020",
       "summary": "Developer at a Madrid startup, working fully remote and building the product from early on with a small team where everyone did a bit of everything."
     },
     {
       "company": "Cognizant",
       "place": "Valladolid",
-      "period": "",
+      "period": "Oct 2017 – Jun 2019",
       "summary": "Developer at a global IT services company, on projects for large clients. An international, English-speaking team, and a good school for working at scale."
     },
     {
       "company": "Thomson Reuters",
       "place": "Burgos",
-      "period": "",
+      "period": "Jul 2014 – May 2017",
       "summary": "Developer in an international team at a large information company, on products for the legal sector. Web applications and APIs, mainly with .NET, working day to day with colleagues in several countries."
     },
     {
       "company": "Marsol",
       "place": "Burgos",
-      "period": "",
+      "period": "May 2012 – Jun 2014",
       "summary": "Web developer at a travel wholesaler in Burgos. I kept the internal back-office application running, connected it with partners' services and built the company's new public website, mainly with .NET."
     }
   ],
-  "skillsHeading": "What I work with",
+  "skillsHeading": "What I've been tinkering with",
   "skills": [
     "Node.js",
     "JavaScript and TypeScript",
@@ -149,15 +149,15 @@
     },
     {
       "name": "GOTO Copenhagen 2025",
-      "detail": "Microservice Communication, masterclass by Sam Newman"
+      "detail": "Microservice Communication, masterclass\nby Sam Newman"
     },
     {
       "name": "GOTO Copenhagen 2025",
-      "detail": "Resilient Distributed Systems, masterclass by Sam Newman"
+      "detail": "Resilient Distributed Systems, masterclass\nby Sam Newman"
     },
     {
       "name": "DDD Academy",
-      "detail": "Domain-Driven Design in TypeScript, by Thomas Coopman, 2023"
+      "detail": "Domain-Driven Design in TypeScript\nby Thomas Coopman, 2023"
     },
     {
       "name": "People Collective",
@@ -165,7 +165,7 @@
     },
     {
       "name": "DDD Europe 2022",
-      "detail": "Software Architecture: The Hard Parts, by Neal Ford"
+      "detail": "Software Architecture: The Hard Parts\nby Neal Ford"
     }
   ],
   "languagesLabel": "Languages",
@@ -186,7 +186,7 @@
   "contactTextMore": "The code for this site is on GitHub, and I also keep a small playground of experiments there.",
   "contactLinkedin": "LinkedIn",
   "contactGithub": "GitHub",
-  "contactTwitter": "Twitter",
+  "contactX": "X",
   "contactPlayground": "Playground",
   "contactSource": "Source of this site",
   "footerMadeWith": "Made with",
