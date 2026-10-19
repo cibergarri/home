@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.1](https://github.com/cibergarri/home/compare/v1.11.0...v1.11.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **terminal:** make the terminal button smaller on phones ([659442b](https://github.com/cibergarri/home/commit/659442bb56323d27343ecc93b7da412b6a114d74))
+
 # [1.11.0](https://github.com/cibergarri/home/compare/v1.10.0...v1.11.0) (2026-10-19)
 
 
