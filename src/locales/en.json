@@ -258,5 +258,25 @@
     "exiting": "Bye! Back to the regular site…",
     "inputLabel": "Type a command",
     "shortcuts": "Commands"
+  },
+  "llms": {
+    "about": "About",
+    "experience": "Experience",
+    "skills": "Skills",
+    "projects": "Side projects",
+    "background": "Background",
+    "education": "Education",
+    "workshops": "Workshops and courses",
+    "languages": "Languages",
+    "offWork": "Away from the keyboard",
+    "contact": "Contact",
+    "award": "Award",
+    "links": "Links",
+    "fullProfile": "Full profile",
+    "fullProfileNote": "experience, skills, projects, education and contact in one Markdown file",
+    "otherLanguage": "Full profile in Spanish",
+    "website": "Website",
+    "terminal": "Terminal version of the site",
+    "source": "Source code of the site"
   }
 }

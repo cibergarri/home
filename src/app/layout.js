@@ -1,10 +1,10 @@
 import Script from 'next/script';
 import { Instrument_Sans } from 'next/font/google';
 
+import { SITE_URL } from '@/content/links';
 import Providers from './providers';
 import './global.css';
 
-const SITE_URL = 'https://javiergarrido.dev';
 const DESCRIPTION = 'Javier Garrido, web developer based in Burgos, Spain. Backend with Node.js, frontend with React, and a soft spot for domain-driven design.';
 const GA_ID = 'G-0ZC72C7EX2';
 const HOTJAR_ID = 1804773;
@@ -31,6 +31,8 @@ export const metadata = {
   // The site has its own English and Spanish versions, so browsers should not offer to translate
   // it; that also keeps the code-like bits (<heart \>, // comments) from being "translated".
   other: { google: 'notranslate' },
+  // The site in Markdown for LLMs, see src/content/llms.js.
+  alternates: { types: { 'text/markdown': '/llms.txt' } },
 };
 
 export const viewport = {

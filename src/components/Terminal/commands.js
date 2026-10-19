@@ -3,13 +3,12 @@
 import { Fragment } from 'react';
 
 import { SOCIAL_LINKS } from '@/components/Header/social';
+import { PLAYGROUND, SITE_SOURCE } from '@/content/links';
 import { NAME_BANNER } from './banner';
 import {
   Banner, Block, Bright, Columns, Grid, Indent, Line, List, Muted, NeofetchLogo, Photo, TermLink,
 } from './style';
 
-const SITE_SOURCE = 'https://github.com/cibergarri/home';
-const PLAYGROUND = 'https://cibergarri.github.io/playground';
 const CODING_SINCE = 2012;
 
 // In the order `help` lists them; the shortcuts bar shows the same ones.

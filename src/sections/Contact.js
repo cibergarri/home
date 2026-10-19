@@ -4,10 +4,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Section, SectionTitle, Prose } from '@/styles';
 import { SOCIAL_LINKS } from '@/components/Header';
+import { PLAYGROUND, SITE_SOURCE } from '@/content/links';
 import { ContactLinks, ContactLink } from './style';
-
-const SITE_SOURCE = 'https://github.com/cibergarri/home';
-const PLAYGROUND = 'https://cibergarri.github.io/playground';
 
 export default function Contact() {
   const { t } = useTranslation();

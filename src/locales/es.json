@@ -258,5 +258,25 @@
     "exiting": "¡Hasta luego! Volviendo a la web normal…",
     "inputLabel": "Escribe un comando",
     "shortcuts": "Comandos"
+  },
+  "llms": {
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "skills": "Habilidades",
+    "projects": "Proyectos personales",
+    "background": "Formación",
+    "education": "Estudios",
+    "workshops": "Talleres y cursos",
+    "languages": "Idiomas",
+    "offWork": "Lejos del teclado",
+    "contact": "Contacto",
+    "award": "Premio",
+    "links": "Enlaces",
+    "fullProfile": "Perfil completo",
+    "fullProfileNote": "experiencia, habilidades, proyectos, formación y contacto en un solo archivo Markdown",
+    "otherLanguage": "Perfil completo en inglés",
+    "website": "Web",
+    "terminal": "Versión terminal de la web",
+    "source": "Código fuente de la web"
   }
 }
