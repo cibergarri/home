@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/cibergarri/home/compare/v1.13.0...v1.14.0) (2026-10-25)
+
+
+### Features
+
+* **julia:** add a rivers exercise with a story and a sorting game ([61e89e8](https://github.com/cibergarri/home/commit/61e89e888c06f4eecc7adddee9ea71e15f2e63ec))
+
 # [1.13.0](https://github.com/cibergarri/home/compare/v1.12.0...v1.13.0) (2026-10-25)
 
 
