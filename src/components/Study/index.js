@@ -5,6 +5,9 @@ import Story from './Story';
 import SortGame from './SortGame';
 import ColourGame from './ColourGame';
 import DirectionsGame from './DirectionsGame';
+import MatchGame from './MatchGame';
+import BuildGame from './BuildGame';
+import QuizGame from './QuizGame';
 import { findSubject, findUnit, findExercise } from './subjects';
 import {
   Page, Header, Back, Titles, Kicker, Title, Main, Empty, Cards, Card, CardIcon, CardText, Part, PartTitle,
@@ -52,7 +55,14 @@ export function CardList({ cards, empty }) {
 
 // The kinds of game a part of an exercise can be; labelling a picture unless it says otherwise.
 const GAMES = {
-  label: LabelMap, story: Story, sort: SortGame, colour: ColourGame, directions: DirectionsGame,
+  label: LabelMap,
+  story: Story,
+  sort: SortGame,
+  colour: ColourGame,
+  directions: DirectionsGame,
+  match: MatchGame,
+  build: BuildGame,
+  quiz: QuizGame,
 };
 
 function Game({ part }) {

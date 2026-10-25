@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 
 import { renderWithProviders } from '@/test-utils';
-import { Exercise } from '@/components/Study';
+import { Exercise, CardList } from '@/components/Study';
 import JuliaPage from '@/app/julia/page';
 import SubjectPage from '@/app/julia/[subject]/page';
 import UnitPage from '@/app/julia/[subject]/[unit]/page';
@@ -18,11 +18,19 @@ describe("Julia's study pages", () => {
     expect(hrefs()).toEqual(['/julia/social-science', '/julia/english']);
   });
 
-  it('says so when a subject has no units yet', async () => {
-    renderWithProviders(await SubjectPage({ params: params({ subject: 'english' }) }));
-    expect(screen.getByRole('heading', { name: 'English' })).toBeInTheDocument();
-    expect(screen.getByText(/No units here yet/)).toBeInTheDocument();
-    expect(screen.queryAllByRole('link').map(link => link.getAttribute('href'))).toEqual(['/julia']);
+  it('says so when there is nothing to list yet', () => {
+    renderWithProviders(<CardList cards={[]} empty="No units here yet." />);
+    expect(screen.getByText('No units here yet.')).toBeInTheDocument();
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+  });
+
+  it('lists the exercises of English unit 1', async () => {
+    renderWithProviders(await UnitPage({ params: params({ subject: 'english', unit: 'unit-1' }) }));
+    expect(hrefs()).toEqual([
+      '/julia/english',
+      ...['days-of-the-week', 'places-at-school', 'wheres', 'positions', 'rules-and-games', 'story-phrases', 'review']
+        .map(slug => `/julia/english/unit-1/${slug}`),
+    ]);
   });
 
   it('lists the units of a subject', async () => {
@@ -57,6 +65,13 @@ describe("Julia's study pages", () => {
       { subject: 'social-science', unit: 'unit-1', exercise: 'rivers' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'find-directions' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'physical-and-human-features' },
+      { subject: 'english', unit: 'unit-1', exercise: 'days-of-the-week' },
+      { subject: 'english', unit: 'unit-1', exercise: 'places-at-school' },
+      { subject: 'english', unit: 'unit-1', exercise: 'wheres' },
+      { subject: 'english', unit: 'unit-1', exercise: 'positions' },
+      { subject: 'english', unit: 'unit-1', exercise: 'rules-and-games' },
+      { subject: 'english', unit: 'unit-1', exercise: 'story-phrases' },
+      { subject: 'english', unit: 'unit-1', exercise: 'review' },
     ]);
   });
 
@@ -69,6 +84,6 @@ describe("Julia's study pages", () => {
     expect(screen.getAllByRole('button', { name: 'Valley' })).toHaveLength(2);
 
     renderWithProviders(await UnitPage({ params: params({ subject: 'social-science', unit: 'unit-1' }) }));
-    expect(screen.getByText('11 words')).toBeInTheDocument();
+    expect(screen.getByText('10 words')).toBeInTheDocument(); // Valley is in both parts
   });
 });

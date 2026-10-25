@@ -19,6 +19,23 @@ export const shuffle = (list) => {
   return result;
 };
 
+// A fixed mix-up of a list, the same every time for the same seed, so the static page and the
+// browser agree on it; never left in its original order.
+export const scramble = (list, seed = 1) => {
+  let state = seed;
+  const random = () => {
+    state = (state * 9301 + 49297) % 233280;
+    return state / 233280;
+  };
+  const result = [...list];
+  for (let i = result.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  if (result.length > 1 && result.every((item, index) => item === list[index])) result.push(result.shift());
+  return result;
+};
+
 // Whether a point is on an element, or near enough for a finger.
 export const isNear = (element, x, y) => {
   const rect = element.getBoundingClientRect();

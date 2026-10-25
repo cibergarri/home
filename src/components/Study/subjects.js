@@ -5,6 +5,13 @@ import flatLandscape from './exercises/flat-landscape';
 import rivers from './exercises/rivers';
 import findDirections from './exercises/find-directions';
 import physicalAndHumanFeatures from './exercises/physical-and-human-features';
+import daysOfTheWeek from './exercises/english/days-of-the-week';
+import placesAtSchool from './exercises/english/places-at-school';
+import wheres from './exercises/english/wheres';
+import positions from './exercises/english/positions';
+import rulesAndGames from './exercises/english/rules-and-games';
+import storyPhrases from './exercises/english/story-phrases';
+import review from './exercises/english/review';
 
 // What Julia is studying: subjects, their units, and the exercises of each unit. A new exercise
 // goes in ./exercises and is listed under its unit here; the pages are generated from this list.
@@ -29,7 +36,16 @@ export const SUBJECTS = [
     slug: 'english',
     title: 'English',
     icon: '🇬🇧',
-    units: [],
+    units: [
+      {
+        slug: 'unit-1',
+        title: 'Unit 1',
+        icon: '🏫',
+        exercises: [
+          daysOfTheWeek, placesAtSchool, wheres, positions, rulesAndGames, storyPhrases, review,
+        ],
+      },
+    ],
   },
 ];
 
@@ -49,9 +65,10 @@ const count = (n, word) => (n === 0 ? `No ${word}s yet` : `${n} ${word}${n === 1
 
 export const countUnits = subject => count(subject.units.length, 'unit');
 export const countExercises = unit => count(unit.exercises.length, 'exercise');
-// How many words an exercise teaches, if it teaches words at all.
+// How many different words an exercise teaches, if it teaches words at all.
 export const countWords = (exercise) => {
-  const words = [exercise, ...(exercise.more ?? [])]
-    .reduce((total, part) => total + (part.items ?? part.words ?? []).length, 0);
-  return words > 0 ? count(words, 'word') : undefined;
+  const words = new Set([exercise, ...(exercise.more ?? [])]
+    .flatMap(part => part.items ?? part.words ?? part.pairs ?? [])
+    .map(({ word, en }) => (word ?? en).toLowerCase()));
+  return words.size > 0 ? count(words.size, 'word') : undefined;
 };
