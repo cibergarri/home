@@ -24,6 +24,7 @@ export default async function SubjectPage({ params }) {
           title: unit.title,
           subtitle: countExercises(unit),
         }))}
+        empty="No units here yet. They are on their way! 🚧"
       />
     </StudyPage>
   );

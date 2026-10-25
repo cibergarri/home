@@ -5,10 +5,11 @@ import { useRef, useState } from 'react';
 import { speak } from '../speech';
 import {
   Instructions, Board, Scene, EmptyBox, FilledBox, BoxSpeaker, Side, Tray, Chip, Word, Speaker,
-  Ghost, Message, Progress, Done, Stars, Again,
+  Groups, Group, GroupTitle, GroupDone, Ghost, Message, Progress, Done, Stars, Again,
 } from './style';
 
-// Boxes are this big in drawing units (the drawings are 1000 wide).
+// Boxes are this big in drawing units (the drawings are 1000 wide), unless an exercise with
+// longer words asks for wider ones.
 const BOX_WIDTH = 180;
 const BOX_HEIGHT = 60;
 // How far a finger moves before a tap becomes a drag, and how near a box counts as on it, in px.
@@ -46,9 +47,10 @@ const starsFor = (mistakes) => {
 
 // A picture with empty boxes and a tray of words: each word is dragged (or tapped, then its box
 // tapped) to the box of the thing it names. A right word stays in its box, a wrong one goes back.
+// When the exercise sorts its words into groups, the tray shows them group by group.
 export default function LabelMap({ exercise }) {
   const {
-    instructions, width, height, Drawing, items,
+    instructions, width, height, Drawing, items, groups, boxWidth = BOX_WIDTH,
   } = exercise;
   // The first round is in a fixed order, so the static page and the browser agree on it.
   const [order, setOrder] = useState(() => items.map(item => item.id).reverse());
@@ -147,6 +149,33 @@ export default function LabelMap({ exercise }) {
   const percent = (value, total) => `${(value / total) * 100}%`;
   const stars = starsFor(mistakes);
   const messageItem = message?.id && byId[message.id];
+  const messageGroup = messageItem && groups?.find(group => group.id === messageItem.group);
+  const trays = groups
+    ? groups.map(group => ({ ...group, ids: order.filter(id => byId[id].group === group.id) }))
+    : [{ id: 'words', title: 'Words', ids: order }];
+
+  const renderChip = (id) => {
+    const { word } = byId[id];
+    return (
+      <Chip key={id} $selected={selected === id} $dragging={drag?.id === id}>
+        <Word
+          type="button"
+          aria-pressed={selected === id}
+          onPointerDown={event => onPointerDown(event, id)}
+          onPointerMove={onPointerMove}
+          onPointerUp={event => endDrag(event, true)}
+          onPointerCancel={event => endDrag(event, false)}
+          onClick={event => onWordClick(event, id)}
+          onContextMenu={event => event.preventDefault()}
+        >
+          {word}
+        </Word>
+        <Speaker type="button" onClick={() => speak(word)} aria-label={`Listen to ${word}`}>
+          <SpeakerIcon />
+        </Speaker>
+      </Chip>
+    );
+  };
 
   return (
     <>
@@ -158,7 +187,7 @@ export default function LabelMap({ exercise }) {
             {items.map(({ id, dot, box }) => {
               const [x, y] = dot;
               const end = [
-                clamp(x, box[0] - BOX_WIDTH / 2, box[0] + BOX_WIDTH / 2),
+                clamp(x, box[0] - boxWidth / 2, box[0] + boxWidth / 2),
                 clamp(y, box[1] - BOX_HEIGHT / 2, box[1] + BOX_HEIGHT / 2),
               ];
               return (
@@ -172,9 +201,9 @@ export default function LabelMap({ exercise }) {
           </svg>
           {items.map(({ id, word, box }, index) => {
             const position = {
-              left: percent(box[0] - BOX_WIDTH / 2, width),
+              left: percent(box[0] - boxWidth / 2, width),
               top: percent(box[1] - BOX_HEIGHT / 2, height),
-              width: percent(BOX_WIDTH, width),
+              width: percent(boxWidth, width),
               height: percent(BOX_HEIGHT, height),
             };
             if (placed[id]) {
@@ -218,30 +247,23 @@ export default function LabelMap({ exercise }) {
             </Done>
           ) : (
             <>
-              <Tray aria-label="Words">
-                {order.filter(id => !placed[id]).map((id) => {
-                  const { word } = byId[id];
-                  return (
-                    <Chip key={id} $selected={selected === id} $dragging={drag?.id === id}>
-                      <Word
-                        type="button"
-                        aria-pressed={selected === id}
-                        onPointerDown={event => onPointerDown(event, id)}
-                        onPointerMove={onPointerMove}
-                        onPointerUp={event => endDrag(event, true)}
-                        onPointerCancel={event => endDrag(event, false)}
-                        onClick={event => onWordClick(event, id)}
-                        onContextMenu={event => event.preventDefault()}
-                      >
-                        {word}
-                      </Word>
-                      <Speaker type="button" onClick={() => speak(word)} aria-label={`Listen to ${word}`}>
-                        <SpeakerIcon />
-                      </Speaker>
-                    </Chip>
-                  );
-                })}
-              </Tray>
+              {groups ? (
+                <Groups>
+                  {trays.map(({ id, title, ids }) => {
+                    const left = ids.filter(word => !placed[word]);
+                    return (
+                      <Group key={id}>
+                        <GroupTitle>{title}</GroupTitle>
+                        {left.length > 0
+                          ? <Tray aria-label={title}>{left.map(renderChip)}</Tray>
+                          : <GroupDone>✓ All in place</GroupDone>}
+                      </Group>
+                    );
+                  })}
+                </Groups>
+              ) : (
+                <Tray aria-label="Words">{order.filter(id => !placed[id]).map(renderChip)}</Tray>
+              )}
               <Progress>{`${placedCount} of ${items.length} done`}</Progress>
             </>
           )}
@@ -250,7 +272,7 @@ export default function LabelMap({ exercise }) {
               <Message $kind={message.kind}>
                 {message.kind === 'right' && (
                   <span>
-                    <strong>{`✓ ${messageItem.word}: `}</strong>
+                    <strong>{`✓ ${messageItem.word}${messageGroup ? ` (${messageGroup.name})` : ''}: `}</strong>
                     {messageItem.definition}
                   </span>
                 )}

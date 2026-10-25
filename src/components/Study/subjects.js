@@ -1,4 +1,7 @@
+import landscape from './exercises/landscape';
 import coastalLandscape from './exercises/coastal-landscape';
+import mountainLandscapes from './exercises/mountain-landscapes';
+import flatLandscape from './exercises/flat-landscape';
 
 // What Julia is studying: subjects, their units, and the exercises of each unit. A new exercise
 // goes in ./exercises and is listed under its unit here; the pages are generated from this list.
@@ -9,9 +12,15 @@ export const SUBJECTS = [
     icon: '🌍',
     units: [
       {
-        slug: 'unit-1', title: 'Unit 1', icon: '🏖️', exercises: [coastalLandscape],
+        slug: 'unit-1', title: 'Unit 1', icon: '🏖️', exercises: [landscape, coastalLandscape, mountainLandscapes, flatLandscape],
       },
     ],
+  },
+  {
+    slug: 'english',
+    title: 'English',
+    icon: '🇬🇧',
+    units: [],
   },
 ];
 
@@ -27,8 +36,11 @@ export const allUnits = () => SUBJECTS.flatMap(subject => subject.units.map(unit
 export const allExercises = () => allUnits()
   .flatMap(({ subject, unit }) => unit.exercises.map(exercise => ({ subject, unit, exercise })));
 
-const count = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
+const count = (n, word) => (n === 0 ? `No ${word}s yet` : `${n} ${word}${n === 1 ? '' : 's'}`);
 
 export const countUnits = subject => count(subject.units.length, 'unit');
 export const countExercises = unit => count(unit.exercises.length, 'exercise');
-export const countWords = exercise => count(exercise.items.length, 'word');
+export const countWords = exercise => count(
+  [exercise, ...(exercise.more ?? [])].reduce((total, part) => total + part.items.length, 0),
+  'word',
+);

@@ -1,7 +1,8 @@
 // A coastal landscape seen from above, in a 1000 × 640 box: the mainland across the top and down
 // the left, the sea below. Every feature of the exercise is here, each in its own spot:
 // the cape (with a lighthouse) and the bay on the right, the peninsula in the middle, the gulf
-// between it and the left coast, the beach on that coast, an island and an archipelago at sea.
+// between it and the left coast, the beach and a cliff on that coast, an island and an archipelago
+// at sea.
 
 const MAINLAND = [
   'M0,0 H1000 V165',
@@ -29,7 +30,7 @@ const ARCHIPELAGO = [
 ];
 
 const TREES = [
-  [60, 420], [112, 468], [68, 538], [150, 585], [40, 605], [190, 520],
+  [45, 398], [178, 404], [40, 530], [120, 545], [68, 600], [150, 600],
   [372, 28], [560, 28], [612, 46], [952, 58], [980, 112], [690, 130],
   [640, 262], [700, 318], [628, 372], [872, 492], [832, 512],
 ];
@@ -109,6 +110,20 @@ export default function CoastalLandscape() {
       <path d="M268,298 a14,14 0 0 1 28,0 Z" fill="#ef5b5b" />
       <path d="M275,298 a7,14 0 0 1 14,0 Z" fill="#fff" />
       <line x1={282} y1={298} x2={282} y2={312} stroke="#7a5532" strokeWidth={2} />
+
+      {/* A cliff: below the beach the coast turns into a wall of rock, with rocks fallen into the sea. */}
+      <path d="M236,488 L228,540 L216,592 L202,640 L168,640 L182,590 L195,540 L205,492 Z" fill="#a7835f" stroke="#7a5a3e" strokeWidth={2} strokeLinejoin="round" />
+      <g stroke="#7a5a3e" strokeWidth={2} strokeLinecap="round">
+        <line x1={206} y1={512} x2={230} y2={514} />
+        <line x1={198} y1={546} x2={225} y2={548} />
+        <line x1={189} y1={580} x2={217} y2={582} />
+        <line x1={180} y1={614} x2={207} y2={616} />
+      </g>
+      <g fill="#9a9a9a" stroke="#6f6f6f" strokeWidth={1.5}>
+        <ellipse cx={241} cy={566} rx={7} ry={5} />
+        <ellipse cx={233} cy={612} rx={9} ry={6} />
+        <ellipse cx={250} cy={598} rx={5} ry={4} />
+      </g>
 
       {/* Mountains inland. */}
       <path d="M30,215 L100,92 L170,215 Z" fill="#a8927a" />

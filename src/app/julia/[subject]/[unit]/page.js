@@ -29,6 +29,7 @@ export default async function UnitPage({ params }) {
           title: exercise.title,
           subtitle: countWords(exercise),
         }))}
+        empty="No exercises here yet. They are on their way! 🚧"
       />
     </StudyPage>
   );

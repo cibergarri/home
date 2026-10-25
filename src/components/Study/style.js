@@ -82,6 +82,16 @@ export const Main = styled.main`
   hyphens: manual;
 `;
 
+export const Empty = styled.p`
+  margin: 0;
+  padding: 28px 20px;
+  border-radius: 20px;
+  border: 2px dashed var(--s-line);
+  color: var(--s-muted);
+  font-size: 20px;
+  text-align: center;
+`;
+
 export const Cards = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -131,4 +141,17 @@ export const CardText = styled.span`
     font-size: 16px;
     font-weight: 400;
   }
+`;
+
+/* A further picture in the same exercise, below the first. */
+export const Part = styled.section`
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 2px dashed var(--s-line);
+`;
+
+export const PartTitle = styled.h2`
+  margin: 0 0 6px;
+  font-size: clamp(22px, 3.4vw, 28px);
+  font-weight: 600;
 `;

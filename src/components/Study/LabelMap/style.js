@@ -145,7 +145,46 @@ export const Tray = styled.ul`
   @media (orientation: landscape) and (min-width: 900px) {
     flex-direction: column;
     flex-wrap: nowrap;
+    gap: 10px;
   }
+`;
+
+/* Words sorted into groups: side by side under the picture, one above the other beside it. */
+export const Groups = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  @media (orientation: landscape) and (min-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const Group = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 2px dashed var(--s-line);
+  @media (orientation: landscape) and (min-width: 900px) {
+    gap: 8px;
+    padding: 8px;
+  }
+`;
+
+export const GroupTitle = styled.h2`
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+`;
+
+export const GroupDone = styled.p`
+  margin: 0;
+  color: var(--s-good);
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
 `;
 
 export const Chip = styled.li`
@@ -173,6 +212,10 @@ export const Word = styled.button`
   font-weight: 600;
   text-align: left;
   cursor: grab;
+  /* A little shorter beside the picture, so the whole column fits on a tablet lying flat. */
+  @media (orientation: landscape) and (min-width: 900px) {
+    min-height: 46px;
+  }
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;

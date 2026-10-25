@@ -2,6 +2,7 @@ import { act, fireEvent, screen } from '@testing-library/react';
 
 import { renderWithProviders } from '@/test-utils';
 import coastalLandscape from '../exercises/coastal-landscape';
+import landscape from '../exercises/landscape';
 import LabelMap from '.';
 
 const words = coastalLandscape.items.map(item => item.word);
@@ -97,5 +98,31 @@ describe('LabelMap', () => {
     expect(screen.getByLabelText('2 out of 3 stars')).toBeInTheDocument();
     act(() => fireEvent.click(screen.getByRole('button', { name: 'Play again' })));
     words.forEach(name => expect(word(name)).toBeInTheDocument());
+  });
+
+  describe('with its words in groups', () => {
+    const inGroup = (title) => {
+      const heading = screen.getByRole('heading', { name: title });
+      return Array.from(heading.parentElement.querySelectorAll('button[aria-pressed]'))
+        .map(button => button.textContent);
+    };
+
+    it('shows each word under its group', () => {
+      renderWithProviders(<LabelMap exercise={landscape} />);
+      expect(inGroup('Physical features (natural)').sort()).toEqual(['Lake', 'Mountain', 'River', 'Tree']);
+      expect(inGroup('Human features').sort()).toEqual(['Bridge', 'Houses', 'Village']);
+    });
+
+    it('names the group of a word put in place, and says when a group is done', () => {
+      renderWithProviders(<LabelMap exercise={landscape} />);
+      fireEvent.click(word('Bridge'));
+      fireEvent.click(box('bridge'));
+      expect(screen.getByText(/Bridge \(human feature\)/)).toBeInTheDocument();
+      ['houses', 'village'].forEach((id) => {
+        fireEvent.click(word(id[0].toUpperCase() + id.slice(1)));
+        fireEvent.click(box(id));
+      });
+      expect(screen.getByText('✓ All in place')).toBeInTheDocument();
+    });
   });
 });

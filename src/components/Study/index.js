@@ -3,7 +3,7 @@
 import LabelMap from './LabelMap';
 import { findSubject, findUnit, findExercise } from './subjects';
 import {
-  Page, Header, Back, Titles, Kicker, Title, Main, Cards, Card, CardIcon, CardText,
+  Page, Header, Back, Titles, Kicker, Title, Main, Empty, Cards, Card, CardIcon, CardText, Part, PartTitle,
 } from './style';
 
 // The frame of every page in Julia's study corner: a way back, a title, and the page itself.
@@ -24,8 +24,9 @@ export function StudyPage({
   );
 }
 
-// Big tappable cards, one per subject or exercise.
-export function CardList({ cards }) {
+// Big tappable cards, one per subject, unit or exercise, or a note when there are none yet.
+export function CardList({ cards, empty }) {
+  if (cards.length === 0) return <Empty>{empty}</Empty>;
   return (
     <Cards>
       {cards.map(({
@@ -45,7 +46,19 @@ export function CardList({ cards }) {
   );
 }
 
-// An exercise, looked up here because its drawing cannot be passed down from a server page.
+// An exercise, looked up here because its drawings cannot be passed down from a server page.
+// Some have more pictures after the first, each under its own title.
 export function Exercise({ subject, unit, exercise }) {
-  return <LabelMap exercise={findExercise(findUnit(findSubject(subject), unit), exercise)} />;
+  const found = findExercise(findUnit(findSubject(subject), unit), exercise);
+  return (
+    <>
+      <LabelMap exercise={found} />
+      {found.more?.map(part => (
+        <Part key={part.title}>
+          <PartTitle>{part.title}</PartTitle>
+          <LabelMap exercise={part} />
+        </Part>
+      ))}
+    </>
+  );
 }

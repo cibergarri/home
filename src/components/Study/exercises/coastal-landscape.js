@@ -47,6 +47,13 @@ const coastalLandscape = {
       box: [665, 505],
     },
     {
+      id: 'cliff',
+      word: 'Cliff',
+      definition: 'A high, steep wall of rock next to the sea.',
+      dot: [214, 548],
+      box: [115, 460],
+    },
+    {
       id: 'island',
       word: 'Island',
       definition: 'A piece of land completely surrounded by water.',
