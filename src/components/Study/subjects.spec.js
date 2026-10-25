@@ -15,7 +15,8 @@ describe("Julia's study pages", () => {
     renderWithProviders(<JuliaPage />);
     expect(screen.getByText('Social Science')).toBeInTheDocument();
     expect(screen.getByText('English')).toBeInTheDocument();
-    expect(hrefs()).toEqual(['/julia/social-science', '/julia/english']);
+    expect(screen.getByText('Mates')).toBeInTheDocument();
+    expect(hrefs()).toEqual(['/julia/social-science', '/julia/mates', '/julia/english']);
   });
 
   it('says so when there is nothing to list yet', () => {
@@ -65,6 +66,10 @@ describe("Julia's study pages", () => {
       { subject: 'social-science', unit: 'unit-1', exercise: 'rivers' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'find-directions' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'physical-and-human-features' },
+      ...['numeros-de-dos-cifras', 'comparar', 'aproximar', 'sumar', 'restar', 'problemas', 'tabla-cien', 'tablas', 'repaso']
+        .map(exercise => ({ subject: 'mates', unit: 'tema-1', exercise })),
+      ...['centena', 'hasta-199', 'sumar', 'restar', 'dieces', 'euros', 'barras', 'tabla-100-199', 'mensaje-secreto', 'repaso']
+        .map(exercise => ({ subject: 'mates', unit: 'tema-2', exercise })),
       { subject: 'english', unit: 'unit-1', exercise: 'days-of-the-week' },
       { subject: 'english', unit: 'unit-1', exercise: 'places-at-school' },
       { subject: 'english', unit: 'unit-1', exercise: 'wheres' },
@@ -85,5 +90,14 @@ describe("Julia's study pages", () => {
 
     renderWithProviders(await UnitPage({ params: params({ subject: 'social-science', unit: 'unit-1' }) }));
     expect(screen.getByText('10 words')).toBeInTheDocument(); // Valley is in both parts
+  });
+
+  it('speaks Spanish on the pages of Mates', async () => {
+    renderWithProviders(await SubjectPage({ params: params({ subject: 'mates' }) }));
+    expect(screen.getByText('🔢 Asignatura')).toBeInTheDocument();
+    expect(screen.getByText('Tema 1')).toBeInTheDocument();
+    expect(screen.getByText('9 ejercicios')).toBeInTheDocument();
+    renderWithProviders(await UnitPage({ params: params({ subject: 'mates', unit: 'tema-1' }) }));
+    expect(screen.getAllByText('3 partes')).not.toHaveLength(0);
   });
 });

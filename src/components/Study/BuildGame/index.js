@@ -3,10 +3,11 @@
 import { useRef, useState } from 'react';
 
 import { speak } from '../speech';
+import { useStrings } from '../language';
 import {
-  scramble, shuffle, SpeakerIcon, WellDone,
+  scramble, shuffle, SpeakerIcon, WellDone, QuestionNav,
 } from '../game';
-import { Instructions, Message, Progress } from '../LabelMap/style';
+import { Instructions, Message } from '../LabelMap/style';
 import {
   Puzzle, Prompt, Line, Placed, Slot, Tiles, Tile, Row, Listen, Next,
 } from './style';
@@ -18,6 +19,7 @@ const mixUp = (puzzle, seed) => scramble(puzzle.answer.map((word, index) => inde
 // finished answer is read aloud.
 export default function BuildGame({ exercise }) {
   const { instructions, puzzles } = exercise;
+  const text = useStrings();
   const [index, setIndex] = useState(0);
   const [order, setOrder] = useState(() => mixUp(puzzles[0], 3));
   const [used, setUsed] = useState([]);
@@ -38,14 +40,14 @@ export default function BuildGame({ exercise }) {
       const next = [...used, tile];
       setUsed(next);
       setMessage(null);
-      if (next.length === answer.length) speak(sentence);
+      if (next.length === answer.length) speak(sentence, text.lang);
       return;
     }
     setMistakes(count => count + 1);
     setWrong(tile);
     clearTimeout(wrongTimer.current);
     wrongTimer.current = setTimeout(() => setWrong(null), 600);
-    setMessage('Not yet! Which word comes next?');
+    setMessage(text.notYet);
   };
 
   const goTo = (next) => {
@@ -86,18 +88,18 @@ export default function BuildGame({ exercise }) {
           {puzzle.prompt}
           {puzzle.hint && <small>{puzzle.hint}</small>}
         </Prompt>
-        <Line $done={solved} aria-label="Your answer">
+        <Line $done={solved} aria-label={text.yourAnswer}>
           {answer.map((word, position) => (used[position] !== undefined
             ? <Placed key={`placed-${word}-${position}`}>{answer[used[position]]}</Placed>
             : <Slot key={`slot-${word}-${position}`} aria-hidden="true" />))}
         </Line>
         {solved ? (
           <Row>
-            <Listen type="button" onClick={() => speak(sentence)}>
+            <Listen type="button" onClick={() => speak(sentence, text.lang)}>
               <SpeakerIcon />
-              Listen
+              {text.listen}
             </Listen>
-            <Next type="button" onClick={next}>{index + 1 < puzzles.length ? 'Next →' : 'Finish ✓'}</Next>
+            <Next type="button" onClick={next}>{index + 1 < puzzles.length ? text.next : text.finish}</Next>
           </Row>
         ) : (
           <Tiles>
@@ -109,10 +111,9 @@ export default function BuildGame({ exercise }) {
           </Tiles>
         )}
       </Puzzle>
+      <QuestionNav index={index} total={puzzles.length} onGo={goTo} label={text.count(index + 1, puzzles.length)} />
       <div aria-live="polite">
-        {message
-          ? <Message $kind="wrong">{message}</Message>
-          : <Progress>{`${index + 1} of ${puzzles.length}`}</Progress>}
+        {message && <Message $kind="wrong">{message}</Message>}
       </div>
     </>
   );

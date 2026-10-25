@@ -292,6 +292,45 @@ export const Progress = styled.p`
   text-align: center;
 `;
 
+/* Back and forward between the questions of a game, with where you are in between. */
+export const QuestionBar = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 10px;
+  color: var(--s-muted);
+  font-size: 17px;
+`;
+
+export const QuestionArrow = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--s-line);
+  background: var(--s-card);
+  box-shadow: 0 3px 0 var(--s-line);
+  color: var(--s-ink);
+  font-family: inherit;
+  font-size: 24px;
+  cursor: pointer;
+  touch-action: manipulation;
+  &:disabled {
+    visibility: hidden;
+  }
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 var(--s-line);
+  }
+  &:focus-visible {
+    outline: 3px solid var(--s-teal);
+    outline-offset: 2px;
+  }
+`;
+
 export const Done = styled.div`
   display: flex;
   flex-direction: column;

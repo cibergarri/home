@@ -40,10 +40,10 @@ export const Layout = styled.div`
 export const Map = styled.div`
   width: 100%;
   margin: 0 auto;
-  aspect-ratio: 640 / 720;
+  aspect-ratio: ${({ $ratio }) => $ratio};
   max-width: 600px;
   @media (orientation: landscape) and (min-width: 900px) {
-    max-width: calc((100svh - 210px) * 640 / 720);
+    max-width: calc((100svh - 210px) * ${({ $ratio }) => $ratio});
   }
   svg {
     display: block;
@@ -161,9 +161,9 @@ export const Arrow = styled.button`
   box-shadow: 0 5px 0 #d95c3d;
   color: #fff;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   cursor: pointer;
   touch-action: manipulation;
   span {

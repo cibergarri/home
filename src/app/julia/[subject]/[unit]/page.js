@@ -1,6 +1,6 @@
 import { StudyPage, CardList } from '@/components/Study';
 import {
-  allUnits, findSubject, findUnit, countWords,
+  allUnits, findSubject, findUnit, countWords, textFor,
 } from '@/components/Study/subjects';
 
 export const dynamicParams = false;
@@ -27,9 +27,9 @@ export default async function UnitPage({ params }) {
           href: `/julia/${subject.slug}/${unit.slug}/${exercise.slug}`,
           icon: unit.icon,
           title: exercise.title,
-          subtitle: countWords(exercise),
+          subtitle: countWords(exercise, subject),
         }))}
-        empty="No exercises here yet. They are on their way! 🚧"
+        empty={textFor(subject).noExercises}
       />
     </StudyPage>
   );

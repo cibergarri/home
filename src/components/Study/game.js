@@ -2,7 +2,10 @@
 
 import { useRef, useState } from 'react';
 
-import { Done, Stars, Again } from './LabelMap/style';
+import { useStrings } from './language';
+import {
+  Done, Stars, Again, QuestionBar, QuestionArrow,
+} from './LabelMap/style';
 
 // What the study games share: dragging with a finger, the speaker icon, and the end screen.
 
@@ -122,15 +125,32 @@ const starsFor = (mistakes) => {
 
 // The end of a game: up to three stars, fewer for mistakes, and a way to play again.
 export function WellDone({ mistakes, onAgain }) {
+  const text = useStrings();
   const stars = starsFor(mistakes);
   return (
     <Done role="status">
-      <h2>Well done, Julia!</h2>
-      <Stars aria-label={`${stars} out of 3 stars`}>
+      <h2>{text.wellDone}</h2>
+      <Stars aria-label={text.stars(stars)}>
         {[1, 2, 3].map(n => <span key={n} data-off={n > stars || undefined}>⭐</span>)}
       </Stars>
-      <p>{mistakes === 0 ? 'Every word right first time!' : `${mistakes} ${mistakes === 1 ? 'mistake' : 'mistakes'} on the way.`}</p>
-      <Again type="button" onClick={onAgain}>Play again</Again>
+      <p>{mistakes === 0 ? text.perfect : text.mistakes(mistakes)}</p>
+      <Again type="button" onClick={onAgain}>{text.again}</Again>
     </Done>
+  );
+}
+
+// Arrows to go back and forward between the questions of a game, with which one this is (or
+// `label`, to say it another way). Nothing for a game of one question.
+export function QuestionNav({
+  index, total, onGo, label,
+}) {
+  const text = useStrings();
+  if (total < 2) return null;
+  return (
+    <QuestionBar aria-label={text.questions}>
+      <QuestionArrow type="button" onClick={() => onGo(index - 1)} disabled={index === 0} aria-label={text.previousQuestion}>←</QuestionArrow>
+      <span>{label ?? text.question(index + 1, total)}</span>
+      <QuestionArrow type="button" onClick={() => onGo(index + 1)} disabled={index === total - 1} aria-label={text.nextQuestion}>→</QuestionArrow>
+    </QuestionBar>
   );
 }

@@ -1,5 +1,7 @@
 import { StudyPage, CardList } from '@/components/Study';
-import { SUBJECTS, findSubject, countExercises } from '@/components/Study/subjects';
+import {
+  SUBJECTS, findSubject, countExercises, textFor,
+} from '@/components/Study/subjects';
 
 export const dynamicParams = false;
 
@@ -15,16 +17,17 @@ export async function generateMetadata({ params }) {
 // A subject: all of its units.
 export default async function SubjectPage({ params }) {
   const subject = findSubject((await params).subject);
+  const text = textFor(subject);
   return (
-    <StudyPage back="/julia" kicker={`${subject.icon} Subject`} title={subject.title}>
+    <StudyPage back="/julia" kicker={`${subject.icon} ${text.subject}`} title={subject.title}>
       <CardList
         cards={subject.units.map(unit => ({
           href: `/julia/${subject.slug}/${unit.slug}`,
           icon: unit.icon,
           title: unit.title,
-          subtitle: countExercises(unit),
+          subtitle: countExercises(unit, subject),
         }))}
-        empty="No units here yet. They are on their way! 🚧"
+        empty={text.noUnits}
       />
     </StudyPage>
   );

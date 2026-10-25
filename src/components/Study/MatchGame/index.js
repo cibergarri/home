@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 
 import { speak } from '../speech';
+import { useStrings } from '../language';
 import {
   scramble, shuffle, SpeakerIcon, WellDone,
 } from '../game';
@@ -19,6 +20,8 @@ const COLOURS = ['#8ec5f2', '#a6db8a', '#f7dc6f', '#f5a8c8', '#c3a6f2', '#f7b58a
 // `Picture` (a drawing 160 × 110) shows it on the right instead, its Spanish kept as its label.
 export default function MatchGame({ exercise }) {
   const { instructions, pairs } = exercise;
+  const text = useStrings();
+  const [leftTitle, rightTitle] = exercise.columns ?? text.columns;
   const pictures = pairs.every(pair => pair.Picture);
   const ids = pairs.map(pair => pair.id);
   const [left, setLeft] = useState(ids);
@@ -43,7 +46,7 @@ export default function MatchGame({ exercise }) {
     if (selected.id === id) {
       setMatched(current => [...current, id]);
       setMessage({ kind: 'right', pair: byId[id] });
-      speak(byId[id].en);
+      speak(byId[id].en, text.lang);
       return;
     }
     setMistakes(count => count + 1);
@@ -91,7 +94,7 @@ export default function MatchGame({ exercise }) {
           {content}
         </CardButton>
         {side === 'left' && (
-          <CardSpeaker type="button" onClick={() => speak(pair.en)} aria-label={`Listen to ${pair.en}`}>
+          <CardSpeaker type="button" onClick={() => speak(pair.en, text.lang)} aria-label={text.listenTo(pair.en)}>
             <SpeakerIcon />
           </CardSpeaker>
         )}
@@ -103,18 +106,18 @@ export default function MatchGame({ exercise }) {
     <>
       <Instructions>{instructions}</Instructions>
       <Columns>
-        <Column aria-label="English">
-          <Heading aria-hidden="true">English</Heading>
+        <Column aria-label={leftTitle}>
+          <Heading aria-hidden="true">{leftTitle}</Heading>
           {left.map(id => renderCard('left', id))}
         </Column>
-        <Column aria-label={pictures ? 'Pictures' : 'Español'}>
-          <Heading aria-hidden="true">{pictures ? 'Pictures' : 'Español'}</Heading>
+        <Column aria-label={pictures ? text.pictures : rightTitle}>
+          <Heading aria-hidden="true">{pictures ? text.pictures : rightTitle}</Heading>
           {right.map(id => renderCard('right', id))}
         </Column>
       </Columns>
 
       {finished ? <WellDone mistakes={mistakes} onAgain={playAgain} /> : (
-        <Progress>{`${matched.length} of ${pairs.length} pairs`}</Progress>
+        <Progress>{text.pairs(matched.length, pairs.length)}</Progress>
       )}
       <div aria-live="polite">
         {message && !finished && (
@@ -122,7 +125,7 @@ export default function MatchGame({ exercise }) {
             {message.kind === 'right' && (
               <span><strong>{message.pair.Picture ? `✓ ${message.pair.en}` : `✓ ${message.pair.en} = ${message.pair.es}`}</strong></span>
             )}
-            {message.kind === 'wrong' && <span>Not quite. Try another pair!</span>}
+            {message.kind === 'wrong' && <span>{text.notQuitePair}</span>}
           </Message>
         )}
       </div>
