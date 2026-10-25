@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/cibergarri/home/compare/v1.12.0...v1.13.0) (2026-10-25)
+
+
+### Features
+
+* **julia:** add the landscape exercises of unit 1 and an English subject ([f5eca9e](https://github.com/cibergarri/home/commit/f5eca9e07b291b9727f5add04f95e62ca79b6f51))
+
 # [1.12.0](https://github.com/cibergarri/home/compare/v1.11.2...v1.12.0) (2026-10-25)
 
 
