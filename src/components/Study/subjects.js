@@ -3,6 +3,8 @@ import coastalLandscape from './exercises/coastal-landscape';
 import mountainLandscapes from './exercises/mountain-landscapes';
 import flatLandscape from './exercises/flat-landscape';
 import rivers from './exercises/rivers';
+import findDirections from './exercises/find-directions';
+import physicalAndHumanFeatures from './exercises/physical-and-human-features';
 
 // What Julia is studying: subjects, their units, and the exercises of each unit. A new exercise
 // goes in ./exercises and is listed under its unit here; the pages are generated from this list.
@@ -13,7 +15,13 @@ export const SUBJECTS = [
     icon: '🌍',
     units: [
       {
-        slug: 'unit-1', title: 'Unit 1', icon: '🏖️', exercises: [landscape, coastalLandscape, mountainLandscapes, flatLandscape, rivers],
+        slug: 'unit-1',
+        title: 'Unit 1',
+        icon: '🏖️',
+        exercises: [
+          landscape, coastalLandscape, mountainLandscapes, flatLandscape, rivers, findDirections,
+          physicalAndHumanFeatures,
+        ],
       },
     ],
   },
@@ -41,7 +49,9 @@ const count = (n, word) => (n === 0 ? `No ${word}s yet` : `${n} ${word}${n === 1
 
 export const countUnits = subject => count(subject.units.length, 'unit');
 export const countExercises = unit => count(unit.exercises.length, 'exercise');
-export const countWords = exercise => count(
-  [exercise, ...(exercise.more ?? [])].reduce((total, part) => total + (part.items?.length ?? 0), 0),
-  'word',
-);
+// How many words an exercise teaches, if it teaches words at all.
+export const countWords = (exercise) => {
+  const words = [exercise, ...(exercise.more ?? [])]
+    .reduce((total, part) => total + (part.items ?? part.words ?? []).length, 0);
+  return words > 0 ? count(words, 'word') : undefined;
+};

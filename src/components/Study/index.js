@@ -3,6 +3,8 @@
 import LabelMap from './LabelMap';
 import Story from './Story';
 import SortGame from './SortGame';
+import ColourGame from './ColourGame';
+import DirectionsGame from './DirectionsGame';
 import { findSubject, findUnit, findExercise } from './subjects';
 import {
   Page, Header, Back, Titles, Kicker, Title, Main, Empty, Cards, Card, CardIcon, CardText, Part, PartTitle,
@@ -49,7 +51,9 @@ export function CardList({ cards, empty }) {
 }
 
 // The kinds of game a part of an exercise can be; labelling a picture unless it says otherwise.
-const GAMES = { label: LabelMap, story: Story, sort: SortGame };
+const GAMES = {
+  label: LabelMap, story: Story, sort: SortGame, colour: ColourGame, directions: DirectionsGame,
+};
 
 function Game({ part }) {
   const Kind = GAMES[part.type ?? 'label'];
@@ -57,11 +61,12 @@ function Game({ part }) {
 }
 
 // An exercise, looked up here because its drawings cannot be passed down from a server page.
-// Some have more parts after the first, each under its own title.
+// Some have more parts after the first, each under its own title; the first can have one too.
 export function Exercise({ subject, unit, exercise }) {
   const found = findExercise(findUnit(findSubject(subject), unit), exercise);
   return (
     <>
+      {found.heading && <PartTitle>{found.heading}</PartTitle>}
       <Game part={found} />
       {found.more?.map(part => (
         <Part key={part.title}>
