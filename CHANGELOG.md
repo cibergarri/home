@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/cibergarri/home/compare/v1.11.2...v1.12.0) (2026-10-25)
+
+
+### Features
+
+* **julia:** add a hidden study corner with a coastal landscape exercise ([d0eee1c](https://github.com/cibergarri/home/commit/d0eee1c37503bf8235a5ad83ff9ccffe7638b4aa))
+
 ## [1.11.2](https://github.com/cibergarri/home/compare/v1.11.1...v1.11.2) (2026-10-19)
 
 
