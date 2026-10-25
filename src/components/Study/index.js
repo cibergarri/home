@@ -1,6 +1,8 @@
 'use client';
 
 import LabelMap from './LabelMap';
+import Story from './Story';
+import SortGame from './SortGame';
 import { findSubject, findUnit, findExercise } from './subjects';
 import {
   Page, Header, Back, Titles, Kicker, Title, Main, Empty, Cards, Card, CardIcon, CardText, Part, PartTitle,
@@ -46,17 +48,25 @@ export function CardList({ cards, empty }) {
   );
 }
 
+// The kinds of game a part of an exercise can be; labelling a picture unless it says otherwise.
+const GAMES = { label: LabelMap, story: Story, sort: SortGame };
+
+function Game({ part }) {
+  const Kind = GAMES[part.type ?? 'label'];
+  return <Kind exercise={part} />;
+}
+
 // An exercise, looked up here because its drawings cannot be passed down from a server page.
-// Some have more pictures after the first, each under its own title.
+// Some have more parts after the first, each under its own title.
 export function Exercise({ subject, unit, exercise }) {
   const found = findExercise(findUnit(findSubject(subject), unit), exercise);
   return (
     <>
-      <LabelMap exercise={found} />
+      <Game part={found} />
       {found.more?.map(part => (
         <Part key={part.title}>
           <PartTitle>{part.title}</PartTitle>
-          <LabelMap exercise={part} />
+          <Game part={part} />
         </Part>
       ))}
     </>

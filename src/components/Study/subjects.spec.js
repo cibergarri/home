@@ -29,7 +29,7 @@ describe("Julia's study pages", () => {
     renderWithProviders(await SubjectPage({ params: params({ subject: 'social-science' }) }));
     expect(screen.getByRole('heading', { name: 'Social Science' })).toBeInTheDocument();
     expect(screen.getByText('Unit 1')).toBeInTheDocument();
-    expect(screen.getByText('4 exercises')).toBeInTheDocument();
+    expect(screen.getByText('5 exercises')).toBeInTheDocument();
     expect(hrefs()).toContain('/julia/social-science/unit-1');
   });
 
@@ -42,6 +42,7 @@ describe("Julia's study pages", () => {
       '/julia/social-science/unit-1/coastal-landscape',
       '/julia/social-science/unit-1/mountain-landscapes',
       '/julia/social-science/unit-1/flat-landscape',
+      '/julia/social-science/unit-1/rivers',
     ]);
   });
 
@@ -51,6 +52,7 @@ describe("Julia's study pages", () => {
       { subject: 'social-science', unit: 'unit-1', exercise: 'coastal-landscape' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'mountain-landscapes' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'flat-landscape' },
+      { subject: 'social-science', unit: 'unit-1', exercise: 'rivers' },
     ]);
   });
 

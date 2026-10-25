@@ -4,46 +4,18 @@ import { useRef, useState } from 'react';
 
 import { speak } from '../speech';
 import {
+  shuffle, isNear, useDrag, SpeakerIcon, WellDone,
+} from '../game';
+import {
   Instructions, Board, Scene, EmptyBox, FilledBox, BoxSpeaker, Side, Tray, Chip, Word, Speaker,
-  Groups, Group, GroupTitle, GroupDone, Ghost, Message, Progress, Done, Stars, Again,
+  Groups, Group, GroupTitle, GroupDone, Ghost, Message, Progress,
 } from './style';
 
 // Boxes are this big in drawing units (the drawings are 1000 wide), unless an exercise with
 // longer words asks for wider ones.
 const BOX_WIDTH = 180;
 const BOX_HEIGHT = 60;
-// How far a finger moves before a tap becomes a drag, and how near a box counts as on it, in px.
-const DRAG_THRESHOLD = 8;
-const DROP_SLOP = 18;
-
-const shuffle = (list) => {
-  const result = [...list];
-  for (let i = result.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
-};
-
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
-
-const near = (rect, x, y) => x >= rect.left - DROP_SLOP && x <= rect.right + DROP_SLOP
-  && y >= rect.top - DROP_SLOP && y <= rect.bottom + DROP_SLOP;
-
-function SpeakerIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor" />
-      <path d="M15.5 9a4 4 0 0 1 0 6" />
-      <path d="M18.5 6.5a7.5 7.5 0 0 1 0 11" />
-    </svg>
-  );
-}
-
-const starsFor = (mistakes) => {
-  if (mistakes === 0) return 3;
-  return mistakes <= 2 ? 2 : 1;
-};
 
 // A picture with empty boxes and a tray of words: each word is dragged (or tapped, then its box
 // tapped) to the box of the thing it names. A right word stays in its box, a wrong one goes back.
@@ -56,14 +28,10 @@ export default function LabelMap({ exercise }) {
   const [order, setOrder] = useState(() => items.map(item => item.id).reverse());
   const [placed, setPlaced] = useState({});
   const [selected, setSelected] = useState(null);
-  const [drag, setDrag] = useState(null);
-  const [over, setOver] = useState(null);
   const [wrong, setWrong] = useState(null);
   const [mistakes, setMistakes] = useState(0);
   const [message, setMessage] = useState(null);
   const boxes = useRef({});
-  const pointer = useRef(null);
-  const ignoreClicksUntil = useRef(0);
   const wrongTimer = useRef(null);
 
   const byId = Object.fromEntries(items.map(item => [item.id, item]));
@@ -72,7 +40,7 @@ export default function LabelMap({ exercise }) {
 
   const boxAt = (x, y) => Object.keys(boxes.current).find((id) => {
     const element = boxes.current[id];
-    return element && !placed[id] && near(element.getBoundingClientRect(), x, y);
+    return element && !placed[id] && isNear(element, x, y);
   }) ?? null;
 
   const place = (wordId, boxId) => {
@@ -89,46 +57,12 @@ export default function LabelMap({ exercise }) {
     setMessage({ kind: 'wrong', id: wordId });
   };
 
-  const onPointerDown = (event, id) => {
-    if (event.button > 0 || pointer.current) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    pointer.current = {
-      id,
-      pointerId: event.pointerId,
-      startX: event.clientX,
-      startY: event.clientY,
-      offsetX: event.clientX - rect.left,
-      offsetY: event.clientY - rect.top,
-      dragging: false,
-    };
-    event.currentTarget.setPointerCapture?.(event.pointerId);
-  };
-
-  const onPointerMove = (event) => {
-    const current = pointer.current;
-    if (!current || current.pointerId !== event.pointerId) return;
-    const distance = Math.hypot(event.clientX - current.startX, event.clientY - current.startY);
-    if (!current.dragging && distance < DRAG_THRESHOLD) return;
-    current.dragging = true;
-    setDrag({ id: current.id, x: event.clientX - current.offsetX, y: event.clientY - current.offsetY });
-    setOver(boxAt(event.clientX, event.clientY));
-  };
-
-  const endDrag = (event, drop) => {
-    const current = pointer.current;
-    if (!current || current.pointerId !== event.pointerId) return;
-    pointer.current = null;
-    if (!current.dragging) return; // a tap: the click that follows selects the word
-    // A drag that ends on its own word must not also select it.
-    ignoreClicksUntil.current = event.timeStamp + 400;
-    setDrag(null);
-    setOver(null);
-    const box = drop && boxAt(event.clientX, event.clientY);
-    if (box) place(current.id, box);
-  };
+  const {
+    drag, over, handlersFor, isTap,
+  } = useDrag({ targetAt: boxAt, onDrop: place });
 
   const onWordClick = (event, id) => {
-    if (event.timeStamp < ignoreClicksUntil.current) return;
+    if (!isTap(event)) return;
     setSelected(current => (current === id ? null : id));
     setMessage(null);
   };
@@ -147,7 +81,6 @@ export default function LabelMap({ exercise }) {
   };
 
   const percent = (value, total) => `${(value / total) * 100}%`;
-  const stars = starsFor(mistakes);
   const messageItem = message?.id && byId[message.id];
   const messageGroup = messageItem && groups?.find(group => group.id === messageItem.group);
   const trays = groups
@@ -161,12 +94,8 @@ export default function LabelMap({ exercise }) {
         <Word
           type="button"
           aria-pressed={selected === id}
-          onPointerDown={event => onPointerDown(event, id)}
-          onPointerMove={onPointerMove}
-          onPointerUp={event => endDrag(event, true)}
-          onPointerCancel={event => endDrag(event, false)}
+          {...handlersFor(id)}
           onClick={event => onWordClick(event, id)}
-          onContextMenu={event => event.preventDefault()}
         >
           {word}
         </Word>
@@ -237,14 +166,7 @@ export default function LabelMap({ exercise }) {
 
         <Side>
           {finished ? (
-            <Done role="status">
-              <h2>Well done, Julia!</h2>
-              <Stars aria-label={`${stars} out of 3 stars`}>
-                {[1, 2, 3].map(n => <span key={n} data-off={n > stars || undefined}>⭐</span>)}
-              </Stars>
-              <p>{mistakes === 0 ? 'Every word right first time!' : `${mistakes} ${mistakes === 1 ? 'mistake' : 'mistakes'} on the way.`}</p>
-              <Again type="button" onClick={playAgain}>Play again</Again>
-            </Done>
+            <WellDone mistakes={mistakes} onAgain={playAgain} />
           ) : (
             <>
               {groups ? (
