@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/cibergarri/home/compare/v1.15.0...v1.16.0) (2026-10-25)
+
+
+### Features
+
+* **julia:** add English unit 1 with match, build and quiz games ([670b3d5](https://github.com/cibergarri/home/commit/670b3d5f464c18c9e57d801bd890069deeef2613))
+
 # [1.15.0](https://github.com/cibergarri/home/compare/v1.14.0...v1.15.0) (2026-10-25)
 
 
