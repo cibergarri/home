@@ -113,6 +113,12 @@ html.page-ready body::before {
   color-scheme: dark;
 }
 
+/* Julia's study corner (src/components/Study) is light and warm whatever the theme. */
+[data-study] {
+  --c-background: #fff7ea;
+  color-scheme: light;
+}
+
 /* Digits left behind by the mouse over the hero, see public/scripts/bg-animation.js */
 .bg-animation-div-normal,
 .bg-animation-div-night {
