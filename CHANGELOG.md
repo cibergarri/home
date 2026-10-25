@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/cibergarri/home/compare/v1.14.0...v1.15.0) (2026-10-25)
+
+
+### Features
+
+* **julia:** add directions and physical and human features exercises ([da50ff6](https://github.com/cibergarri/home/commit/da50ff6c83597117f8682a8c01ac18afea50ff31))
+
 # [1.14.0](https://github.com/cibergarri/home/compare/v1.13.0...v1.14.0) (2026-10-25)
 
 
