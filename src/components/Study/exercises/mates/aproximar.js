@@ -7,11 +7,11 @@ const nearest = n => Math.round(n / 10) * 10;
 const round = (n) => {
   const down = Math.floor(n / 10) * 10;
   return {
-    prompt: `¿A qué decena se aproxima el ${n}?`,
+    story: `¿A qué decena se aproxima el ${n}?`,
+    prompt: `${n} → ?`,
     hint: `El ${n} está entre el ${down} y el ${down + 10}.`,
     scene: numberLine(down, down + 10, n),
-    choices: [String(down), String(down + 10)],
-    answer: String(nearest(n)),
+    answer: nearest(n),
   };
 };
 
@@ -19,8 +19,8 @@ const aproximar = {
   slug: 'aproximar',
   title: 'Aproximar a las decenas',
   heading: 'La decena más cercana',
-  type: 'quiz',
-  instructions: 'Mira en la recta dónde está el número y elige la decena más cercana.',
+  type: 'numbers',
+  instructions: 'Mira en la recta dónde está el número y escribe la decena más cercana.',
   questions: [
     round(18),
     round(24),
@@ -32,10 +32,19 @@ const aproximar = {
     round(53),
     round(59),
     round(55),
+  ],
+  more: [
     {
-      prompt: 'En una carrera participan 33 personas. Han comprado 30 medallas. ¿Tendrán para todos?',
-      choices: ['Sí', 'No'],
-      answer: 'No',
+      title: '¿Tendrán para todos?',
+      type: 'quiz',
+      instructions: 'Piensa si llega o no llega.',
+      questions: [
+        {
+          prompt: 'En una carrera participan 33 personas. Han comprado 30 medallas. ¿Tendrán para todos?',
+          choices: ['Sí', 'No'],
+          answer: 'No',
+        },
+      ],
     },
   ],
 };

@@ -6,7 +6,16 @@ import sumar from '../exercises/mates/sumar';
 import restar from '../exercises/mates/restar';
 import problemas from '../exercises/mates/problemas';
 import repaso from '../exercises/mates/repaso';
+import { readNumber } from '../handwriting';
 import NumberGame from '.';
+
+jest.mock('../handwriting', () => ({
+  loadNet: () => Promise.resolve('net'),
+  readNumber: jest.fn(),
+}));
+
+// Sumar is answered by hand: the keys for most of these tests.
+const typedSumar = { ...sumar, write: false };
 
 const inSpanish = ui => renderWithProviders(<LanguageContext.Provider value="es">{ui}</LanguageContext.Provider>);
 const type = digits => [...digits].forEach(digit => fireEvent.click(screen.getByRole('button', { name: digit })));
@@ -19,7 +28,7 @@ describe('NumberGame', () => {
   });
 
   it('shows the sum with a box for the answer, in Spanish', () => {
-    inSpanish(<NumberGame exercise={sumar} />);
+    inSpanish(<NumberGame exercise={typedSumar} />);
     expect(screen.getByText('14 + 30 =')).toBeInTheDocument();
     expect(screen.getByLabelText('Tu respuesta')).toHaveTextContent('?');
     expect(screen.getByText('Pregunta 1 de 10')).toBeInTheDocument();
@@ -27,7 +36,7 @@ describe('NumberGame', () => {
 
   it('clears a wrong answer for another try, and leads on after the right one', () => {
     jest.useFakeTimers();
-    inSpanish(<NumberGame exercise={sumar} />);
+    inSpanish(<NumberGame exercise={typedSumar} />);
     type('43');
     check();
     expect(screen.getByText('¡Casi! Inténtalo otra vez.')).toBeInTheDocument();
@@ -41,7 +50,7 @@ describe('NumberGame', () => {
   });
 
   it('asks for a number before checking, and can rub one out', () => {
-    inSpanish(<NumberGame exercise={sumar} />);
+    inSpanish(<NumberGame exercise={typedSumar} />);
     check();
     expect(screen.getByText('Escribe primero un número.')).toBeInTheDocument();
     type('45');
@@ -61,7 +70,7 @@ describe('NumberGame', () => {
   });
 
   it('moves between questions with the arrows, in Spanish', () => {
-    inSpanish(<NumberGame exercise={sumar} />);
+    inSpanish(<NumberGame exercise={typedSumar} />);
     type('9');
     fireEvent.click(screen.getByRole('button', { name: 'Pregunta siguiente' }));
     expect(screen.getByText('20 + 50 =')).toBeInTheDocument();
@@ -80,5 +89,54 @@ describe('NumberGame', () => {
         const result = sign === '+' ? Number(a) + Number(b) : Number(a) - Number(b);
         expect(result).toBe(Number(c));
       });
+  });
+
+  describe('written by hand', () => {
+    beforeAll(() => {
+      window.PointerEvent ??= class PointerEvent extends MouseEvent {
+        constructor(type, init = {}) {
+          super(type, init);
+          this.pointerId = init.pointerId;
+        }
+      };
+      HTMLCanvasElement.prototype.getContext = () => ({
+        setTransform: jest.fn(), beginPath: jest.fn(), moveTo: jest.fn(), lineTo: jest.fn(), stroke: jest.fn(),
+      });
+    });
+
+    const scribble = () => {
+      const pad = screen.getByRole('img', { name: 'Escribe aquí el número' });
+      fireEvent.pointerDown(pad, { pointerId: 1, clientX: 10, clientY: 10 });
+      fireEvent.pointerMove(pad, { pointerId: 1, clientX: 20, clientY: 60 });
+      fireEvent.pointerUp(pad, { pointerId: 1 });
+    };
+
+    it('reads what is written, says what it read when it is wrong, and takes the right answer', async () => {
+      jest.useFakeTimers();
+      inSpanish(<NumberGame exercise={sumar} />);
+      expect(screen.queryByRole('group', { name: 'Teclado de números' })).not.toBeInTheDocument();
+      check();
+      expect(screen.getByText('Escribe primero un número.')).toBeInTheDocument();
+
+      readNumber.mockReturnValueOnce({ text: '47' });
+      scribble();
+      await act(async () => check());
+      expect(screen.getByText('He leído 47. ¡Casi! Inténtalo otra vez.')).toBeInTheDocument();
+      act(() => jest.runAllTimers());
+
+      readNumber.mockReturnValueOnce({ text: '44' });
+      scribble();
+      await act(async () => check());
+      expect(screen.getByRole('button', { name: 'Siguiente →' })).toBeInTheDocument();
+      jest.useRealTimers();
+    });
+
+    it('can swap to the number keys and back', () => {
+      inSpanish(<NumberGame exercise={sumar} />);
+      fireEvent.click(screen.getByRole('button', { name: '🔢 Usar el teclado' }));
+      expect(screen.getByRole('group', { name: 'Teclado de números' })).toBeInTheDocument();
+      fireEvent.click(screen.getByRole('button', { name: '✍️ Escribir a mano' }));
+      expect(screen.getByRole('img', { name: 'Escribe aquí el número' })).toBeInTheDocument();
+    });
   });
 });

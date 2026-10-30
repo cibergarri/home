@@ -23,6 +23,7 @@ const euros = {
   title: 'Monedas y billetes',
   heading: '¿Cuánto dinero hay?',
   type: 'numbers',
+  write: true,
   instructions: 'Cuenta primero los billetes y después las monedas.',
   questions: [
     count(10, 5, 5),
@@ -35,6 +36,7 @@ const euros = {
     {
       title: '¿Cuánto falta para 100 €?',
       type: 'numbers',
+      write: true,
       instructions: 'Cuenta el dinero y piensa cuánto falta para llegar a 100 €. Pulsa ✓ después de cada número.',
       questions: [toHundred(10, 10, 10, 10), toHundred(50, 10, 10), toHundred(50, 20, 10, 10), toHundred(20, 20, 20, 10, 5)],
     },

@@ -1,27 +1,27 @@
 import { blocks } from './scenes';
 
 // Mates, tema 1: números de dos cifras, en bloques, en decenas y unidades y en letras.
-const blockQuestion = (tens, ones, choices) => ({
-  prompt: '¿Qué número es?',
+const blockQuestion = (tens, ones) => ({
+  story: '¿Qué número es?',
+  prompt: '?',
   hint: 'Cada barra roja es una decena (10). Cada cubo azul es una unidad (1).',
   scene: blocks(tens, ones),
-  choices: choices.map(String),
-  answer: String(tens * 10 + ones),
+  answer: tens * 10 + ones,
 });
 
 const numerosDeDosCifras = {
   slug: 'numeros-de-dos-cifras',
   title: 'Números de dos cifras',
   heading: 'Cuenta los bloques',
-  type: 'quiz',
-  instructions: 'Cuenta las decenas y las unidades y elige el número.',
+  type: 'numbers',
+  instructions: 'Cuenta las decenas y las unidades y escribe el número.',
   questions: [
-    blockQuestion(2, 4, [42, 24, 6]),
-    blockQuestion(3, 4, [34, 43, 7]),
-    blockQuestion(1, 1, [2, 11, 10]),
-    blockQuestion(1, 5, [51, 6, 15]),
-    blockQuestion(5, 7, [57, 75, 12]),
-    blockQuestion(4, 0, [4, 40, 14]),
+    blockQuestion(2, 4),
+    blockQuestion(3, 4),
+    blockQuestion(1, 1),
+    blockQuestion(1, 5),
+    blockQuestion(5, 7),
+    blockQuestion(4, 0),
   ],
   more: [
     {

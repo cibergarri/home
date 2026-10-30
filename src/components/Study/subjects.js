@@ -11,6 +11,7 @@ import wheres from './exercises/english/wheres';
 import positions from './exercises/english/positions';
 import rulesAndGames from './exercises/english/rules-and-games';
 import storyPhrases from './exercises/english/story-phrases';
+import numbers from './exercises/english/numbers';
 import review from './exercises/english/review';
 import numerosDeDosCifras from './exercises/mates/numeros-de-dos-cifras';
 import comparar from './exercises/mates/comparar';
@@ -88,7 +89,7 @@ export const SUBJECTS = [
         title: 'Unit 1',
         icon: '🏫',
         exercises: [
-          daysOfTheWeek, placesAtSchool, wheres, positions, rulesAndGames, storyPhrases, review,
+          daysOfTheWeek, placesAtSchool, wheres, positions, rulesAndGames, storyPhrases, numbers, review,
         ],
       },
     ],

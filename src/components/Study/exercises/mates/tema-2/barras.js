@@ -7,6 +7,7 @@ const barras = {
   title: 'Problemas con barras',
   heading: 'Mira la barra y calcula',
   type: 'numbers',
+  write: true,
   instructions: 'La barra representa el problema. ¿Qué parte falta? Calcula y escribe el resultado.',
   questions: [
     {

@@ -8,7 +8,8 @@ const sumar = {
   title: 'Sumar',
   heading: 'Sumar decenas completas',
   type: 'numbers',
-  instructions: 'Calcula mentalmente: suma las decenas y deja las unidades. Escribe el resultado y pulsa ✓.',
+  write: true, // the answer written by hand
+  instructions: 'Calcula mentalmente: suma las decenas y deja las unidades. Escribe el resultado a mano y pulsa ✓.',
   questions: [sum(14, 30), sum(20, 50), sum(80, 10), sum(50, 40), sum(30, 47), sum(15, 70), sum(28, 60), sum(45, 20), sum(23, 40), sum(38, 50)],
   more: [
     {

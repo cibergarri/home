@@ -42,6 +42,7 @@ const restar = {
     {
       title: 'Problemas',
       type: 'numbers',
+      write: true,
       instructions: 'Lee el problema, calcula y escribe el resultado.',
       questions: [
         {

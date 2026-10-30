@@ -4,6 +4,7 @@ const repaso = {
   title: 'Repaso',
   heading: '1. Completa la serie',
   type: 'numbers',
+  write: true,
   instructions: 'Escribe los números que faltan y descompón.',
   questions: [
     { prompt: '140, 141, ?, 143, ?, ?, 146, ?, ?, 149', answer: [142, 144, 145, 147, 148] },
@@ -39,6 +40,7 @@ const repaso = {
     {
       title: '4. Un problema',
       type: 'numbers',
+      write: true,
       instructions: 'Lee y calcula.',
       questions: [
         {

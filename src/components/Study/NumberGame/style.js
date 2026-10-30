@@ -137,6 +137,29 @@ export const Key = styled.button`
   `}
 `;
 
+/* The keys, or the strip to write on, with a way to swap one for the other. */
+export const Answering = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const Switch = styled.button`
+  min-height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 20px;
+  background: none;
+  color: var(--s-teal);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+`;
+
 export const Row = styled.div`
   display: flex;
   flex-wrap: wrap;

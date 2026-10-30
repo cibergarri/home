@@ -10,12 +10,14 @@ const dieces = {
   title: 'Sumar completando dieces',
   heading: 'Junta las decenas',
   type: 'numbers',
+  write: true,
   instructions: 'Primero suma las decenas. Las unidades juntas forman otra decena: súmala al final.',
   questions: [tens(24, 16), tens(35, 15), tens(28, 22), tens(45, 25), tens(16, 54), tens(28, 42), tens(57, 13)],
   more: [
     {
       title: 'De cabeza',
       type: 'numbers',
+      write: true,
       instructions: 'Calcula mentalmente.',
       questions: [
         { prompt: '34 + 26 = ?', answer: 60 },

@@ -29,7 +29,7 @@ describe("Julia's study pages", () => {
     renderWithProviders(await UnitPage({ params: params({ subject: 'english', unit: 'unit-1' }) }));
     expect(hrefs()).toEqual([
       '/julia/english',
-      ...['days-of-the-week', 'places-at-school', 'wheres', 'positions', 'rules-and-games', 'story-phrases', 'review']
+      ...['days-of-the-week', 'places-at-school', 'wheres', 'positions', 'rules-and-games', 'story-phrases', 'numbers', 'review']
         .map(slug => `/julia/english/unit-1/${slug}`),
     ]);
   });
@@ -76,6 +76,7 @@ describe("Julia's study pages", () => {
       { subject: 'english', unit: 'unit-1', exercise: 'positions' },
       { subject: 'english', unit: 'unit-1', exercise: 'rules-and-games' },
       { subject: 'english', unit: 'unit-1', exercise: 'story-phrases' },
+      { subject: 'english', unit: 'unit-1', exercise: 'numbers' },
       { subject: 'english', unit: 'unit-1', exercise: 'review' },
     ]);
   });

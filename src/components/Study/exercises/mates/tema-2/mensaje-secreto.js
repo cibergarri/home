@@ -16,6 +16,7 @@ const mensajeSecreto = {
   slug: 'mensaje-secreto',
   title: 'Un mensaje secreto',
   type: 'numbers',
+  write: true,
   instructions: 'Lorenzo quiere dar las gracias al equipo de rescate. Calcula cada pista: el número es una letra del código. En las flechas, ↑ resta 10, ↓ suma 10, ← resta 1 y → suma 1.',
   questions: [
     clue('6 ↑ de 197', 137, 'M'),

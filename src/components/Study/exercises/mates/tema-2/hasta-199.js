@@ -2,12 +2,12 @@ import { blocks } from '../scenes';
 
 // Mates, tema 2: números hasta 199, en centenas, decenas y unidades, en bloques, en letras y en
 // series.
-const blockQuestion = (hundreds, tens, ones, choices) => ({
-  prompt: '¿Qué número es?',
+const blockQuestion = (hundreds, tens, ones) => ({
+  story: '¿Qué número es?',
+  prompt: '?',
   hint: 'La placa verde es una centena (100), cada barra roja una decena (10) y cada cubo azul una unidad (1).',
   scene: blocks(tens, ones, hundreds),
-  choices: choices.map(String),
-  answer: String(hundreds * 100 + tens * 10 + ones),
+  answer: hundreds * 100 + tens * 10 + ones,
 });
 
 const hasta199 = {
@@ -15,6 +15,7 @@ const hasta199 = {
   title: 'Números hasta 199',
   heading: 'Descompón',
   type: 'numbers',
+  write: true,
   instructions: 'Escribe cuántas centenas, decenas y unidades tiene. Pulsa ✓ después de cada número.',
   questions: [
     { prompt: '152 = 100 + ? + ?', answer: [50, 2] },
@@ -39,15 +40,16 @@ const hasta199 = {
   more: [
     {
       title: 'Cuenta los bloques',
-      type: 'quiz',
-      instructions: 'Cuenta las centenas, las decenas y las unidades y elige el número.',
+      type: 'numbers',
+      write: true,
+      instructions: 'Cuenta las centenas, las decenas y las unidades y escribe el número.',
       questions: [
-        blockQuestion(1, 4, 5, [154, 145, 45]),
-        blockQuestion(1, 3, 6, [136, 163, 36]),
-        blockQuestion(1, 2, 2, [22, 212, 122]),
-        blockQuestion(1, 0, 8, [108, 180, 18]),
-        blockQuestion(1, 5, 0, [105, 150, 15]),
-        blockQuestion(1, 9, 9, [199, 99, 919]),
+        blockQuestion(1, 4, 5),
+        blockQuestion(1, 3, 6),
+        blockQuestion(1, 2, 2),
+        blockQuestion(1, 0, 8),
+        blockQuestion(1, 5, 0),
+        blockQuestion(1, 9, 9),
       ],
     },
     {
@@ -69,6 +71,7 @@ const hasta199 = {
     {
       title: 'Completa la serie',
       type: 'numbers',
+      write: true,
       instructions: 'Escribe los números que faltan, uno a uno.',
       questions: [
         { prompt: '140, 141, ?, 143, ?, ?, 146, ?, ?, 149', answer: [142, 144, 145, 147, 148] },
