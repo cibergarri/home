@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 
+import Explain from '../Explain';
 import { speak } from '../speech';
 import {
   shuffle, isNear, useDrag, SpeakerIcon, WellDone,
@@ -99,6 +100,7 @@ export default function LabelMap({ exercise }) {
         >
           {word}
         </Word>
+        <Explain word={word} variant="chip" />
         <Speaker type="button" onClick={() => speak(word)} aria-label={`Listen to ${word}`}>
           <SpeakerIcon />
         </Speaker>
@@ -139,6 +141,7 @@ export default function LabelMap({ exercise }) {
               return (
                 <FilledBox key={id} style={position} data-testid={`box-${id}`}>
                   {word}
+                  <Explain word={word} variant="box" />
                   <BoxSpeaker type="button" onClick={() => speak(word)} aria-label={`Listen to ${word}`}>
                     <SpeakerIcon />
                   </BoxSpeaker>
@@ -175,7 +178,11 @@ export default function LabelMap({ exercise }) {
                     const left = ids.filter(word => !placed[word]);
                     return (
                       <Group key={id}>
-                        <GroupTitle>{title}</GroupTitle>
+                        <GroupTitle>
+                          {title}
+                          {' '}
+                          <Explain word={title} />
+                        </GroupTitle>
                         {left.length > 0
                           ? <Tray aria-label={title}>{left.map(renderChip)}</Tray>
                           : <GroupDone>✓ All in place</GroupDone>}

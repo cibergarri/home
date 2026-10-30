@@ -28,7 +28,7 @@ export const Board = styled.div`
   display: grid;
   gap: 16px;
   @media (orientation: landscape) and (min-width: 900px) {
-    grid-template-columns: minmax(0, 1fr) 230px;
+    grid-template-columns: minmax(0, 1fr) 260px;
     align-items: start;
   }
 `;

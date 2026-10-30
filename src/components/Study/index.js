@@ -12,6 +12,7 @@ import NumberGame from './NumberGame';
 import BlocksGame from './BlocksGame';
 import TowerGame from './TowerGame';
 import ScrapPaper from './ScrapPaper';
+import Explain, { ExplainContext } from './Explain';
 import { findSubject, findUnit, findExercise } from './subjects';
 import { LanguageContext } from './language';
 import {
@@ -23,7 +24,7 @@ export function StudyPage({
   title, kicker, back, children,
 }) {
   return (
-    <Page>
+    <Page data-study-page>
       <Header>
         {back && <Back href={back} aria-label="Back">←</Back>}
         <Titles>
@@ -80,17 +81,27 @@ function Game({ part }) {
 
 // An exercise, looked up here because its drawings cannot be passed down from a server page.
 // Some have more parts after the first, each under its own title; the first can have one too.
-// Subjects with `scrap` have scrap paper beside them.
+// Subjects with `scrap` have scrap paper beside them, and with `explain` their words in Spanish.
 export function Exercise({ subject, unit, exercise }) {
   const studied = findSubject(subject);
   const found = findExercise(findUnit(studied, unit), exercise);
   const parts = (
     <>
-      {found.heading && <PartTitle>{found.heading}</PartTitle>}
+      {found.heading && (
+        <PartTitle>
+          {found.heading}
+          {' '}
+          <Explain word={found.heading} />
+        </PartTitle>
+      )}
       <Game part={found} />
       {found.more?.map(part => (
         <Part key={part.title}>
-          <PartTitle>{part.title}</PartTitle>
+          <PartTitle>
+            {part.title}
+            {' '}
+            <Explain word={part.title} />
+          </PartTitle>
           <Game part={part} />
         </Part>
       ))}
@@ -98,7 +109,9 @@ export function Exercise({ subject, unit, exercise }) {
   );
   return (
     <LanguageContext.Provider value={studied.lang ?? 'en'}>
-      {studied.scrap ? <ScrapPaper>{parts}</ScrapPaper> : parts}
+      <ExplainContext.Provider value={Boolean(studied.explain)}>
+        {studied.scrap ? <ScrapPaper>{parts}</ScrapPaper> : parts}
+      </ExplainContext.Provider>
     </LanguageContext.Provider>
   );
 }

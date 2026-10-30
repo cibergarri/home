@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 
+import Explain from '../Explain';
 import { speak } from '../speech';
 import { shuffle, SpeakerIcon, WellDone } from '../game';
 import { Instructions, Message, Progress } from '../LabelMap/style';
@@ -92,6 +93,7 @@ export default function ColourGame({ exercise }) {
               <TileWord type="button" onClick={() => colourIn(id)} disabled={Boolean(done) || finished}>
                 {word}
               </TileWord>
+              <Explain word={word} variant="tile" />
               <TileSpeaker type="button" onClick={() => speak(word)} aria-label={`Listen to ${word}`}>
                 <SpeakerIcon />
               </TileSpeaker>

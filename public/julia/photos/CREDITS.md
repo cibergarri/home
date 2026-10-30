@@ -1,0 +1,46 @@
+# Photos
+
+Photos for the Spanish explanations in /julia, from Wikimedia Commons, resized. Each is under the licence given, by its author.
+
+- `landscape.jpg` (landscape): Basile Morin, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Four_dogs_running_at_golden_hour_in_the_countryside_of_Don_Det_Laos.jpg
+- `physical-feature.jpg` (physical feature): Isiwal, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Sankt_Moritz_Lake_Piz_Muragl.jpg
+- `human-feature.jpg` (human feature): Basile Morin, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Colorful_houses_in_Gamcheon_Culture_Village_at_sunset_in_Busan_South_Korea.jpg
+- `mountain.jpg` (mountain): kallerna, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Vihren_%26_Kutelo_Pirin_Mountains_Bulgaria_2025.jpg
+- `lake.jpg` (lake): Vyacheslav Argenberg, CC BY 4.0, https://commons.wikimedia.org/wiki/File:Mountain_lake,_Mylgval_mountain_cirque,_Western_Caucasus.jpg
+- `river.jpg` (river): Michal Klajban, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Wilkin_River_close_to_its_confluence_with_Makarora_River,_Otago,_New_Zealand.jpg
+- `tree.jpg` (tree): ZarlokX, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Ch%C3%AAne,_colza,_Jura_(horizontal).jpg
+- `houses.jpg` (houses): Dietmar Rabich, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Wale_Street_--_2024_--_3544.jpg
+- `bridge.jpg` (bridge): kallerna, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Belcastel_4.jpg
+- `village.jpg` (village): Diego Delso, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Albarrac%C3%ADn,_Teruel,_Espa%C3%B1a,_2014-01-10,_DD_022-025_PAN.JPG
+- `coastal-landscape.jpg` (coastal landscape): Moahim, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:2019_-_Nationalpark_Jasmund_-_01.jpg
+- `cape.jpg` (cape): King of Hearts, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Point_Reyes_Lighthouse_Trail_December_2016_panorama.jpg
+- `beach.jpg` (beach): Marek Ślusarczyk, CC BY 3.0, https://commons.wikimedia.org/wiki/File:02_Cyprus_vacation,_sandy_beach_of_Ayia_Thekla,_Sotira,_Cyprus.jpg
+- `bay.jpg` (bay): Jebulon, CC0, https://commons.wikimedia.org/wiki/File:Coast_Sorrento_Sant%27Agnello_Gulf_Naples.jpg
+- `gulf.jpg` (gulf): Wolfgang Moroder, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Naples_from_the_Castello_Sant_Elmo_with_Abbazia_San_Martino_the_port_and_the_Vesuv.jpg
+- `peninsula.jpg` (peninsula): Деан Лазаревски, Aristeas, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:%D0%9C%D0%B0%D0%BB_%D0%BF%D0%BE%D0%BB%D1%83%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B2_%D0%B2%D0%BE_%D0%94%D0%B5%D0%B1%D0%B0%D1%80%D1%81%D0%BA%D0%BE%D1%82%D0%BE_%D0%95%D0%B7%D0%B5%D1%80%D0%BE.jpg
+- `cliff.jpg` (cliff): Berthold Werner, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Ireland_Cliffs_of_Moher_BW_2025-09-11_13-47-21.jpg
+- `island.jpg` (island): Ximonic (Simo Räsänen), CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:A_small_island_near_Gumbostrand_in_Sipoo,_Finland,_March_2021.jpg
+- `archipelago.jpg` (archipelago): Arild Vågen, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Kors%C3%B6_Kroks%C3%B6_Sand%C3%B6n_February_2013.jpg
+- `mountain-landscape.jpg` (mountain landscape): böhringer friedrich, CC BY-SA 2.5, https://commons.wikimedia.org/wiki/File:FraxernVlbg1.JPG
+- `mountain-range.jpg` (mountain range): Michal Klajban, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Winterslow_Range,_Canterbury,_New_Zealand.jpg
+- `valley.jpg` (valley): KennyOMG, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Pahalgam_Valley.jpg
+- `small-village.jpg` (small village): Sumit Surai, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Saanen_Mountains.jpg
+- `narrow-road.jpg` (narrow road): Dietmar Rabich, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Haltern_am_See,_NSG_%22Borkenberge%22_--_2021_--_0542.jpg
+- `tunnel.jpg` (tunnel): Lucasbosch, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Pregasina_tunnel_east_entrance,_Pregasina,_Trient,_Italy.jpg
+- `peak.jpg` (peak): Vyacheslav Argenberg, CC BY 4.0, https://commons.wikimedia.org/wiki/File:Cholatse_Peak,_Nepal,_Himalayas.jpg
+- `slope.jpg` (slope): Gideon Pisanty, CC BY 3.0, https://commons.wikimedia.org/wiki/File:Onagers_Negev_Mountains_1.jpg
+- `foot.jpg` (foot): böhringer friedrich, CC BY-SA 2.5, https://commons.wikimedia.org/wiki/File:Faschina_Panorama.jpg
+- `flat-landscape.jpg` (flat landscape): H. Zell, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:View_of_the_Upper_Rhine_Plain_from_Battenberg_Castle.jpg
+- `hill.jpg` (hill): Michal Klajban, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:A_peat_bog_below_the_top_of_Doune_Hill,_Luss_Hills,_Scotland.jpg
+- `plateau.jpg` (plateau): Ney Teixeira de Freitas Guimarães Filho, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Monte_Roraima_e_Kukenan_Tepui_no_retorno_a_casa.jpg
+- `plain.jpg` (plain): Jacek Halicki, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:2015_Czeskie_Wzg%C3%B3rze,_Wzg%C3%B3rza_%C5%9Acinawskie,_Sudety.JPG
+- `city.jpg` (city): King of Hearts, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Lower_Manhattan_from_Jersey_City_November_2014_panorama_3.jpg
+- `town.jpg` (town): Jörg Braukmann, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Vue_d%27%C3%89tretat.jpg
+- `farmland.jpg` (farmland): Daniel Schwen, CC BY-SA 2.5, https://commons.wikimedia.org/wiki/File:Rapsfeld_2007.jpg
+- `motorway.jpg` (motorway): Pudelek, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:A-1_motorway_in_Montenegro.jpg
+- `source.jpg` (source): Neptuul, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Angitis_river_near_the_source.jpg
+- `upper-course.jpg` (upper course): Dominicus Johannes Bergsma, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Breil-Brigels,_Lag_da_Breil-_Flem._23-09-2022._(d.j.b)_04.jpg
+- `middle-course.jpg` (middle course): Walter Siegmund, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Skagit_River_8667s.JPG
+- `lower-course.jpg` (lower course): MB-one, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Altrhein,_Mainz_(LRM_20210611_212924).jpg
+- `tributary.jpg` (tributary): Syrio, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Confluenza_del_Noce_nell%27Adige_07.jpg
+- `mouth.jpg` (mouth): Bidgee, CC BY 3.0, https://commons.wikimedia.org/wiki/File:Estuary_mouth.jpg

@@ -39,6 +39,7 @@ export const SUBJECTS = [
     slug: 'social-science',
     title: 'Social Science',
     icon: '🌍',
+    explain: true, // its words are explained in Spanish too
     units: [
       {
         slug: 'unit-1',

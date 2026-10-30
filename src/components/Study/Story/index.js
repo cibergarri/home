@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import Explain from '../Explain';
 import { speak } from '../speech';
 import { SpeakerIcon } from '../game';
 import {
@@ -95,7 +96,11 @@ export default function Story({ exercise }) {
         <Side>
           <Card aria-live="polite">
             {current.where && <Where>{current.where}</Where>}
-            <StepTitle>{current.title}</StepTitle>
+            <StepTitle>
+              {current.title}
+              {' '}
+              <Explain word={current.title} />
+            </StepTitle>
             <Text>{current.text}</Text>
             <Listen type="button" onClick={() => speak(`${current.title}. ${current.text}`)}>
               <SpeakerIcon />

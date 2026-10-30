@@ -54,7 +54,7 @@ export const Crayon = styled.button`
 
 export const Words = styled.ul`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
   gap: 12px;
   margin: 0 0 16px;
   padding: 0;
@@ -82,6 +82,7 @@ export const Tile = styled.li`
 
 export const TileWord = styled.button`
   flex: 1;
+  min-width: 0;
   min-height: 60px;
   padding: 0 8px 0 16px;
   border: 0;
