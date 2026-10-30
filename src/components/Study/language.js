@@ -87,6 +87,15 @@ const STRINGS = {
     subtractTens: (a, b) => `Subtract the tens: ${a} - ${b}.`,
     wrongDigit: 'Not that one. Look again!',
     tower: 'Sum in columns',
+    // Scrap paper.
+    scrap: 'Scrap paper',
+    scrapTools: 'Scrap paper tools',
+    pencil: colour => `${colour} pencil`,
+    colours: { ink: 'Black', red: 'Red', blue: 'Blue' },
+    eraser: 'Eraser',
+    undo: 'Undo',
+    clearAll: 'Clear it all',
+    close: 'Close',
   },
   es: {
     wellDone: '¡Muy bien, Julia!',
@@ -162,6 +171,15 @@ const STRINGS = {
     subtractTens: (a, b) => `Resta las decenas: ${a} - ${b}.`,
     wrongDigit: '¡Ese no! Vuelve a mirar.',
     tower: 'Operación en torre',
+    // El borrador.
+    scrap: 'Borrador',
+    scrapTools: 'Herramientas del borrador',
+    pencil: colour => `Lápiz ${colour}`,
+    colours: { ink: 'negro', red: 'rojo', blue: 'azul' },
+    eraser: 'Goma',
+    undo: 'Deshacer',
+    clearAll: 'Borrar todo',
+    close: 'Cerrar',
   },
 };
 

@@ -11,6 +11,7 @@ import QuizGame from './QuizGame';
 import NumberGame from './NumberGame';
 import BlocksGame from './BlocksGame';
 import TowerGame from './TowerGame';
+import ScrapPaper from './ScrapPaper';
 import { findSubject, findUnit, findExercise } from './subjects';
 import { LanguageContext } from './language';
 import {
@@ -79,11 +80,12 @@ function Game({ part }) {
 
 // An exercise, looked up here because its drawings cannot be passed down from a server page.
 // Some have more parts after the first, each under its own title; the first can have one too.
+// Subjects with `scrap` have scrap paper beside them.
 export function Exercise({ subject, unit, exercise }) {
   const studied = findSubject(subject);
   const found = findExercise(findUnit(studied, unit), exercise);
-  return (
-    <LanguageContext.Provider value={studied.lang ?? 'en'}>
+  const parts = (
+    <>
       {found.heading && <PartTitle>{found.heading}</PartTitle>}
       <Game part={found} />
       {found.more?.map(part => (
@@ -92,6 +94,11 @@ export function Exercise({ subject, unit, exercise }) {
           <Game part={part} />
         </Part>
       ))}
+    </>
+  );
+  return (
+    <LanguageContext.Provider value={studied.lang ?? 'en'}>
+      {studied.scrap ? <ScrapPaper>{parts}</ScrapPaper> : parts}
     </LanguageContext.Provider>
   );
 }

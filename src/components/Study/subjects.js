@@ -57,6 +57,7 @@ export const SUBJECTS = [
     icon: '🔢',
     lang: 'es', // its pages and exercises are in Spanish
     summary: 'parts', // its exercises are summed up by how many parts they have, not words
+    scrap: true, // with scrap paper to work things out on
     units: [
       {
         slug: 'tema-1',
