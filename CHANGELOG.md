@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/cibergarri/home/compare/v1.18.0...v1.19.0) (2026-10-30)
+
+
+### Features
+
+* **julia:** explain Social Science words in Spanish, with photos ([f364d45](https://github.com/cibergarri/home/commit/f364d45596dbb607fb0b3e131c640386cb115d8f))
+
 # [1.18.0](https://github.com/cibergarri/home/compare/v1.17.0...v1.18.0) (2026-10-30)
 
 
