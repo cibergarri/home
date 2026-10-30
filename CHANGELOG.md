@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/cibergarri/home/compare/v1.19.0...v1.20.0) (2026-10-30)
+
+
+### Features
+
+* **julia:** write answers by hand, and spell the numbers 1 to 20 ([6f79caa](https://github.com/cibergarri/home/commit/6f79caac48b0a34a5baf6643bdb25cf201e0a94a))
+
 # [1.19.0](https://github.com/cibergarri/home/compare/v1.18.0...v1.19.0) (2026-10-30)
 
 
