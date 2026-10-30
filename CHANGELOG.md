@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/cibergarri/home/compare/v1.17.0...v1.18.0) (2026-10-30)
+
+
+### Features
+
+* **julia:** add more Descompón questions, first in números hasta 199 ([ea2e3ef](https://github.com/cibergarri/home/commit/ea2e3ef365294401c340c083579ae8f44a1b1151))
+* **julia:** add scrap paper to Mates exercises ([35f77d3](https://github.com/cibergarri/home/commit/35f77d310e5de382826ff7fe2a26b298cccc30fc))
+
 # [1.17.0](https://github.com/cibergarri/home/compare/v1.16.0...v1.17.0) (2026-10-25)
 
 
