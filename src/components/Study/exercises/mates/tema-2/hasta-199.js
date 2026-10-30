@@ -1,6 +1,6 @@
 import { blocks } from '../scenes';
 
-// Mates, tema 2: números hasta 199, en bloques, en centenas, decenas y unidades, en letras y en
+// Mates, tema 2: números hasta 199, en centenas, decenas y unidades, en bloques, en letras y en
 // series.
 const blockQuestion = (hundreds, tens, ones, choices) => ({
   prompt: '¿Qué número es?',
@@ -13,30 +13,41 @@ const blockQuestion = (hundreds, tens, ones, choices) => ({
 const hasta199 = {
   slug: 'hasta-199',
   title: 'Números hasta 199',
-  heading: 'Cuenta los bloques',
-  type: 'quiz',
-  instructions: 'Cuenta las centenas, las decenas y las unidades y elige el número.',
+  heading: 'Descompón',
+  type: 'numbers',
+  instructions: 'Escribe cuántas centenas, decenas y unidades tiene. Pulsa ✓ después de cada número.',
   questions: [
-    blockQuestion(1, 4, 5, [154, 145, 45]),
-    blockQuestion(1, 3, 6, [136, 163, 36]),
-    blockQuestion(1, 2, 2, [22, 212, 122]),
-    blockQuestion(1, 0, 8, [108, 180, 18]),
-    blockQuestion(1, 5, 0, [105, 150, 15]),
-    blockQuestion(1, 9, 9, [199, 99, 919]),
+    { prompt: '152 = 100 + ? + ?', answer: [50, 2] },
+    { prompt: '174 = 100 + ? + ?', answer: [70, 4] },
+    { prompt: '163 = 1 C + ? D + ? U', answer: [6, 3] },
+    { prompt: '187 = 100 + ? + ?', answer: [80, 7] },
+    { prompt: '115 = 100 + ? + ?', answer: [10, 5] },
+    { prompt: '158 = 1 C + ? D + ? U', answer: [5, 8] },
+    { prompt: '191 = 100 + ? + ?', answer: [90, 1] },
+    { prompt: '109 = 1 C + ? D + ? U', answer: [0, 9] },
+    { prompt: '100 + 60 + 7 = ?', answer: 167 },
+    { prompt: '1 C + 2 D + 5 U = ?', answer: 125 },
+    { prompt: '100 + 30 + 9 = ?', answer: 139 },
+    { prompt: '145 = 1 C + ? D + ? U', answer: [4, 5] },
+    { prompt: '145 = 100 + ? + ?', answer: [40, 5] },
+    { prompt: '136 = 1 C + ? D + ? U', answer: [3, 6] },
+    { prompt: '136 = 100 + ? + ?', answer: [30, 6] },
+    { prompt: '128 = 100 + ? + ?', answer: [20, 8] },
+    { prompt: '119 = 1 C + ? D + ? U', answer: [1, 9] },
+    { prompt: '160 = 1 C + ? D + ? U', answer: [6, 0] },
   ],
   more: [
     {
-      title: 'Descompón',
-      type: 'numbers',
-      instructions: 'Escribe cuántas centenas, decenas y unidades tiene. Pulsa ✓ después de cada número.',
+      title: 'Cuenta los bloques',
+      type: 'quiz',
+      instructions: 'Cuenta las centenas, las decenas y las unidades y elige el número.',
       questions: [
-        { prompt: '145 = 1 C + ? D + ? U', answer: [4, 5] },
-        { prompt: '145 = 100 + ? + ?', answer: [40, 5] },
-        { prompt: '136 = 1 C + ? D + ? U', answer: [3, 6] },
-        { prompt: '136 = 100 + ? + ?', answer: [30, 6] },
-        { prompt: '128 = 100 + ? + ?', answer: [20, 8] },
-        { prompt: '119 = 1 C + ? D + ? U', answer: [1, 9] },
-        { prompt: '160 = 1 C + ? D + ? U', answer: [6, 0] },
+        blockQuestion(1, 4, 5, [154, 145, 45]),
+        blockQuestion(1, 3, 6, [136, 163, 36]),
+        blockQuestion(1, 2, 2, [22, 212, 122]),
+        blockQuestion(1, 0, 8, [108, 180, 18]),
+        blockQuestion(1, 5, 0, [105, 150, 15]),
+        blockQuestion(1, 9, 9, [199, 99, 919]),
       ],
     },
     {
