@@ -32,6 +32,13 @@ import barras from './exercises/mates/tema-2/barras';
 import tabla100 from './exercises/mates/tema-2/tabla-100-199';
 import mensajeSecreto from './exercises/mates/tema-2/mensaje-secreto';
 import repaso2 from './exercises/mates/tema-2/repaso';
+import tresCifras from './exercises/mates/tema-2/tres-cifras';
+import etapas from './exercises/naturales/tema-1/etapas';
+import funciones from './exercises/naturales/tema-1/funciones';
+import movemos from './exercises/naturales/tema-1/movemos';
+import respirar from './exercises/naturales/tema-1/respirar';
+import alimentamos from './exercises/naturales/tema-1/alimentamos';
+import repasoNaturales from './exercises/naturales/tema-1/repaso';
 
 // What Julia is studying: subjects, their units, and the exercises of each unit. A new exercise
 // goes in ./exercises and is listed under its unit here; the pages are generated from this list.
@@ -74,8 +81,23 @@ export const SUBJECTS = [
         title: 'Tema 2',
         icon: '💯',
         exercises: [
-          centena, hasta199, sumar2, restar2, dieces, euros, barras, tabla100, mensajeSecreto, repaso2,
+          centena, hasta199, tresCifras, sumar2, restar2, dieces, euros, barras, tabla100, mensajeSecreto, repaso2,
         ],
+      },
+    ],
+  },
+  {
+    slug: 'naturales',
+    title: 'Naturales',
+    icon: '🌱',
+    lang: 'es',
+    summary: 'parts',
+    units: [
+      {
+        slug: 'tema-1',
+        title: 'Tema 1',
+        icon: '🧍',
+        exercises: [etapas, funciones, movemos, respirar, alimentamos, repasoNaturales],
       },
     ],
   },

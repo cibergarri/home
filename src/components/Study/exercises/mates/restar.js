@@ -2,6 +2,12 @@
 // la resta.
 const minus = (a, b) => ({ prompt: `${a} - ${b} = ?`, answer: a - b });
 const take = (a, b) => ({ op: '-', a, b });
+// Añade y quita: `steps` are numbers to add (positive) or take away (negative), from `start`.
+const addAndTake = (start, ...steps) => ({
+  story: `Representa ${start}${steps.map(step => (step > 0 ? `, añade ${step}` : `, quita ${-step}`)).join('')}.`,
+  prompt: `${start}${steps.map(step => (step > 0 ? ` + ${step}` : ` - ${-step}`)).join('')} = ?`,
+  answer: steps.reduce((total, step) => total + step, start),
+});
 
 const restar = {
   slug: 'restar',
@@ -11,6 +17,15 @@ const restar = {
   instructions: 'Quita primero las unidades y después las decenas. Escribe el resultado y pulsa ✓.',
   questions: [minus(34, 12), minus(45, 12), minus(56, 35), minus(64, 54), minus(78, 72), minus(49, 16), minus(55, 35), minus(37, 25), minus(57, 36), minus(71, 41), minus(89, 81), minus(59, 37)],
   more: [
+    {
+      title: 'Añade y quita bloques',
+      type: 'numbers',
+      instructions: 'Ve paso a paso: primero quita o añade el primer número, y después el segundo. ¿A qué número llegas?',
+      questions: [
+        addAndTake(85, -43, 21), addAndTake(12, 27, -33), addAndTake(56, 32, -41), addAndTake(94, -50, 13),
+        addAndTake(27, 41, -35), addAndTake(69, -22, 30),
+      ],
+    },
     {
       title: 'Tacha los bloques',
       type: 'blocks',

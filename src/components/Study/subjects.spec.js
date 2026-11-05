@@ -16,7 +16,7 @@ describe("Julia's study pages", () => {
     expect(screen.getByText('Social Science')).toBeInTheDocument();
     expect(screen.getByText('English')).toBeInTheDocument();
     expect(screen.getByText('Mates')).toBeInTheDocument();
-    expect(hrefs()).toEqual(['/julia/social-science', '/julia/mates', '/julia/english']);
+    expect(hrefs()).toEqual(['/julia/social-science', '/julia/mates', '/julia/naturales', '/julia/english']);
   });
 
   it('says so when there is nothing to list yet', () => {
@@ -68,8 +68,14 @@ describe("Julia's study pages", () => {
       { subject: 'social-science', unit: 'unit-1', exercise: 'physical-and-human-features' },
       ...['numeros-de-dos-cifras', 'comparar', 'aproximar', 'sumar', 'restar', 'problemas', 'tabla-cien', 'tablas', 'repaso']
         .map(exercise => ({ subject: 'mates', unit: 'tema-1', exercise })),
-      ...['centena', 'hasta-199', 'sumar', 'restar', 'dieces', 'euros', 'barras', 'tabla-100-199', 'mensaje-secreto', 'repaso']
+      ...['centena', 'hasta-199', 'tres-cifras', 'sumar', 'restar', 'dieces', 'euros', 'barras', 'tabla-100-199', 'mensaje-secreto', 'repaso']
         .map(exercise => ({ subject: 'mates', unit: 'tema-2', exercise })),
+      { subject: 'naturales', unit: 'tema-1', exercise: 'etapas' },
+      { subject: 'naturales', unit: 'tema-1', exercise: 'funciones' },
+      { subject: 'naturales', unit: 'tema-1', exercise: 'movemos' },
+      { subject: 'naturales', unit: 'tema-1', exercise: 'respirar' },
+      { subject: 'naturales', unit: 'tema-1', exercise: 'alimentamos' },
+      { subject: 'naturales', unit: 'tema-1', exercise: 'repaso' },
       { subject: 'english', unit: 'unit-1', exercise: 'days-of-the-week' },
       { subject: 'english', unit: 'unit-1', exercise: 'places-at-school' },
       { subject: 'english', unit: 'unit-1', exercise: 'wheres' },

@@ -45,6 +45,18 @@ const centena = {
         { prompt: '2 + ? = 10   20 + ? = 100', answer: [8, 80] },
       ],
     },
+    {
+      title: 'Marca la respuesta correcta',
+      type: 'quiz',
+      instructions: '10 unidades hacen una decena, y 10 decenas una centena.',
+      questions: [
+        { prompt: 'Si a 9 unidades le añado 1 unidad, tengo una…', choices: ['decena', 'centena'], answer: 'decena' },
+        { prompt: 'Si a 99 unidades le añado 1 unidad, tengo una…', choices: ['decena', 'centena'], answer: 'centena' },
+        { prompt: 'Si a 9 decenas le añado 1 decena, tengo una…', choices: ['decena', 'centena'], answer: 'centena' },
+        { prompt: 'Si a 90 unidades le añado 10 unidades, tengo una…', choices: ['decena', 'centena'], answer: 'centena' },
+        { prompt: 'Si a 5 unidades le añado 5 unidades, tengo una…', choices: ['decena', 'centena'], answer: 'decena' },
+      ],
+    },
   ],
 };
 

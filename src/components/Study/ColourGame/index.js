@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 
 import Explain from '../Explain';
 import { speak } from '../speech';
+import { useStrings } from '../language';
 import { shuffle, SpeakerIcon, WellDone } from '../game';
 import { Instructions, Message, Progress } from '../LabelMap/style';
 import {
@@ -26,6 +27,7 @@ function CrayonIcon({ colour }) {
 // Words to colour in, as in a workbook: pick up a crayon, then tap each word it belongs to. Each
 // word has one right crayon. A right word is coloured in, a wrong one shakes and stays white.
 export default function ColourGame({ exercise }) {
+  const text = useStrings();
   const { instructions, crayons, words } = exercise;
   const [order, setOrder] = useState(() => words.map(word => word.id));
   const [crayon, setCrayon] = useState(null);
@@ -94,7 +96,7 @@ export default function ColourGame({ exercise }) {
                 {word}
               </TileWord>
               <Explain word={word} variant="tile" />
-              <TileSpeaker type="button" onClick={() => speak(word)} aria-label={`Listen to ${word}`}>
+              <TileSpeaker type="button" onClick={() => speak(word, text.lang)} aria-label={text.listenTo(word)}>
                 <SpeakerIcon />
               </TileSpeaker>
             </Tile>
@@ -103,7 +105,7 @@ export default function ColourGame({ exercise }) {
       </Words>
 
       {finished ? <WellDone mistakes={mistakes} onAgain={playAgain} /> : (
-        <Progress>{`${colouredCount} of ${words.length} coloured`}</Progress>
+        <Progress>{text.progressColoured(colouredCount, words.length)}</Progress>
       )}
       <div aria-live="polite">
         {message && !finished && (
@@ -111,11 +113,11 @@ export default function ColourGame({ exercise }) {
             {message.kind === 'right' && (
               <span>
                 <strong>{`✓ ${message.word}`}</strong>
-                {` is in ${message.crayon.title.toLowerCase()}.`}
+                {text.colouredIn(message.crayon.title)}
               </span>
             )}
-            {message.kind === 'wrong' && <span>{`Not quite. ${message.word} isn't in ${message.crayon.title.toLowerCase()}. Try another crayon!`}</span>}
-            {message.kind === 'hint' && <span>First pick up a crayon, then tap the words to colour.</span>}
+            {message.kind === 'wrong' && <span>{text.notInCrayon(message.word, message.crayon.title)}</span>}
+            {message.kind === 'hint' && <span>{text.pickCrayonFirst}</span>}
           </Message>
         )}
       </div>

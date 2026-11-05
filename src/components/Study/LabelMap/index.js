@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 
 import Explain from '../Explain';
 import { speak } from '../speech';
+import { useStrings } from '../language';
 import {
   shuffle, isNear, useDrag, SpeakerIcon, WellDone,
 } from '../game';
@@ -22,6 +23,7 @@ const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 // tapped) to the box of the thing it names. A right word stays in its box, a wrong one goes back.
 // When the exercise sorts its words into groups, the tray shows them group by group.
 export default function LabelMap({ exercise }) {
+  const text = useStrings();
   const {
     instructions, width, height, Drawing, items, groups, boxWidth = BOX_WIDTH,
   } = exercise;
@@ -86,7 +88,7 @@ export default function LabelMap({ exercise }) {
   const messageGroup = messageItem && groups?.find(group => group.id === messageItem.group);
   const trays = groups
     ? groups.map(group => ({ ...group, ids: order.filter(id => byId[id].group === group.id) }))
-    : [{ id: 'words', title: 'Words', ids: order }];
+    : [{ id: 'words', title: text.wordsTray, ids: order }];
 
   const renderChip = (id) => {
     const { word } = byId[id];
@@ -101,7 +103,7 @@ export default function LabelMap({ exercise }) {
           {word}
         </Word>
         <Explain word={word} variant="chip" />
-        <Speaker type="button" onClick={() => speak(word)} aria-label={`Listen to ${word}`}>
+        <Speaker type="button" onClick={() => speak(word, text.lang)} aria-label={text.listenTo(word)}>
           <SpeakerIcon />
         </Speaker>
       </Chip>
@@ -142,7 +144,7 @@ export default function LabelMap({ exercise }) {
                 <FilledBox key={id} style={position} data-testid={`box-${id}`}>
                   {word}
                   <Explain word={word} variant="box" />
-                  <BoxSpeaker type="button" onClick={() => speak(word)} aria-label={`Listen to ${word}`}>
+                  <BoxSpeaker type="button" onClick={() => speak(word, text.lang)} aria-label={text.listenTo(word)}>
                     <SpeakerIcon />
                   </BoxSpeaker>
                 </FilledBox>
@@ -155,7 +157,7 @@ export default function LabelMap({ exercise }) {
                 style={position}
                 ref={(element) => { boxes.current[id] = element; }}
                 onClick={() => onBoxClick(id)}
-                aria-label={`Box ${index + 1}`}
+                aria-label={text.boxNumber(index + 1)}
                 data-testid={`box-${id}`}
                 $over={over === id}
                 $ready={Boolean(selected)}
@@ -185,15 +187,15 @@ export default function LabelMap({ exercise }) {
                         </GroupTitle>
                         {left.length > 0
                           ? <Tray aria-label={title}>{left.map(renderChip)}</Tray>
-                          : <GroupDone>✓ All in place</GroupDone>}
+                          : <GroupDone>{text.allInPlace}</GroupDone>}
                       </Group>
                     );
                   })}
                 </Groups>
               ) : (
-                <Tray aria-label="Words">{order.filter(id => !placed[id]).map(renderChip)}</Tray>
+                <Tray aria-label={text.wordsTray}>{order.filter(id => !placed[id]).map(renderChip)}</Tray>
               )}
-              <Progress>{`${placedCount} of ${items.length} done`}</Progress>
+              <Progress>{text.progressDone(placedCount, items.length)}</Progress>
             </>
           )}
           <div aria-live="polite">
@@ -205,8 +207,8 @@ export default function LabelMap({ exercise }) {
                     {messageItem.definition}
                   </span>
                 )}
-                {message.kind === 'wrong' && <span>Not quite. Try another box!</span>}
-                {message.kind === 'hint' && <span>First pick a word, then tap its box.</span>}
+                {message.kind === 'wrong' && <span>{text.tryAnotherBox}</span>}
+                {message.kind === 'hint' && <span>{text.pickWordFirst}</span>}
               </Message>
             )}
           </div>

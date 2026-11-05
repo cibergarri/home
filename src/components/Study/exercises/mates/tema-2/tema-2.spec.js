@@ -8,9 +8,11 @@ import barras from './barras';
 import tabla from './tabla-100-199';
 import mensajeSecreto from './mensaje-secreto';
 import repaso from './repaso';
+import tresCifras from './tres-cifras';
+import { fewestPieces } from '../../../MoneyGame';
 
 // The maths of every Tema 2 exercise, checked: if a sum is written down, it adds up.
-const exercises = [centena, hasta199, sumar, restar, dieces, euros, barras, tabla, mensajeSecreto, repaso];
+const exercises = [centena, hasta199, tresCifras, sumar, restar, dieces, euros, barras, tabla, mensajeSecreto, repaso];
 const parts = exercises.flatMap(exercise => [exercise, ...(exercise.more ?? [])]);
 const ofType = type => parts.filter(part => (part.type ?? 'label') === type).flatMap(part => part.questions);
 
@@ -48,6 +50,12 @@ describe('Mates, tema 2', () => {
       [...line.matchAll(/(\d+) U y (\d+) U son 1 C/g)].forEach(([, a, b]) => expect(Number(a) + Number(b)).toBe(100));
       const htu = line.match(/(\d+) = (\d+) C \+ (\d+) D \+ (\d+) U$/);
       if (htu) expect(Number(htu[2]) * 100 + Number(htu[3]) * 10 + Number(htu[4])).toBe(Number(htu[1]));
+      const built = line.match(/(\d+) C \+ (\d+) D \+ (\d+) U = (?:(\d+) \+ (\d+) \+ (\d+) = )?(\d+)$/);
+      if (built) {
+        const [, c, d, u, h, t, o, number] = built.map(Number);
+        expect(c * 100 + d * 10 + u).toBe(number);
+        if (h) expect([h, t, o]).toEqual([c * 100, d * 10, u]);
+      }
       const split = line.match(/^(\d+) = (\d+) \+ (\d+) \+ (\d+)$/);
       if (split) expect(Number(split[2]) + Number(split[3]) + Number(split[4])).toBe(Number(split[1]));
     });
@@ -100,5 +108,24 @@ describe('Mates, tema 2', () => {
 
   it('has the right answer among the choices of every question', () => {
     ofType('quiz').forEach(({ choices, answer }) => expect(choices).toContain(answer));
+  });
+
+  it('has money that can be changed into as many notes or coins as asked, and right change', () => {
+    const notes = [50, 20, 10, 5, 2, 1];
+    // Whether `amount` can be made with exactly `count` notes and coins.
+    const canMake = (amount, count) => (count === 0 ? amount === 0
+      : notes.some(value => value <= amount && canMake(amount - value, count - 1)));
+    ofType('money').forEach(({ target, pieces, story }) => {
+      expect(target).toBeGreaterThan(0);
+      if (pieces) expect(`${story} ${canMake(target, pieces)}`).toBe(`${story} true`);
+      else expect(fewestPieces(target)).toBeGreaterThan(0);
+    });
+    const change = ofType('money').filter(({ story }) => story.includes('cuesta'));
+    change.forEach(({ story, target, scene }) => {
+      const { price, paid } = scene.props;
+      expect(story).toContain(`${price} €`);
+      expect(paid.reduce((a, b) => a + b, 0) - price).toBe(target);
+    });
+    expect(change.length).toBeGreaterThan(0);
   });
 });

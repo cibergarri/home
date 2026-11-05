@@ -12,6 +12,7 @@ import NumberGame from './NumberGame';
 import BlocksGame from './BlocksGame';
 import TowerGame from './TowerGame';
 import LetterGame from './LetterGame';
+import MoneyGame from './MoneyGame';
 import ScrapPaper from './ScrapPaper';
 import Explain, { ExplainContext } from './Explain';
 import { findSubject, findUnit, findExercise } from './subjects';
@@ -74,6 +75,7 @@ const GAMES = {
   blocks: BlocksGame,
   tower: TowerGame,
   letters: LetterGame,
+  money: MoneyGame,
 };
 
 function Game({ part }) {

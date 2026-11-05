@@ -10,6 +10,14 @@ const blockQuestion = (hundreds, tens, ones) => ({
   answer: hundreds * 100 + tens * 10 + ones,
 });
 
+// Página 9 del cuaderno: un número de más de 100, y cuántas decenas y unidades tiene de más.
+const more100 = (tens, ones) => ({
+  story: `Es ${100 + tens * 10 + ones}, mayor que 100. ¿Cuánto más?`,
+  prompt: 'Hay ? decenas y ? unidades más.',
+  scene: blocks(tens, ones, 1),
+  answer: [tens, ones],
+});
+
 const hasta199 = {
   slug: 'hasta-199',
   title: 'Números hasta 199',
@@ -38,6 +46,15 @@ const hasta199 = {
     { prompt: '160 = 1 C + ? D + ? U', answer: [6, 0] },
   ],
   more: [
+    {
+      title: '¿Cuánto más que 100?',
+      type: 'numbers',
+      write: true,
+      instructions: 'Una placa verde son 100. Cuenta lo que hay además de la placa.',
+      questions: [
+        more100(2, 4), more100(3, 7), more100(1, 5), more100(6, 0), more100(0, 9), more100(4, 2),
+      ],
+    },
     {
       title: 'Cuenta los bloques',
       type: 'numbers',

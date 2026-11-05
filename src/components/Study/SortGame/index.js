@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 
 import { speak } from '../speech';
+import { useStrings } from '../language';
 import {
   shuffle, isNear, useDrag, SpeakerIcon, WellDone,
 } from '../game';
@@ -17,6 +18,7 @@ import {
 // the column it belongs to. A card can belong to more than one column (`columns`), and then any
 // of them is right. A right card stays in its column, a wrong one goes back.
 export default function SortGame({ exercise }) {
+  const strings = useStrings();
   const { instructions, columns, cards } = exercise;
   // The first round is in a fixed order, so the static page and the browser agree on it.
   const [order, setOrder] = useState(() => cards.map(card => card.id).reverse());
@@ -97,7 +99,7 @@ export default function SortGame({ exercise }) {
                 return (
                   <SortedCard key={cardId}>
                     {text}
-                    <SmallSpeaker type="button" onClick={() => speak(text)} aria-label={`Listen to ${text}`}>
+                    <SmallSpeaker type="button" onClick={() => speak(text, strings.lang)} aria-label={strings.listenTo(text)}>
                       <SpeakerIcon />
                     </SmallSpeaker>
                   </SortedCard>
@@ -111,7 +113,7 @@ export default function SortGame({ exercise }) {
       <Bottom>
         {finished ? <WellDone mistakes={mistakes} onAgain={playAgain} /> : (
           <>
-            <Cards aria-label="Cards">
+            <Cards aria-label={strings.cardsTray}>
               {order.filter(id => !sorted[id]).map((id) => {
                 const { text } = byId[id];
                 return (
@@ -119,14 +121,14 @@ export default function SortGame({ exercise }) {
                     <Word type="button" aria-pressed={selected === id} {...handlersFor(id)} onClick={event => onCardClick(event, id)}>
                       {text}
                     </Word>
-                    <Speaker type="button" onClick={() => speak(text)} aria-label={`Listen to ${text}`}>
+                    <Speaker type="button" onClick={() => speak(text, strings.lang)} aria-label={strings.listenTo(text)}>
                       <SpeakerIcon />
                     </Speaker>
                   </Chip>
                 );
               })}
             </Cards>
-            <Progress>{`${sortedCount} of ${cards.length} done`}</Progress>
+            <Progress>{strings.progressDone(sortedCount, cards.length)}</Progress>
           </>
         )}
         <div aria-live="polite">
@@ -138,8 +140,8 @@ export default function SortGame({ exercise }) {
                   {`${message.card.text.toLowerCase()}.`}
                 </span>
               )}
-              {message.kind === 'wrong' && <span>Not quite. Try another column!</span>}
-              {message.kind === 'hint' && <span>First pick a card, then tap its column.</span>}
+              {message.kind === 'wrong' && <span>{strings.tryAnotherColumn}</span>}
+              {message.kind === 'hint' && <span>{strings.pickCardFirst}</span>}
             </Message>
           )}
         </div>

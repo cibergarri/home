@@ -1,5 +1,5 @@
 import {
-  Blocks, blocksSize, NumberLine, NUMBER_LINE, DataTable, tableSize, Money, moneySize, BarModel, BAR,
+  Blocks, blocksSize, NumberLine, NUMBER_LINE, DataTable, tableSize, Money, moneySize, Shop, shopSize, BarModel, BAR,
 } from '../../drawings/Maths';
 
 // Pictures for maths questions: base-ten blocks, a number line, or a two-way table.
@@ -19,6 +19,11 @@ export const table = (columns, rows) => ({
 
 export const money = (...values) => ({
   Drawing: Money, ...moneySize({ money: values }), props: { money: values },
+});
+
+// Something bought, `item` an emoji, at `price`, paid with the notes and coins in `paid`.
+export const shop = (item, price, ...paid) => ({
+  Drawing: Shop, ...shopSize({ paid }), props: { item, price, paid },
 });
 
 export const bar = props => ({ Drawing: BarModel, ...BAR, props });
