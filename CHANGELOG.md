@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/cibergarri/home/compare/v1.20.0...v1.21.0) (2026-11-05)
+
+
+### Features
+
+* **julia:** add Lengua, with the welcome unit and temas 1 and 2 ([337bb96](https://github.com/cibergarri/home/commit/337bb968ce775419334d09e44fbfa86e69b41390))
+* **julia:** add Naturales, and money and 3-digit exercises from the book ([9d8156d](https://github.com/cibergarri/home/commit/9d8156d2e803c35819d7bc43c8a78b9f6a01396c))
+
 # [1.20.0](https://github.com/cibergarri/home/compare/v1.19.0...v1.20.0) (2026-10-30)
 
 
