@@ -33,6 +33,21 @@ import tabla100 from './exercises/mates/tema-2/tabla-100-199';
 import mensajeSecreto from './exercises/mates/tema-2/mensaje-secreto';
 import repaso2 from './exercises/mates/tema-2/repaso';
 import tresCifras from './exercises/mates/tema-2/tres-cifras';
+import teoRegresa from './exercises/lengua/bienvenida/teo-regresa';
+import empezamos from './exercises/lengua/bienvenida/empezamos';
+import trolls from './exercises/lengua/tema-1/trolls';
+import generoNumero from './exercises/lengua/tema-1/genero-numero';
+import mayusculas from './exercises/lengua/tema-1/mayusculas';
+import abecedario from './exercises/lengua/tema-1/abecedario';
+import receta from './exercises/lengua/tema-1/receta';
+import pareados from './exercises/lengua/tema-1/pareados';
+import juegosTopi from './exercises/lengua/tema-1/juegos';
+import ciervo from './exercises/lengua/tema-2/ciervo';
+import adjetivos from './exercises/lengua/tema-2/adjetivos';
+import silabas from './exercises/lengua/tema-2/silabas';
+import sinonimos from './exercises/lengua/tema-2/sinonimos';
+import nutrias from './exercises/lengua/tema-2/nutrias';
+import cancion from './exercises/lengua/tema-2/cancion';
 import etapas from './exercises/naturales/tema-1/etapas';
 import funciones from './exercises/naturales/tema-1/funciones';
 import movemos from './exercises/naturales/tema-1/movemos';
@@ -83,6 +98,33 @@ export const SUBJECTS = [
         exercises: [
           centena, hasta199, tresCifras, sumar2, restar2, dieces, euros, barras, tabla100, mensajeSecreto, repaso2,
         ],
+      },
+    ],
+  },
+  {
+    slug: 'lengua',
+    title: 'Lengua',
+    icon: '📖',
+    lang: 'es',
+    summary: 'parts',
+    units: [
+      {
+        slug: 'bienvenida',
+        title: 'Bienvenidos',
+        icon: '🎒',
+        exercises: [teoRegresa, empezamos],
+      },
+      {
+        slug: 'tema-1',
+        title: 'Tema 1. Cocineros de salud',
+        icon: '🍓',
+        exercises: [trolls, generoNumero, mayusculas, abecedario, receta, pareados, juegosTopi],
+      },
+      {
+        slug: 'tema-2',
+        title: 'Tema 2. Seres fantásticos',
+        icon: '🦌',
+        exercises: [ciervo, adjetivos, silabas, sinonimos, nutrias, cancion],
       },
     ],
   },

@@ -34,6 +34,13 @@ export const Number = styled.span`
   font-weight: 700;
 `;
 
+/* What the word is, when it is not a number. */
+export const Clue = styled.p`
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+`;
+
 /* The word, a box for each letter, a dashed one for each that is missing. */
 export const Word = styled.div`
   display: flex;

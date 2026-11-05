@@ -14,7 +14,7 @@ import {
 } from '../BuildGame/style';
 import { Answering, Switch } from '../NumberGame/style';
 import {
-  Top, Number, Word, Letter, Gap,
+  Top, Number, Clue, Word, Letter, Gap,
 } from './style';
 
 // Letters that look like they could fit, to tap among the missing ones.
@@ -30,7 +30,8 @@ const tilesFor = (puzzle, seed) => {
   return scramble([...missing, ...decoys], seed).map((letter, id) => ({ id, letter }));
 };
 
-// Words with some letters missing, one after another: the missing letters are tapped in order from
+// Words with some letters missing, one after another, each with its `number` (the numbers in
+// English) or a `clue` to find it by ("Lo contrario de bajar"): the missing letters are tapped in order from
 // a few letter tiles, or with `write: true` written by hand one at a time. Only the right next
 // letter goes in; a wrong one shakes and counts as a mistake. The word can be heard at any time,
 // and is read aloud once it is complete.
@@ -109,7 +110,7 @@ export default function LetterGame({ exercise }) {
 
   let gap = -1;
   const listen = (
-    <Listen type="button" onClick={() => speak(puzzle.word, text.lang)} aria-label={text.listenTo(puzzle.number)}>
+    <Listen type="button" onClick={() => speak(puzzle.word, text.lang)} aria-label={text.listenTo(puzzle.number ?? puzzle.word)}>
       <SpeakerIcon />
       {text.listen}
     </Listen>
@@ -119,8 +120,9 @@ export default function LetterGame({ exercise }) {
     <>
       <Instructions>{instructions}</Instructions>
       <Puzzle>
+        {puzzle.clue && <Clue>{puzzle.clue}</Clue>}
         <Top>
-          <Number aria-hidden="true">{puzzle.number}</Number>
+          {puzzle.number !== undefined && <Number aria-hidden="true">{puzzle.number}</Number>}
           <Word $done={solved} aria-label={text.yourAnswer}>
             {[...puzzle.shown].map((letter, i) => {
               const key = `${puzzle.word}-${i}`;

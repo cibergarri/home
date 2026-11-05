@@ -1,0 +1,60 @@
+// Lengua, tema 2: los adjetivos. Dicen cómo son o cómo están las personas, los animales y los
+// objetos, y concuerdan con el nombre.
+const ADJETIVO = { id: 'adjetivo', title: 'Adjetivo (cómo es)', colour: '#a6db8a' };
+const NOMBRE = { id: 'nombre', title: 'Nombre', colour: '#8ec5f2' };
+const SI = { id: 'si', title: 'Así es Topi', colour: '#f5a8c8' };
+const NO = { id: 'no', title: 'Así no es Topi', colour: '#d9d4c7' };
+
+const adjetivos = {
+  slug: 'adjetivos',
+  title: 'Los adjetivos',
+  heading: '¿Nombre o adjetivo?',
+  type: 'colour',
+  instructions: 'Las palabras que dicen cómo es o cómo está algo son adjetivos: un cuenco grande, una zona tranquila.',
+  crayons: [ADJETIVO, NOMBRE],
+  words: [
+    { id: 'grande', word: 'grande', crayon: 'adjetivo' },
+    { id: 'cuenco', word: 'cuenco', crayon: 'nombre' },
+    { id: 'rapido', word: 'rápido', crayon: 'adjetivo' },
+    { id: 'ciervo', word: 'ciervo', crayon: 'nombre' },
+    { id: 'veloz', word: 'veloz', crayon: 'adjetivo' },
+    { id: 'manzanas', word: 'manzanas', crayon: 'nombre' },
+    { id: 'frescas', word: 'frescas', crayon: 'adjetivo' },
+    { id: 'diminuta', word: 'diminuta', crayon: 'adjetivo' },
+    { id: 'bosque', word: 'bosque', crayon: 'nombre' },
+    { id: 'salvaje', word: 'salvaje', crayon: 'adjetivo' },
+  ],
+  more: [
+    {
+      title: '¿Cómo es Topi?',
+      type: 'colour',
+      instructions: 'Piensa en el cerdivolador Topi. Colorea los adjetivos que dicen cómo es.',
+      crayons: [SI, NO],
+      words: [
+        { id: 'simpatico', word: 'simpático', crayon: 'si' },
+        { id: 'fiero', word: 'fiero', crayon: 'no' },
+        { id: 'rosa', word: 'rosa', crayon: 'si' },
+        { id: 'volador', word: 'volador', crayon: 'si' },
+        { id: 'enorme', word: 'enorme', crayon: 'no' },
+        { id: 'pequeno', word: 'pequeño', crayon: 'si' },
+        { id: 'gracioso', word: 'gracioso', crayon: 'si' },
+        { id: 'marron', word: 'marrón', crayon: 'no' },
+      ],
+    },
+    {
+      title: 'El adjetivo correcto',
+      type: 'quiz',
+      instructions: 'Los adjetivos concuerdan con los nombres: hocico largo, patas largas.',
+      questions: [
+        { prompt: 'La veterinaria está …', choices: ['ocupada', 'ocupado'], answer: 'ocupada' },
+        { prompt: 'Ese perro es muy …', choices: ['tranquilo', 'tranquila'], answer: 'tranquilo' },
+        { prompt: 'Las gacelas son …', choices: ['ágil', 'ágiles'], answer: 'ágiles' },
+        { prompt: 'Las orejas de los trolls son …', choices: ['puntiagudas', 'puntiagudo'], answer: 'puntiagudas' },
+        { prompt: 'Javier ha perdido su juguete. Está …', choices: ['triste', 'contento'], answer: 'triste' },
+        { prompt: 'Silvia ve una araña enorme. Está …', choices: ['asustada', 'aburrida'], answer: 'asustada' },
+      ],
+    },
+  ],
+};
+
+export default adjetivos;

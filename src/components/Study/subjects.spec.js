@@ -16,7 +16,7 @@ describe("Julia's study pages", () => {
     expect(screen.getByText('Social Science')).toBeInTheDocument();
     expect(screen.getByText('English')).toBeInTheDocument();
     expect(screen.getByText('Mates')).toBeInTheDocument();
-    expect(hrefs()).toEqual(['/julia/social-science', '/julia/mates', '/julia/naturales', '/julia/english']);
+    expect(hrefs()).toEqual(['/julia/social-science', '/julia/mates', '/julia/lengua', '/julia/naturales', '/julia/english']);
   });
 
   it('says so when there is nothing to list yet', () => {
@@ -70,6 +70,21 @@ describe("Julia's study pages", () => {
         .map(exercise => ({ subject: 'mates', unit: 'tema-1', exercise })),
       ...['centena', 'hasta-199', 'tres-cifras', 'sumar', 'restar', 'dieces', 'euros', 'barras', 'tabla-100-199', 'mensaje-secreto', 'repaso']
         .map(exercise => ({ subject: 'mates', unit: 'tema-2', exercise })),
+      { subject: 'lengua', unit: 'bienvenida', exercise: 'teo-regresa' },
+      { subject: 'lengua', unit: 'bienvenida', exercise: 'empezamos' },
+      { subject: 'lengua', unit: 'tema-1', exercise: 'trolls' },
+      { subject: 'lengua', unit: 'tema-1', exercise: 'genero-numero' },
+      { subject: 'lengua', unit: 'tema-1', exercise: 'mayusculas' },
+      { subject: 'lengua', unit: 'tema-1', exercise: 'abecedario' },
+      { subject: 'lengua', unit: 'tema-1', exercise: 'receta' },
+      { subject: 'lengua', unit: 'tema-1', exercise: 'pareados' },
+      { subject: 'lengua', unit: 'tema-1', exercise: 'juegos' },
+      { subject: 'lengua', unit: 'tema-2', exercise: 'ciervo' },
+      { subject: 'lengua', unit: 'tema-2', exercise: 'adjetivos' },
+      { subject: 'lengua', unit: 'tema-2', exercise: 'silabas' },
+      { subject: 'lengua', unit: 'tema-2', exercise: 'sinonimos' },
+      { subject: 'lengua', unit: 'tema-2', exercise: 'nutrias' },
+      { subject: 'lengua', unit: 'tema-2', exercise: 'cancion' },
       { subject: 'naturales', unit: 'tema-1', exercise: 'etapas' },
       { subject: 'naturales', unit: 'tema-1', exercise: 'funciones' },
       { subject: 'naturales', unit: 'tema-1', exercise: 'movemos' },
