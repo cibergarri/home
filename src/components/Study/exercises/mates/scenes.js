@@ -1,6 +1,9 @@
 import {
   Blocks, blocksSize, NumberLine, NUMBER_LINE, DataTable, tableSize, Money, moneySize, Shop, shopSize, BarModel, BAR,
 } from '../../drawings/Maths';
+import {
+  Clock, CLOCK, DigitalClock, DIGITAL, BarChart, chartSize, Ruler, rulerSize, Shapes, shapesSize,
+} from '../../drawings/Measures';
 
 // Pictures for maths questions: base-ten blocks, a number line, or a two-way table.
 export const blocks = (tens, ones, hundreds = 0) => ({
@@ -27,3 +30,25 @@ export const shop = (item, price, ...paid) => ({
 });
 
 export const bar = props => ({ Drawing: BarModel, ...BAR, props });
+
+// The notes and coins can be cents too: '50c', '20c', '10c', '5c', '2c', '1c'.
+
+// A clock with hands, or a digital one, at `hours` and `minutes`.
+export const clock = (hours, minutes = 0) => ({ Drawing: Clock, ...CLOCK, props: { hours, minutes } });
+
+export const digital = (hours, minutes = 0) => ({ Drawing: DigitalClock, ...DIGITAL, props: { hours, minutes } });
+
+// A bar chart, `bars` as [label, value] pairs (or [label, value, colour]), its axis counting by
+// `step`. A bar named after a colour, 'Rojo', is drawn in that colour.
+export const chart = (bars, step = 1) => {
+  const props = { bars: bars.map(([label, value, colour]) => ({ label, value, colour })), step };
+  return { Drawing: BarChart, ...chartSize(props), props };
+};
+
+// Something `length` centimetres long on a ruler `to` centimetres long.
+export const ruler = (length, to = 12, colour = undefined) => ({
+  Drawing: Ruler, ...rulerSize({ to }), props: { length, to, colour },
+});
+
+// A row of shapes by name (see SHAPE_KINDS), or { kind, axis: true } for one with its axis drawn.
+export const shapes = (...kinds) => ({ Drawing: Shapes, ...shapesSize({ shapes: kinds }), props: { shapes: kinds } });

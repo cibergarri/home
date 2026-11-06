@@ -144,13 +144,21 @@ const NOTES = {
     colour: '#d8b04c', dark: '#8f6f1c', light: '#f2dea3', size: [153, 77],
   },
 };
+// The cent coins go by their name, '50c': copper for 1, 2 and 5 cents, Nordic gold for the rest.
 const COINS = {
   1: { radius: 27, ring: 'gold', centre: 'silver' },
   2: { radius: 30, ring: 'silver', centre: 'gold' },
+  '1c': { radius: 19, centre: 'copper', cents: 1 },
+  '2c': { radius: 21, centre: 'copper', cents: 2 },
+  '5c': { radius: 23, centre: 'copper', cents: 5 },
+  '10c': { radius: 22, centre: 'gold', cents: 10 },
+  '20c': { radius: 24, centre: 'gold', cents: 20 },
+  '50c': { radius: 27, centre: 'gold', cents: 50 },
 };
 const METALS = {
   gold: ['#f8e08c', '#d6ac43', '#9c7a24'],
   silver: ['#f4f6f8', '#c3c9d0', '#7f8790'],
+  copper: ['#f3b58a', '#c4703f', '#7f3f1d'],
 };
 const MONEY_HEIGHT = 110; // a row of money
 const GAP = 10;
@@ -233,13 +241,27 @@ function Note({
   );
 }
 
-// The common side of a euro coin: the numeral and EURO beside a few lines with stars.
+// The common side of a euro coin: the numeral and EURO beside a few lines with stars. A cent coin
+// is all one metal, with its number over EURO CENT.
 function Coin({
   value, x, top = 0, id,
 }) {
-  const { radius, ring, centre } = COINS[value];
+  const {
+    radius, ring, centre, cents,
+  } = COINS[value];
   const cx = x + radius;
   const cy = top + MONEY_HEIGHT / 2;
+  if (cents) {
+    const ink = METALS[centre][2];
+    return (
+      <g>
+        <circle cx={cx} cy={cy} r={radius} fill={`url(#${id}-${centre})`} stroke={ink} strokeWidth={1.2} />
+        <circle cx={cx} cy={cy} r={radius - 3} fill="none" stroke={ink} strokeWidth={0.8} opacity={0.6} />
+        <text x={cx} y={cy + radius * 0.3} textAnchor="middle" fontSize={radius * 0.95} fontWeight={800} fill={ink} fontFamily="inherit">{cents}</text>
+        <text x={cx} y={cy + radius * 0.68} textAnchor="middle" fontSize={radius * 0.26} fontWeight={800} fill={ink} fontFamily="inherit">EURO CENT</text>
+      </g>
+    );
+  }
   const inner = radius * 0.68;
   const ink = METALS[centre][2];
   return (

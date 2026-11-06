@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 import { StudyPage, Exercise } from '@/components/Study';
 import {
   allExercises, findSubject, findUnit, findExercise,
@@ -15,7 +17,9 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { subject, unit, exercise } = await params;
-  return { title: `Julia · ${findExercise(findUnit(findSubject(subject), unit), exercise).title}` };
+  const found = findExercise(findUnit(findSubject(subject), unit), exercise);
+  if (!found) notFound(); // in a hidden unit, or not there
+  return { title: `Julia · ${found.title}` };
 }
 
 export default async function ExercisePage({ params }) {
@@ -23,6 +27,7 @@ export default async function ExercisePage({ params }) {
   const subject = findSubject(subjectSlug);
   const unit = findUnit(subject, unitSlug);
   const exercise = findExercise(unit, exerciseSlug);
+  if (!exercise) notFound();
   return (
     <StudyPage
       back={`/julia/${subject.slug}/${unit.slug}`}

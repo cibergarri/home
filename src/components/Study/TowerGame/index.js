@@ -9,7 +9,7 @@ import { sayable } from '../NumberGame';
 import { Instructions, Message } from '../LabelMap/style';
 import { Row, Listen, Next } from '../NumberGame/style';
 import {
-  Card, Story, Tower, Head, Cell, Box, Side, Prompt, Keypad, Key,
+  Card, Story, Tower, Head, Cell, Box, Digit, Side, Prompt, Keypad, Key,
 } from './style';
 
 const digits = n => ({ hundreds: Math.floor(n / 100), tens: Math.floor(n / 10) % 10, units: n % 10 });
@@ -23,10 +23,24 @@ const stepsFor = ({ a, b, op }, text) => {
   const result = digits(op === '-' ? a - b : a + b);
   const hundreds = Math.max(a, b) >= 100 || result.hundreds > 0;
   if (op === '-') {
+    // Restar desagrupando, as in the book: when the top digit is smaller, 1 of the next column is
+    // swapped for 10 of this one. Its digit is crossed out and the new ones written above.
+    const borrowUnits = x.units < y.units;
+    const tensLeft = x.tens - (borrowUnits ? 1 : 0);
+    const borrowTens = tensLeft < y.tens;
+    const tensTop = borrowUnits && borrowTens ? 'topTens2' : 'topTens';
     return [
-      { box: 'units', value: x.units - y.units, prompt: text.subtractUnits(x.units, y.units) },
-      { box: 'tens', value: x.tens - y.tens, prompt: text.subtractTens(x.tens, y.tens) },
-      ...(hundreds ? [{ box: 'hundreds', value: x.hundreds - y.hundreds, prompt: text.subtractHundreds(x.hundreds, y.hundreds) }] : []),
+      ...(borrowUnits ? [
+        { box: 'topTens', value: tensLeft, prompt: text.borrowTens(x.units, y.units, x.tens) },
+        { box: 'topUnits', value: x.units + 10, prompt: text.borrowUnits(x.units) },
+      ] : []),
+      { box: 'units', value: x.units + (borrowUnits ? 10 : 0) - y.units, prompt: text.subtractUnits(x.units + (borrowUnits ? 10 : 0), y.units) },
+      ...(borrowTens ? [
+        { box: 'topHundreds', value: x.hundreds - 1, prompt: text.borrowHundreds(tensLeft, y.tens, x.hundreds) },
+        { box: tensTop, value: tensLeft + 10, prompt: text.borrowTensFromHundreds(tensLeft) },
+      ] : []),
+      { box: 'tens', value: tensLeft + (borrowTens ? 10 : 0) - y.tens, prompt: text.subtractTens(tensLeft + (borrowTens ? 10 : 0), y.tens) },
+      ...(hundreds ? [{ box: 'hundreds', value: x.hundreds - (borrowTens ? 1 : 0) - y.hundreds, prompt: text.subtractHundreds(x.hundreds - (borrowTens ? 1 : 0), y.hundreds) }] : []),
     ];
   }
   const units = x.units + y.units;
@@ -45,13 +59,16 @@ const stepsFor = ({ a, b, op }, text) => {
 
 // Sums and subtractions in columns ("en torre"), one box at a time, guided: each digit typed goes
 // in the glowing box and is checked straight away. A sum whose units (or tens) come to 10 or more
-// asks for the 1 carried above the next column. Numbers up to 999, with a column for the hundreds
-// when there are any; results under 1000, and subtractions that don't borrow.
+// asks for the 1 carried above the next column; a subtraction whose top digit is too small swaps 1
+// of the next column for 10, crossing out its digit and writing the new ones above. Numbers up to
+// 999, with a column for the hundreds when there are any; results under 1000, and no borrowing
+// across a 0 in the tens.
 export default function TowerGame({ exercise }) {
   const { instructions, questions } = exercise;
   const text = useStrings();
   const [index, setIndex] = useState(0);
   const [filled, setFilled] = useState({});
+  const [partial, setPartial] = useState(''); // the first digit of a 10 to 19 written above
   const [wrong, setWrong] = useState(null);
   const [mistakes, setMistakes] = useState(0);
   const [message, setMessage] = useState(null);
@@ -72,13 +89,21 @@ export default function TowerGame({ exercise }) {
 
   const type = (digit) => {
     if (solved) return;
-    if (digit === step.value) {
-      const next = { ...filled, [step.box]: digit };
+    const typed = `${partial}${digit}`;
+    if (step.value >= 10 && typed.length < 2 && String(step.value).startsWith(typed)) {
+      setPartial(typed);
+      setMessage(null);
+      return;
+    }
+    if (Number(typed) === step.value) {
+      const next = { ...filled, [step.box]: step.value };
       setFilled(next);
+      setPartial('');
       setMessage(null);
       if (steps.every(({ box }) => next[box] !== undefined)) speak(sayable(sentence, text.lang), text.lang);
       return;
     }
+    setPartial('');
     setMistakes(count => count + 1);
     setWrong(step.box);
     setMessage(text.wrongDigit);
@@ -88,6 +113,7 @@ export default function TowerGame({ exercise }) {
 
   const goTo = (to) => {
     setFilled({});
+    setPartial('');
     setMessage(null);
     setIndex(to);
   };
@@ -119,12 +145,13 @@ export default function TowerGame({ exercise }) {
     return (
       <Box
         $small={small}
+        $crossed={name === 'topTens' && filled.topTens2 !== undefined}
         $active={step?.box === name}
         $done={filled[name] !== undefined}
         $wrong={wrong === name}
         data-testid={`box-${name}`}
       >
-        {filled[name] ?? ''}
+        {filled[name] ?? (step?.box === name ? partial : '')}
       </Box>
     );
   };
@@ -141,14 +168,14 @@ export default function TowerGame({ exercise }) {
           <Head $kind="units">{unitsLabel}</Head>
 
           <Cell $plain />
-          {big && <Cell>{question.op === '+' && box('carryHundreds', true)}</Cell>}
-          <Cell>{question.op === '+' && box('carry', true)}</Cell>
-          <Cell />
+          {big && <Cell>{question.op === '+' ? box('carryHundreds', true) : box('topHundreds', true)}</Cell>}
+          <Cell $pair>{question.op === '+' ? box('carry', true) : <>{box('topTens', true)}{box('topTens2', true)}</>}</Cell>
+          <Cell>{question.op === '-' && box('topUnits', true)}</Cell>
 
           <Cell $plain />
-          {big && <Cell>{a.hundreds || ''}</Cell>}
-          <Cell>{a.hundreds || a.tens ? a.tens : ''}</Cell>
-          <Cell>{a.units}</Cell>
+          {big && <Cell><Digit $crossed={filled.topHundreds !== undefined}>{a.hundreds || ''}</Digit></Cell>}
+          <Cell><Digit $crossed={filled.topTens !== undefined}>{a.hundreds || a.tens ? a.tens : ''}</Digit></Cell>
+          <Cell><Digit $crossed={filled.topUnits !== undefined}>{a.units}</Digit></Cell>
 
           <Cell $plain>{question.op}</Cell>
           {big && <Cell>{b.hundreds || ''}</Cell>}

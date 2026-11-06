@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { cleanup, screen } from '@testing-library/react';
 
 import { renderWithProviders } from '@/test-utils';
 import { Exercise, CardList } from '@/components/Study';
@@ -6,6 +6,8 @@ import JuliaPage from '@/app/julia/page';
 import SubjectPage from '@/app/julia/[subject]/page';
 import UnitPage from '@/app/julia/[subject]/[unit]/page';
 import { generateStaticParams } from '@/app/julia/[subject]/[unit]/[exercise]/page';
+import { findSubject, findUnit } from './subjects';
+import { HIDDEN_UNITS } from './hidden';
 
 const params = value => Promise.resolve(value);
 const hrefs = () => screen.getAllByRole('link').map(link => link.getAttribute('href'));
@@ -66,39 +68,46 @@ describe("Julia's study pages", () => {
       { subject: 'social-science', unit: 'unit-1', exercise: 'rivers' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'find-directions' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'physical-and-human-features' },
-      ...['numeros-de-dos-cifras', 'comparar', 'aproximar', 'sumar', 'restar', 'problemas', 'tabla-cien', 'tablas', 'repaso']
-        .map(exercise => ({ subject: 'mates', unit: 'tema-1', exercise })),
-      ...['centena', 'hasta-199', 'tres-cifras', 'sumar', 'restar', 'dieces', 'euros', 'barras', 'tabla-100-199', 'mensaje-secreto', 'repaso']
-        .map(exercise => ({ subject: 'mates', unit: 'tema-2', exercise })),
-      { subject: 'lengua', unit: 'bienvenida', exercise: 'teo-regresa' },
-      { subject: 'lengua', unit: 'bienvenida', exercise: 'empezamos' },
-      { subject: 'lengua', unit: 'tema-1', exercise: 'trolls' },
-      { subject: 'lengua', unit: 'tema-1', exercise: 'genero-numero' },
-      { subject: 'lengua', unit: 'tema-1', exercise: 'mayusculas' },
-      { subject: 'lengua', unit: 'tema-1', exercise: 'abecedario' },
-      { subject: 'lengua', unit: 'tema-1', exercise: 'receta' },
-      { subject: 'lengua', unit: 'tema-1', exercise: 'pareados' },
-      { subject: 'lengua', unit: 'tema-1', exercise: 'juegos' },
-      { subject: 'lengua', unit: 'tema-2', exercise: 'ciervo' },
-      { subject: 'lengua', unit: 'tema-2', exercise: 'adjetivos' },
-      { subject: 'lengua', unit: 'tema-2', exercise: 'silabas' },
-      { subject: 'lengua', unit: 'tema-2', exercise: 'sinonimos' },
-      { subject: 'lengua', unit: 'tema-2', exercise: 'nutrias' },
-      { subject: 'lengua', unit: 'tema-2', exercise: 'cancion' },
+      ...[
+        ['bienvenida', ['empezamos', 'numeros', 'repaso']],
+        ['tema-1', ['numeros-de-dos-cifras', 'comparar', 'aproximar', 'sumar', 'restar', 'problemas', 'tabla-cien', 'tablas', 'con-las-manos', 'repaso']],
+        ['tema-2', ['centena', 'hasta-199', 'tres-cifras', 'sumar', 'restar', 'dieces', 'euros', 'barras', 'tabla-100-199', 'mensaje-secreto', 'con-las-manos', 'repaso']],
+        ['tema-3', ['hasta-999', 'sumar', 'restar', 'restar-decenas', 'medir', 'lineas-poligonos', 'problemas', 'desafio', 'con-las-manos', 'repaso']],
+        ['tema-4', ['recta', 'prueba-resta', 'desagrupar', 'recta-calculo', 'calendario', 'reloj', 'barras', 'desafio', 'con-las-manos', 'repaso']],
+        ['tema-5', ['anterior-posterior', 'ordinales', 'sumar-reagrupando', 'restar-desagrupando', 'sumar-restar-9', 'litros', 'kilos', 'tablas-de-datos', 'problemas-de-litros', 'con-las-manos', 'repaso']],
+        ['tema-6', ['aproximar', 'conmutativa', 'restar-desagrupando', 'restar-saltando', 'reloj-digital', 'circulo', 'graficos-de-barras', 'problemas-dos-pasos', 'con-las-manos', 'repaso']],
+        ['tema-7', ['aproximar', 'asociativa', 'restar', 'restar-saltando', 'centimos', 'cuerpos', 'seguro-posible', 'barras-dinero', 'con-las-manos', 'repaso']],
+        ['tema-8', ['pares-impares', 'sumandos-repetidos', 'multiplicacion', 'doble-mitad', 'longitud', 'izquierda-derecha', 'planos', 'problemas', 'con-las-manos', 'repaso']],
+        ['tema-9', ['tres-cifras', 'sumar-restar', 'tabla-2', 'tablas-5-10', 'minutos-segundos', 'simetria', 'graficos', 'problemas-cambio', 'con-las-manos', 'repaso']],
+      ].flatMap(([unit, exercises]) => exercises.map(exercise => ({ subject: 'mates', unit, exercise }))),
+      ...[
+        ['bienvenida', ['teo-regresa', 'empezamos']],
+        ['tema-1', ['trolls', 'genero-numero', 'mayusculas', 'abecedario', 'receta', 'pareados', 'juegos']],
+        ['tema-2', ['ciervo', 'adjetivos', 'silabas', 'sinonimos', 'nutrias', 'cancion']],
+        ['tema-3', ['frutillas', 'demostrativos', 'ca-que', 'diminutivos', 'cartel', 'poesia', 'repaso']],
+        ['tema-4', ['reloj', 'pronombres', 'za-ce', 'polisemicas', 'noticia', 'mitos', 'juegos', 'repaso']],
+        ['tema-5', ['pantanos', 'verbos', 'gue-gui', 'familias', 'entrevista', 'teatro', 'aire', 'repaso']],
+        ['tema-6', ['rueda-rocas', 'sujeto', 'ge-gi-je-ji', 'campos', 'tiempo', 'trabalenguas', 'resumen', 'repaso']],
+        ['tema-7', ['niebla', 'oraciones', 'mp-mb-nv', 'frases-hechas', 'instrucciones', 'comic', 'esquema', 'repaso']],
+        ['tema-8', ['festival', 'lenguas', 'r-fuerte', 'derivadas', 'dialogo', 'monstruo', 'bruja-mon', 'repaso']],
+        ['tema-9', ['hechizo', 'oral-escrita', 'bl-br', 'compuestas', 'patines', 'adivinanzas', 'juegos', 'repaso']],
+      ].flatMap(([unit, exercises]) => exercises.map(exercise => ({ subject: 'lengua', unit, exercise }))),
       { subject: 'naturales', unit: 'tema-1', exercise: 'etapas' },
       { subject: 'naturales', unit: 'tema-1', exercise: 'funciones' },
       { subject: 'naturales', unit: 'tema-1', exercise: 'movemos' },
       { subject: 'naturales', unit: 'tema-1', exercise: 'respirar' },
       { subject: 'naturales', unit: 'tema-1', exercise: 'alimentamos' },
       { subject: 'naturales', unit: 'tema-1', exercise: 'repaso' },
-      { subject: 'english', unit: 'unit-1', exercise: 'days-of-the-week' },
-      { subject: 'english', unit: 'unit-1', exercise: 'places-at-school' },
-      { subject: 'english', unit: 'unit-1', exercise: 'wheres' },
-      { subject: 'english', unit: 'unit-1', exercise: 'positions' },
-      { subject: 'english', unit: 'unit-1', exercise: 'rules-and-games' },
-      { subject: 'english', unit: 'unit-1', exercise: 'story-phrases' },
-      { subject: 'english', unit: 'unit-1', exercise: 'numbers' },
-      { subject: 'english', unit: 'unit-1', exercise: 'review' },
+      ...[
+        ['welcome', ['family', 'greetings', 'whos-that', 'story', 'review']],
+        ['unit-1', ['days-of-the-week', 'places-at-school', 'wheres', 'positions', 'rules-and-games', 'story-phrases', 'numbers', 'review']],
+        ['unit-2', ['rooms', 'theres-there-are', 'story', 'where-do-you-live', 'furniture', 'materials', 'review']],
+        ['unit-3', ['clothes', 'what-are-you-wearing', 'the-scarecrow', 'put-on-your-sweater', 'new-and-old', 'seasons', 'school-uniforms', 'review']],
+        ['unit-4', ['hair', 'hes-got', 'a-new-star', 'im-brave', 'has-she-got', 'portraits', 'dressing-up', 'review']],
+        ['unit-5', ['camp-activities', 'i-want-to', 'fun-at-camp', 'whose-turn', 'do-you-want-to', 'lets-move', 'countryside', 'unit-review']],
+        ['unit-6', ['summer-places', 'in-summer', 'a-safari-adventure', 'wheres-the-funfair', 'by-car', 'moving-around', 'summer-activities', 'unit-review', 'review']],
+        ['festivals', ['halloween', 'christmas', 'holi']],
+      ].flatMap(([unit, exercises]) => exercises.map(exercise => ({ subject: 'english', unit, exercise }))),
     ]);
   });
 
@@ -117,9 +126,36 @@ describe("Julia's study pages", () => {
   it('speaks Spanish on the pages of Mates', async () => {
     renderWithProviders(await SubjectPage({ params: params({ subject: 'mates' }) }));
     expect(screen.getByText('🔢 Asignatura')).toBeInTheDocument();
-    expect(screen.getByText('Tema 1')).toBeInTheDocument();
-    expect(screen.getByText('9 ejercicios')).toBeInTheDocument();
+    expect(screen.getByText('Tema 1. ¡Qué bien estoy!')).toBeInTheDocument();
+    expect(screen.getAllByText('10 ejercicios')).not.toHaveLength(0);
     renderWithProviders(await UnitPage({ params: params({ subject: 'mates', unit: 'tema-1' }) }));
     expect(screen.getAllByText('3 partes')).not.toHaveLength(0);
+  });
+
+  it('leaves the units in hidden.js out of the list, though their pages are there', async () => {
+    Object.entries(HIDDEN_UNITS).forEach(([subject, units]) => {
+      units.forEach(unit => expect(`${subject}/${findUnit(findSubject(subject), unit)?.hidden}`).toBe(`${subject}/true`));
+    });
+    expect(generateStaticParams()).toContainEqual({ subject: 'mates', unit: 'tema-3', exercise: 'sumar' });
+    renderWithProviders(await SubjectPage({ params: params({ subject: 'mates' }) }));
+    expect(hrefs()).toContain('/julia/mates/tema-2');
+    expect(hrefs()).not.toContain('/julia/mates/tema-3');
+  });
+
+  it('lists the hidden units too after ?all, and remembers it until ?all=0', async () => {
+    window.history.replaceState(null, '', '/julia/mates?all');
+    renderWithProviders(await SubjectPage({ params: params({ subject: 'mates' }) }));
+    expect(await screen.findByRole('link', { name: /Tema 9/ })).toHaveAttribute('href', '/julia/mates/tema-9');
+    cleanup();
+
+    window.history.replaceState(null, '', '/julia/lengua');
+    renderWithProviders(await SubjectPage({ params: params({ subject: 'lengua' }) }));
+    expect(await screen.findByRole('link', { name: /Tema 9/ })).toBeInTheDocument();
+    cleanup();
+
+    window.history.replaceState(null, '', '/julia/lengua?all=0');
+    renderWithProviders(await SubjectPage({ params: params({ subject: 'lengua' }) }));
+    expect(hrefs()).not.toContain('/julia/lengua/tema-9');
+    window.history.replaceState(null, '', '/');
   });
 });

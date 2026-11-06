@@ -10,11 +10,29 @@ import {
   Card, Picture, Body, Question, Hint, Choices, Choice, ChoiceButton, SmallSpeaker, Next,
 } from './style';
 
+// The choices of a question in a mixed order, so the right one is not always first: the same order
+// every time for the same question, so the page drawn on the server and in the browser agree.
+// Numbers stay in order, as do the choices of an exercise with `keepOrder`.
+export const mixed = (choices, seed) => {
+  if (choices.every(choice => /^\d+$/.test(choice))) return choices;
+  let hash = [...seed].reduce((sum, letter) => (sum * 31 + letter.charCodeAt(0)) % 2147483647, 7);
+  const random = () => {
+    hash = (hash * 16807) % 2147483647;
+    return hash / 2147483647;
+  };
+  const order = [...choices];
+  for (let i = order.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order;
+};
+
 // Questions one after another, each with a few answers to choose from and maybe a picture
 // (`scene`: a drawing, its size and what to draw). A wrong answer is crossed out and another can be
 // tried; the right one turns green and leads on to the next question.
 export default function QuizGame({ exercise }) {
-  const { instructions, questions } = exercise;
+  const { instructions, questions, keepOrder } = exercise;
   const text = useStrings();
   const [index, setIndex] = useState(0);
   const [tried, setTried] = useState([]);
@@ -24,6 +42,7 @@ export default function QuizGame({ exercise }) {
 
   const question = questions[index];
   const { scene } = question;
+  const choices = keepOrder ? question.choices : mixed(question.choices, `${question.prompt}|${question.choices.join('|')}`);
 
   const choose = (choice) => {
     if (choice === question.answer) {
@@ -85,7 +104,7 @@ export default function QuizGame({ exercise }) {
           </Question>
           {question.hint && <Hint>{question.hint}</Hint>}
           <Choices aria-label={text.answers}>
-            {question.choices.map((choice) => {
+            {choices.map((choice) => {
               let state;
               if (solved && choice === question.answer) state = 'right';
               else if (tried.includes(choice)) state = 'wrong';

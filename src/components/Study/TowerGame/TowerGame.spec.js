@@ -54,6 +54,37 @@ describe('TowerGame', () => {
     expect(screen.getByText('✓ 57 - 36 = 21')).toBeInTheDocument();
   });
 
+  it('swaps 1 ten for 10 units when the units on top are too few, crossing out the tens', () => {
+    inSpanish(<TowerGame exercise={{ questions: [{ op: '-', a: 35, b: 6 }] }} />);
+    expect(screen.getByText(/A 5 no le puedes quitar 6: cambia 1 decena por 10 unidades/)).toBeInTheDocument();
+    key(2);
+    expect(box('topTens')).toHaveTextContent('2');
+    expect(within(screen.getByRole('group', { name: 'Operación en torre' })).getByText('3')).toHaveStyle('text-decoration: line-through 3px var(--s-accent)');
+    key(1);
+    expect(box('topUnits')).toHaveTextContent('1');
+    key(5);
+    expect(box('topUnits')).toHaveTextContent('15');
+    expect(screen.getByText('Resta las unidades: 15 - 6.')).toBeInTheDocument();
+    key(9);
+    expect(screen.getByText('Resta las decenas: 2 - 0.')).toBeInTheDocument();
+    key(2);
+    expect(screen.getByText('✓ 35 - 6 = 29')).toBeInTheDocument();
+  });
+
+  it('swaps 1 hundred for 10 tens too, after the units', () => {
+    inSpanish(<TowerGame exercise={{ questions: [{ op: '-', a: 245, b: 172 }] }} />);
+    key(3);
+    expect(screen.getByText(/A 4 decenas no le puedes quitar 7: cambia 1 centena por 10 decenas/)).toBeInTheDocument();
+    key(1);
+    key(1);
+    key(4);
+    expect(box('topTens')).toHaveTextContent('14');
+    key(7);
+    expect(screen.getByText('Resta las centenas: 1 - 1.')).toBeInTheDocument();
+    key(0);
+    expect(screen.getByText('✓ 245 - 172 = 73')).toBeInTheDocument();
+  });
+
   it('only has two-digit sums under 100 and subtractions that do not borrow', () => {
     columnSums.questions.forEach(({ a, b }) => expect(a + b).toBeLessThan(100));
     columnSubtractions.questions.forEach(({ a, b }) => {

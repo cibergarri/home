@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 /* Julia's study corner: bright and warm whatever the site theme, with big things to tap. */
 export const Page = styled.div`
@@ -114,6 +114,10 @@ export const Card = styled(Link)`
   color: var(--s-ink);
   text-decoration: none;
   transition: transform 0.15s, box-shadow 0.15s;
+  ${({ $hidden }) => $hidden && css`
+    opacity: 0.6;
+    border-style: dashed;
+  `}
   &:active {
     transform: translateY(3px);
     box-shadow: 0 1px 0 var(--s-line);

@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 import { StudyPage, CardList } from '@/components/Study';
 import {
   SUBJECTS, findSubject, countExercises, textFor,
@@ -10,13 +12,15 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const { subject } = await params;
-  return { title: `Julia · ${findSubject(subject).title}` };
+  const found = findSubject((await params).subject);
+  if (!found) notFound();
+  return { title: `Julia · ${found.title}` };
 }
 
 // A subject: all of its units.
 export default async function SubjectPage({ params }) {
   const subject = findSubject((await params).subject);
+  if (!subject) notFound();
   const text = textFor(subject);
   return (
     <StudyPage back="/julia" kicker={`${subject.icon} ${text.subject}`} title={subject.title}>
@@ -26,6 +30,7 @@ export default async function SubjectPage({ params }) {
           icon: unit.icon,
           title: unit.title,
           subtitle: countExercises(unit, subject),
+          hidden: unit.hidden,
         }))}
         empty={text.noUnits}
       />

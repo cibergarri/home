@@ -1,15 +1,22 @@
-import { findSubject } from '../../subjects';
+import { ALL_SUBJECTS } from '../../subjects';
 
 // Every Lengua exercise, checked: each answer is one of its choices, each card and word has a
 // column or crayon that exists, and the missing letters can be written by hand (no accents or ñ:
 // the handwriting reader only knows a to z).
-const units = findSubject('lengua').units;
+const units = ALL_SUBJECTS.find(({ slug }) => slug === 'lengua').units; // shown or hidden
 const parts = units.flatMap(unit => unit.exercises).flatMap(exercise => [exercise, ...(exercise.more ?? [])]);
 const ofType = type => parts.filter(part => (part.type ?? 'label') === type);
 
 describe('Lengua', () => {
-  it('has three units from the book: the welcome, tema 1 and tema 2', () => {
-    expect(units.map(unit => unit.slug)).toEqual(['bienvenida', 'tema-1', 'tema-2']);
+  it('has every unit of the book: the welcome and temas 1 to 9', () => {
+    expect(units.map(unit => unit.slug)).toEqual(['bienvenida', ...Array.from({ length: 9 }, (_, i) => `tema-${i + 1}`)]);
+  });
+
+  it('has exercises with different names in each unit', () => {
+    units.forEach(({ exercises }) => {
+      const slugs = exercises.map(({ slug }) => slug);
+      expect(new Set(slugs).size).toBe(slugs.length);
+    });
   });
 
   it('has the right answer among the choices of every question, and no question twice', () => {

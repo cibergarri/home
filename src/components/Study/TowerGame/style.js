@@ -71,6 +71,17 @@ export const Cell = styled.div`
     border-color: transparent;
     background: transparent;
   `}
+  ${({ $pair }) => $pair && css`
+    gap: 4px;
+  `}
+`;
+
+/* A digit of the top number, crossed out once 1 of it has been swapped for 10 of the next column. */
+export const Digit = styled.span`
+  ${({ $crossed }) => $crossed && css`
+    color: var(--s-muted);
+    text-decoration: line-through 3px var(--s-accent);
+  `}
 `;
 
 /* A box to write in: dashed while waiting, orange and glowing when it is its turn. */
@@ -94,6 +105,10 @@ export const Box = styled.span`
     border-style: solid;
     border-color: var(--s-good);
     background: var(--s-good-bg);
+  `}
+  ${({ $crossed }) => $crossed && css`
+    color: var(--s-muted);
+    text-decoration: line-through 3px var(--s-accent);
   `}
   ${({ $wrong }) => $wrong && css`
     border-color: var(--s-bad);

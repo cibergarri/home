@@ -123,6 +123,10 @@ const STRINGS = {
     addTens: parts => `Add the tens: ${parts.join(' + ')}.`,
     subtractUnits: (a, b) => `Subtract the units: ${a} - ${b}.`,
     subtractTens: (a, b) => `Subtract the tens: ${a} - ${b}.`,
+    borrowTens: (a, b, tens) => `You can't take ${b} from ${a}: swap 1 ten for 10 units. Cross out the ${tens}: how many tens are left?`,
+    borrowUnits: units => `And the 10 units go with the ${units}: how many units are there now?`,
+    borrowHundreds: (a, b, hundreds) => `You can't take ${b} tens from ${a}: swap 1 hundred for 10 tens. Cross out the ${hundreds}: how many hundreds are left?`,
+    borrowTensFromHundreds: tens => `And the 10 tens go with the ${tens}: how many tens are there now?`,
     wrongDigit: 'Not that one. Look again!',
     tower: 'Sum in columns',
     // Scrap paper.
@@ -245,6 +249,10 @@ const STRINGS = {
     addTens: parts => `Suma las decenas: ${parts.join(' + ')}.`,
     subtractUnits: (a, b) => `Resta las unidades: ${a} - ${b}.`,
     subtractTens: (a, b) => `Resta las decenas: ${a} - ${b}.`,
+    borrowTens: (a, b, tens) => `A ${a} no le puedes quitar ${b}: cambia 1 decena por 10 unidades. Tacha el ${tens}: ¿cuántas decenas quedan?`,
+    borrowUnits: units => `Y las 10 unidades se juntan con las ${units}: ¿cuántas unidades tienes ahora?`,
+    borrowHundreds: (a, b, hundreds) => `A ${a} decenas no le puedes quitar ${b}: cambia 1 centena por 10 decenas. Tacha el ${hundreds}: ¿cuántas centenas quedan?`,
+    borrowTensFromHundreds: tens => `Y las 10 decenas se juntan con las ${tens}: ¿cuántas decenas tienes ahora?`,
     wrongDigit: '¡Ese no! Vuelve a mirar.',
     tower: 'Operación en torre',
     // El borrador.

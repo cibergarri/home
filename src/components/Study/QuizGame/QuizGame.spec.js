@@ -11,7 +11,8 @@ import restar from '../exercises/mates/restar';
 import tablas from '../exercises/mates/tablas';
 import repaso from '../exercises/mates/repaso';
 import problemas from '../exercises/mates/problemas';
-import QuizGame from '.';
+import { ALL_SUBJECTS } from '../subjects';
+import QuizGame, { mixed } from '.';
 
 const choose = text => fireEvent.click(screen.getByRole('button', { name: new RegExp(`^(✓ )?${text}$`) }));
 
@@ -63,5 +64,20 @@ describe('QuizGame', () => {
       .filter(part => part.type === 'quiz')
       .flatMap(part => part.questions)
       .forEach(({ choices, answer }) => expect(choices).toContain(answer));
+  });
+
+  it('mixes the choices, the same way every time, so the right one is not always first', () => {
+    const choices = ['el cerdo', 'la vaca', 'el gato', 'la oveja'];
+    expect(mixed(choices, 'a')).toEqual(mixed(choices, 'a'));
+    expect([...mixed(choices, 'a')].sort()).toEqual([...choices].sort());
+    expect(mixed(['3', '30', '300'], 'a')).toEqual(['3', '30', '300']);
+
+    const questions = ALL_SUBJECTS.flatMap(({ units }) => units).flatMap(({ exercises }) => exercises)
+      .flatMap(exercise => [exercise, ...(exercise.more ?? [])])
+      .filter(({ type, keepOrder }) => type === 'quiz' && !keepOrder)
+      .flatMap(({ questions: asked }) => asked)
+      .filter(({ choices: offered }) => !offered.every(choice => /^\d+$/.test(choice)));
+    const first = questions.filter(({ prompt, choices: offered, answer }) => mixed(offered, `${prompt}|${offered.join('|')}`)[0] === answer);
+    expect(first.length / questions.length).toBeLessThan(0.55);
   });
 });

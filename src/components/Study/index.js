@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import LabelMap from './LabelMap';
 import Story from './Story';
 import SortGame from './SortGame';
@@ -16,6 +18,7 @@ import MoneyGame from './MoneyGame';
 import ScrapPaper from './ScrapPaper';
 import Explain, { ExplainContext } from './Explain';
 import { findSubject, findUnit, findExercise } from './subjects';
+import { showsAll } from './hidden';
 import { LanguageContext } from './language';
 import {
   Page, Header, Back, Titles, Kicker, Title, Main, Empty, Cards, Card, CardIcon, CardText, Part, PartTitle,
@@ -39,16 +42,23 @@ export function StudyPage({
   );
 }
 
-// Big tappable cards, one per subject, unit or exercise, or a note when there are none yet.
+// Big tappable cards, one per subject, unit or exercise, or a note when there are none yet. A
+// `hidden` card is left out unless this browser shows the hidden units (see ./hidden.js), and
+// then it is drawn faded.
 export function CardList({ cards, empty }) {
-  if (cards.length === 0) return <Empty>{empty}</Empty>;
+  const [all, setAll] = useState(false);
+  // Read once on the client, after the page drawn on the server (which shows none) has loaded.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => setAll(showsAll(window.location.search)), []);
+  const shown = cards.filter(card => all || !card.hidden);
+  if (shown.length === 0) return <Empty>{empty}</Empty>;
   return (
     <Cards>
-      {cards.map(({
-        href, icon, title, subtitle,
+      {shown.map(({
+        href, icon, title, subtitle, hidden,
       }) => (
         <li key={href}>
-          <Card href={href}>
+          <Card href={href} $hidden={hidden}>
             <CardIcon aria-hidden="true">{icon}</CardIcon>
             <CardText>
               {title}
