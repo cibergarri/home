@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/cibergarri/home/compare/v1.23.0...v1.24.0) (2026-11-06)
+
+
+### Features
+
+* **julia:** show the mistakes again at the end of each game, and practise just those ([66d1a85](https://github.com/cibergarri/home/commit/66d1a85592691569a312e510c2aeb4415da21d74))
+
 # [1.23.0](https://github.com/cibergarri/home/compare/v1.22.0...v1.23.0) (2026-11-06)
 
 
