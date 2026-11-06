@@ -6,9 +6,9 @@ const font = Fredoka({
   display: 'swap',
 });
 
-// Julia's study corner: not linked from the site and kept out of search engines.
+// The study corner: not linked from the site and kept out of search engines.
 export const metadata = {
-  title: 'Julia · study',
+  title: 'Study corner',
   robots: { index: false, follow: false },
 };
 

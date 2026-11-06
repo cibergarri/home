@@ -94,7 +94,7 @@ describe('LabelMap', () => {
       fireEvent.click(word(name));
       fireEvent.click(box(id));
     });
-    expect(screen.getByText('Well done, Julia!')).toBeInTheDocument();
+    expect(screen.getByText('Well done!')).toBeInTheDocument();
     expect(screen.getByLabelText('2 out of 3 stars')).toBeInTheDocument();
     act(() => fireEvent.click(screen.getByRole('button', { name: 'Play again' })));
     words.forEach(name => expect(word(name)).toBeInTheDocument());

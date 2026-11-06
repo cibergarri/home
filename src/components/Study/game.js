@@ -3,8 +3,9 @@
 import { useRef, useState } from 'react';
 
 import { useStrings } from './language';
+import { useName } from './profile';
 import {
-  Done, Stars, Again, QuestionBar, QuestionArrow,
+  Done, Stars, Cheer, Again, QuestionBar, QuestionArrow,
 } from './LabelMap/style';
 
 // What the study games share: dragging with a finger, the speaker icon, and the end screen.
@@ -123,17 +124,21 @@ const starsFor = (mistakes) => {
   return mistakes <= 2 ? 2 : 1;
 };
 
-// The end of a game: up to three stars, fewer for mistakes, and a way to play again.
+// The end of a game: up to three stars, fewer for mistakes, a few words to keep going, and a way
+// to play again. It speaks to whoever is studying by name, if the settings have one.
 export function WellDone({ mistakes, onAgain }) {
   const text = useStrings();
+  const name = useName();
+  const [cheer] = useState(() => Math.floor(Math.random() * text.cheers.length)); // only drawn in the browser
   const stars = starsFor(mistakes);
   return (
     <Done role="status">
-      <h2>{text.wellDone}</h2>
+      <h2>{text.wellDone(name)}</h2>
       <Stars aria-label={text.stars(stars)}>
         {[1, 2, 3].map(n => <span key={n} data-off={n > stars || undefined}>⭐</span>)}
       </Stars>
       <p>{mistakes === 0 ? text.perfect : text.mistakes(mistakes)}</p>
+      <Cheer>{text.cheers[cheer](name)}</Cheer>
       <Again type="button" onClick={onAgain}>{text.again}</Again>
     </Done>
   );

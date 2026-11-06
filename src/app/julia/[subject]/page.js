@@ -14,7 +14,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const found = findSubject((await params).subject);
   if (!found) notFound();
-  return { title: `Julia · ${found.title}` };
+  return { title: `Study · ${found.title}` };
 }
 
 // A subject: all of its units.

@@ -363,6 +363,13 @@ export const Stars = styled.div`
   }
 `;
 
+export const Cheer = styled.p`
+  && {
+    color: var(--s-teal);
+    font-weight: 600;
+  }
+`;
+
 export const Again = styled.button`
   min-height: 52px;
   padding: 0 28px;

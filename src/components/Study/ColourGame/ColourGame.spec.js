@@ -41,7 +41,7 @@ describe('ColourGame', () => {
       crayon(title);
       physicalAndHumanFeatures.words.filter(word => word.crayon === id).forEach(({ word }) => colour(word));
     });
-    expect(screen.getByText('Well done, Julia!')).toBeInTheDocument();
+    expect(screen.getByText('Well done!')).toBeInTheDocument();
     expect(screen.getByLabelText('3 out of 3 stars')).toBeInTheDocument();
   });
 });

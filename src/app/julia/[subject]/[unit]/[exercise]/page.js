@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
   const { subject, unit, exercise } = await params;
   const found = findExercise(findUnit(findSubject(subject), unit), exercise);
   if (!found) notFound(); // in a hidden unit, or not there
-  return { title: `Julia · ${found.title}` };
+  return { title: `Study · ${found.title}` };
 }
 
 export default async function ExercisePage({ params }) {

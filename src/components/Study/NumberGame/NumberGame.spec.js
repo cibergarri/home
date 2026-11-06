@@ -65,7 +65,7 @@ describe('NumberGame', () => {
       check();
       fireEvent.click(screen.getByRole('button', { name: index + 1 < problemas.questions.length ? 'Siguiente →' : 'Terminar ✓' }));
     });
-    expect(screen.getByText('¡Muy bien, Julia!')).toBeInTheDocument();
+    expect(screen.getByText('¡Muy bien!')).toBeInTheDocument();
     expect(screen.getByLabelText('3 de 3 estrellas')).toBeInTheDocument();
   });
 

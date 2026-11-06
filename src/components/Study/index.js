@@ -19,12 +19,60 @@ import ScrapPaper from './ScrapPaper';
 import Explain, { ExplainContext } from './Explain';
 import { findSubject, findUnit, findExercise } from './subjects';
 import { showsAll } from './hidden';
-import { LanguageContext } from './language';
+import { LanguageContext, useStrings } from './language';
+import { loadProfile, saveProfile, useName } from './profile';
 import {
   Page, Header, Back, Titles, Kicker, Title, Main, Empty, Cards, Card, CardIcon, CardText, Part, PartTitle,
+  SettingsButton, SettingsPanel, SettingsForm, NameInput, SaveButton, SettingsNote,
 } from './style';
 
-// The frame of every page in Julia's study corner: a way back, a title, and the page itself.
+// Hello to whoever is studying, by name if the settings have one.
+export function Hello() {
+  const text = useStrings();
+  return text.hi(useName());
+}
+
+// The ⚙️ in the corner of every page, to type the name of who is studying. It is kept in this
+// browser only (see ./profile.js).
+export function Settings() {
+  const text = useStrings();
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState('');
+  const toggle = () => {
+    if (!open) setName(loadProfile().name);
+    setOpen(!open);
+  };
+  const save = (event) => {
+    event.preventDefault();
+    saveProfile({ name });
+    setOpen(false);
+  };
+  return (
+    <>
+      <SettingsButton type="button" onClick={toggle} aria-expanded={open} aria-label={text.settings}>⚙️</SettingsButton>
+      {open && (
+        <SettingsPanel role="dialog" aria-label={text.settings} onKeyDown={event => event.key === 'Escape' && setOpen(false)}>
+          <SettingsForm onSubmit={save}>
+            <label htmlFor="study-name">{text.nameLabel}</label>
+            <NameInput
+              id="study-name"
+              value={name}
+              onChange={event => setName(event.target.value)}
+              placeholder={text.namePlaceholder}
+              maxLength={30}
+              autoComplete="off"
+              autoFocus
+            />
+            <SaveButton type="submit">{text.save}</SaveButton>
+          </SettingsForm>
+          <SettingsNote>{text.noName}</SettingsNote>
+        </SettingsPanel>
+      )}
+    </>
+  );
+}
+
+// The frame of every page in the study corner: a way back, a title, the settings, and the page.
 export function StudyPage({
   title, kicker, back, children,
 }) {
@@ -36,6 +84,7 @@ export function StudyPage({
           {kicker && <Kicker>{kicker}</Kicker>}
           <Title>{title}</Title>
         </Titles>
+        <Settings />
       </Header>
       <Main>{children}</Main>
     </Page>

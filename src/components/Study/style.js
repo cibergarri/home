@@ -31,6 +31,7 @@ export const Page = styled.div`
 `;
 
 export const Header = styled.header`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -58,7 +59,92 @@ export const Back = styled(Link)`
 `;
 
 export const Titles = styled.div`
+  flex: 1;
   min-width: 0;
+`;
+
+export const SettingsButton = styled.button`
+  flex: none;
+  align-self: flex-start;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--s-card);
+  border: 2px solid var(--s-line);
+  font-size: 24px;
+  cursor: pointer;
+  &[aria-expanded='true'] {
+    border-color: var(--s-teal);
+  }
+  &:focus-visible {
+    outline: 3px solid var(--s-teal);
+    outline-offset: 2px;
+  }
+`;
+
+export const SettingsPanel = styled.div`
+  position: absolute;
+  top: 58px;
+  right: 0;
+  z-index: 10;
+  width: min(360px, 100%);
+  box-sizing: border-box;
+  padding: 18px;
+  border-radius: 20px;
+  background: var(--s-card);
+  border: 2px solid var(--s-line);
+  box-shadow: 0 8px 24px rgb(36 50 74 / 15%);
+`;
+
+export const SettingsForm = styled.form`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  label {
+    flex-basis: 100%;
+    font-size: 18px;
+    font-weight: 600;
+  }
+`;
+
+export const NameInput = styled.input`
+  flex: 1;
+  min-width: 0;
+  min-height: 52px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 2px solid var(--s-line);
+  background: #fffaf2;
+  color: var(--s-ink);
+  font-family: inherit;
+  font-size: 20px;
+  &:focus {
+    outline: none;
+    border-color: var(--s-teal);
+  }
+`;
+
+export const SaveButton = styled.button`
+  min-height: 52px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 26px;
+  background: var(--s-teal);
+  color: #fff;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  &:focus-visible {
+    outline: 3px solid var(--s-accent);
+    outline-offset: 2px;
+  }
+`;
+
+export const SettingsNote = styled.p`
+  margin: 10px 0 0;
+  color: var(--s-muted);
+  font-size: 14px;
 `;
 
 export const Kicker = styled.p`

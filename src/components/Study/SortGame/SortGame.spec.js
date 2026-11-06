@@ -38,7 +38,7 @@ describe('SortGame', () => {
   it('celebrates when every card is sorted', () => {
     renderWithProviders(<SortGame exercise={sorting} />);
     sorting.cards.forEach(({ text, columns }) => sortInto(text, columns[0]));
-    expect(screen.getByText('Well done, Julia!')).toBeInTheDocument();
+    expect(screen.getByText('Well done!')).toBeInTheDocument();
     expect(screen.getByLabelText('3 out of 3 stars')).toBeInTheDocument();
   });
 });

@@ -10,7 +10,25 @@ const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
 const STRINGS = {
   en: {
-    wellDone: 'Well done, Julia!',
+    wellDone: name => (name ? `Well done, ${name}!` : 'Well done!'),
+    // A few words to keep going, one picked at random at the end of each game.
+    cheers: [
+      name => (name ? `You’re a star, ${name}!` : 'You’re a star!'),
+      () => 'Every day you learn something new.',
+      name => (name ? `Keep it up, ${name}!` : 'Keep it up!'),
+      () => 'Your brain is growing stronger!',
+      name => (name ? `I’m proud of you, ${name}!` : 'Great work, I’m proud of you!'),
+      () => 'Practice makes progress!',
+      () => 'Mistakes help us learn. Keep trying!',
+      name => (name ? `${name}, you’re a super learner!` : 'You’re a super learner!'),
+    ],
+    hi: name => (name ? `Hi, ${name}! 👋` : 'Hi! 👋'),
+    // The settings.
+    settings: 'Settings',
+    nameLabel: 'Who is studying?',
+    namePlaceholder: 'Your name',
+    save: 'Save',
+    noName: 'Leave it empty to keep the messages without a name.',
     stars: n => `${n} out of 3 stars`,
     perfect: 'Every word right first time!',
     mistakes: n => `${plural(n, 'mistake', 'mistakes')} on the way.`,
@@ -140,7 +158,23 @@ const STRINGS = {
     close: 'Close',
   },
   es: {
-    wellDone: '¡Muy bien, Julia!',
+    wellDone: name => (name ? `¡Muy bien, ${name}!` : '¡Muy bien!'),
+    cheers: [
+      name => (name ? `¡Eres una estrella, ${name}!` : '¡Eres una estrella!'),
+      () => 'Cada día aprendes algo nuevo.',
+      name => (name ? `¡Sigue así, ${name}!` : '¡Sigue así!'),
+      () => '¡Tu cerebro se hace cada vez más fuerte!',
+      name => (name ? `¡Qué orgullo, ${name}!` : '¡Buen trabajo, qué orgullo!'),
+      () => '¡Practicando se aprende!',
+      () => 'Equivocarse ayuda a aprender. ¡No te rindas!',
+      name => (name ? `¡${name}, lo estás haciendo genial!` : '¡Lo estás haciendo genial!'),
+    ],
+    hi: name => (name ? `¡Hola, ${name}! 👋` : '¡Hola! 👋'),
+    settings: 'Ajustes',
+    nameLabel: '¿Quién está estudiando?',
+    namePlaceholder: 'Tu nombre',
+    save: 'Guardar',
+    noName: 'Déjalo vacío para que los mensajes no lleven nombre.',
     stars: n => `${n} de 3 estrellas`,
     perfect: '¡Todo bien a la primera!',
     mistakes: n => `${plural(n, 'fallo', 'fallos')} por el camino.`,
