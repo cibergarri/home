@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://github.com/cibergarri/home/compare/v1.21.0...v1.22.0) (2026-11-06)
+
+
+### Features
+
+* **julia:** add every unit of Mates, Lengua and English, hidden until class gets there ([bad4c41](https://github.com/cibergarri/home/commit/bad4c4166bbca21e9f0f97f83e3ec6bfa31d0cb2))
+
 # [1.21.0](https://github.com/cibergarri/home/compare/v1.20.0...v1.21.0) (2026-11-05)
 
 
