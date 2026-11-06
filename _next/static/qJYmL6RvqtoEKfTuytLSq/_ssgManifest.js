@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fjulia\u002F[[...path]]","\u002Fstudy-corner\u002F[subject]","\u002Fstudy-corner\u002F[subject]\u002F[unit]","\u002Fstudy-corner\u002F[subject]\u002F[unit]\u002F[exercise]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()

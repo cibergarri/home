@@ -1,4 +1,4 @@
 :HL["/_next/static/chunks/39nj_pducwvwn.css","style"]
 :HL["/_next/static/media/f06bf9da926bae75-s.p.2874ccu1_u7jf.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 1:[["children",{"s":"__PAGE__","h":160}]]
-0:{"b":"1OfTGIzNIz5XA1AbAWcUU","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"qJYmL6RvqtoEKfTuytLSq","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
