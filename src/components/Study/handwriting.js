@@ -1,7 +1,7 @@
 // Reading a number, or a letter, written by hand. The writing comes as strokes, lists of [x, y]
 // points; a number is split into digits. Each digit or letter is drawn small and centred as in the
 // collection of handwriting its network was trained on, and read by that small neural network
-// (public/julia/handwriting): digits from MNIST, lowercase and capital letters from EMNIST.
+// (public/study-corner/handwriting): digits from MNIST, lowercase and capital letters from EMNIST.
 
 const SIZE = 28;
 
@@ -9,10 +9,10 @@ const SIZE = 28;
 // the width of the line (`pen`) in its pixels, and whether centred by centre of mass or by the box.
 export const MODELS = {
   digits: {
-    src: '/julia/handwriting/digits.json', labels: '0123456789', box: 20, pen: 1.15, byMass: true,
+    src: '/study-corner/handwriting/digits.json', labels: '0123456789', box: 20, pen: 1.15, byMass: true,
   },
   letters: {
-    src: '/julia/handwriting/letters.json', labels: 'abcdefghijklmnopqrstuvwxyz', box: 24, pen: 1.6, byMass: false,
+    src: '/study-corner/handwriting/letters.json', labels: 'abcdefghijklmnopqrstuvwxyz', box: 24, pen: 1.6, byMass: false,
   },
 };
 

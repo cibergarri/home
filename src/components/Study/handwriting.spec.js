@@ -5,7 +5,7 @@ import {
   splitDigits, toPixels, classify, unpack, readNumber, readLetter,
 } from './handwriting';
 
-const load = name => unpack(JSON.parse(fs.readFileSync(path.join(process.cwd(), `public/julia/handwriting/${name}.json`), 'utf8')));
+const load = name => unpack(JSON.parse(fs.readFileSync(path.join(process.cwd(), `public/study-corner/handwriting/${name}.json`), 'utf8')));
 const net = load('digits');
 const letterNet = load('letters');
 const readsSamples = (network, file) => {

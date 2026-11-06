@@ -2,10 +2,10 @@ import { cleanup, screen } from '@testing-library/react';
 
 import { renderWithProviders } from '@/test-utils';
 import { Exercise, CardList } from '@/components/Study';
-import JuliaPage from '@/app/julia/page';
-import SubjectPage from '@/app/julia/[subject]/page';
-import UnitPage from '@/app/julia/[subject]/[unit]/page';
-import { generateStaticParams } from '@/app/julia/[subject]/[unit]/[exercise]/page';
+import StudyCornerPage from '@/app/study-corner/page';
+import SubjectPage from '@/app/study-corner/[subject]/page';
+import UnitPage from '@/app/study-corner/[subject]/[unit]/page';
+import { generateStaticParams } from '@/app/study-corner/[subject]/[unit]/[exercise]/page';
 import { findSubject, findUnit } from './subjects';
 import { HIDDEN_UNITS } from './hidden';
 
@@ -14,11 +14,11 @@ const hrefs = () => screen.getAllByRole('link').map(link => link.getAttribute('h
 
 describe("Julia's study pages", () => {
   it('lists the subjects', () => {
-    renderWithProviders(<JuliaPage />);
+    renderWithProviders(<StudyCornerPage />);
     expect(screen.getByText('Social Science')).toBeInTheDocument();
     expect(screen.getByText('English')).toBeInTheDocument();
     expect(screen.getByText('Mates')).toBeInTheDocument();
-    expect(hrefs()).toEqual(['/julia/social-science', '/julia/mates', '/julia/lengua', '/julia/naturales', '/julia/english']);
+    expect(hrefs()).toEqual(['/study-corner/social-science', '/study-corner/mates', '/study-corner/lengua', '/study-corner/naturales', '/study-corner/english']);
   });
 
   it('says so when there is nothing to list yet', () => {
@@ -30,9 +30,9 @@ describe("Julia's study pages", () => {
   it('lists the exercises of English unit 1', async () => {
     renderWithProviders(await UnitPage({ params: params({ subject: 'english', unit: 'unit-1' }) }));
     expect(hrefs()).toEqual([
-      '/julia/english',
+      '/study-corner/english',
       ...['days-of-the-week', 'places-at-school', 'wheres', 'positions', 'rules-and-games', 'story-phrases', 'numbers', 'review']
-        .map(slug => `/julia/english/unit-1/${slug}`),
+        .map(slug => `/study-corner/english/unit-1/${slug}`),
     ]);
   });
 
@@ -41,21 +41,21 @@ describe("Julia's study pages", () => {
     expect(screen.getByRole('heading', { name: 'Social Science' })).toBeInTheDocument();
     expect(screen.getByText('Unit 1')).toBeInTheDocument();
     expect(screen.getByText('7 exercises')).toBeInTheDocument();
-    expect(hrefs()).toContain('/julia/social-science/unit-1');
+    expect(hrefs()).toContain('/study-corner/social-science/unit-1');
   });
 
   it('lists the exercises of a unit, with a way back to the subject', async () => {
     renderWithProviders(await UnitPage({ params: params({ subject: 'social-science', unit: 'unit-1' }) }));
     expect(screen.getByRole('heading', { name: 'Unit 1' })).toBeInTheDocument();
     expect(hrefs()).toEqual([
-      '/julia/social-science',
-      '/julia/social-science/unit-1/landscape',
-      '/julia/social-science/unit-1/coastal-landscape',
-      '/julia/social-science/unit-1/mountain-landscapes',
-      '/julia/social-science/unit-1/flat-landscape',
-      '/julia/social-science/unit-1/rivers',
-      '/julia/social-science/unit-1/find-directions',
-      '/julia/social-science/unit-1/physical-and-human-features',
+      '/study-corner/social-science',
+      '/study-corner/social-science/unit-1/landscape',
+      '/study-corner/social-science/unit-1/coastal-landscape',
+      '/study-corner/social-science/unit-1/mountain-landscapes',
+      '/study-corner/social-science/unit-1/flat-landscape',
+      '/study-corner/social-science/unit-1/rivers',
+      '/study-corner/social-science/unit-1/find-directions',
+      '/study-corner/social-science/unit-1/physical-and-human-features',
     ]);
   });
 
@@ -138,24 +138,24 @@ describe("Julia's study pages", () => {
     });
     expect(generateStaticParams()).toContainEqual({ subject: 'mates', unit: 'tema-3', exercise: 'sumar' });
     renderWithProviders(await SubjectPage({ params: params({ subject: 'mates' }) }));
-    expect(hrefs()).toContain('/julia/mates/tema-2');
-    expect(hrefs()).not.toContain('/julia/mates/tema-3');
+    expect(hrefs()).toContain('/study-corner/mates/tema-2');
+    expect(hrefs()).not.toContain('/study-corner/mates/tema-3');
   });
 
   it('lists the hidden units too after ?all, and remembers it until ?all=0', async () => {
-    window.history.replaceState(null, '', '/julia/mates?all');
+    window.history.replaceState(null, '', '/study-corner/mates?all');
     renderWithProviders(await SubjectPage({ params: params({ subject: 'mates' }) }));
-    expect(await screen.findByRole('link', { name: /Tema 9/ })).toHaveAttribute('href', '/julia/mates/tema-9');
+    expect(await screen.findByRole('link', { name: /Tema 9/ })).toHaveAttribute('href', '/study-corner/mates/tema-9');
     cleanup();
 
-    window.history.replaceState(null, '', '/julia/lengua');
+    window.history.replaceState(null, '', '/study-corner/lengua');
     renderWithProviders(await SubjectPage({ params: params({ subject: 'lengua' }) }));
     expect(await screen.findByRole('link', { name: /Tema 9/ })).toBeInTheDocument();
     cleanup();
 
-    window.history.replaceState(null, '', '/julia/lengua?all=0');
+    window.history.replaceState(null, '', '/study-corner/lengua?all=0');
     renderWithProviders(await SubjectPage({ params: params({ subject: 'lengua' }) }));
-    expect(hrefs()).not.toContain('/julia/lengua/tema-9');
+    expect(hrefs()).not.toContain('/study-corner/lengua/tema-9');
     window.history.replaceState(null, '', '/');
   });
 });

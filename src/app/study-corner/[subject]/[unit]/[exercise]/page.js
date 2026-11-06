@@ -30,7 +30,7 @@ export default async function ExercisePage({ params }) {
   if (!exercise) notFound();
   return (
     <StudyPage
-      back={`/julia/${subject.slug}/${unit.slug}`}
+      back={`/study-corner/${subject.slug}/${unit.slug}`}
       kicker={`${subject.title} · ${unit.title}`}
       title={exercise.title}
     >

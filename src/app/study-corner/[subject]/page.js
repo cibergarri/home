@@ -23,10 +23,10 @@ export default async function SubjectPage({ params }) {
   if (!subject) notFound();
   const text = textFor(subject);
   return (
-    <StudyPage back="/julia" kicker={`${subject.icon} ${text.subject}`} title={subject.title}>
+    <StudyPage back="/study-corner" kicker={`${subject.icon} ${text.subject}`} title={subject.title}>
       <CardList
         cards={subject.units.map(unit => ({
-          href: `/julia/${subject.slug}/${unit.slug}`,
+          href: `/study-corner/${subject.slug}/${unit.slug}`,
           icon: unit.icon,
           title: unit.title,
           subtitle: countExercises(unit, subject),

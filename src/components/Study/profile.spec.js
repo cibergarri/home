@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '@/test-utils';
-import JuliaPage from '@/app/julia/page';
+import StudyCornerPage from '@/app/study-corner/page';
 import { WellDone } from './game';
 import { LanguageContext } from './language';
 import { loadProfile } from './profile';
@@ -19,12 +19,12 @@ describe('who is studying', () => {
   afterEach(() => window.localStorage.clear());
 
   it('says hello to nobody in particular until a name is set', () => {
-    renderWithProviders(<JuliaPage />);
+    renderWithProviders(<StudyCornerPage />);
     expect(screen.getByText('Hi! 👋')).toBeInTheDocument();
   });
 
   it('keeps the name typed in the settings in this browser, and says hello by name', async () => {
-    renderWithProviders(<JuliaPage />);
+    renderWithProviders(<StudyCornerPage />);
     await setName('  Ana ');
     expect(screen.getByText('Hi, Ana! 👋')).toBeInTheDocument();
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
@@ -33,7 +33,7 @@ describe('who is studying', () => {
 
   it('forgets the name when it is left empty', async () => {
     window.localStorage.setItem('study-profile', JSON.stringify({ name: 'Ana' }));
-    renderWithProviders(<JuliaPage />);
+    renderWithProviders(<StudyCornerPage />);
     await userEvent.click(screen.getByRole('button', { name: 'Settings' }));
     expect(screen.getByLabelText('Who is studying?')).toHaveValue('Ana');
     await userEvent.click(screen.getByRole('button', { name: 'Settings' })); // closes without saving

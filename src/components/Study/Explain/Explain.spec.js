@@ -48,7 +48,7 @@ describe('Explain', () => {
     const bubble = screen.getByRole('dialog', { name: 'Mountain' });
     expect(within(bubble).getByText('montaña')).toBeInTheDocument();
     expect(within(bubble).getByText('Tierra muy alta, con los lados empinados.')).toBeInTheDocument();
-    expect(within(bubble).getByRole('img', { name: 'montaña' })).toHaveAttribute('src', '/julia/photos/mountain.jpg');
+    expect(within(bubble).getByRole('img', { name: 'montaña' })).toHaveAttribute('src', '/study-corner/photos/mountain.jpg');
     expect(within(bubble).getByText(/^Foto: /)).toBeInTheDocument();
     fireEvent.click(within(bubble).getByRole('button', { name: 'Escuchar' }));
     expect(speak).toHaveBeenCalledWith(expect.objectContaining({ text: 'montaña. Tierra muy alta, con los lados empinados.', lang: 'es-ES' }));

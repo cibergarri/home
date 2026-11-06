@@ -26,10 +26,10 @@ export default async function UnitPage({ params }) {
   const unit = findUnit(subject, unitSlug);
   if (!unit) notFound();
   return (
-    <StudyPage back={`/julia/${subject.slug}`} kicker={`${subject.icon} ${subject.title}`} title={unit.title}>
+    <StudyPage back={`/study-corner/${subject.slug}`} kicker={`${subject.icon} ${subject.title}`} title={unit.title}>
       <CardList
         cards={unit.exercises.map(exercise => ({
-          href: `/julia/${subject.slug}/${unit.slug}/${exercise.slug}`,
+          href: `/study-corner/${subject.slug}/${unit.slug}/${exercise.slug}`,
           icon: unit.icon,
           title: exercise.title,
           subtitle: countWords(exercise, subject),

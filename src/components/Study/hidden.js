@@ -2,7 +2,7 @@
 // leaves them out of its list until the class gets to them. To show a unit, take it off its
 // subject's list.
 //
-// To see every unit anyway, open any page with ?all (e.g. /julia/mates?all). The browser remembers
+// To see every unit anyway, open any page with ?all (e.g. /study-corner/mates?all). The browser remembers
 // it, so the hidden units stay listed on every page after that; ?all=0 hides them again.
 export const HIDDEN_UNITS = {
   mates: ['tema-3', 'tema-4', 'tema-5', 'tema-6', 'tema-7', 'tema-8', 'tema-9'],

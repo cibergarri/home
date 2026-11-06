@@ -1,17 +1,10 @@
-import { Fredoka } from 'next/font/google';
-
-const font = Fredoka({
-  subsets: ['latin'],
-  variable: '--font-study',
-  display: 'swap',
-});
-
-// The study corner: not linked from the site and kept out of search engines.
+// The study corner's old address: every page of it sends the browser on to the same page under
+// /study-corner. Kept out of search engines like the study corner itself.
 export const metadata = {
   title: 'Study corner',
   robots: { index: false, follow: false },
 };
 
-export default function JuliaLayout({ children }) {
-  return <div className={font.variable}>{children}</div>;
+export default function OldStudyCornerLayout({ children }) {
+  return children;
 }
