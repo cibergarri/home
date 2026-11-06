@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://github.com/cibergarri/home/compare/v1.22.0...v1.23.0) (2026-11-06)
+
+
+### Features
+
+* **julia:** add settings to set who is studying, and cheers at the end of each game ([2ee2a8d](https://github.com/cibergarri/home/commit/2ee2a8d3d2aa85761f88b0337b3209e1e6520105))
+
 # [1.22.0](https://github.com/cibergarri/home/compare/v1.21.0...v1.22.0) (2026-11-06)
 
 
