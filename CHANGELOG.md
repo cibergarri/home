@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.25.0](https://github.com/cibergarri/home/compare/v1.24.0...v1.25.0) (2026-11-06)
+
+
+### Features
+
+* **study-corner:** serve the study corner at /study-corner, with /julia sending on to it ([d7019fc](https://github.com/cibergarri/home/commit/d7019fcc206c1e0c899b1bdf1b4c7b9376bb87b4))
+
 # [1.24.0](https://github.com/cibergarri/home/compare/v1.23.0...v1.24.0) (2026-11-06)
 
 
