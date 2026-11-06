@@ -4,7 +4,9 @@ import { useRef, useState } from 'react';
 
 import { speak } from '../speech';
 import { useStrings } from '../language';
-import { SpeakerIcon, WellDone, QuestionNav } from '../game';
+import {
+  SpeakerIcon, WellDone, QuestionNav, useSlips, practiseItems,
+} from '../game';
 import { sayable } from '../NumberGame';
 import { Instructions, Message } from '../LabelMap/style';
 import {
@@ -40,7 +42,8 @@ function SmallBlocks({ n }) {
 // with flats of a hundred (when there are hundreds), rods of ten and unit cubes, and 10 cubes are
 // swapped for a rod and 10 rods for a flat; to subtract, the blocks of the first number are
 // crossed out. Either way the number is then typed. Subtractions don't borrow: each digit of the
-// second number is no more than the first's.
+// second number is no more than the first's. At the end, the mistakes can be looked at again, and
+// those sums done again on their own.
 export default function BlocksGame({ exercise }) {
   const { instructions, questions } = exercise;
   const text = useStrings();
@@ -53,12 +56,14 @@ export default function BlocksGame({ exercise }) {
   const [drawn, setDrawn] = useState(false);
   const [typed, setTyped] = useState('');
   const [state, setState] = useState(null);
-  const [mistakes, setMistakes] = useState(0);
+  const [slips, slip, clearSlips] = useSlips();
   const [message, setMessage] = useState(null);
   const [finished, setFinished] = useState(false);
+  const [only, setOnly] = useState(null); // the sums to do again, if not all
   const wrongTimer = useRef(null);
 
-  const question = questions[index];
+  const order = only ?? questions.map((q, i) => i);
+  const question = questions[order[index]];
   const { a, b, op } = question;
   const adding = op === '+';
   const result = adding ? a + b : a - b;
@@ -99,7 +104,15 @@ export default function BlocksGame({ exercise }) {
   };
   const checkDrawing = () => {
     if (flats * 100 + rods * 10 + cubes !== result) {
-      setMistakes(n => n + 1);
+      const shouldBe = digits(result);
+      slip({
+        item: order[index],
+        key: `${order[index]}-drawing`,
+        prompt: `${a} + ${b}`,
+        note: text.yourDrawing,
+        wrong: count(flats, rods, cubes),
+        right: count(shouldBe.hundreds, shouldBe.tens, shouldBe.units),
+      });
       setMessage({ kind: 'wrong', text: text.drawWrong });
     } else if (cubes >= 10) {
       setMessage({ kind: 'hint', text: text.drawExchange(cubes) });
@@ -144,7 +157,9 @@ export default function BlocksGame({ exercise }) {
       speak(sayable(sentence, text.lang), text.lang);
       return;
     }
-    setMistakes(n => n + 1);
+    slip({
+      item: order[index], prompt: `${a} ${op} ${b} = ?`, wrong: Number(typed), right: result, say: sayable(sentence, text.lang),
+    });
     setState('wrong');
     setMessage({ kind: 'wrong', text: text.tryAgain });
     clearTimeout(wrongTimer.current);
@@ -160,13 +175,14 @@ export default function BlocksGame({ exercise }) {
   };
 
   const next = () => {
-    if (index + 1 < questions.length) goTo(index + 1);
+    if (index + 1 < order.length) goTo(index + 1);
     else setFinished(true);
   };
 
-  const playAgain = () => {
+  const playAgain = (sumsToDo = null) => {
+    setOnly(sumsToDo);
     goTo(0);
-    setMistakes(0);
+    clearSlips();
     setFinished(false);
   };
 
@@ -174,7 +190,7 @@ export default function BlocksGame({ exercise }) {
     return (
       <>
         <Instructions>{instructions}</Instructions>
-        <WellDone mistakes={mistakes} onAgain={playAgain} />
+        <WellDone slips={slips} onAgain={() => playAgain()} onPractise={() => playAgain(practiseItems(slips))} />
       </>
     );
   }
@@ -283,7 +299,7 @@ export default function BlocksGame({ exercise }) {
                     <SpeakerIcon />
                     {text.listen}
                   </Listen>
-                  <Next type="button" onClick={next}>{index + 1 < questions.length ? text.next : text.finish}</Next>
+                  <Next type="button" onClick={next}>{index + 1 < order.length ? text.next : text.finish}</Next>
                 </Row>
               )}
             </div>
@@ -300,7 +316,7 @@ export default function BlocksGame({ exercise }) {
           </Answering>
         )}
       </Card>
-      <QuestionNav index={index} total={questions.length} onGo={goTo} />
+      <QuestionNav index={index} total={order.length} onGo={goTo} />
       <div aria-live="polite">
         {message && <Message $kind={message.kind}>{message.text}</Message>}
       </div>

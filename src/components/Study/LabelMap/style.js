@@ -370,6 +370,137 @@ export const Cheer = styled.p`
   }
 `;
 
+export const Buttons = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+`;
+
+/* The mistakes again, at the end of a game: left-aligned cards, one per thing gone wrong. */
+export const Review = styled.section`
+  align-self: stretch;
+  text-align: left;
+  h3 {
+    margin: 6px 0 10px;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+  }
+  ul {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+`;
+
+export const Slip = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #fffaf2;
+  border: 2px solid var(--s-line);
+  > div {
+    min-width: 0;
+  }
+`;
+
+export const SlipDrawing = styled.svg`
+  flex: none;
+  width: 140px;
+  max-height: 110px;
+  border-radius: 10px;
+`;
+
+export const SlipPrompt = styled.p`
+  && {
+    margin: 0;
+    color: var(--s-ink);
+    font-size: 19px;
+    font-weight: 600;
+  }
+`;
+
+export const SlipNote = styled.p`
+  && {
+    margin: 2px 0 0;
+    font-size: 16px;
+  }
+`;
+
+export const SlipAnswers = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 8px;
+  font-size: 19px;
+`;
+
+export const SlipWrong = styled.s`
+  color: var(--s-bad);
+  &::before {
+    content: '✗ ';
+    display: inline-block;
+    text-decoration: none;
+  }
+`;
+
+export const SlipRight = styled.strong`
+  padding: 2px 10px;
+  border-radius: 10px;
+  background: var(--s-good-bg);
+  color: var(--s-good);
+  font-weight: 600;
+  &::before {
+    content: '✓ ';
+  }
+`;
+
+export const SlipSpeaker = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: 2px solid var(--s-line);
+  border-radius: 50%;
+  background: var(--s-card);
+  color: var(--s-teal);
+  cursor: pointer;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const Practise = styled.button`
+  min-height: 52px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 26px;
+  background: var(--s-teal);
+  box-shadow: 0 4px 0 #17776b;
+  color: #fff;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  &:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #17776b;
+  }
+  &:focus-visible {
+    outline: 3px solid var(--s-accent);
+    outline-offset: 3px;
+  }
+`;
+
 export const Again = styled.button`
   min-height: 52px;
   padding: 0 28px;

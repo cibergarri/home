@@ -2,10 +2,12 @@
 
 import { useRef, useState } from 'react';
 
+import { speak } from './speech';
 import { useStrings } from './language';
 import { useName } from './profile';
 import {
-  Done, Stars, Cheer, Again, QuestionBar, QuestionArrow,
+  Done, Stars, Cheer, Again, Practise, Buttons, Review, Slip, SlipDrawing, SlipPrompt, SlipNote, SlipAnswers,
+  SlipWrong, SlipRight, SlipSpeaker, QuestionBar, QuestionArrow,
 } from './LabelMap/style';
 
 // What the study games share: dragging with a finger, the speaker icon, and the end screen.
@@ -124,12 +126,88 @@ const starsFor = (mistakes) => {
   return mistakes <= 2 ? 2 : 1;
 };
 
+// The mistakes made in a game, to look at again at the end. Each one says what was asked
+// (`prompt`, maybe with a `note`, a `scene` or a `Picture`), the `wrong` answer given and the
+// `right` one (read aloud as `say`, if it should be said another way). `item` is what to practise
+// again (a question's place in the exercise, or a card's id) and `also` any others to practise
+// with it; mistakes with the same `key` (the item, unless they say otherwise) are shown together.
+export function useSlips() {
+  const [slips, setSlips] = useState([]);
+  const slip = mistake => setSlips(list => [...list, mistake]);
+  const clear = () => setSlips([]);
+  return [slips, slip, clear];
+}
+
+// What to practise after a game with mistakes, in the order they come in the exercise.
+export const practiseItems = (slips) => {
+  const items = [...new Set(slips.flatMap(({ item, also = [] }) => [item, ...also]))];
+  return items.every(item => typeof item === 'number') ? items.sort((a, b) => a - b) : items;
+};
+
+// The mistakes about the same thing as one, with every wrong answer given to it once.
+const together = slips => slips.reduce((list, mistake) => {
+  const key = mistake.key ?? mistake.item;
+  const same = list.find(other => other.key === key);
+  if (!same) return [...list, { ...mistake, key, wrong: [mistake.wrong] }];
+  if (!same.wrong.includes(mistake.wrong)) same.wrong.push(mistake.wrong);
+  return list;
+}, []);
+
+function SlipPicture({ scene, Picture }) {
+  if (scene) {
+    return (
+      <SlipDrawing viewBox={`0 0 ${scene.width} ${scene.height}`} aria-hidden="true">
+        <scene.Drawing {...scene.props} />
+      </SlipDrawing>
+    );
+  }
+  return (
+    <SlipDrawing viewBox="0 0 160 110" aria-hidden="true">
+      <Picture />
+    </SlipDrawing>
+  );
+}
+
+// Each mistake again, with the wrong answer crossed out and the right one to hear.
+function LookAgain({ slips }) {
+  const text = useStrings();
+  return (
+    <Review aria-label={text.lookAgain}>
+      <h3>{text.lookAgain}</h3>
+      <ul>
+        {together(slips).map(({
+          key, prompt, note, scene, Picture, wrong, right, say,
+        }) => (
+          <Slip key={key}>
+            {(scene || Picture) && <SlipPicture scene={scene} Picture={Picture} />}
+            <div>
+              {prompt && <SlipPrompt>{prompt}</SlipPrompt>}
+              {note && <SlipNote>{note}</SlipNote>}
+              <SlipAnswers>
+                {wrong.map(answer => (
+                  <SlipWrong key={answer} aria-label={text.wrongAnswer(answer)}>{answer}</SlipWrong>
+                ))}
+                <SlipRight aria-label={text.rightAnswer(right)}>{right}</SlipRight>
+                <SlipSpeaker type="button" onClick={() => speak(String(say ?? right), text.lang)} aria-label={text.listenTo(right)}>
+                  <SpeakerIcon />
+                </SlipSpeaker>
+              </SlipAnswers>
+            </div>
+          </Slip>
+        ))}
+      </ul>
+    </Review>
+  );
+}
+
 // The end of a game: up to three stars, fewer for mistakes, a few words to keep going, and a way
-// to play again. It speaks to whoever is studying by name, if the settings have one.
-export function WellDone({ mistakes, onAgain }) {
+// to play again. It speaks to whoever is studying by name, if the settings have one. After
+// mistakes, it shows them again, and `onPractise` plays only those again.
+export function WellDone({ slips, onAgain, onPractise }) {
   const text = useStrings();
   const name = useName();
   const [cheer] = useState(() => Math.floor(Math.random() * text.cheers.length)); // only drawn in the browser
+  const mistakes = slips.length;
   const stars = starsFor(mistakes);
   return (
     <Done role="status">
@@ -139,7 +217,11 @@ export function WellDone({ mistakes, onAgain }) {
       </Stars>
       <p>{mistakes === 0 ? text.perfect : text.mistakes(mistakes)}</p>
       <Cheer>{text.cheers[cheer](name)}</Cheer>
-      <Again type="button" onClick={onAgain}>{text.again}</Again>
+      {mistakes > 0 && <LookAgain slips={slips} />}
+      <Buttons>
+        {mistakes > 0 && onPractise && <Practise type="button" onClick={onPractise}>{text.practise}</Practise>}
+        <Again type="button" onClick={onAgain}>{text.again}</Again>
+      </Buttons>
     </Done>
   );
 }

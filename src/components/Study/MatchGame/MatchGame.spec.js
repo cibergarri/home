@@ -54,4 +54,21 @@ describe('MatchGame', () => {
     fireEvent.click(within(pictures).getByRole('button', { name: 'Lávate las manos.' }));
     expect(screen.getByText('✓ Wash your hands.')).toBeInTheDocument();
   });
+
+  it('shows a wrong pair again at the end, and matches it again with the one it was mixed up with', () => {
+    renderWithProviders(<MatchGame exercise={daysOfTheWeek} />);
+    fireEvent.click(english('Monday'));
+    fireEvent.click(spanish('Martes'));
+    daysOfTheWeek.pairs.forEach(({ en, es }) => {
+      fireEvent.click(english(en));
+      fireEvent.click(spanish(es));
+    });
+    expect(screen.getByLabelText('Not Martes')).toBeInTheDocument();
+    expect(screen.getByLabelText('Right answer: Lunes')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Practise my mistakes 💪' }));
+    expect(screen.getByText('0 of 2 pairs')).toBeInTheDocument();
+    expect(english('Monday')).toBeEnabled();
+    expect(english('Tuesday')).toBeEnabled();
+    expect(screen.queryByRole('button', { name: 'Friday' })).not.toBeInTheDocument();
+  });
 });

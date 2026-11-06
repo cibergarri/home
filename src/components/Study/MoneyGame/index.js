@@ -4,7 +4,9 @@ import { useState } from 'react';
 
 import { speak } from '../speech';
 import { useStrings } from '../language';
-import { WellDone, QuestionNav } from '../game';
+import {
+  WellDone, QuestionNav, useSlips, practiseItems,
+} from '../game';
 import { MoneyPiece, pieceSize } from '../drawings/Maths';
 import { Instructions, Message } from '../LabelMap/style';
 import {
@@ -29,6 +31,31 @@ export const fewestPieces = (amount) => {
 
 const total = pieces => pieces.reduce((sum, value) => sum + value, 0);
 
+// A right way to make an amount from the tray, biggest first: with exactly `count` notes and
+// coins, or with the fewest.
+export const piecesFor = (amount, tray, count) => {
+  const values = [...tray].sort((a, b) => b - a);
+  if (count === undefined) {
+    let left = amount;
+    return values.flatMap((value) => {
+      const used = Math.floor(left / value);
+      left -= used * value;
+      return Array(used).fill(value);
+    });
+  }
+  const search = (left, n, from) => {
+    if (n === 0) return left === 0 ? [] : null;
+    for (let i = from; i < values.length; i += 1) {
+      if (values[i] <= left) {
+        const rest = search(left - values[i], n - 1, i);
+        if (rest) return [values[i], ...rest];
+      }
+    }
+    return null;
+  };
+  return search(amount, count, 0) ?? [];
+};
+
 // A note or coin, in the tray as big as in the pictures, a little smaller once put down.
 function Pieces({ value, scale = 1 }) {
   const { width, height } = pieceSize(value);
@@ -44,18 +71,21 @@ function Pieces({ value, scale = 1 }) {
 // notes and coins, or with exactly `pieces` of them (`piecesSaid` in words) when the question says
 // how many. A question
 // may tell a story and show a picture (`scene`), as in "Cambia por un billete" or "¿Cuánto te
-// devuelven?". The tray is the exercise's `tray`, or the notes up to 50 € and the coins.
+// devuelven?". The tray is the exercise's `tray`, or the notes up to 50 € and the coins. At the
+// end, the mistakes can be looked at again, and those questions played again on their own.
 export default function MoneyGame({ exercise }) {
   const { instructions, questions, tray = TRAY } = exercise;
   const text = useStrings();
   const [index, setIndex] = useState(0);
   const [placed, setPlaced] = useState([]);
   const [solved, setSolved] = useState(false);
-  const [mistakes, setMistakes] = useState(0);
+  const [slips, slip, clearSlips] = useSlips();
   const [message, setMessage] = useState(null);
   const [finished, setFinished] = useState(false);
+  const [only, setOnly] = useState(null); // the questions to practise again, if not all
 
-  const question = questions[index];
+  const order = only ?? questions.map((q, i) => i);
+  const question = questions[order[index]];
   const { target, pieces, piecesSaid } = question;
   const sum = total(placed);
 
@@ -72,7 +102,15 @@ export default function MoneyGame({ exercise }) {
   };
 
   const wrong = (why) => {
-    setMistakes(count => count + 1);
+    slip({
+      item: order[index],
+      prompt: question.story,
+      note: why,
+      scene: question.scene,
+      wrong: text.yourMoneyWas(placed),
+      right: text.yourMoneyWas(piecesFor(target, tray, pieces)),
+      say: text.euros(target),
+    });
     setMessage(why);
   };
 
@@ -96,13 +134,14 @@ export default function MoneyGame({ exercise }) {
   };
 
   const next = () => {
-    if (index + 1 < questions.length) goTo(index + 1);
+    if (index + 1 < order.length) goTo(index + 1);
     else setFinished(true);
   };
 
-  const playAgain = () => {
+  const playAgain = (questionsToPlay = null) => {
+    setOnly(questionsToPlay);
     goTo(0);
-    setMistakes(0);
+    clearSlips();
     setFinished(false);
   };
 
@@ -110,7 +149,7 @@ export default function MoneyGame({ exercise }) {
     return (
       <>
         <Instructions>{instructions}</Instructions>
-        <WellDone mistakes={mistakes} onAgain={playAgain} />
+        <WellDone slips={slips} onAgain={() => playAgain()} onPractise={() => playAgain(practiseItems(slips))} />
       </>
     );
   }
@@ -147,7 +186,7 @@ export default function MoneyGame({ exercise }) {
           {solved ? (
             <Row>
               <span />
-              <Next type="button" onClick={next}>{index + 1 < questions.length ? text.next : text.finish}</Next>
+              <Next type="button" onClick={next}>{index + 1 < order.length ? text.next : text.finish}</Next>
             </Row>
           ) : (
             <>
@@ -166,7 +205,7 @@ export default function MoneyGame({ exercise }) {
           )}
         </Body>
       </Card>
-      <QuestionNav index={index} total={questions.length} onGo={goTo} />
+      <QuestionNav index={index} total={order.length} onGo={goTo} />
       <div aria-live="polite">
         {message && <Message $kind="wrong">{message}</Message>}
       </div>

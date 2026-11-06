@@ -4,7 +4,9 @@ import { useRef, useState } from 'react';
 
 import { speak } from '../speech';
 import { useStrings } from '../language';
-import { SpeakerIcon, WellDone, QuestionNav } from '../game';
+import {
+  SpeakerIcon, WellDone, QuestionNav, useSlips, practiseItems,
+} from '../game';
 import WritingPad from '../WritingPad';
 import { Instructions, Message } from '../LabelMap/style';
 import {
@@ -26,7 +28,8 @@ export const sayable = (sum, lang) => sum.replace(/[+\-−=→]/g, sign => ` ${S
 // a time. It may have a `hint` or a picture (`scene`). A wrong answer shakes and is cleared for
 // another try. If the questions carry a `letter`, each one solved uncovers its letter of a secret
 // message (`space: true` leaves a gap after it). With `write: true` the answer is written by hand,
-// and read, though the number keys are a tap away.
+// and read, though the number keys are a tap away. At the end, the mistakes can be looked at
+// again, and those questions played again on their own (with no secret message then).
 export default function NumberGame({ exercise }) {
   const { instructions, questions } = exercise;
   const text = useStrings();
@@ -34,20 +37,22 @@ export default function NumberGame({ exercise }) {
   const [filled, setFilled] = useState([]);
   const [typed, setTyped] = useState('');
   const [state, setState] = useState(null);
-  const [mistakes, setMistakes] = useState(0);
+  const [slips, slip, clearSlips] = useSlips();
   const [message, setMessage] = useState(null);
   const [finished, setFinished] = useState(false);
   const [uncovered, setUncovered] = useState([]);
   const [writing, setWriting] = useState(Boolean(exercise.write));
+  const [only, setOnly] = useState(null); // the questions to practise again, if not all
   const wrongTimer = useRef(null);
 
-  const question = questions[index];
+  const order = only ?? questions.map((q, i) => i);
+  const question = questions[order[index]];
   const answers = [].concat(question.answer);
   const parts = question.prompt.split('?');
   const current = filled.length;
   const solved = current === answers.length;
   const solution = parts.map((part, i) => `${part}${i < answers.length ? answers[i] : ''}`).join('');
-  const secret = questions.some(q => q.letter);
+  const secret = !only && questions.some(q => q.letter);
 
   const type = (digit) => {
     if (solved || typed.length >= MAX_DIGITS) return;
@@ -72,7 +77,15 @@ export default function NumberGame({ exercise }) {
       }
       return;
     }
-    setMistakes(count => count + 1);
+    slip({
+      item: order[index],
+      key: `${order[index]}-${current}`,
+      prompt: question.prompt,
+      note: question.story,
+      scene: question.scene,
+      wrong: Number(value),
+      right: answers[current],
+    });
     setTyped(value);
     setState('wrong');
     setMessage(read ? `${text.readAs(value)} ${text.tryAgain}` : text.tryAgain);
@@ -92,13 +105,14 @@ export default function NumberGame({ exercise }) {
   };
 
   const next = () => {
-    if (index + 1 < questions.length) goTo(index + 1);
+    if (index + 1 < order.length) goTo(index + 1);
     else setFinished(true);
   };
 
-  const playAgain = () => {
+  const playAgain = (questionsToPlay = null) => {
+    setOnly(questionsToPlay);
     goTo(0);
-    setMistakes(0);
+    clearSlips();
     setUncovered([]);
     setFinished(false);
   };
@@ -119,7 +133,7 @@ export default function NumberGame({ exercise }) {
       <>
         <Instructions>{instructions}</Instructions>
         {secretLine}
-        <WellDone mistakes={mistakes} onAgain={playAgain} />
+        <WellDone slips={slips} onAgain={() => playAgain()} onPractise={() => playAgain(practiseItems(slips))} />
       </>
     );
   }
@@ -159,7 +173,7 @@ export default function NumberGame({ exercise }) {
                 <SpeakerIcon />
                 {text.listen}
               </Listen>
-              <Next type="button" onClick={next}>{index + 1 < questions.length ? text.next : text.finish}</Next>
+              <Next type="button" onClick={next}>{index + 1 < order.length ? text.next : text.finish}</Next>
             </Row>
           )}
         </Body>
@@ -190,7 +204,7 @@ export default function NumberGame({ exercise }) {
           </Answering>
         )}
       </Card>
-      <QuestionNav index={index} total={questions.length} onGo={goTo} />
+      <QuestionNav index={index} total={order.length} onGo={goTo} />
       <div aria-live="polite">
         {message && <Message $kind="wrong">{message}</Message>}
       </div>

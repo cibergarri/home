@@ -3,7 +3,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import { renderWithProviders } from '@/test-utils';
 import { LanguageContext } from '../language';
 import euros from '../exercises/mates/tema-2/euros';
-import MoneyGame, { fewestPieces } from '.';
+import MoneyGame, { fewestPieces, piecesFor } from '.';
 
 const part = title => euros.more.find(more => more.title === title);
 const inSpanish = ui => renderWithProviders(<LanguageContext.Provider value="es">{ui}</LanguageContext.Provider>);
@@ -61,5 +61,11 @@ describe('MoneyGame', () => {
     expect(screen.getByRole('button', { name: 'Terminar ✓' })).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Terminar ✓' }));
     expect(screen.getByLabelText('2 de 3 estrellas')).toBeInTheDocument();
+  });
+
+  it('finds a right way to pay, to show after a mistake', () => {
+    expect(piecesFor(8, [50, 20, 10, 5, 2, 1])).toEqual([5, 2, 1]);
+    expect(piecesFor(10, [5, 2, 1], 2)).toEqual([5, 5]);
+    expect(piecesFor(10, [5, 2, 1], 4)).toEqual([5, 2, 2, 1]);
   });
 });

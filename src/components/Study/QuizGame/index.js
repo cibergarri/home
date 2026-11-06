@@ -4,7 +4,9 @@ import { useState } from 'react';
 
 import { speak } from '../speech';
 import { useStrings } from '../language';
-import { SpeakerIcon, WellDone, QuestionNav } from '../game';
+import {
+  SpeakerIcon, WellDone, QuestionNav, useSlips, practiseItems,
+} from '../game';
 import { Instructions } from '../LabelMap/style';
 import {
   Card, Picture, Body, Question, Hint, Choices, Choice, ChoiceButton, SmallSpeaker, Next,
@@ -30,17 +32,20 @@ export const mixed = (choices, seed) => {
 
 // Questions one after another, each with a few answers to choose from and maybe a picture
 // (`scene`: a drawing, its size and what to draw). A wrong answer is crossed out and another can be
-// tried; the right one turns green and leads on to the next question.
+// tried; the right one turns green and leads on to the next question. At the end, the mistakes
+// can be looked at again, and those questions played again on their own.
 export default function QuizGame({ exercise }) {
   const { instructions, questions, keepOrder } = exercise;
   const text = useStrings();
   const [index, setIndex] = useState(0);
   const [tried, setTried] = useState([]);
   const [solved, setSolved] = useState(false);
-  const [mistakes, setMistakes] = useState(0);
+  const [slips, slip, clearSlips] = useSlips();
   const [finished, setFinished] = useState(false);
+  const [only, setOnly] = useState(null); // the questions to practise again, if not all
 
-  const question = questions[index];
+  const order = only ?? questions.map((q, i) => i);
+  const question = questions[order[index]];
   const { scene } = question;
   const choices = keepOrder ? question.choices : mixed(question.choices, `${question.prompt}|${question.choices.join('|')}`);
 
@@ -50,7 +55,9 @@ export default function QuizGame({ exercise }) {
       speak(choice, text.lang);
       return;
     }
-    setMistakes(count => count + 1);
+    slip({
+      item: order[index], prompt: question.prompt, scene, wrong: choice, right: question.answer,
+    });
     setTried(current => [...current, choice]);
   };
 
@@ -61,15 +68,16 @@ export default function QuizGame({ exercise }) {
   };
 
   const next = () => {
-    if (index + 1 < questions.length) goTo(index + 1);
+    if (index + 1 < order.length) goTo(index + 1);
     else setFinished(true);
   };
 
-  const playAgain = () => {
+  const playAgain = (questionsToPlay = null) => {
+    setOnly(questionsToPlay);
     setIndex(0);
     setTried([]);
     setSolved(false);
-    setMistakes(0);
+    clearSlips();
     setFinished(false);
   };
 
@@ -77,7 +85,7 @@ export default function QuizGame({ exercise }) {
     return (
       <>
         <Instructions>{instructions}</Instructions>
-        <WellDone mistakes={mistakes} onAgain={playAgain} />
+        <WellDone slips={slips} onAgain={() => playAgain()} onPractise={() => playAgain(practiseItems(slips))} />
       </>
     );
   }
@@ -120,10 +128,10 @@ export default function QuizGame({ exercise }) {
               );
             })}
           </Choices>
-          {solved && <Next type="button" onClick={next}>{index + 1 < questions.length ? text.next : text.finish}</Next>}
+          {solved && <Next type="button" onClick={next}>{index + 1 < order.length ? text.next : text.finish}</Next>}
         </Body>
       </Card>
-      <QuestionNav index={index} total={questions.length} onGo={goTo} />
+      <QuestionNav index={index} total={order.length} onGo={goTo} />
     </>
   );
 }

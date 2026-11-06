@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { speak } from '../speech';
 import { useStrings } from '../language';
 import {
-  scramble, shuffle, SpeakerIcon, WellDone,
+  scramble, shuffle, SpeakerIcon, WellDone, useSlips, practiseItems,
 } from '../game';
 import { Instructions, Message, Progress } from '../LabelMap/style';
 import {
@@ -18,8 +18,12 @@ const COLOURS = ['#8ec5f2', '#a6db8a', '#f7dc6f', '#f5a8c8', '#c3a6f2', '#f7b58a
 // English on the left, Spanish on the right: tap a card on one side, then its partner on the
 // other. A right pair is coloured in and read aloud in English; a wrong one shakes. A pair with a
 // `Picture` (a drawing 160 × 110) shows it on the right instead, its Spanish kept as its label.
+// At the end, the pairs gone wrong can be looked at again, and matched again on their own, with
+// the ones they were mixed up with.
 export default function MatchGame({ exercise }) {
-  const { instructions, pairs } = exercise;
+  const { instructions } = exercise;
+  const [only, setOnly] = useState(null); // the pairs to practise again, if not all
+  const pairs = only ? exercise.pairs.filter(pair => only.includes(pair.id)) : exercise.pairs;
   const text = useStrings();
   const [leftTitle, rightTitle] = exercise.columns ?? text.columns;
   const pictures = pairs.every(pair => pair.Picture);
@@ -29,7 +33,7 @@ export default function MatchGame({ exercise }) {
   const [matched, setMatched] = useState([]);
   const [selected, setSelected] = useState(null);
   const [wrong, setWrong] = useState([]);
-  const [mistakes, setMistakes] = useState(0);
+  const [slips, slip, clearSlips] = useSlips();
   const [message, setMessage] = useState(null);
   const wrongTimer = useRef(null);
 
@@ -49,19 +53,28 @@ export default function MatchGame({ exercise }) {
       speak(byId[id].en, text.lang);
       return;
     }
-    setMistakes(count => count + 1);
+    // Whichever was picked first: a word put with the wrong Spanish one, or a picture with the
+    // wrong word (and then it is the picture that is shown again, with its word).
+    const [word, partner] = selected.side === 'left' ? [byId[selected.id], byId[id]] : [byId[id], byId[selected.id]];
+    slip(partner.Picture ? {
+      item: partner.id, also: [word.id], Picture: partner.Picture, wrong: word.en, right: partner.en,
+    } : {
+      item: word.id, also: [partner.id], prompt: word.en, wrong: partner.es, right: word.es, say: word.en,
+    });
     setWrong([`${selected.side}-${selected.id}`, `${side}-${id}`]);
     clearTimeout(wrongTimer.current);
     wrongTimer.current = setTimeout(() => setWrong([]), 600);
     setMessage({ kind: 'wrong' });
   };
 
-  const playAgain = () => {
-    setLeft(shuffle(ids));
-    setRight(shuffle(ids));
+  const playAgain = (pairsToMatch = null) => {
+    const playing = pairsToMatch ?? exercise.pairs.map(pair => pair.id);
+    setOnly(pairsToMatch);
+    setLeft(shuffle(playing));
+    setRight(shuffle(playing));
     setMatched([]);
     setSelected(null);
-    setMistakes(0);
+    clearSlips();
     setMessage(null);
   };
 
@@ -116,7 +129,7 @@ export default function MatchGame({ exercise }) {
         </Column>
       </Columns>
 
-      {finished ? <WellDone mistakes={mistakes} onAgain={playAgain} /> : (
+      {finished ? <WellDone slips={slips} onAgain={() => playAgain()} onPractise={() => playAgain(practiseItems(slips))} /> : (
         <Progress>{text.pairs(matched.length, pairs.length)}</Progress>
       )}
       <div aria-live="polite">

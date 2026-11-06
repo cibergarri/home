@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { speak } from '../speech';
 import { useStrings } from '../language';
 import {
-  scramble, shuffle, SpeakerIcon, WellDone, QuestionNav,
+  scramble, shuffle, SpeakerIcon, WellDone, QuestionNav, useSlips, practiseItems,
 } from '../game';
 import WritingPad from '../WritingPad';
 import { Instructions, Message } from '../LabelMap/style';
@@ -34,7 +34,8 @@ const tilesFor = (puzzle, seed) => {
 // English) or a `clue` to find it by ("Lo contrario de bajar"): the missing letters are tapped in order from
 // a few letter tiles, or with `write: true` written by hand one at a time. Only the right next
 // letter goes in; a wrong one shakes and counts as a mistake. The word can be heard at any time,
-// and is read aloud once it is complete.
+// and is read aloud once it is complete. At the end, the words gone wrong can be looked at again,
+// and played again on their own.
 export default function LetterGame({ exercise }) {
   const { instructions, words } = exercise;
   const text = useStrings();
@@ -42,15 +43,24 @@ export default function LetterGame({ exercise }) {
   const [tiles, setTiles] = useState(() => tilesFor(words[0], 3));
   const [used, setUsed] = useState([]);
   const [wrong, setWrong] = useState(null);
-  const [mistakes, setMistakes] = useState(0);
+  const [slips, slip, clearSlips] = useSlips();
   const [message, setMessage] = useState(null);
   const [finished, setFinished] = useState(false);
   const [writing, setWriting] = useState(Boolean(exercise.write));
+  const [only, setOnly] = useState(null); // the words to practise again, if not all
   const wrongTimer = useRef(null);
 
-  const puzzle = words[index];
+  const order = only ?? words.map((w, i) => i);
+  const puzzle = words[order[index]];
   const missing = gapsOf(puzzle);
   const solved = used.length === missing.length;
+
+  const mistake = letter => slip({
+    item: order[index],
+    prompt: [puzzle.number ?? puzzle.clue, [...puzzle.shown].join(' ')].filter(item => item !== undefined).join(' → '),
+    wrong: letter,
+    right: puzzle.word,
+  });
 
   const tap = (tile) => {
     if (tile.letter === missing[used.length]) {
@@ -60,7 +70,7 @@ export default function LetterGame({ exercise }) {
       if (next.length === missing.length) speak(puzzle.word, text.lang);
       return;
     }
-    setMistakes(count => count + 1);
+    mistake(tile.letter);
     setWrong(tile.id);
     clearTimeout(wrongTimer.current);
     wrongTimer.current = setTimeout(() => setWrong(null), 600);
@@ -74,27 +84,29 @@ export default function LetterGame({ exercise }) {
       tap(tile);
       return;
     }
-    setMistakes(count => count + 1);
+    mistake(letter);
     setMessage(`${text.readLetterAs(letter)} ${text.tryAgain}`);
   };
 
-  const goTo = (next) => {
+  const goTo = (next, playing = order) => {
     setIndex(next);
-    setTiles(tilesFor(words[next], next + 3));
+    setTiles(tilesFor(words[playing[next]], playing[next] + 3));
     setUsed([]);
     setMessage(null);
   };
 
   const next = () => {
-    if (index + 1 < words.length) goTo(index + 1);
+    if (index + 1 < order.length) goTo(index + 1);
     else setFinished(true);
   };
 
-  const playAgain = () => {
+  const playAgain = (wordsToPlay = null) => {
+    const playing = wordsToPlay ?? words.map((w, i) => i);
+    setOnly(wordsToPlay);
     setIndex(0);
-    setTiles(shuffle(tilesFor(words[0], 3)));
+    setTiles(shuffle(tilesFor(words[playing[0]], 3)));
     setUsed([]);
-    setMistakes(0);
+    clearSlips();
     setMessage(null);
     setFinished(false);
   };
@@ -103,7 +115,7 @@ export default function LetterGame({ exercise }) {
     return (
       <>
         <Instructions>{instructions}</Instructions>
-        <WellDone mistakes={mistakes} onAgain={playAgain} />
+        <WellDone slips={slips} onAgain={() => playAgain()} onPractise={() => playAgain(practiseItems(slips))} />
       </>
     );
   }
@@ -137,7 +149,7 @@ export default function LetterGame({ exercise }) {
         {solved ? (
           <Row>
             {listen}
-            <Next type="button" onClick={next}>{index + 1 < words.length ? text.next : text.finish}</Next>
+            <Next type="button" onClick={next}>{index + 1 < order.length ? text.next : text.finish}</Next>
           </Row>
         ) : (
           <>
@@ -169,7 +181,7 @@ export default function LetterGame({ exercise }) {
           </>
         )}
       </Puzzle>
-      <QuestionNav index={index} total={words.length} onGo={goTo} label={text.count(index + 1, words.length)} />
+      <QuestionNav index={index} total={order.length} onGo={goTo} label={text.count(index + 1, order.length)} />
       <div aria-live="polite">
         {message && <Message $kind="wrong">{message}</Message>}
       </div>

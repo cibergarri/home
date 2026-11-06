@@ -4,7 +4,9 @@ import { useId, useRef, useState } from 'react';
 
 import { speak } from '../speech';
 import { useStrings } from '../language';
-import { SpeakerIcon, WellDone, QuestionNav } from '../game';
+import {
+  SpeakerIcon, WellDone, QuestionNav, useSlips, practiseItems,
+} from '../game';
 import { sayable } from '../NumberGame';
 import { Instructions, Message } from '../LabelMap/style';
 import { Row, Listen, Next } from '../NumberGame/style';
@@ -62,7 +64,8 @@ const stepsFor = ({ a, b, op }, text) => {
 // asks for the 1 carried above the next column; a subtraction whose top digit is too small swaps 1
 // of the next column for 10, crossing out its digit and writing the new ones above. Numbers up to
 // 999, with a column for the hundreds when there are any; results under 1000, and no borrowing
-// across a 0 in the tens.
+// across a 0 in the tens. At the end, the steps gone wrong can be looked at again, and those sums
+// done again on their own.
 export default function TowerGame({ exercise }) {
   const { instructions, questions } = exercise;
   const text = useStrings();
@@ -70,13 +73,15 @@ export default function TowerGame({ exercise }) {
   const [filled, setFilled] = useState({});
   const [partial, setPartial] = useState(''); // the first digit of a 10 to 19 written above
   const [wrong, setWrong] = useState(null);
-  const [mistakes, setMistakes] = useState(0);
+  const [slips, slip, clearSlips] = useSlips();
   const [message, setMessage] = useState(null);
   const [finished, setFinished] = useState(false);
+  const [only, setOnly] = useState(null); // the sums to do again, if not all
   const wrongTimer = useRef(null);
   const promptId = useId();
 
-  const question = questions[index];
+  const order = only ?? questions.map((q, i) => i);
+  const question = questions[order[index]];
   const steps = stepsFor(question, text);
   const step = steps.find(({ box }) => filled[box] === undefined);
   const solved = !step;
@@ -104,7 +109,14 @@ export default function TowerGame({ exercise }) {
       return;
     }
     setPartial('');
-    setMistakes(count => count + 1);
+    slip({
+      item: order[index],
+      key: `${order[index]}-${step.box}`,
+      prompt: `${question.a} ${question.op} ${question.b}`,
+      note: step.prompt,
+      wrong: Number(typed),
+      right: step.value,
+    });
     setWrong(step.box);
     setMessage(text.wrongDigit);
     clearTimeout(wrongTimer.current);
@@ -119,14 +131,16 @@ export default function TowerGame({ exercise }) {
   };
 
   const next = () => {
-    if (index + 1 < questions.length) goTo(index + 1);
+    if (index + 1 < order.length) goTo(index + 1);
     else setFinished(true);
   };
 
-  const playAgain = () => {
+  const playAgain = (sumsToDo = null) => {
+    setOnly(sumsToDo);
     setIndex(0);
     setFilled({});
-    setMistakes(0);
+    setPartial('');
+    clearSlips();
     setMessage(null);
     setFinished(false);
   };
@@ -135,7 +149,7 @@ export default function TowerGame({ exercise }) {
     return (
       <>
         <Instructions>{instructions}</Instructions>
-        <WellDone mistakes={mistakes} onAgain={playAgain} />
+        <WellDone slips={slips} onAgain={() => playAgain()} onPractise={() => playAgain(practiseItems(slips))} />
       </>
     );
   }
@@ -198,7 +212,7 @@ export default function TowerGame({ exercise }) {
                 <SpeakerIcon />
                 {text.listen}
               </Listen>
-              <Next type="button" onClick={next}>{index + 1 < questions.length ? text.next : text.finish}</Next>
+              <Next type="button" onClick={next}>{index + 1 < order.length ? text.next : text.finish}</Next>
             </Row>
           ) : (
             <Keypad role="group" aria-label={text.keypad}>
@@ -209,7 +223,7 @@ export default function TowerGame({ exercise }) {
           )}
         </Side>
       </Card>
-      <QuestionNav index={index} total={questions.length} onGo={goTo} />
+      <QuestionNav index={index} total={order.length} onGo={goTo} />
       <div aria-live="polite">
         {message && <Message $kind="wrong">{message}</Message>}
       </div>

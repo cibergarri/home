@@ -6,7 +6,7 @@ import Explain from '../Explain';
 import { speak } from '../speech';
 import { useStrings } from '../language';
 import {
-  shuffle, isNear, useDrag, SpeakerIcon, WellDone,
+  shuffle, isNear, useDrag, SpeakerIcon, WellDone, useSlips, practiseItems,
 } from '../game';
 import {
   Instructions, Board, Scene, EmptyBox, FilledBox, BoxSpeaker, Side, Tray, Chip, Word, Speaker,
@@ -21,7 +21,8 @@ const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
 // A picture with empty boxes and a tray of words: each word is dragged (or tapped, then its box
 // tapped) to the box of the thing it names. A right word stays in its box, a wrong one goes back.
-// When the exercise sorts its words into groups, the tray shows them group by group.
+// When the exercise sorts its words into groups, the tray shows them group by group. At the end,
+// the words gone wrong can be looked at again and placed again, with the rest already in place.
 export default function LabelMap({ exercise }) {
   const text = useStrings();
   const {
@@ -32,7 +33,7 @@ export default function LabelMap({ exercise }) {
   const [placed, setPlaced] = useState({});
   const [selected, setSelected] = useState(null);
   const [wrong, setWrong] = useState(null);
-  const [mistakes, setMistakes] = useState(0);
+  const [slips, slip, clearSlips] = useSlips();
   const [message, setMessage] = useState(null);
   const boxes = useRef({});
   const wrongTimer = useRef(null);
@@ -53,7 +54,15 @@ export default function LabelMap({ exercise }) {
       setMessage({ kind: 'right', id: wordId });
       return;
     }
-    setMistakes(count => count + 1);
+    slip({
+      item: wordId,
+      also: [boxId],
+      prompt: text.whereGoes(byId[wordId].word),
+      note: byId[wordId].definition,
+      wrong: text.boxOf(byId[boxId].word),
+      right: text.boxOf(byId[wordId].word),
+      say: byId[wordId].word,
+    });
     setWrong(boxId);
     clearTimeout(wrongTimer.current);
     wrongTimer.current = setTimeout(() => setWrong(null), 600);
@@ -75,11 +84,12 @@ export default function LabelMap({ exercise }) {
     else setMessage({ kind: 'hint' });
   };
 
-  const playAgain = () => {
-    setOrder(shuffle(items.map(item => item.id)));
-    setPlaced({});
+  const playAgain = (wordsToPlace = null) => {
+    const left = wordsToPlace ?? items.map(item => item.id);
+    setOrder(shuffle(left));
+    setPlaced(Object.fromEntries(items.filter(item => !left.includes(item.id)).map(item => [item.id, true])));
     setSelected(null);
-    setMistakes(0);
+    clearSlips();
     setMessage(null);
   };
 
@@ -171,7 +181,7 @@ export default function LabelMap({ exercise }) {
 
         <Side>
           {finished ? (
-            <WellDone mistakes={mistakes} onAgain={playAgain} />
+            <WellDone slips={slips} onAgain={() => playAgain()} onPractise={() => playAgain(practiseItems(slips))} />
           ) : (
             <>
               {groups ? (

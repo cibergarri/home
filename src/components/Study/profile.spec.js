@@ -44,7 +44,7 @@ describe('who is studying', () => {
 
   it('cheers at the end of a game, by name if there is one', () => {
     window.localStorage.setItem('study-profile', JSON.stringify({ name: 'Ana' }));
-    renderWithProviders(<WellDone mistakes={0} onAgain={() => {}} />);
+    renderWithProviders(<WellDone slips={[]} onAgain={() => {}} />);
     expect(screen.getByRole('heading', { name: 'Well done, Ana!' })).toBeInTheDocument();
     expect(screen.getAllByRole('paragraph')).toHaveLength(2); // how it went, and a cheer
   });
@@ -52,7 +52,7 @@ describe('who is studying', () => {
   it('cheers in Spanish with no name', () => {
     renderWithProviders(
       <LanguageContext.Provider value="es">
-        <WellDone mistakes={1} onAgain={() => {}} />
+        <WellDone slips={[{ item: 0, prompt: '2 + 2 = ?', wrong: 5, right: 4 }]} onAgain={() => {}} />
       </LanguageContext.Provider>,
     );
     expect(screen.getByRole('heading', { name: '¡Muy bien!' })).toBeInTheDocument();

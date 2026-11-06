@@ -80,4 +80,27 @@ describe('QuizGame', () => {
     const first = questions.filter(({ prompt, choices: offered, answer }) => mixed(offered, `${prompt}|${offered.join('|')}`)[0] === answer);
     expect(first.length / questions.length).toBeLessThan(0.55);
   });
+
+  it('shows the mistakes again at the end, and plays only those questions again', () => {
+    renderWithProviders(<QuizGame exercise={positions} />);
+    const [first] = positions.questions;
+    const wrong = first.choices.find(choice => choice !== first.answer);
+    choose(wrong);
+    positions.questions.forEach(({ answer }, index) => {
+      choose(answer);
+      fireEvent.click(screen.getByRole('button', { name: index + 1 < positions.questions.length ? 'Next →' : 'Finish ✓' }));
+    });
+    const review = screen.getByRole('region', { name: 'Let’s look at these again 🔍' });
+    expect(review).toHaveTextContent(first.prompt);
+    expect(screen.getByLabelText(`Not ${wrong}`)).toBeInTheDocument();
+    expect(screen.getByLabelText(`Right answer: ${first.answer}`)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Practise my mistakes 💪' }));
+    expect(screen.getByText(first.prompt)).toBeInTheDocument();
+    expect(screen.queryByText('Question 1 of 7')).not.toBeInTheDocument(); // just the one
+    choose(first.answer);
+    fireEvent.click(screen.getByRole('button', { name: 'Finish ✓' }));
+    expect(screen.getByLabelText('3 out of 3 stars')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Practise my mistakes 💪' })).not.toBeInTheDocument();
+  });
 });

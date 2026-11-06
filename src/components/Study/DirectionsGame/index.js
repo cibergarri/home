@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 
 import { speak } from '../speech';
 import { useStrings } from '../language';
-import { SpeakerIcon, WellDone } from '../game';
+import { SpeakerIcon, WellDone, useSlips } from '../game';
 import { Message, Progress } from '../LabelMap/style';
 import { CELL } from '../drawings/DirectionsMap';
 import {
@@ -31,7 +31,8 @@ function CompassRose() {
 
 // A map on a grid and a route to follow, a step at a time ("6 squares north"): each press of an
 // arrow moves one square, but only the way the step says. A wrong arrow counts as a mistake and
-// does not move. After each route, playing again gives the next one.
+// does not move. After each route, playing again gives the next one, and after mistakes they can
+// be looked at again and the same route walked again.
 // The grid's squares are `cell` units wide in a drawing `width` × `height`; a route starts at its
 // own `start` or the exercise's, and may say what to do (`task`) and what happened (`done`)
 // instead of naming a place to get to (`goal`). With `marker: 'ring'` what is under the marker
@@ -47,7 +48,7 @@ export default function DirectionsGame({ exercise }) {
   const [trail, setTrail] = useState([startOf(routes[0])]);
   const [stepIndex, setStepIndex] = useState(0);
   const [moved, setMoved] = useState(0);
-  const [mistakes, setMistakes] = useState(0);
+  const [slips, slip, clearSlips] = useSlips();
   const [wrong, setWrong] = useState(null);
   const [message, setMessage] = useState(null);
   const wrongTimer = useRef(null);
@@ -61,7 +62,12 @@ export default function DirectionsGame({ exercise }) {
   const press = (direction) => {
     if (finished) return;
     if (direction !== step.direction) {
-      setMistakes(count => count + 1);
+      slip({
+        item: stepIndex,
+        prompt: text.move(step.squares, text.directions[step.direction]),
+        wrong: text.directions[direction],
+        right: text.directions[step.direction],
+      });
       setWrong(direction);
       clearTimeout(wrongTimer.current);
       wrongTimer.current = setTimeout(() => setWrong(null), 600);
@@ -79,15 +85,15 @@ export default function DirectionsGame({ exercise }) {
     }
   };
 
-  const nextRoute = () => {
-    const next = (routeIndex + 1) % routes.length;
+  const walk = (next) => {
     setRouteIndex(next);
     setTrail([startOf(routes[next])]);
     setStepIndex(0);
     setMoved(0);
-    setMistakes(0);
+    clearSlips();
     setMessage(null);
   };
+  const nextRoute = () => walk((routeIndex + 1) % routes.length);
 
   return (
     <>
@@ -145,7 +151,7 @@ export default function DirectionsGame({ exercise }) {
           {finished ? (
             <>
               <Message $kind="right">{route.done ?? text.arrived(route.goal)}</Message>
-              <WellDone mistakes={mistakes} onAgain={nextRoute} />
+              <WellDone slips={slips} onAgain={nextRoute} onPractise={() => walk(routeIndex)} />
             </>
           ) : (
             <>

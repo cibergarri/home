@@ -92,4 +92,23 @@ describe('TowerGame', () => {
       expect(a).toBeGreaterThanOrEqual(b);
     });
   });
+
+  it('shows the step gone wrong at the end, and does that sum again on its own', () => {
+    inSpanish(<TowerGame exercise={{ questions: [{ op: '+', a: 52, b: 34 }, { op: '+', a: 10, b: 10 }] }} />);
+    key(7);
+    key(6);
+    key(8);
+    fireEvent.click(screen.getByRole('button', { name: 'Siguiente →' }));
+    key(0);
+    key(2);
+    fireEvent.click(screen.getByRole('button', { name: 'Terminar ✓' }));
+    const review = screen.getByRole('region', { name: 'Vamos a repasar estos 🔍' });
+    expect(review).toHaveTextContent('52 + 34');
+    expect(review).toHaveTextContent('Suma las unidades: 2 + 4');
+    expect(screen.getByLabelText('No es 7')).toBeInTheDocument();
+    expect(screen.getByLabelText('Respuesta buena: 6')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Practicar mis fallos 💪' }));
+    expect(screen.getByText(/Suma las unidades: 2 \+ 4/)).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Pregunta siguiente' })).not.toBeInTheDocument(); // just the one
+  });
 });

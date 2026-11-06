@@ -5,7 +5,9 @@ import { useRef, useState } from 'react';
 import Explain from '../Explain';
 import { speak } from '../speech';
 import { useStrings } from '../language';
-import { shuffle, SpeakerIcon, WellDone } from '../game';
+import {
+  shuffle, SpeakerIcon, WellDone, useSlips, practiseItems,
+} from '../game';
 import { Instructions, Message, Progress } from '../LabelMap/style';
 import {
   Crayons, Crayon, Words, Tile, TileWord, TileSpeaker,
@@ -25,15 +27,18 @@ function CrayonIcon({ colour }) {
 }
 
 // Words to colour in, as in a workbook: pick up a crayon, then tap each word it belongs to. Each
-// word has one right crayon. A right word is coloured in, a wrong one shakes and stays white.
+// word has one right crayon. A right word is coloured in, a wrong one shakes and stays white. At
+// the end, the words gone wrong can be looked at again, and coloured again on their own.
 export default function ColourGame({ exercise }) {
   const text = useStrings();
-  const { instructions, crayons, words } = exercise;
+  const { instructions, crayons } = exercise;
+  const [only, setOnly] = useState(null); // the words to colour again, if not all
+  const words = only ? exercise.words.filter(word => only.includes(word.id)) : exercise.words;
   const [order, setOrder] = useState(() => words.map(word => word.id));
   const [crayon, setCrayon] = useState(null);
   const [coloured, setColoured] = useState({});
   const [wrong, setWrong] = useState(null);
-  const [mistakes, setMistakes] = useState(0);
+  const [slips, slip, clearSlips] = useSlips();
   const [message, setMessage] = useState(null);
   const wrongTimer = useRef(null);
 
@@ -52,18 +57,21 @@ export default function ColourGame({ exercise }) {
       setMessage({ kind: 'right', word: byId[id].word, crayon: crayonById[crayon] });
       return;
     }
-    setMistakes(count => count + 1);
+    slip({
+      item: id, prompt: byId[id].word, wrong: crayonById[crayon].title, right: crayonById[byId[id].crayon].title,
+    });
     setWrong(id);
     clearTimeout(wrongTimer.current);
     wrongTimer.current = setTimeout(() => setWrong(null), 600);
     setMessage({ kind: 'wrong', word: byId[id].word, crayon: crayonById[crayon] });
   };
 
-  const playAgain = () => {
-    setOrder(shuffle(words.map(word => word.id)));
+  const playAgain = (wordsToColour = null) => {
+    setOnly(wordsToColour);
+    setOrder(shuffle(wordsToColour ?? exercise.words.map(word => word.id)));
     setColoured({});
     setCrayon(null);
-    setMistakes(0);
+    clearSlips();
     setMessage(null);
   };
 
@@ -104,7 +112,7 @@ export default function ColourGame({ exercise }) {
         })}
       </Words>
 
-      {finished ? <WellDone mistakes={mistakes} onAgain={playAgain} /> : (
+      {finished ? <WellDone slips={slips} onAgain={() => playAgain()} onPractise={() => playAgain(practiseItems(slips))} /> : (
         <Progress>{text.progressColoured(colouredCount, words.length)}</Progress>
       )}
       <div aria-live="polite">

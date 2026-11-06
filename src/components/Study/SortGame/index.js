@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { speak } from '../speech';
 import { useStrings } from '../language';
 import {
-  shuffle, isNear, useDrag, SpeakerIcon, WellDone,
+  shuffle, isNear, useDrag, SpeakerIcon, WellDone, useSlips, practiseItems,
 } from '../game';
 import {
   Instructions, Chip, Word, Speaker, Ghost, Message, Progress,
@@ -16,16 +16,19 @@ import {
 
 // Cards to sort into columns: each card is dragged (or tapped, then a column's name tapped) into
 // the column it belongs to. A card can belong to more than one column (`columns`), and then any
-// of them is right. A right card stays in its column, a wrong one goes back.
+// of them is right. A right card stays in its column, a wrong one goes back. At the end, the
+// cards gone wrong can be looked at again, and sorted again on their own.
 export default function SortGame({ exercise }) {
   const strings = useStrings();
-  const { instructions, columns, cards } = exercise;
+  const { instructions, columns } = exercise;
+  const [only, setOnly] = useState(null); // the cards to sort again, if not all
+  const cards = only ? exercise.cards.filter(card => only.includes(card.id)) : exercise.cards;
   // The first round is in a fixed order, so the static page and the browser agree on it.
   const [order, setOrder] = useState(() => cards.map(card => card.id).reverse());
   const [sorted, setSorted] = useState({});
   const [selected, setSelected] = useState(null);
   const [wrong, setWrong] = useState(null);
-  const [mistakes, setMistakes] = useState(0);
+  const [slips, slip, clearSlips] = useSlips();
   const [message, setMessage] = useState(null);
   const zones = useRef({});
   const wrongTimer = useRef(null);
@@ -47,7 +50,10 @@ export default function SortGame({ exercise }) {
       setMessage({ kind: 'right', card, column: columns.find(column => column.id === columnId) });
       return;
     }
-    setMistakes(count => count + 1);
+    const titleOf = id => columns.find(column => column.id === id).title;
+    slip({
+      item: cardId, prompt: card.text, wrong: titleOf(columnId), right: card.columns.map(titleOf).join(' / '),
+    });
     setWrong(columnId);
     clearTimeout(wrongTimer.current);
     wrongTimer.current = setTimeout(() => setWrong(null), 600);
@@ -69,11 +75,12 @@ export default function SortGame({ exercise }) {
     else setMessage({ kind: 'hint' });
   };
 
-  const playAgain = () => {
-    setOrder(shuffle(cards.map(card => card.id)));
+  const playAgain = (cardsToSort = null) => {
+    setOnly(cardsToSort);
+    setOrder(shuffle(cardsToSort ?? exercise.cards.map(card => card.id)));
     setSorted({});
     setSelected(null);
-    setMistakes(0);
+    clearSlips();
     setMessage(null);
   };
 
@@ -111,7 +118,7 @@ export default function SortGame({ exercise }) {
       </Columns>
 
       <Bottom>
-        {finished ? <WellDone mistakes={mistakes} onAgain={playAgain} /> : (
+        {finished ? <WellDone slips={slips} onAgain={() => playAgain()} onPractise={() => playAgain(practiseItems(slips))} /> : (
           <>
             <Cards aria-label={strings.cardsTray}>
               {order.filter(id => !sorted[id]).map((id) => {
