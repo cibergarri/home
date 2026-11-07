@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.27.0](https://github.com/cibergarri/home/compare/v1.26.0...v1.27.0) (2026-11-07)
+
+
+### Features
+
+* **study-corner:** add the vital functions diagram and the nutrients concept map ([074a301](https://github.com/cibergarri/home/commit/074a301f78c1af3eba9f80316b0ea4685bde8658))
+
 # [1.26.0](https://github.com/cibergarri/home/compare/v1.25.0...v1.26.0) (2026-11-07)
 
 
