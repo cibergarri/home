@@ -81,6 +81,7 @@ const euros = {
         giveBack('El abrigo', '🧥', 54, 50, 20),
         giveBack('El balón', '⚽', 13, 20),
         giveBack('El osito', '🧸', 27, 50),
+        giveBack('El disfraz de egipcio de Topi', '🐫', 20, 50),
       ],
     },
     {

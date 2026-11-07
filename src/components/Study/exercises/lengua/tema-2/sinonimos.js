@@ -1,4 +1,5 @@
-// Lengua, tema 2: sinónimos (significan lo mismo) y antónimos (significan lo contrario).
+// Lengua, tema 2: sinónimos (significan lo mismo) y antónimos (significan lo contrario), también
+// con las palabras de la tabla del cuaderno.
 const sinonimos = {
   slug: 'sinonimos',
   title: 'Sinónimos y antónimos',
@@ -15,6 +16,59 @@ const sinonimos = {
     { id: 'gigante', en: 'gigante', es: 'enorme' },
   ],
   more: [
+    {
+      title: 'Más sinónimos',
+      type: 'match',
+      instructions: 'Las palabras de la tabla del cuaderno. Toca una palabra y después la que significa lo mismo.',
+      columns: ['Palabra', 'Sinónimo'],
+      pairs: [
+        { id: 'pequeno', en: 'pequeño', es: 'chiquitito' },
+        { id: 'valiente', en: 'valiente', es: 'atrevido' },
+        { id: 'facil', en: 'fácil', es: 'sencillo' },
+        { id: 'antiguo', en: 'antiguo', es: 'viejo' },
+        { id: 'divertido', en: 'divertido', es: 'gracioso' },
+        { id: 'comenzar', en: 'comenzar', es: 'empezar' },
+        { id: 'alto', en: 'alto', es: 'elevado' },
+        { id: 'ganar', en: 'ganar', es: 'vencer' },
+        { id: 'alegre', en: 'alegre', es: 'contento' },
+        { id: 'bajar', en: 'bajar', es: 'descender' },
+      ],
+    },
+    {
+      title: 'Y sus antónimos',
+      type: 'match',
+      instructions: 'Las mismas palabras. Ahora busca la que significa lo contrario.',
+      columns: ['Palabra', 'Antónimo'],
+      pairs: [
+        { id: 'pequeno', en: 'pequeño', es: 'grande' },
+        { id: 'valiente', en: 'valiente', es: 'cobarde' },
+        { id: 'facil', en: 'fácil', es: 'difícil' },
+        { id: 'antiguo', en: 'antiguo', es: 'nuevo' },
+        { id: 'divertido', en: 'divertido', es: 'aburrido' },
+        { id: 'comenzar', en: 'comenzar', es: 'acabar' },
+        { id: 'alto', en: 'alto', es: 'bajo' },
+        { id: 'ganar', en: 'ganar', es: 'perder' },
+        { id: 'alegre', en: 'alegre', es: 'triste' },
+        { id: 'bajar', en: 'bajar', es: 'subir' },
+      ],
+    },
+    {
+      title: 'Sinónimo y antónimo',
+      type: 'quiz',
+      instructions: 'Lee la palabra y elige la que te piden: la que significa lo mismo o la contraria.',
+      questions: [
+        { prompt: 'Un sinónimo de pequeño es…', choices: ['chiquitito', 'grande', 'alto'], answer: 'chiquitito' },
+        { prompt: 'Un antónimo de valiente es…', choices: ['atrevido', 'cobarde', 'fuerte'], answer: 'cobarde' },
+        { prompt: 'Un sinónimo de fácil es…', choices: ['difícil', 'sencillo', 'rápido'], answer: 'sencillo' },
+        { prompt: 'Un antónimo de antiguo es…', choices: ['viejo', 'nuevo', 'roto'], answer: 'nuevo' },
+        { prompt: 'Un antónimo de divertido es…', choices: ['gracioso', 'aburrido', 'alegre'], answer: 'aburrido' },
+        { prompt: 'Un sinónimo de comenzar es…', choices: ['acabar', 'empezar', 'correr'], answer: 'empezar' },
+        { prompt: 'Un sinónimo de ganar es…', choices: ['vencer', 'perder', 'jugar'], answer: 'vencer' },
+        { prompt: 'Un antónimo de alegre es…', choices: ['contento', 'triste', 'feliz'], answer: 'triste' },
+        { prompt: 'Un sinónimo de bajar es…', choices: ['subir', 'descender', 'saltar'], answer: 'descender' },
+        { prompt: 'Un antónimo de alto es…', choices: ['elevado', 'bajo', 'grande'], answer: 'bajo' },
+      ],
+    },
     {
       title: 'Antónimos con des- e in-',
       type: 'letters',

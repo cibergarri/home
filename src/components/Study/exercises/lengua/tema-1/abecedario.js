@@ -13,6 +13,7 @@ const abecedario = {
     { prompt: 'Lo que hay en el campo:', hint: 'a b c d e f g h i j k l m n ñ o p q r s t u v w x y z', answer: ['arbusto', 'camino', 'llanura', 'pradera'], separator: ', ' },
     { prompt: 'Cosas que hacemos:', hint: 'a b c d e f g h i j k l m n ñ o p q r s t u v w x y z', answer: ['descansar', 'escribir', 'leer', 'pasear'], separator: ', ' },
     { prompt: 'Palabras del diccionario:', hint: 'a b c d e f g h i j k l m n ñ o p q r s t u v w x y z', answer: ['dedal', 'megáfono', 'tenazas'], separator: ', ' },
+    { prompt: 'Si empiezan por la misma letra, mira la segunda:', hint: 'a b c d e f g h i j k l m n ñ o p q r s t u v w x y z', answer: ['acelga', 'ardilla', 'brocha', 'búho', 'masticar', 'tejado', 'yoga'], separator: ', ' },
   ],
   more: [
     {

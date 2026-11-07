@@ -54,6 +54,23 @@ const adjetivos = {
         { prompt: 'Silvia ve una araña enorme. Está …', choices: ['asustada', 'aburrida'], answer: 'asustada' },
       ],
     },
+    {
+      title: 'Un adjetivo para cada nombre',
+      type: 'quiz',
+      instructions: 'Elige el adjetivo que dice cómo es. Fíjate en que vaya bien con el nombre: el oso peligroso, las galletas crujientes.',
+      questions: [
+        { prompt: 'El tren …', choices: ['grande', 'grandes', 'viaja'], answer: 'grande' },
+        { prompt: 'Las galletas …', choices: ['crujiente', 'crujientes', 'galleta'], answer: 'crujientes' },
+        { prompt: 'La camiseta …', choices: ['suave', 'suaves', 'ropa'], answer: 'suave' },
+        { prompt: 'Los plátanos …', choices: ['madura', 'maduros', 'pelar'], answer: 'maduros' },
+        { prompt: 'El pájaro …', choices: ['bonito', 'bonita', 'vuela'], answer: 'bonito' },
+        { prompt: 'El oso …', choices: ['peligrosa', 'peligroso', 'bosque'], answer: 'peligroso' },
+        { prompt: 'La pulsera …', choices: ['brillante', 'brillantes', 'muñeca'], answer: 'brillante' },
+        { prompt: 'El jardín …', choices: ['tranquila', 'tranquilo', 'flores'], answer: 'tranquilo' },
+        { prompt: 'Las zapatillas …', choices: ['nueva', 'nuevas', 'correr'], answer: 'nuevas' },
+        { prompt: 'La mochila …', choices: ['pesada', 'pesados', 'libros'], answer: 'pesada' },
+      ],
+    },
   ],
 };
 
