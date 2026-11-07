@@ -12,6 +12,26 @@ export const Columns = styled.div`
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px 20px;
   margin-bottom: 16px;
+  ${({ $diagram }) => $diagram && css`
+    /* A diagram goes down the page: the root, its branches, and what they mean under them. */
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    @media (max-width: 560px) {
+      li {
+        flex-direction: column;
+      }
+      button {
+        padding: 6px 8px;
+        font-size: 16px;
+      }
+      button + button {
+        width: auto;
+        height: 34px;
+        margin: 0 6px 6px;
+      }
+    }
+  `}
 `;
 
 export const Column = styled.ul`
@@ -21,6 +41,14 @@ export const Column = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
+  ${({ $across }) => $across && css`
+    display: grid;
+    grid-template-columns: repeat(${$across}, minmax(0, 1fr));
+    gap: 32px 14px;
+    > :first-child:not([data-card]) {
+      grid-column: 1 / -1;
+    }
+  `}
 `;
 
 export const Heading = styled.li`
@@ -40,6 +68,40 @@ export const Card = styled.li`
   background: var(--s-card);
   box-shadow: 0 4px 0 var(--s-line);
   transition: transform 0.15s;
+  ${({ $branch }) => $branch && css`
+    /* A branch of the diagram: from a bar under the root, a line down to the card. */
+    position: relative;
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: -19px;
+    }
+    &::before {
+      left: calc(50% - 1.5px);
+      height: 16px;
+      border-left: 3px solid var(--s-line);
+    }
+    &::after {
+      left: -10px;
+      right: -10px;
+      border-top: 3px solid var(--s-line);
+    }
+    &:nth-child(2)::after {
+      left: 50%;
+    }
+    &:last-child::after {
+      right: 50%;
+    }
+    /* No room on a phone for the speaker: the word is said when it is matched. */
+    @media (max-width: 560px) {
+      button {
+        hyphens: auto;
+      }
+      button:last-child {
+        display: none;
+      }
+    }
+  `}
   ${({ $selected }) => $selected && css`
     border-color: var(--s-teal);
     box-shadow: 0 4px 0 var(--s-teal);
@@ -110,4 +172,38 @@ export const CardSpeaker = styled.button`
     width: 22px;
     height: 22px;
   }
+`;
+
+/* The game, with room for the lines joining the pairs of a diagram over it. */
+export const Board = styled.div`
+  position: relative;
+`;
+
+/* What a diagram's left cards hang from, with the line down to them. */
+export const Root = styled.li`
+  position: relative;
+  justify-self: center;
+  padding: 10px 18px;
+  border-radius: 14px;
+  background: var(--s-teal);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  &::after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 1.5px);
+    top: 100%;
+    height: 16px;
+    border-left: 3px solid var(--s-line);
+  }
+`;
+
+export const Joins = styled.svg`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
 `;

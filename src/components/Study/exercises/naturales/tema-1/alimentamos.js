@@ -1,33 +1,55 @@
 import { Digestion } from '../../../drawings/Body';
+import { Nutrients } from '../../../drawings/Nutrition';
 
-// Naturales, tema 1: ¿cómo nos alimentamos? La digestión, los nutrientes y el camino de los
-// alimentos.
+// Naturales, tema 1: ¿cómo nos alimentamos? El esquema de lo que nos dan los nutrientes, la
+// digestión y el camino de los alimentos.
 const alimentamos = {
   slug: 'alimentamos',
   title: '¿Cómo nos alimentamos?',
-  heading: 'El camino de los alimentos',
-  instructions: 'Lleva cada palabra a su caja. La digestión transforma los alimentos en nutrientes.',
+  heading: '¿Qué nos dan los alimentos?',
+  instructions: 'La digestión transforma los alimentos en unas sustancias más sencillas: los nutrientes. Lleva cada palabra a su caja del esquema.',
   width: 1000,
   height: 640,
-  Drawing: Digestion,
+  Drawing: Nutrients,
   items: [
     {
-      id: 'boca', word: 'Boca', definition: 'Tomamos los alimentos y los masticamos con los dientes.', dot: [500, 124], box: [760, 100],
+      id: 'alimentos', word: 'Alimentos', definition: 'Lo que comemos y bebemos.', dot: [500, 130], box: [500, 130],
     },
     {
-      id: 'esofago', word: 'Esófago', definition: 'Un tubo por el que bajan los alimentos.', dot: [500, 190], box: [240, 190],
+      id: 'nutrientes', word: 'Nutrientes', definition: 'Las sustancias sencillas en que la digestión transforma los alimentos.', dot: [500, 280], box: [500, 280],
     },
     {
-      id: 'estomago', word: 'Estómago', definition: 'Aquí los alimentos se deshacen.', dot: [548, 270], box: [770, 250],
+      id: 'materia', word: 'Materia', definition: 'Lo que nos ayuda a crecer.', dot: [200, 400], box: [200, 400],
     },
     {
-      id: 'intestinos', word: 'Intestinos', definition: 'Absorben las sustancias que necesitamos.', dot: [452, 342], box: [230, 340],
-    },
-    {
-      id: 'ano', word: 'Ano', definition: 'Por aquí se expulsan los restos que no se aprovechan.', dot: [500, 394], box: [760, 430],
+      id: 'energia', word: 'Energía', definition: 'Lo que necesitamos para realizar nuestras actividades: correr, jugar, estudiar…', dot: [800, 400], box: [800, 400],
     },
   ],
   more: [
+    {
+      title: 'El camino de los alimentos',
+      instructions: 'Lleva cada palabra a su caja. La digestión transforma los alimentos en nutrientes.',
+      width: 1000,
+      height: 640,
+      Drawing: Digestion,
+      items: [
+        {
+          id: 'boca', word: 'Boca', definition: 'Tomamos los alimentos y los masticamos con los dientes.', dot: [500, 124], box: [760, 100],
+        },
+        {
+          id: 'esofago', word: 'Esófago', definition: 'Un tubo por el que bajan los alimentos.', dot: [500, 190], box: [240, 190],
+        },
+        {
+          id: 'estomago', word: 'Estómago', definition: 'Aquí los alimentos se deshacen.', dot: [548, 270], box: [770, 250],
+        },
+        {
+          id: 'intestinos', word: 'Intestinos', definition: 'Absorben las sustancias que necesitamos.', dot: [452, 342], box: [230, 340],
+        },
+        {
+          id: 'ano', word: 'Ano', definition: 'Por aquí se expulsan los restos que no se aprovechan.', dot: [500, 394], box: [760, 430],
+        },
+      ],
+    },
     {
       title: 'Ordena el camino',
       type: 'build',

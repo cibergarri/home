@@ -45,6 +45,6 @@ describe('Naturales, tema 1', () => {
         if (groups) expect(groups.map(({ id }) => id)).toContain(group);
       });
     });
-    expect(ofType('label')).toHaveLength(3);
+    expect(ofType('label')).toHaveLength(4);
   });
 });

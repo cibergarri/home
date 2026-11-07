@@ -3,6 +3,8 @@ import { fireEvent, screen, within } from '@testing-library/react';
 import { renderWithProviders } from '@/test-utils';
 import daysOfTheWeek from '../exercises/english/days-of-the-week';
 import rulesAndGames from '../exercises/english/rules-and-games';
+import funciones from '../exercises/naturales/tema-1/funciones';
+import { LanguageContext } from '../language';
 import MatchGame from '.';
 
 const english = text => within(screen.getByRole('list', { name: 'English' })).getByRole('button', { name: text });
@@ -70,5 +72,20 @@ describe('MatchGame', () => {
     expect(english('Monday')).toBeEnabled();
     expect(english('Tuesday')).toBeEnabled();
     expect(screen.queryByRole('button', { name: 'Friday' })).not.toBeInTheDocument();
+  });
+
+  it('hangs the functions from the root in a diagram, and joins each one to what it is with a line', () => {
+    renderWithProviders(<LanguageContext.Provider value="es"><MatchGame exercise={funciones} /></LanguageContext.Provider>);
+    const functions = screen.getByRole('list', { name: 'Función' });
+    const meanings = screen.getByRole('list', { name: '¿Qué es?' });
+    expect(within(functions).getByText('Funciones vitales')).toBeInTheDocument();
+    expect(screen.queryAllByTestId('join')).toHaveLength(0);
+    fireEvent.click(within(functions).getByRole('button', { name: 'Nutrición' }));
+    fireEvent.click(within(meanings).getByRole('button', { name: 'Tomamos alimentos y aire para crecer y tener energía.' }));
+    expect(screen.getByText('✓ Nutrición: Tomamos alimentos y aire para crecer y tener energía.')).toBeInTheDocument();
+    expect(speak).toHaveBeenLastCalledWith(expect.objectContaining({ text: 'Nutrición: Tomamos alimentos y aire para crecer y tener energía.' }));
+    expect(screen.getAllByTestId('join')).toHaveLength(1);
+    fireEvent.click(within(meanings).getByRole('button', { name: 'Escuchar Los seres vivos tienen hijos que se parecen a ellos.' }));
+    expect(speak).toHaveBeenLastCalledWith(expect.objectContaining({ text: 'Los seres vivos tienen hijos que se parecen a ellos.' }));
   });
 });
