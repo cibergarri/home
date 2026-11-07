@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.26.0](https://github.com/cibergarri/home/compare/v1.25.0...v1.26.0) (2026-11-07)
+
+
+### Features
+
+* **study-corner:** add the notebook's synonyms, antonyms, adjectives and change problem ([ebecf78](https://github.com/cibergarri/home/commit/ebecf78a887a061e1fb480fd6fe3abc98586ba03))
+
 # [1.25.0](https://github.com/cibergarri/home/compare/v1.24.0...v1.25.0) (2026-11-06)
 
 
