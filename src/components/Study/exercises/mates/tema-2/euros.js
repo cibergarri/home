@@ -2,7 +2,7 @@ import { money, shop, table } from '../scenes';
 
 // Mates, tema 2: monedas y billetes de euro: contar dinero, cambiarlo por billetes, pagar y dar la
 // vuelta con el menor número de monedas y billetes (cuaderno, páginas 10 y 11), lo que falta para
-// 100 € y si llega para pagar.
+// 100 € y si llega para pagar, y cuánto le devuelven o le falta (cuaderno).
 const count = (...values) => ({
   prompt: 'Hay ? €',
   scene: money(...values),
@@ -29,6 +29,39 @@ const giveBack = (thing, item, price, ...paid) => ({
   scene: shop(item, price, ...paid),
   target: sum(paid) - price,
 });
+
+// Someone wants something (an emoji) at `price` and has the money in `has`: is it enough? And then
+// how much they get back, or how much they are missing (cuaderno: Paula y el juguete, Ana y el
+// pastel).
+const WANTS = [
+  ['Paula', 'un juguete', '🧸', 12, [20]],
+  ['Ana', 'un pastel', '🎂', 8, [2, 1]],
+  ['Leo', 'un cómic', '📕', 15, [10, 2, 2]],
+  ['Topi', 'una cometa', '🪁', 23, [50]],
+  ['Nala', 'unas gafas de bucear', '🥽', 18, [10, 5]],
+  ['Teo', 'una pelota', '⚽', 9, [10]],
+  ['Coco', 'un puzle', '🧩', 31, [20, 5, 2]],
+  ['Julia', 'una planta', '🪴', 14, [20]],
+  ['Rex', 'un hueso gigante', '🦴', 6, [5]],
+  ['Mía', 'unos rotuladores', '🖍️', 27, [20, 10]],
+];
+const story = (name, thing, price, has) => {
+  const total = sum(has);
+  const money = has.length === 1 && has[0] >= 5 ? `un billete de ${total} €` : `${total} €`;
+  return `${name} quiere ${thing} que cuesta ${price} €. Tiene ${money}.`;
+};
+const isItEnough = ([name, thing, item, price, has]) => ({
+  prompt: `${story(name, thing, price, has)} ¿Le llega para comprarlo?`,
+  scene: shop(item, price, ...has),
+  choices: ['Sí, le llega', 'No, no le llega'],
+  answer: sum(has) >= price ? 'Sí, le llega' : 'No, no le llega',
+});
+const backOrMissing = ([name, thing, item, price, has]) => {
+  const total = sum(has);
+  return total >= price
+    ? { story: `${story(name, thing, price, has)} Le llega. ¿Cuánto le devuelven?`, prompt: 'Le devuelven ? €', scene: shop(item, price, ...has), answer: total - price }
+    : { story: `${story(name, thing, price, has)} No le llega. ¿Cuánto le falta?`, prompt: 'Le falta ? €', scene: shop(item, price, ...has), answer: price - total };
+};
 
 const PRICES = table(['Básica', 'Especial'], [
   ['Adultos', '6 €', '12 €'],
@@ -68,7 +101,7 @@ const euros = {
       title: 'Paga justo',
       type: 'money',
       instructions: 'Pon el dinero justo con el menor número de billetes y monedas.',
-      questions: [pay(8), pay(15), pay(37), pay(26), pay(64), pay(49)],
+      questions: [pay(8), pay(15), pay(37), pay(26), pay(64), pay(49), pay(73), pay(18), pay(55), pay(92)],
     },
     {
       title: '¿Cuánto te devuelven?',
@@ -82,7 +115,24 @@ const euros = {
         giveBack('El balón', '⚽', 13, 20),
         giveBack('El osito', '🧸', 27, 50),
         giveBack('El disfraz de egipcio de Topi', '🐫', 20, 50),
+        giveBack('La linterna', '🔦', 7, 10),
+        giveBack('El juego de mesa', '🎲', 34, 20, 20),
+        giveBack('La gorra', '🧢', 11, 20),
       ],
+    },
+    {
+      title: '¿Le llega?',
+      type: 'quiz',
+      keepOrder: true,
+      instructions: 'Mira el precio y el dinero que tiene. Si tiene más o lo mismo, le llega. Si tiene menos, no le llega.',
+      questions: WANTS.map(isItEnough),
+    },
+    {
+      title: '¿Cuánto le devuelven? ¿Cuánto le falta?',
+      type: 'numbers',
+      write: true,
+      instructions: 'Si le llega, le devuelven lo que sobra: lo que tiene menos el precio. Si no le llega, le falta: el precio menos lo que tiene.',
+      questions: WANTS.map(backOrMissing),
     },
     {
       title: '¿Cuánto falta para 100 €?',

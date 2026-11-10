@@ -22,6 +22,36 @@ describe('QuizGame', () => {
     window.SpeechSynthesisUtterance = function Utterance(text) { this.text = text; };
   });
 
+  it('plays only `draw` of the questions, a different few each time', () => {
+    const pool = {
+      instructions: 'Pick',
+      draw: 3,
+      questions: Array.from({ length: 12 }, (_, i) => ({ prompt: `Question ${i}?`, choices: ['yes', 'no'], answer: 'yes' })),
+    };
+    const seen = new Set();
+    renderWithProviders(<QuizGame exercise={pool} />);
+    for (let round = 0; round < 6; round += 1) {
+      expect(screen.getByText('Question 1 of 3')).toBeInTheDocument();
+      for (let i = 0; i < 3; i += 1) {
+        seen.add(screen.getByText(/^Question \d+\?$/).textContent);
+        choose('yes');
+        fireEvent.click(screen.getByRole('button', { name: i < 2 ? 'Next →' : 'Finish ✓' }));
+      }
+      fireEvent.click(screen.getByRole('button', { name: 'Play again' }));
+    }
+    expect(seen.size).toBeGreaterThan(3);
+  });
+
+  it('shows the whole word on the right answer when the question says so', () => {
+    const exercise = {
+      instructions: 'Pick',
+      questions: [{ prompt: 'Lo contrario de coser', choices: ['in', 'des'], answer: 'des', solved: 'descoser' }],
+    };
+    renderWithProviders(<QuizGame exercise={exercise} />);
+    choose('des');
+    expect(screen.getByRole('button', { name: '✓ descoser' })).toBeInTheDocument();
+  });
+
   it('asks a question with a picture and answers to choose from', () => {
     renderWithProviders(<QuizGame exercise={positions} />);
     expect(screen.getByText('Where’s Daisy?')).toBeInTheDocument();

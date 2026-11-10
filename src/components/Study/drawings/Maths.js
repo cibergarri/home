@@ -459,3 +459,37 @@ export function DataTable({ columns, rows }) {
     </g>
   );
 }
+
+// A sum or a subtraction written in columns on squared paper, as in the notebook: the C, D and U
+// columns, `top` over `bottom` with the sign beside it, and the line under them. `shift` moves the
+// bottom number that many columns to the left, to show one written in the wrong columns.
+const SQUARE = 48;
+export const COLUMN_SUM = { width: SQUARE * 4, height: SQUARE * 4 };
+
+export function ColumnSum({
+  top, bottom, op = '-', shift = 0,
+}) {
+  const { width, height } = COLUMN_SUM;
+  // The x of the middle of column `c`: 0 is the sign, 1 to 3 are C, D and U.
+  const middle = c => c * SQUARE + SQUARE / 2;
+  const digits = (number, row, moved = 0) => [...String(number)].map((digit, i, all) => (
+    // Digits in a number are positional: the i-th one goes in its column.
+    <text key={`${row}-${i}`} x={middle(4 - all.length + i - moved)} y={(row + 1) * SQUARE + SQUARE * 0.72} textAnchor="middle" fontSize={32} fontWeight={600} fill="#1f4fa3" fontFamily="inherit">{digit}</text>
+  ));
+  return (
+    <g>
+      <rect width={width} height={height} fill="#fff" />
+      <g stroke="#b9d3ee" strokeWidth={1}>
+        {Array.from({ length: 5 }, (_, c) => <line key={`c${c}`} x1={c * SQUARE} y1={0} x2={c * SQUARE} y2={height} />)}
+        {Array.from({ length: 5 }, (_, r) => <line key={`r${r}`} x1={0} y1={r * SQUARE} x2={width} y2={r * SQUARE} />)}
+      </g>
+      {['C', 'D', 'U'].map((label, i) => (
+        <text key={label} x={middle(i + 1)} y={SQUARE * 0.7} textAnchor="middle" fontSize={22} fontWeight={700} fill="#8a96a8" fontFamily="inherit">{label}</text>
+      ))}
+      {digits(top, 0)}
+      <text x={middle(0)} y={2 * SQUARE + SQUARE * 0.72} textAnchor="middle" fontSize={32} fontWeight={600} fill="#1f4fa3" fontFamily="inherit">{op === '-' ? '−' : '+'}</text>
+      {digits(bottom, 1, shift)}
+      <line x1={SQUARE * 0.15} y1={3 * SQUARE + 4} x2={width - SQUARE * 0.15} y2={3 * SQUARE + 4} stroke="#1f4fa3" strokeWidth={3} strokeLinecap="round" />
+    </g>
+  );
+}

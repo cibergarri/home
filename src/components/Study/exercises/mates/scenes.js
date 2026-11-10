@@ -1,5 +1,6 @@
 import {
   Blocks, blocksSize, NumberLine, NUMBER_LINE, DataTable, tableSize, Money, moneySize, Shop, shopSize, BarModel, BAR,
+  ColumnSum, COLUMN_SUM,
 } from '../../drawings/Maths';
 import {
   Clock, CLOCK, DigitalClock, DIGITAL, BarChart, chartSize, Ruler, rulerSize, Shapes, shapesSize,
@@ -27,6 +28,13 @@ export const money = (...values) => ({
 // Something bought, `item` an emoji, at `price`, paid with the notes and coins in `paid`.
 export const shop = (item, price, ...paid) => ({
   Drawing: Shop, ...shopSize({ paid }), props: { item, price, paid },
+});
+
+// A sum or subtraction written in columns, the bottom number `shift` columns too far left.
+export const columns = (top, op, bottom, shift = 0) => ({
+  Drawing: ColumnSum, ...COLUMN_SUM, props: {
+    top, op, bottom, shift,
+  },
 });
 
 export const bar = props => ({ Drawing: BarModel, ...BAR, props });

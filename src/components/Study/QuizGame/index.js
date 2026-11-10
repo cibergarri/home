@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { speak } from '../speech';
 import { useStrings } from '../language';
 import {
-  SpeakerIcon, WellDone, QuestionNav, useSlips, practiseItems,
+  SpeakerIcon, WellDone, QuestionNav, useSlips, practiseItems, pickSome,
 } from '../game';
 import { Instructions } from '../LabelMap/style';
 import {
@@ -34,8 +34,14 @@ export const mixed = (choices, seed) => {
 // (`scene`: a drawing, its size and what to draw). A wrong answer is crossed out and another can be
 // tried; the right one turns green and leads on to the next question. At the end, the mistakes
 // can be looked at again, and those questions played again on their own.
+//
+// A question with `solved` shows (and says) that on the right answer once chosen, in place of the
+// answer itself: 'des' becomes 'descoser'.
+//
+// With `draw`, only that many of the questions are played, picked at random each time (the first
+// ones on the page drawn on the server, until the browser picks).
 export default function QuizGame({ exercise }) {
-  const { instructions, questions, keepOrder } = exercise;
+  const { instructions, questions, keepOrder, draw } = exercise;
   const text = useStrings();
   const [index, setIndex] = useState(0);
   const [tried, setTried] = useState([]);
@@ -43,8 +49,16 @@ export default function QuizGame({ exercise }) {
   const [slips, slip, clearSlips] = useSlips();
   const [finished, setFinished] = useState(false);
   const [only, setOnly] = useState(null); // the questions to practise again, if not all
+  const all = questions.map((q, i) => i);
+  const [drawn, setDrawn] = useState(() => (draw ? all.slice(0, draw) : null)); // this time's, with `draw`
 
-  const order = only ?? questions.map((q, i) => i);
+  // Picked once on the client, after the page drawn on the server has loaded.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (draw) setDrawn(pickSome(questions.map((q, i) => i), draw));
+  }, [draw, questions]);
+
+  const order = only ?? drawn ?? all;
   const question = questions[order[index]];
   const { scene } = question;
   const choices = keepOrder ? question.choices : mixed(question.choices, `${question.prompt}|${question.choices.join('|')}`);
@@ -52,7 +66,7 @@ export default function QuizGame({ exercise }) {
   const choose = (choice) => {
     if (choice === question.answer) {
       setSolved(true);
-      speak(choice, text.lang);
+      speak(question.solved ?? choice, text.lang);
       return;
     }
     slip({
@@ -74,6 +88,7 @@ export default function QuizGame({ exercise }) {
 
   const playAgain = (questionsToPlay = null) => {
     setOnly(questionsToPlay);
+    if (draw && !questionsToPlay) setDrawn(pickSome(all, draw));
     setIndex(0);
     setTried([]);
     setSolved(false);
@@ -119,7 +134,7 @@ export default function QuizGame({ exercise }) {
               return (
                 <Choice key={choice} $state={state}>
                   <ChoiceButton type="button" onClick={() => choose(choice)} disabled={solved || Boolean(state)}>
-                    {state === 'right' ? `✓ ${choice}` : choice}
+                    {state === 'right' ? `✓ ${question.solved ?? choice}` : choice}
                   </ChoiceButton>
                   <SmallSpeaker type="button" onClick={() => speak(choice, text.lang)} aria-label={text.listenTo(choice)}>
                     <SpeakerIcon />

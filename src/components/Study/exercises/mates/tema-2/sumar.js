@@ -13,7 +13,7 @@ const sumar = {
       title: 'Suma en torre',
       type: 'tower',
       instructions: 'Coloca cada cifra en su columna: centenas, decenas y unidades. Empieza a sumar por las unidades.',
-      questions: [add(122, 16), add(146, 21), add(172, 16), add(43, 125), add(134, 41), add(185, 13), add(56, 123), add(125, 31)],
+      questions: [add(122, 16), add(146, 21), add(172, 16), add(43, 125), add(134, 41), add(185, 13), add(56, 123), add(125, 31), add(178, 20), add(135, 49)],
     },
     {
       title: 'Problemas',

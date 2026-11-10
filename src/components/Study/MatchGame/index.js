@@ -1,11 +1,13 @@
 'use client';
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import {
+  useEffect, useLayoutEffect, useRef, useState,
+} from 'react';
 
 import { speak } from '../speech';
 import { useStrings } from '../language';
 import {
-  scramble, shuffle, SpeakerIcon, WellDone, useSlips, practiseItems,
+  scramble, shuffle, SpeakerIcon, WellDone, useSlips, practiseItems, pickSome,
 } from '../game';
 import { Instructions, Message, Progress } from '../LabelMap/style';
 import {
@@ -24,10 +26,16 @@ const COLOURS = ['#8ec5f2', '#a6db8a', '#f7dc6f', '#f5a8c8', '#c3a6f2', '#f7b58a
 // With a `root`, it is a little diagram down the page: the left cards hang from the root like
 // branches, the right ones under them are what each one means, read aloud too, and a matched pair
 // is joined with a line.
+//
+// With `draw`, only that many of the pairs are matched, picked at random each time (the first ones
+// on the page drawn on the server, until the browser picks).
 export default function MatchGame({ exercise }) {
-  const { instructions } = exercise;
+  const { instructions, draw } = exercise;
   const [only, setOnly] = useState(null); // the pairs to practise again, if not all
-  const pairs = only ? exercise.pairs.filter(pair => only.includes(pair.id)) : exercise.pairs;
+  const allIds = exercise.pairs.map(pair => pair.id);
+  const [drawn, setDrawn] = useState(() => (draw ? allIds.slice(0, draw) : null)); // this time's, with `draw`
+  const playing = only ?? drawn;
+  const pairs = playing ? exercise.pairs.filter(pair => playing.includes(pair.id)) : exercise.pairs;
   const text = useStrings();
   const [leftTitle, rightTitle] = exercise.columns ?? text.columns;
   const pictures = pairs.every(pair => pair.Picture);
@@ -43,6 +51,16 @@ export default function MatchGame({ exercise }) {
   const board = useRef(null);
   const [joins, setJoins] = useState([]);
   const diagram = Boolean(exercise.root);
+
+  // Picked once on the client, after the page drawn on the server has loaded.
+  useEffect(() => {
+    if (!draw) return;
+    const picked = pickSome(exercise.pairs.map(pair => pair.id), draw);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setDrawn(picked);
+    setLeft(shuffle(picked));
+    setRight(shuffle(picked));
+  }, [draw, exercise.pairs]);
 
   const byId = Object.fromEntries(pairs.map(pair => [pair.id, pair]));
   const finished = matched.length === pairs.length;
@@ -102,10 +120,14 @@ export default function MatchGame({ exercise }) {
   };
 
   const playAgain = (pairsToMatch = null) => {
-    const playing = pairsToMatch ?? exercise.pairs.map(pair => pair.id);
+    let toPlay = pairsToMatch ?? allIds;
+    if (draw && !pairsToMatch) {
+      toPlay = pickSome(allIds, draw);
+      setDrawn(toPlay);
+    }
     setOnly(pairsToMatch);
-    setLeft(shuffle(playing));
-    setRight(shuffle(playing));
+    setLeft(shuffle(toPlay));
+    setRight(shuffle(toPlay));
     setMatched([]);
     setSelected(null);
     clearSlips();

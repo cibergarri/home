@@ -25,6 +25,10 @@ export const shuffle = (list) => {
   return result;
 };
 
+// `count` things from a list, picked at random, for an exercise with `draw`: a bigger pool of
+// questions, a different few each time it is played.
+export const pickSome = (list, count) => shuffle(list).slice(0, count);
+
 // A fixed mix-up of a list, the same every time for the same seed, so the static page and the
 // browser agree on it; never left in its original order.
 export const scramble = (list, seed = 1) => {

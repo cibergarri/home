@@ -39,6 +39,18 @@ describe('MatchGame', () => {
     expect(english('Friday')).toBeDisabled();
   });
 
+  it('matches only `draw` of the pairs, picked from the whole list', () => {
+    const pool = { ...daysOfTheWeek, draw: 3 };
+    renderWithProviders(<MatchGame exercise={pool} />);
+    const shown = daysOfTheWeek.pairs.filter(({ en }) => screen.queryByRole('button', { name: en }));
+    expect(shown).toHaveLength(3);
+    shown.forEach(({ en, es }) => {
+      fireEvent.click(english(en));
+      fireEvent.click(spanish(es));
+    });
+    expect(screen.getByRole('button', { name: 'Play again' })).toBeInTheDocument();
+  });
+
   it('celebrates when every pair is matched', () => {
     renderWithProviders(<MatchGame exercise={daysOfTheWeek} />);
     daysOfTheWeek.pairs.forEach(({ en, es }) => {

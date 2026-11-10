@@ -27,6 +27,14 @@ describe('Lengua', () => {
     });
   });
 
+  it('has a word for every column of a table, and a row only once', () => {
+    ofType('table').forEach(({ columns, rows }) => {
+      rows.forEach(({ word, cells }) => expect(`${word} → ${cells.length}`).toBe(`${word} → ${columns.length - 1}`));
+      const ids = rows.map(({ id }) => id);
+      expect(new Set(ids).size).toBe(ids.length);
+    });
+  });
+
   it('sorts and colours into columns and crayons that are there', () => {
     ofType('sort').forEach(({ columns, cards }) => {
       cards.forEach(card => card.columns.forEach(column => expect(columns.map(({ id }) => id)).toContain(column)));
