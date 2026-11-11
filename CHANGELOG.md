@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0](https://github.com/cibergarri/home/compare/v1.28.0...v1.29.0) (2026-11-11)
+
+
+### Features
+
+* **study-corner:** add zoo and cinema price problems and empty the problem bars ([7c76063](https://github.com/cibergarri/home/commit/7c760635890a6d0525e02092ab53db0846f40494))
+* **study-corner:** ask for the data of word problems, link their steps and add a columns helper ([e1134ef](https://github.com/cibergarri/home/commit/e1134efea387dbe3a0721458b73172a96944d68e))
+
 # [1.28.0](https://github.com/cibergarri/home/compare/v1.27.0...v1.28.0) (2026-11-11)
 
 
