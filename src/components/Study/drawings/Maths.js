@@ -356,14 +356,23 @@ export function Shop({ item, price, paid }) {
 
 // A bar model, as in the textbook's problems. Either one bar split into `parts` with the `total`
 // above it, or (`compare`) one bar under another, the gap between them marked with `difference`.
-// Values may be '?' for what is to be found; `size` then says how long to draw that part. Without
+// Values may be '?' for what is to be found; `size` then says how long to draw that part. With
+// `scale`, bars one under another are drawn to it (the size of the longest bar), so several
+// drawings to choose from agree. Without
 // `values`, the bars are left empty of numbers (only a '?' is shown), to be read from the story.
 export const BAR = { width: 600, height: 190 };
+
+// The size of a bar model: bars one under another with no difference marked take only the room
+// they need, however many there are.
+export const barSize = ({ compare, difference, parts = [] }) => ({
+  width: BAR.width,
+  height: compare && difference === undefined ? 20 + parts.length * 70 : BAR.height,
+});
 
 const BAR_COLOURS = ['#7fc77f', '#8ec5f2', '#f7c96f', '#f5a8c8'];
 
 export function BarModel({
-  parts = [], total, compare = false, difference, values = true,
+  parts = [], total, compare = false, difference, values = true, scale,
 }) {
   const inside = value => (values || value === '?' ? value : null);
   const left = 20;
@@ -372,12 +381,13 @@ export function BarModel({
     <text x={x} y={y} textAnchor="middle" fontSize={size} fontWeight={700} fill="#24324a" fontFamily="inherit">{value}</text>
   );
   if (compare) {
-    const longest = Math.max(...parts.map(part => part.size ?? part.value));
+    const longest = scale ?? Math.max(...parts.map(part => part.size ?? part.value));
     const length = part => ((part.size ?? part.value) / longest) * (span - 110);
     const shorter = Math.min(...parts.map(length));
+    const { height } = barSize({ compare, difference, parts });
     return (
       <g>
-        <rect width={BAR.width} height={BAR.height} fill="#fffaf2" />
+        <rect width={BAR.width} height={height} fill="#fffaf2" />
         {parts.map((part, i) => {
           const y = 30 + i * 70;
           return (
@@ -388,8 +398,12 @@ export function BarModel({
             </g>
           );
         })}
-        <path d={`M${left + 100 + shorter},${170} V${30} M${left + 100 + shorter},${160} H${left + 100 + Math.max(...parts.map(length))}`} stroke="#e5484d" strokeWidth={2} strokeDasharray="5 4" fill="none" />
-        {label(left + 100 + (shorter + Math.max(...parts.map(length))) / 2, 185, difference, 20)}
+        {difference !== undefined && (
+          <>
+            <path d={`M${left + 100 + shorter},${170} V${30} M${left + 100 + shorter},${160} H${left + 100 + Math.max(...parts.map(length))}`} stroke="#e5484d" strokeWidth={2} strokeDasharray="5 4" fill="none" />
+            {label(left + 100 + (shorter + Math.max(...parts.map(length))) / 2, 185, difference, 20)}
+          </>
+        )}
       </g>
     );
   }

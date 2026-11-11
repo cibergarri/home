@@ -332,3 +332,45 @@ export const Columns = styled.div`
     align-items: start;
   }
 `;
+
+// Pictures to pick from, as in «¿Qué barra representa el problema?».
+export const Pictures = styled.div`
+  display: grid;
+  gap: 12px;
+  @media (min-width: 560px) {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+`;
+
+export const PictureChoice = styled.button`
+  padding: 6px;
+  border-radius: 16px;
+  border: 3px solid var(--s-line);
+  background: var(--s-card);
+  cursor: pointer;
+  touch-action: manipulation;
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  &:focus-visible {
+    outline: 3px solid var(--s-teal);
+    outline-offset: 2px;
+  }
+  ${({ $state }) => $state === 'wrong' && css`
+    border-color: var(--s-bad);
+    opacity: 0.45;
+  `}
+  ${({ $state }) => $state === 'right' && css`
+    border-color: var(--s-good);
+  `}
+`;
+
+// What the first step of a problem asks, under its story.
+export const Ask = styled.p`
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+`;

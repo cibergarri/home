@@ -1,5 +1,5 @@
 import {
-  Blocks, blocksSize, NumberLine, NUMBER_LINE, DataTable, tableSize, Money, moneySize, Shop, shopSize, BarModel, BAR,
+  Blocks, blocksSize, NumberLine, NUMBER_LINE, DataTable, tableSize, Money, moneySize, Shop, shopSize, BarModel, barSize,
   ColumnSum, COLUMN_SUM,
 } from '../../drawings/Maths';
 import {
@@ -37,7 +37,7 @@ export const columns = (top, op, bottom, shift = 0) => ({
   },
 });
 
-export const bar = props => ({ Drawing: BarModel, ...BAR, props });
+export const bar = props => ({ Drawing: BarModel, ...barSize(props), props });
 
 // The notes and coins can be cents too: '50c', '20c', '10c', '5c', '2c', '1c'.
 

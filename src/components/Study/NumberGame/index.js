@@ -15,7 +15,7 @@ import { mixed } from '../QuizGame';
 import { Choices, Choice, ChoiceButton } from '../QuizGame/style';
 import { Instructions, Message } from '../LabelMap/style';
 import {
-  Card, Body, Story, Found, Picture, Sum, Data, DataRow, DataLabel, AnswerLabel, StepDone, Answer, Helper, Columns, OperationChoices, Hint, Keypad, Key, Row, Listen, Next, Secret,
+  Card, Body, Story, Found, Picture, Sum, Data, DataRow, DataLabel, AnswerLabel, StepDone, Answer, Helper, Columns, OperationChoices, Pictures, PictureChoice, Ask, Hint, Keypad, Key, Row, Listen, Next, Secret,
   SecretLetter, Answering, Switch,
 } from './style';
 
@@ -36,10 +36,10 @@ const NOT_UNITS = new Set([
 // `[[25, 'huevos para la tortilla grande'], [8, 'huevos para la tortilla pequeña']]` (or just the
 // numbers, `[305, 152]`, when the story has others that are not data, «la zona 1»).
 export const problemData = ({ story, prompt, data }) => {
-  if (!story || data === false) return [];
   const given = Array.isArray(data);
+  if (data === false || (!story && !given)) return [];
   if (!given && (!story.includes('?') || /\d/.test(prompt) || /\d[,.:]\d/.test(story))) return [];
-  const numbers = [...story.matchAll(/\d+(?!\d|\.?[ºª])/g)].map((match) => {
+  const numbers = [...(story ?? '').matchAll(/\d+(?!\d|\.?[ºª])/g)].map((match) => {
     const value = Number(match[0]);
     const after = story.slice(match.index + match[0].length).match(/^\s*(€|[a-záéíóúüñ]+)/i);
     const word = after?.[1];
@@ -103,7 +103,10 @@ export { sayable };
 //
 // A problem can go on (`then`) with more steps about the same story, each with a bit more of it
 // (`story`) and either a number to work out (`prompt` and `answer`, maybe with its own `data` and
-// `scene`) or `choices` to pick the `answer` from. The steps done stay above, solved.
+// `scene`), `choices` to pick the `answer` from, two numbers to `compare`, or pictures to `pick`
+// from (scenes, the `answer` the place of the right one: «¿Qué barra representa el problema?»).
+// The problem itself can be any of these, as its first step, with what it asks first in `ask`. The steps done stay above, solved; a
+// step with no story of its own finds its data in the problem's.
 //
 // With `write: true` the answer is written by hand, and read, though the number keys are a tap
 // away. At the end, the mistakes can be looked at again, and those questions played again on their
@@ -132,29 +135,34 @@ export default function NumberGame({ exercise }) {
   const steps = [question, ...(question.then ?? [])];
   const step = steps[stage];
   const lastStep = stage === steps.length - 1;
-  const choosing = Boolean(step.choices || step.compare);
+  const choosing = Boolean(step.choices || step.compare || step.pick);
   const stepAnswer = one => (one.compare ? signFor(...one.compare) : one.answer);
   const answers = [].concat(stepAnswer(step));
   const parts = choosing ? [] : step.prompt.split('?');
-  const data = choosing ? [] : problemData(step);
+  const storyStage = step.story ? stage : 0; // where the step's data are told
+  const data = choosing ? [] : problemData({ ...step, story: steps[storyStage].story });
   const findingData = dataFound.length < data.length;
   const inOrder = data.some(d => d.label); // each datum has its own box, filled one after another
   const current = filled.length;
   const stepSolved = choosing ? tried.includes(stepAnswer(step)) : !findingData && current === answers.length;
   const solved = lastStep && stepSolved;
   const solutionOf = (one) => {
+    if (one.pick) return text.thatBar;
     if (one.compare) return `${one.compare[0]} ${signFor(...one.compare)} ${one.compare[1]}`;
     return one.choices
       ? one.answer
       : one.prompt.split('?').map((part, i, all) => `${part}${i < all.length - 1 ? [].concat(one.answer)[i] : ''}`).join('');
   };
   const spoken = (one) => {
+    if (one.pick) return text.thatBar;
     if (one.compare) return sayComparison(...one.compare, text.lang);
     return one.choices ? one.answer : sayable(solutionOf(one), text.lang);
   };
   const solution = solutionOf(step);
   const columns = columnSumFor(step, data);
-  const scene = steps.slice(0, stage + 1).reverse().find(one => one.scene)?.scene;
+  // The latest picture: a step's own, or the right one of a step with pictures to pick, once picked.
+  const sceneOf = (one, i) => (one.pick ? (i < stage || stepSolved) && one.pick[one.answer] : one.scene);
+  const scene = steps.slice(0, stage + 1).map(sceneOf).reverse().find(Boolean);
   const secret = !only && questions.some(q => q.letter);
 
   const resetStep = () => {
@@ -248,9 +256,9 @@ export default function NumberGame({ exercise }) {
       item: order[index],
       key: `${order[index]}-${stage}`,
       prompt: step.compare ? `${step.compare[0]} … ${step.compare[1]}` : step.story,
-      note: question.story,
-      wrong: choice,
-      right: stepAnswer(step),
+      note: stage ? question.story : null,
+      wrong: step.pick ? text.pictureNumber(choice + 1) : choice,
+      right: step.pick ? text.pictureNumber(step.answer + 1) : stepAnswer(step),
     });
     setTried(list => [...list, choice]);
   };
@@ -344,7 +352,7 @@ export default function NumberGame({ exercise }) {
 
   const storyOf = (one, i) => {
     if (!one.story) return null;
-    if (i === stage && data.length) return <MarkedStory key={`s${i}`} story={one.story} data={data} found={dataFound} />;
+    if (i === storyStage && data.length) return <MarkedStory key={`s${i}`} story={one.story} data={data} found={dataFound} />;
     return <Story key={`s${i}`}>{one.story}</Story>;
   };
 
@@ -358,6 +366,7 @@ export default function NumberGame({ exercise }) {
             // Steps never move: the i-th is always the problem's i-th step.
             <Fragment key={`step${i + 1}`}>
               {storyOf(one, i)}
+              {one.ask && <Ask>{one.ask}</Ask>}
               {i < stage && <StepDone aria-label={text.rightAnswer(solutionOf(one))}>{`✓ ${solutionOf(one)}`}</StepDone>}
             </Fragment>
           ))}
@@ -373,6 +382,29 @@ export default function NumberGame({ exercise }) {
               <DataLabel>{findingData ? text.dataFirst : text.data}</DataLabel>
               {data.map((d, i) => dataBox(i))}
             </Data>
+          )}
+          {step.pick && !stepSolved && (
+            <Pictures aria-label={text.answers}>
+              {step.pick.map((option, i) => {
+                let pictureState;
+                if (tried.includes(i)) pictureState = i === step.answer ? 'right' : 'wrong';
+                return (
+                  // Pictures never move: the i-th is always the step's i-th.
+                  <PictureChoice
+                    key={`pick${i + 1}`}
+                    type="button"
+                    $state={pictureState}
+                    onClick={() => choose(i)}
+                    disabled={Boolean(pictureState)}
+                    aria-label={text.pictureNumber(i + 1)}
+                  >
+                    <svg viewBox={`0 0 ${option.width} ${option.height}`} aria-hidden="true">
+                      <option.Drawing {...option.props} />
+                    </svg>
+                  </PictureChoice>
+                );
+              })}
+            </Pictures>
           )}
           {step.compare && <Compare a={step.compare[0]} b={step.compare[1]} tried={tried} onChoose={choose} />}
           {step.choices && (

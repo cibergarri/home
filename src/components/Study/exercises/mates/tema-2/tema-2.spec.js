@@ -14,7 +14,10 @@ import { fewestPieces } from '../../../MoneyGame';
 // The maths of every Tema 2 exercise, checked: if a sum is written down, it adds up.
 const exercises = [centena, hasta199, tresCifras, sumar, restar, dieces, euros, barras, tabla, mensajeSecreto, repaso];
 const parts = exercises.flatMap(exercise => [exercise, ...(exercise.more ?? [])]);
-const ofType = type => parts.filter(part => (part.type ?? 'label') === type).flatMap(part => part.questions);
+// The questions of a type, with each step of a problem that has a number to work out as one more.
+const ofType = type => parts.filter(part => (part.type ?? 'label') === type).flatMap(part => part.questions)
+  .flatMap(question => [question, ...(question.then ?? [])])
+  .filter(question => type !== 'numbers' || question.prompt);
 
 // A prompt with its answers written in place of the ?s.
 const filledIn = ({ prompt, answer }) => {

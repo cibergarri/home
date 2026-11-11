@@ -6,6 +6,8 @@ import { ALL_SUBJECTS } from '../../subjects';
 const units = ALL_SUBJECTS.find(({ slug }) => slug === 'mates').units; // shown or hidden
 const parts = units.flatMap(unit => unit.exercises).flatMap(exercise => [exercise, ...(exercise.more ?? [])]);
 const ofType = type => parts.filter(part => (part.type ?? 'label') === type);
+// Every step of the problems with a number to work out (a problem may start by choosing a bar).
+const numberSteps = questions => questions.flatMap(question => [question, ...(question.then ?? [])]).filter(step => step.prompt);
 const digits = n => [Math.floor(n / 100), Math.floor(n / 10) % 10, n % 10];
 
 describe('Mates', () => {
@@ -33,7 +35,7 @@ describe('Mates', () => {
 
   it('has an answer for each gap, every one a whole number', () => {
     ofType('numbers').forEach(({ questions }) => {
-      questions.forEach(({ prompt, answer }) => {
+      numberSteps(questions).forEach(({ prompt, answer }) => {
         const answers = [answer].flat();
         expect(`${prompt} → ${answers.length}`).toBe(`${prompt} → ${(prompt.match(/\?/g) ?? []).length}`);
         answers.forEach(value => expect(Number.isInteger(value) && value >= 0).toBe(true));
@@ -50,7 +52,7 @@ describe('Mates', () => {
     }, 0);
     let checked = 0;
     ofType('numbers').forEach(({ questions }) => {
-      questions.forEach(({ prompt, answer }) => {
+      numberSteps(questions).forEach(({ prompt, answer }) => {
         if (!/^[\d\s+\-×?]+=[\d\s+\-×?]+$/.test(prompt) || (prompt.match(/\?/g) ?? []).length !== 1) return;
         const filled = prompt.replace('?', String(answer));
         const [left, right] = filled.split('=');

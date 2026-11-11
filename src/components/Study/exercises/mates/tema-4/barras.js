@@ -3,106 +3,135 @@ import { bar as barWithNumbers } from '../scenes';
 // The bars without numbers inside: the numbers are in the story.
 const bar = props => barWithNumbers({ ...props, values: false });
 
-// Mates, tema 4: «¡Topi, tengo un problema!», problemas con barras. El globo terráqueo de Teo y
-// Lena, el dinero de Lucas, Adri y Mateo, y el atlas de Sergio.
+// Bars to choose from: one split in parts (`[name, size]`) under what they make together, or bars
+// one under another, to compare.
+const together = (total, ...parts) => bar({ total, parts: parts.map(([name, size]) => ({ name, value: size, size })) });
+const apart = (...parts) => bar({ compare: true, scale: 80, parts: parts.map(([name, size]) => ({ name, value: size, size })) });
+
+// Mates, tema 4: «¡Topi, tengo un problema!», problemas con barras (libro, páginas 116 a 119). El
+// globo terráqueo de Teo y Lena, el dinero de Lucas, Adri y Mateo, y el atlas de Sergio. Cada
+// problema empieza, como en el libro, por las barras.
 const barras = {
   slug: 'barras',
   title: 'Problemas con barras',
-  heading: 'El globo terráqueo',
+  heading: 'Mira las barras y resuelve',
   type: 'numbers',
   write: true,
-  instructions: 'Teo quiere comprar un globo terráqueo que cuesta 30 €. Teo tiene ahorrados 20 € y Lena 15 €. Mira la barra y calcula.',
+  instructions: 'Lee el problema, fíjate en las barras y resuélvelo paso a paso.',
   questions: [
     {
-      story: 'El globo cuesta 30 € y Teo tiene 20 €. ¿Cuánto le falta a Teo para comprarlo él solo?',
-      data: [[30, '€ cuesta el globo'], [20, '€ tiene Teo']],
-      scene: bar({ total: 30, parts: [{ name: 'Teo', value: 20 }, { name: 'Falta', value: '?', size: 10 }] }),
-      prompt: 'Le faltan ? €',
-      answer: 10,
-    },
-    {
-      story: 'Teo tiene 20 € y Lena 15 €. ¿Cuánto dinero tienen entre los dos?',
-      data: [[20, '€ tiene Teo'], [15, '€ tiene Lena']],
-      scene: bar({ total: '?', parts: [{ name: 'Teo', value: 20 }, { name: 'Lena', value: 15 }] }),
-      prompt: 'Tienen ? €',
-      answer: 35,
-    },
-    {
-      story: 'Teo y Lena tienen 35 € y el globo cuesta 30 €. ¿Cuánto les sobrará?',
-      data: [[35, '€ tienen Teo y Lena'], [30, '€ cuesta el globo']],
-      scene: bar({ total: 35, parts: [{ name: 'Globo', value: 30 }, { name: 'Sobra', value: '?', size: 5 }] }),
-      prompt: 'Les sobrarán ? €',
-      answer: 5,
-    },
-    {
-      story: 'Lena tiene 15 € y Teo 20 €. ¿Cuánto dinero tiene Teo más que Lena?',
-      data: [[15, '€ tiene Lena'], [20, '€ tiene Teo']],
-      scene: bar({ compare: true, difference: '?', parts: [{ name: 'Teo', value: 20 }, { name: 'Lena', value: 15 }] }),
-      prompt: 'Teo tiene ? € más',
-      answer: 5,
-    },
-  ],
-  more: [
-    {
-      title: 'Lucas, Adri y Mateo',
-      type: 'numbers',
-      write: true,
-      instructions: 'Lucas tiene 40 €. Adri tiene 10 € menos que Lucas. Mateo tiene 30 € más que Adri.',
-      questions: [
+      story: 'Teo quiere comprar un globo terráqueo que cuesta 30 €. Tiene ahorrados 20 €. Lena tiene ahorrados 15 €. ¿Pueden comprar el globo terráqueo? ¿Cómo?',
+      ask: 'La barra de arriba es lo que vale el globo y la de abajo, lo que tiene Teo. ¿Tiene Teo suficiente dinero?',
+      scene: apart(['Globo', 30], ['Teo', 20]),
+      choices: ['No: su barra es más corta que la del globo', 'Sí: su barra es más larga que la del globo'],
+      answer: 'No: su barra es más corta que la del globo',
+      then: [
         {
-          story: 'Adri tiene 10 € menos que Lucas, que tiene 40 €. ¿Cuánto tiene Adri?',
+          story: '¿Cuánto le falta a Teo para comprar el globo él solo?',
+          data: [[30, '€ cuesta el globo'], [20, '€ tiene Teo']],
+          scene: bar({ total: 30, parts: [{ name: 'Teo', value: 20 }, { name: 'Falta', value: '?', size: 10 }] }),
+          prompt: 'Le faltan ? €',
+          answer: 10,
+        },
+        {
+          story: 'Si dibujas la barra de los ahorros de Lena debajo de la de Teo, ¿será más larga o más corta?',
+          scene: apart(['Globo', 30], ['Teo', 20], ['Lena', 15]),
+          choices: ['Más corta: Lena tiene menos que Teo', 'Más larga: Lena tiene más que Teo'],
+          answer: 'Más corta: Lena tiene menos que Teo',
+        },
+        {
+          story: 'Observa las barras. ¿Teo y Lena tienen suficiente dinero entre los dos?',
+          scene: together('Teo y Lena', ['Teo', 20], ['Lena', 15]),
+          choices: ['Sí: sus barras juntas son más largas que la del globo', 'No: sus barras juntas son más cortas que la del globo'],
+          answer: 'Sí: sus barras juntas son más largas que la del globo',
+        },
+        {
+          story: '¿Cuánto dinero tienen en total Teo y Lena?',
+          data: [[20, '€ tiene Teo'], [15, '€ tiene Lena']],
+          prompt: 'En total tienen ? €',
+          answer: 35,
+        },
+        {
+          story: '¿Pueden comprar entre los dos el globo terráqueo?',
+          choices: ['Sí', 'No'],
+          answer: 'Sí',
+        },
+        {
+          story: '¿Cuánto les sobrará?',
+          data: [[35, '€ tienen entre los dos'], [30, '€ cuesta el globo']],
+          scene: bar({ total: 35, parts: [{ name: 'Globo', value: 30 }, { name: 'Sobra', value: '?', size: 5 }] }),
+          prompt: 'Les sobrarán ? €',
+          answer: 5,
+        },
+      ],
+    },
+    {
+      story: 'Lucas tiene 40 €. Adri tiene 10 € menos que Lucas. Mateo tiene 30 € más que Adri. ¿Quién tiene más dinero de los tres? ¿Cuánto más?',
+      ask: '¿Qué barras representan el dinero de cada uno?',
+      pick: [
+        apart(['Lucas', 40], ['Adri', 50], ['Mateo', 80]),
+        apart(['Lucas', 40], ['Adri', 30], ['Mateo', 60]),
+        apart(['Lucas', 40], ['Adri', 30], ['Mateo', 20]),
+      ],
+      answer: 1,
+      then: [
+        {
+          story: '¿Cuánto dinero tiene Adri?',
           data: [[40, '€ tiene Lucas'], [10, '€ menos tiene Adri']],
-          scene: bar({ compare: true, difference: 10, parts: [{ name: 'Lucas', value: 40 }, { name: 'Adri', value: '?', size: 30 }] }),
           prompt: 'Adri tiene ? €',
           answer: 30,
         },
         {
-          story: 'Mateo tiene 30 € más que Adri. ¿Cuánto tiene Mateo?',
+          story: '¿Cuánto dinero tiene Mateo?',
+          data: [[30, '€ tiene Adri'], [30, '€ más tiene Mateo']],
           prompt: 'Mateo tiene ? €',
           answer: 60,
         },
         {
-          story: '¿Cuántos euros tiene Mateo más que Lucas?',
-          scene: bar({ compare: true, difference: '?', parts: [{ name: 'Mateo', value: 60 }, { name: 'Lucas', value: 40 }] }),
-          prompt: '? € más',
+          story: '¿Cómo sabes quién tiene más dinero?',
+          choices: ['Elijo la barra más larga', 'Elijo la barra más corta'],
+          answer: 'Elijo la barra más larga',
+        },
+        {
+          story: '¿Quién tiene más dinero de los tres?',
+          choices: ['Lucas', 'Adri', 'Mateo'],
+          answer: 'Mateo',
+        },
+        {
+          story: '¿Cuántos euros más que Lucas tiene Mateo?',
+          data: [[60, '€ tiene Mateo'], [40, '€ tiene Lucas']],
+          prompt: 'Mateo tiene ? € más que Lucas',
           answer: 20,
         },
-      ],
-    },
-    {
-      title: '¿Quién tiene más?',
-      type: 'quiz',
-      instructions: 'Piensa en las barras de Lucas, Adri y Mateo.',
-      questions: [
         {
-          prompt: '¿Cómo sabes quién tiene más dinero?', choices: ['Elijo la barra más corta', 'Elijo la barra más larga'], answer: 'Elijo la barra más larga',
-        },
-        {
-          prompt: '¿Quién tiene más dinero de los tres?', choices: ['Lucas', 'Adri', 'Mateo'], answer: 'Mateo',
-        },
-        {
-          prompt: '¿Quién tiene menos dinero de los tres?', choices: ['Lucas', 'Adri', 'Mateo'], answer: 'Adri',
-        },
-        {
-          prompt: 'La barra de Lena (15 €), ¿es más larga o más corta que la de Teo (20 €)?', choices: ['Más larga', 'Más corta'], answer: 'Más corta',
+          story: '¿Y cuántos euros más que Adri?',
+          data: [[60, '€ tiene Mateo'], [30, '€ tiene Adri']],
+          prompt: 'Mateo tiene ? € más que Adri',
+          answer: 30,
         },
       ],
     },
     {
-      title: 'El atlas de Sergio',
-      type: 'numbers',
-      write: true,
-      instructions: 'Un atlas es un libro de mapas. El atlas «Viaja por el universo» cuesta 30 €. Sergio tenía 20 €, ahorró algo más y sus abuelos le dieron 2 €. ¡Ahora tiene justo 30 €!',
-      questions: [
+      story: 'El atlas «Viaja por el universo» cuesta 30 €. Sergio tiene 20 € y no le llega. Ha conseguido ahorrar algo más de dinero y, además, sus abuelos le han dado 2 €. ¡Ahora ya tiene suficiente! ¿Cuánto ha ahorrado Sergio?',
+      ask: '¿Qué barra representa la historia?',
+      pick: [
+        together('Cuesta el atlas', ['Tenía', 8], ['Ahorra', 20], ['Abuelos', 2]),
+        together('Cuesta el atlas', ['Tenía', 20], ['Ahorra', 8], ['Abuelos', 2]),
+        together('Cuesta el atlas', ['Tenía', 20], ['Ahorra', 2], ['Abuelos', 8]),
+      ],
+      answer: 1,
+      then: [
         {
-          story: 'Sergio tenía 20 € y sus abuelos le dieron 2 €. ¿Cuánto tiene sin contar lo que ha ahorrado?',
-          prompt: '20 + 2 = ?',
+          story: '¿Cuánto tiene Sergio sin contar lo que ha ahorrado?',
+          data: [[20, '€ tenía Sergio'], [2, '€ le dan los abuelos']],
+          prompt: '? €',
           answer: 22,
         },
         {
-          story: 'Con lo que ha ahorrado, tiene 30 €. ¿Cuánto ha ahorrado Sergio?',
-          scene: bar({ total: 30, parts: [{ name: 'Tenía', value: 20 }, { name: 'Abuelos', value: 2, size: 3 }, { name: 'Ahorra', value: '?', size: 8 }] }),
-          prompt: 'Ha ahorrado ? €',
+          story: 'Con lo que ha ahorrado tiene justo los 30 € del atlas. ¿Cuánto ha ahorrado?',
+          data: [[30, '€ cuesta el atlas'], [22, '€ tiene con lo de los abuelos']],
+          scene: bar({ total: 30, parts: [{ name: 'Tenía y abuelos', value: 22 }, { name: 'Ahorra', value: '?', size: 8 }] }),
+          prompt: 'Sergio ha ahorrado ? €',
           answer: 8,
         },
       ],

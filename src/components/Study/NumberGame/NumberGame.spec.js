@@ -166,7 +166,7 @@ describe('NumberGame', () => {
       Object.values(node).forEach(walk);
     };
     walk(ALL_SUBJECTS.find(subject => subject.slug === 'mates'));
-    const problems = questions.filter(question => problemData(question).length);
+    const problems = questions.filter(question => question.prompt && problemData(question).length);
     expect(problems.length).toBeGreaterThan(100);
     problems.forEach((question) => {
       expect([question.story, Array.isArray(question.data)]).toEqual([question.story, true]);
@@ -252,6 +252,36 @@ describe('NumberGame', () => {
     expect(screen.queryByText(/Suma las unidades/)).not.toBeInTheDocument();
     expect(screen.getByText('138')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Terminar ✓' })).toBeInTheDocument();
+  });
+
+  it('starts a problem by picking the bar that shows it, then finds the data in its story', () => {
+    const picture = { Drawing: () => null, width: 10, height: 10, props: {} };
+    const exercise = {
+      instructions: 'Lee y calcula.',
+      questions: [{
+        story: 'Hay 55 zumos de naranja y 28 de piña.',
+        ask: '¿Qué barra representa esta situación?',
+        pick: [picture, picture],
+        answer: 1,
+        then: [{ data: [[55, 'zumos de naranja'], [28, 'zumos de piña']], prompt: '? zumos', answer: 83 }],
+      }],
+    };
+    inSpanish(<NumberGame exercise={exercise} />);
+    expect(screen.getByText('¿Qué barra representa esta situación?')).toBeInTheDocument();
+    expect(screen.queryByRole('group', { name: 'Teclado de números' })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Dibujo 1' }));
+    expect(screen.getByRole('button', { name: 'Dibujo 1' })).toBeDisabled();
+    fireEvent.click(screen.getByRole('button', { name: 'Dibujo 2' }));
+    expect(screen.getByText('✓ Esa es la barra')).toBeInTheDocument();
+    type('55');
+    check();
+    expect(screen.getAllByText('55')).toHaveLength(2); // underlined in the problem's story, and written in the data
+    ['28', '83'].forEach((number) => {
+      type(number);
+      check();
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Terminar ✓' }));
+    expect(screen.getByText('1 fallo por el camino.')).toBeInTheDocument();
   });
 
   it('moves between questions with the arrows, in Spanish', () => {
