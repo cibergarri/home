@@ -35,6 +35,17 @@ describe('Lengua', () => {
     });
   });
 
+  it('asks for each word only once, with answers that are not the word itself', () => {
+    ofType('word').forEach(({ questions }) => {
+      const prompts = questions.map(({ prompt }) => prompt);
+      expect(new Set(prompts).size).toBe(prompts.length);
+      questions.forEach(({ prompt, answers }) => {
+        expect(answers.length).toBeGreaterThan(0);
+        answers.forEach(answer => expect(prompt).not.toContain(`«${answer}»`));
+      });
+    });
+  });
+
   it('sorts and colours into columns and crayons that are there', () => {
     ofType('sort').forEach(({ columns, cards }) => {
       cards.forEach(card => card.columns.forEach(column => expect(columns.map(({ id }) => id)).toContain(column)));

@@ -20,6 +20,10 @@ const prefixed = (word, prefix) => ({
   solved: `${prefix}${word}`,
 });
 
+// One word to find, typed or said: a synonym or an antonym of `word`, any of `answers` right.
+const synonym = (word, ...answers) => ({ prompt: `Un sinónimo de «${word}»`, say: `Un sinónimo de ${word}`, answers });
+const antonym = (word, ...answers) => ({ prompt: `Un antónimo de «${word}»`, say: `Un antónimo de ${word}`, answers });
+
 // Words run together, the sentence they make, and two wrong ways to separate them.
 const separate = (sentence, ...wrong) => ({
   prompt: `Separa las palabras: ${sentence.replace(/ /g, '')}`,
@@ -267,6 +271,44 @@ const sinonimos = {
         { prompt: 'Rodajas gruesas → rodajas…', choices: ['finas', 'grandes'], answer: 'finas' },
         { prompt: 'Una lata grande → una lata…', choices: ['pequeña', 'enorme'], answer: 'pequeña' },
         { prompt: 'Aceitunas con hueso → aceitunas…', choices: ['sin hueso', 'con más hueso'], answer: 'sin hueso' },
+      ],
+    },
+    {
+      title: 'Escríbelo o dilo',
+      type: 'word',
+      instructions: 'Piensa la palabra que te piden: un sinónimo (significa lo mismo) o un antónimo (significa lo contrario). Escríbela y pulsa Comprobar, o toca 🎤 y dila en voz alta.',
+      draw: 10,
+      questions: [
+        synonym('pequeño', 'chiquitito', 'diminuto', 'chico', 'pequeñito', 'chiquito', 'minúsculo', 'enano'),
+        antonym('pequeño', 'grande', 'enorme', 'gigante', 'inmenso'),
+        synonym('valiente', 'atrevido', 'valeroso', 'osado', 'bravo', 'intrépido', 'audaz'),
+        antonym('valiente', 'cobarde', 'miedoso', 'gallina', 'temeroso'),
+        synonym('fácil', 'sencillo', 'simple', 'facilito'),
+        antonym('fácil', 'difícil', 'complicado', 'complejo'),
+        synonym('antiguo', 'viejo', 'anticuado', 'añejo', 'vetusto'),
+        antonym('antiguo', 'nuevo', 'moderno', 'actual'),
+        synonym('divertido', 'gracioso', 'entretenido', 'chistoso', 'cómico'),
+        antonym('divertido', 'aburrido', 'soso', 'pesado'),
+        synonym('comenzar', 'empezar', 'iniciar', 'arrancar'),
+        antonym('comenzar', 'acabar', 'terminar', 'finalizar'),
+        synonym('alto', 'elevado', 'espigado'),
+        antonym('alto', 'bajo', 'bajito'),
+        synonym('ganar', 'vencer', 'triunfar'),
+        antonym('ganar', 'perder'),
+        synonym('alegre', 'contento', 'feliz', 'animado', 'dichoso'),
+        antonym('alegre', 'triste', 'apenado', 'tristón'),
+        antonym('bajar', 'subir', 'ascender'),
+        synonym('rápido', 'veloz', 'ligero', 'raudo'),
+        antonym('rápido', 'lento', 'despacio'),
+        synonym('bonito', 'precioso', 'hermoso', 'bello', 'lindo', 'guapo'),
+        synonym('terminar', 'acabar', 'finalizar', 'concluir'),
+        synonym('enfadado', 'furioso', 'enojado', 'molesto', 'rabioso'),
+        antonym('limpio', 'sucio', 'manchado'),
+        antonym('lleno', 'vacío'),
+        antonym('abrir', 'cerrar'),
+        antonym('encender', 'apagar'),
+        antonym('día', 'noche'),
+        antonym('frío', 'caliente', 'cálido', 'ardiente', 'caluroso'),
       ],
     },
   ],

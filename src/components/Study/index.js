@@ -16,6 +16,7 @@ import TowerGame from './TowerGame';
 import LetterGame from './LetterGame';
 import MoneyGame from './MoneyGame';
 import TableGame from './TableGame';
+import WordGame from './WordGame';
 import ScrapPaper from './ScrapPaper';
 import Explain, { ExplainContext } from './Explain';
 import { findSubject, findUnit, findExercise } from './subjects';
@@ -137,6 +138,7 @@ const GAMES = {
   letters: LetterGame,
   money: MoneyGame,
   table: TableGame,
+  word: WordGame,
 };
 
 function Game({ part }) {
