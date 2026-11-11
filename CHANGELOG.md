@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.28.0](https://github.com/cibergarri/home/compare/v1.27.0...v1.28.0) (2026-11-11)
+
+
+### Features
+
+* **study-corner:** add a synonym and antonym exercise to type or say the word ([a85cc31](https://github.com/cibergarri/home/commit/a85cc3175a4d0052698576548d038ab093ca280f))
+* **study-corner:** add the synonyms table, money problems and words that change each time ([202fcdb](https://github.com/cibergarri/home/commit/202fcdb5caee778e2baa12f1efc2baabaa313542))
+
 # [1.27.0](https://github.com/cibergarri/home/compare/v1.26.0...v1.27.0) (2026-11-07)
 
 
