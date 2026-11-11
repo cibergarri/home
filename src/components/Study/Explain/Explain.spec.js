@@ -30,7 +30,10 @@ describe('Explain', () => {
       expect(photo.credit).toMatch(/, (CC|FAL)/);
     });
     expect(Object.keys(GLOSSARY).filter(word => !GLOSSARY[word].photo)).toEqual(
-      ['parts of a mountain', 'parts of a river', 'cardinal points', 'north', 'south', 'east', 'west'],
+      [
+        'parts of a mountain', 'parts of a river',
+        'cardinal points', 'north', 'south', 'east', 'west',
+      ],
     );
   });
 
@@ -38,6 +41,8 @@ describe('Explain', () => {
     expect(meaningOf('Physical features (natural)').es).toBe('elemento natural');
     expect(meaningOf('Mountain landscapes').es).toBe('paisaje de montaña');
     expect(meaningOf('A river').es).toBe('río');
+    expect(meaningOf('Councillors').es).toBe('concejal o concejala');
+    expect(meaningOf('Libraries').es).toBe('biblioteca');
     expect(meaningOf('Which course is it?')).toBeUndefined();
   });
 

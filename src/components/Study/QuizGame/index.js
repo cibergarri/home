@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { speak } from '../speech';
 import { useStrings } from '../language';
+import Explain from '../Explain';
 import {
   SpeakerIcon, WellDone, QuestionNav, useSlips, practiseItems, pickSome,
 } from '../game';
@@ -148,6 +149,7 @@ export default function QuizGame({ exercise }) {
                   <SmallSpeaker type="button" onClick={() => speak(choice, text.lang)} aria-label={text.listenTo(choice)}>
                     <SpeakerIcon />
                   </SmallSpeaker>
+                  <Explain word={choice} variant="chip" />
                 </Choice>
               );
             })}

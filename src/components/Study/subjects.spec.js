@@ -40,8 +40,10 @@ describe("Julia's study pages", () => {
     renderWithProviders(await SubjectPage({ params: params({ subject: 'social-science' }) }));
     expect(screen.getByRole('heading', { name: 'Social Science' })).toBeInTheDocument();
     expect(screen.getByText('Unit 1')).toBeInTheDocument();
-    expect(screen.getByText('7 exercises')).toBeInTheDocument();
+    expect(screen.getByText('Unit 2')).toBeInTheDocument();
+    expect(screen.getAllByText('7 exercises')).toHaveLength(2);
     expect(hrefs()).toContain('/study-corner/social-science/unit-1');
+    expect(hrefs()).toContain('/study-corner/social-science/unit-2');
   });
 
   it('lists the exercises of a unit, with a way back to the subject', async () => {
@@ -68,6 +70,8 @@ describe("Julia's study pages", () => {
       { subject: 'social-science', unit: 'unit-1', exercise: 'rivers' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'find-directions' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'physical-and-human-features' },
+      ...['villages-and-cities', 'living-together', 'road-safety', 'local-council', 'street-map', 'safe-routes', 'review']
+        .map(exercise => ({ subject: 'social-science', unit: 'unit-2', exercise })),
       ...[
         ['bienvenida', ['empezamos', 'numeros', 'repaso']],
         ['tema-1', ['numeros-de-dos-cifras', 'comparar', 'aproximar', 'sumar', 'restar', 'problemas', 'tabla-cien', 'tablas', 'con-las-manos', 'repaso']],
@@ -98,6 +102,8 @@ describe("Julia's study pages", () => {
       { subject: 'naturales', unit: 'tema-1', exercise: 'respirar' },
       { subject: 'naturales', unit: 'tema-1', exercise: 'alimentamos' },
       { subject: 'naturales', unit: 'tema-1', exercise: 'repaso' },
+      ...['salud', 'habitos', 'alimentacion', 'accidentes', 'ejercicio-emociones', 'menu-saludable', 'repaso']
+        .map(exercise => ({ subject: 'naturales', unit: 'tema-2', exercise })),
       ...[
         ['welcome', ['family', 'greetings', 'whos-that', 'story', 'review']],
         ['unit-1', ['days-of-the-week', 'places-at-school', 'wheres', 'positions', 'rules-and-games', 'story-phrases', 'numbers', 'review']],

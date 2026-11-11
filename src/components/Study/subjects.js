@@ -6,6 +6,13 @@ import flatLandscape from './exercises/flat-landscape';
 import rivers from './exercises/rivers';
 import findDirections from './exercises/find-directions';
 import physicalAndHumanFeatures from './exercises/physical-and-human-features';
+import villagesAndCities from './exercises/social-science/unit-2/villages-and-cities';
+import livingTogether from './exercises/social-science/unit-2/living-together';
+import roadSafety from './exercises/social-science/unit-2/road-safety';
+import localCouncil from './exercises/social-science/unit-2/local-council';
+import streetMap from './exercises/social-science/unit-2/street-map';
+import safeRoutes from './exercises/social-science/unit-2/safe-routes';
+import reviewSocial2 from './exercises/social-science/unit-2/review';
 import daysOfTheWeek from './exercises/english/days-of-the-week';
 import placesAtSchool from './exercises/english/places-at-school';
 import wheres from './exercises/english/wheres';
@@ -79,6 +86,13 @@ import movemos from './exercises/naturales/tema-1/movemos';
 import respirar from './exercises/naturales/tema-1/respirar';
 import alimentamos from './exercises/naturales/tema-1/alimentamos';
 import repasoNaturales from './exercises/naturales/tema-1/repaso';
+import salud from './exercises/naturales/tema-2/salud';
+import habitos from './exercises/naturales/tema-2/habitos';
+import alimentacion from './exercises/naturales/tema-2/alimentacion';
+import accidentes from './exercises/naturales/tema-2/accidentes';
+import ejercicioEmociones from './exercises/naturales/tema-2/ejercicio-emociones';
+import menuSaludable from './exercises/naturales/tema-2/menu-saludable';
+import repasoNaturales2 from './exercises/naturales/tema-2/repaso';
 
 // What Julia is studying: subjects, their units, and the exercises of each unit. A new exercise
 // goes in ./exercises and is listed under its unit here; the pages are generated from this list.
@@ -98,6 +112,12 @@ export const ALL_SUBJECTS = [
           landscape, coastalLandscape, mountainLandscapes, flatLandscape, rivers, findDirections,
           physicalAndHumanFeatures,
         ],
+      },
+      {
+        slug: 'unit-2',
+        title: 'Unit 2',
+        icon: '🏘️',
+        exercises: [villagesAndCities, livingTogether, roadSafety, localCouncil, streetMap, safeRoutes, reviewSocial2],
       },
     ],
   },
@@ -257,6 +277,12 @@ export const ALL_SUBJECTS = [
         title: 'Tema 1',
         icon: '🧍',
         exercises: [etapas, funciones, movemos, respirar, alimentamos, repasoNaturales],
+      },
+      {
+        slug: 'tema-2',
+        title: 'Tema 2',
+        icon: '🩺',
+        exercises: [salud, habitos, alimentacion, accidentes, ejercicioEmociones, menuSaludable, repasoNaturales2],
       },
     ],
   },

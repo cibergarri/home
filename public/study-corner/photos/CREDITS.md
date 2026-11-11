@@ -44,3 +44,27 @@ Photos for the Spanish explanations in /julia, from Wikimedia Commons, resized. 
 - `lower-course.jpg` (lower course): MB-one, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Altrhein,_Mainz_(LRM_20210611_212924).jpg
 - `tributary.jpg` (tributary): Syrio, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Confluenza_del_Noce_nell%27Adige_07.jpg
 - `mouth.jpg` (mouth): Bidgee, CC BY 3.0, https://commons.wikimedia.org/wiki/File:Estuary_mouth.jpg
+- `pedestrian-crossing.jpg` (pedestrian crossing): Ximonic (Simo Räsänen), CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Pedestrian_crossing_over_Calle_de_Orihuela_in_Torrevieja,_Alicante,_Spain,_2022_January.jpg
+- `pavement.jpg` (pavement): Richard Sutcliffe, CC BY-SA 2.0, https://commons.wikimedia.org/wiki/File:A_cluttered_pavement,_St_Andrews_-_geograph.org.uk_-_6166107.jpg
+- `road.jpg` (road): Krzysztof Golik, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Road_CS-240_at_Coll_d%27Ordino_(2).jpg
+- `road-sign.jpg` (road sign): CEphoto, Uwe Aranas, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Spain_Traffic-signs_Regulatory-sign-02.jpg
+- `traffic-lights.jpg` (traffic lights): LBM1948, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:El_Puente_del_Arzobispo_(2024)_63.jpg
+- `cycle-lane.jpg` (cycle lane): Pacopac, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Anell_ciclista_a_la_ciutat_de_Val%C3%A8ncia_01.jpg
+- `hospital.jpg` (hospital): Xnatedawgx, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Adult_Ambulance_Entrance,_Denver_Health_Medical_Center.jpg
+- `museum.jpg` (museum): Oilisab, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Museo_del_Prado_00_Fachada_1a.jpg
+- `school.jpg` (school): Henri97, CC0, https://commons.wikimedia.org/wiki/File:Schulhof-Grundschule-Jagsthausen.jpg
+- `park.jpg` (park): Iago Pillado, CC BY-SA 2.5 es, https://commons.wikimedia.org/wiki/File:Paseo_no_Parque_do_Retiro,_Madrid.jpg
+- `supermarket.jpg` (supermarket): Wilfredor, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Aisle_in_L_Intermarche_supermarket_in_Quebec_City.jpg
+- `square.jpg` (square): Martin Falbisoner, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Plaza_Mayor_de_Santa_Ana,_Las_Palmas_de_Gran_Canaria,_May_2018.jpg
+- `town-hall.jpg` (town hall): Zarateman, CC0, https://commons.wikimedia.org/wiki/File:Burgos_-_Ayuntamiento_08.jpg
+- `neighbourhood.jpg` (neighbourhood): Camerano Viejo, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Estacion_2.jpg
+- `library.jpg` (library): Bibliotecapublicadeburgos, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Planta_uno_Biblioteca_P%C3%BAblica_de_Burgos.JPG
+- `police.jpg` (police): Torres05, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Coche_de_la_Polic%C3%ADa_Local_de_Gij%C3%B3n_en_la_plaza_del_Marqu%C3%A9s.jpg
+- `public-transport.jpg` (public transport): Eltitomac, CC0, https://commons.wikimedia.org/wiki/File:L%C3%ADnea_1_Parada_Arlanz%C3%B3n.JPG
+- `rubbish-collection.jpg` (rubbish collection): Zarateman, CC0, https://commons.wikimedia.org/wiki/File:Burgos_-_Contenedores.jpg
+- `cultural-events.jpg` (cultural events): Jesús Serna, CC BY-SA 2.5, https://commons.wikimedia.org/wiki/File:Burgos_gigantones_4.jpg
+- `mayor.jpg` (mayor): Marinabailen, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:181108_Ayala_Catedral_Burgos.jpg
+- `councillor.jpg` (councillor): Diario de Madrid, CC BY 4.0, https://commons.wikimedia.org/wiki/File:El_Pleno_aprueba_el_Presupuesto_General_del_Ayuntamiento_2018_05.jpg
+- `local-council.jpg` (local council): Diario de Madrid, CC BY 4.0, https://commons.wikimedia.org/wiki/File:El_Pleno_aprueba_el_Presupuesto_General_del_Ayuntamiento_2018_03.jpg
+- `municipality.jpg` (municipality): LBM1948, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Burgos,_vistas_generales_5.jpg
+- `local-services.jpg` (local services): Jardoz, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Bicibur.jpg

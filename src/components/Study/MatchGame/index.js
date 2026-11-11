@@ -6,12 +6,13 @@ import {
 
 import { speak } from '../speech';
 import { useStrings } from '../language';
+import Explain from '../Explain';
 import {
   scramble, shuffle, SpeakerIcon, WellDone, useSlips, practiseItems, pickSome,
 } from '../game';
 import { Instructions, Message, Progress } from '../LabelMap/style';
 import {
-  Board, Columns, Column, Heading, Root, Card, CardButton, CardSpeaker, Picture, Joins,
+  Board, Columns, Column, Heading, Root, Card, CardButton, CardSpeaker, CardTools, Picture, Joins,
 } from './style';
 
 // Each matched pair gets its own colour, so the two halves of a pair look alike.
@@ -166,9 +167,12 @@ export default function MatchGame({ exercise }) {
           {content}
         </CardButton>
         {(side === 'left' || diagram) && (
-          <CardSpeaker type="button" onClick={() => speak(said, text.lang)} aria-label={text.listenTo(said)}>
-            <SpeakerIcon />
-          </CardSpeaker>
+          <CardTools>
+            <CardSpeaker type="button" data-speaker onClick={() => speak(said, text.lang)} aria-label={text.listenTo(said)}>
+              <SpeakerIcon />
+            </CardSpeaker>
+            {side === 'left' && <Explain word={pair.en} variant="chip" />}
+          </CardTools>
         )}
       </Card>
     );

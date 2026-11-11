@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 
 import { speak } from '../speech';
 import { useStrings } from '../language';
+import Explain from '../Explain';
 import {
   shuffle, isNear, useDrag, SpeakerIcon, WellDone, useSlips, practiseItems,
 } from '../game';
@@ -109,6 +110,7 @@ export default function SortGame({ exercise }) {
                     <SmallSpeaker type="button" onClick={() => speak(text, strings.lang)} aria-label={strings.listenTo(text)}>
                       <SpeakerIcon />
                     </SmallSpeaker>
+                    <Explain word={text} variant="tile" />
                   </SortedCard>
                 );
               })}
@@ -131,6 +133,7 @@ export default function SortGame({ exercise }) {
                     <Speaker type="button" onClick={() => speak(text, strings.lang)} aria-label={strings.listenTo(text)}>
                       <SpeakerIcon />
                     </Speaker>
+                    <Explain word={text} variant="chip" />
                   </Chip>
                 );
               })}

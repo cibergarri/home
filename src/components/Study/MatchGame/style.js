@@ -48,6 +48,16 @@ export const Column = styled.ul`
     > :first-child:not([data-card]) {
       grid-column: 1 / -1;
     }
+    /* On a phone, more than three branches go in two rows. */
+    ${$across > 3 && css`
+      @media (max-width: 560px) {
+        grid-template-columns: repeat(${Math.ceil($across / 2)}, minmax(0, 1fr));
+        gap: 16px 10px;
+        li::before, li::after {
+          display: none;
+        }
+      }
+    `}
   `}
 `;
 
@@ -97,7 +107,7 @@ export const Card = styled.li`
       button {
         hyphens: auto;
       }
-      button:last-child {
+      [data-speaker] {
         display: none;
       }
     }
@@ -206,4 +216,28 @@ export const Joins = styled.svg`
   height: 100%;
   overflow: visible;
   pointer-events: none;
+`;
+
+// The speaker and, for a word with a Spanish meaning, its flag: one above the other, so a card in a
+// narrow diagram row does not grow wider.
+export const CardTools = styled.div`
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 6px 6px 0;
+  & > * {
+    flex: 1;
+    width: 44px;
+    min-height: 36px;
+    margin: 0;
+  }
+  @media (max-width: 560px) {
+    flex-direction: row;
+    padding: 0 6px 6px;
+    & > * {
+      width: auto;
+      min-height: 34px;
+    }
+  }
 `;

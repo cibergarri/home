@@ -214,6 +214,136 @@ export const GLOSSARY = {
     text: 'El sitio donde el río llega al mar.',
     photo: { src: '/study-corner/photos/mouth.jpg', credit: 'Bidgee, CC BY 3.0' },
   },
+  neighbourhood: {
+    es: 'barrio',
+    text: 'Una parte de una ciudad o de un pueblo, con sus calles y sus vecinos.',
+    photo: { src: '/study-corner/photos/neighbourhood.jpg', credit: 'Camerano Viejo, CC BY-SA 4.0' },
+  },
+  'pedestrian crossing': {
+    es: 'paso de peatones',
+    text: 'Las rayas blancas en la calle por donde cruzamos.',
+    photo: { src: '/study-corner/photos/pedestrian-crossing.jpg', credit: 'Ximonic (Simo Räsänen), CC BY-SA 4.0' },
+  },
+  pavement: {
+    es: 'acera',
+    text: 'El camino al lado de la calle por donde andamos.',
+    photo: { src: '/study-corner/photos/pavement.jpg', credit: 'Richard Sutcliffe, CC BY-SA 2.0' },
+  },
+  road: {
+    es: 'calzada',
+    text: 'Por donde van los coches, los autobuses y los camiones.',
+    photo: { src: '/study-corner/photos/road.jpg', credit: 'Krzysztof Golik, CC BY-SA 4.0' },
+  },
+  'road sign': {
+    es: 'señal de tráfico',
+    text: 'Un dibujo en un poste que dice qué hay que hacer.',
+    photo: { src: '/study-corner/photos/road-sign.jpg', credit: 'CEphoto, Uwe Aranas, CC BY-SA 3.0' },
+  },
+  'traffic lights': {
+    es: 'semáforo',
+    text: 'Luces roja, ámbar y verde que dicen cuándo parar y cuándo pasar.',
+    photo: { src: '/study-corner/photos/traffic-lights.jpg', credit: 'LBM1948, CC BY-SA 4.0' },
+  },
+  'cycle lane': {
+    es: 'carril bici',
+    text: 'Una parte de la calle solo para las bicis.',
+    photo: { src: '/study-corner/photos/cycle-lane.jpg', credit: 'Pacopac, CC BY-SA 4.0' },
+  },
+  hospital: {
+    es: 'hospital',
+    text: 'Donde los médicos curan a las personas enfermas.',
+    photo: { src: '/study-corner/photos/hospital.jpg', credit: 'Xnatedawgx, CC BY-SA 4.0' },
+  },
+  museum: {
+    es: 'museo',
+    text: 'Un edificio donde se ven cosas antiguas e interesantes.',
+    photo: { src: '/study-corner/photos/museum.jpg', credit: 'Oilisab, CC BY-SA 4.0' },
+  },
+  school: {
+    es: 'colegio',
+    text: 'Donde los niños van a aprender.',
+    photo: { src: '/study-corner/photos/school.jpg', credit: 'Henri97, CC0' },
+  },
+  park: {
+    es: 'parque',
+    text: 'Un sitio verde con césped y árboles para jugar y pasear.',
+    photo: { src: '/study-corner/photos/park.jpg', credit: 'Iago Pillado, CC BY-SA 2.5 es' },
+  },
+  supermarket: {
+    es: 'supermercado',
+    text: 'Una tienda grande donde compramos comida y otras cosas.',
+    photo: { src: '/study-corner/photos/supermarket.jpg', credit: 'Wilfredor, CC BY-SA 4.0' },
+  },
+  square: {
+    es: 'plaza',
+    text: 'Un espacio abierto en el pueblo o la ciudad, con bancos y a veces una fuente.',
+    photo: { src: '/study-corner/photos/square.jpg', credit: 'Martin Falbisoner, CC BY-SA 4.0' },
+  },
+  'town hall': {
+    es: 'ayuntamiento',
+    text: 'El edificio donde trabajan el alcalde y los concejales.',
+    photo: { src: '/study-corner/photos/town-hall.jpg', credit: 'Zarateman, CC0' },
+  },
+  library: {
+    es: 'biblioteca',
+    text: 'Un sitio con muchos libros para leer y llevártelos prestados.',
+    photo: { src: '/study-corner/photos/library.jpg', credit: 'Bibliotecapublicadeburgos, CC BY-SA 3.0' },
+  },
+  'parks and gardens': {
+    es: 'parques y jardines',
+    text: 'Sitios verdes del pueblo o la ciudad para jugar y pasear.',
+    photo: { src: '/study-corner/photos/park.jpg', credit: 'Iago Pillado, CC BY-SA 2.5 es' },
+  },
+  police: {
+    es: 'policía',
+    text: 'Cuida de que todos estemos seguros.',
+    photo: { src: '/study-corner/photos/police.jpg', credit: 'Torres05, CC BY-SA 4.0' },
+  },
+  'police and traffic': {
+    es: 'policía y tráfico',
+    text: 'La policía local cuida de que estemos seguros y ordena el tráfico.',
+    photo: { src: '/study-corner/photos/police.jpg', credit: 'Torres05, CC BY-SA 4.0' },
+  },
+  'public transport': {
+    es: 'transporte público',
+    text: 'Autobuses y otros transportes que todos podemos usar.',
+    photo: { src: '/study-corner/photos/public-transport.jpg', credit: 'Eltitomac, CC0' },
+  },
+  'rubbish collection': {
+    es: 'recogida de basuras',
+    text: 'Los camiones que vacían los contenedores y se llevan la basura.',
+    photo: { src: '/study-corner/photos/rubbish-collection.jpg', credit: 'Zarateman, CC0' },
+  },
+  'cultural events': {
+    es: 'actividades culturales',
+    text: 'Conciertos, teatro y fiestas para todos.',
+    photo: { src: '/study-corner/photos/cultural-events.jpg', credit: 'Jesús Serna, CC BY-SA 2.5' },
+  },
+  municipality: {
+    es: 'municipio',
+    text: 'Uno o varios pueblos y el campo de alrededor. Burgos es nuestro municipio.',
+    photo: { src: '/study-corner/photos/municipality.jpg', credit: 'LBM1948, CC BY-SA 4.0' },
+  },
+  'local council': {
+    es: 'ayuntamiento',
+    text: 'Las personas que gobiernan el municipio: el alcalde o la alcaldesa y los concejales.',
+    photo: { src: '/study-corner/photos/local-council.jpg', credit: 'Diario de Madrid, CC BY 4.0' },
+  },
+  mayor: {
+    es: 'alcalde o alcaldesa',
+    text: 'La persona que dirige el ayuntamiento. En Burgos es la alcaldesa, Cristina Ayala.',
+    photo: { src: '/study-corner/photos/mayor.jpg', credit: 'Marinabailen, CC BY-SA 4.0' },
+  },
+  councillor: {
+    es: 'concejal o concejala',
+    text: 'Las personas que ayudan al alcalde.',
+    photo: { src: '/study-corner/photos/councillor.jpg', credit: 'Diario de Madrid, CC BY 4.0' },
+  },
+  'local services': {
+    es: 'servicios municipales',
+    text: 'Lo que el ayuntamiento organiza para todos: bibliotecas, parques, autobuses, las bicis de Bicibur…',
+    photo: { src: '/study-corner/photos/local-services.jpg', credit: 'Jardoz, CC BY-SA 3.0' },
+  },
   'cardinal points': { es: 'puntos cardinales', text: 'Norte, sur, este y oeste. Nos ayudan a orientarnos.' },
   north: { es: 'norte', text: 'Hacia arriba en el mapa.' },
   south: { es: 'sur', text: 'Hacia abajo en el mapa.' },
@@ -222,8 +352,9 @@ export const GLOSSARY = {
 };
 
 // What a word means, looked up as "Physical features (natural)", "Mountain landscapes" or "A river"
-// are: in lower case, without what is in brackets, and in the singular if need be.
+// are: in lower case, without what is in brackets, and in the singular if need be ("Libraries" is
+// "library").
 export const meaningOf = (term) => {
   const key = term.toLowerCase().replace(/\(.*\)/, '').replace(/^an? /, '').trim();
-  return GLOSSARY[key] ?? GLOSSARY[key.replace(/s$/, '')];
+  return GLOSSARY[key] ?? GLOSSARY[key.replace(/ies$/, 'y')] ?? GLOSSARY[key.replace(/s$/, '')];
 };
