@@ -1,4 +1,7 @@
-import { bar } from '../scenes';
+import { bar as barWithNumbers } from '../scenes';
+
+// The bars without numbers inside: the numbers are in the story.
+const bar = props => barWithNumbers({ ...props, values: false });
 
 // Mates, tema 4: «¡Topi, tengo un problema!», problemas con barras. El globo terráqueo de Teo y
 // Lena, el dinero de Lucas, Adri y Mateo, y el atlas de Sergio.

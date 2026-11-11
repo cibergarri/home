@@ -1,4 +1,7 @@
-import { bar } from '../scenes';
+import { bar as barWithNumbers } from '../scenes';
+
+// The bars without numbers inside: the numbers are in the story.
+const bar = props => barWithNumbers({ ...props, values: false });
 
 // Mates, tema 2: problemas con barras. La barra ayuda a ver qué se junta (sumar) o qué se compara
 // (restar).

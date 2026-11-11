@@ -356,14 +356,16 @@ export function Shop({ item, price, paid }) {
 
 // A bar model, as in the textbook's problems. Either one bar split into `parts` with the `total`
 // above it, or (`compare`) one bar under another, the gap between them marked with `difference`.
-// Values may be '?' for what is to be found; `size` then says how long to draw that part.
+// Values may be '?' for what is to be found; `size` then says how long to draw that part. Without
+// `values`, the bars are left empty of numbers (only a '?' is shown), to be read from the story.
 export const BAR = { width: 600, height: 190 };
 
 const BAR_COLOURS = ['#7fc77f', '#8ec5f2', '#f7c96f', '#f5a8c8'];
 
 export function BarModel({
-  parts = [], total, compare = false, difference,
+  parts = [], total, compare = false, difference, values = true,
 }) {
+  const inside = value => (values || value === '?' ? value : null);
   const left = 20;
   const span = BAR.width - 40;
   const label = (x, y, value, size = 22) => (
@@ -382,7 +384,7 @@ export function BarModel({
             <g key={part.name}>
               <text x={left} y={y + 31} fontSize={20} fontWeight={600} fill="#24324a" fontFamily="inherit">{part.name}</text>
               <rect x={left + 100} y={y} width={length(part)} height={46} rx={4} fill={BAR_COLOURS[i]} stroke="#4b4a73" strokeWidth={1.5} />
-              {label(left + 100 + length(part) / 2, y + 31, part.value)}
+              {label(left + 100 + length(part) / 2, y + 31, inside(part.value))}
             </g>
           );
         })}
@@ -406,7 +408,7 @@ export function BarModel({
         return (
           <g key={part.name}>
             <rect x={at} y={60} width={width} height={56} fill={BAR_COLOURS[i]} stroke="#4b4a73" strokeWidth={1.5} />
-            {label(at + width / 2, 96, part.value)}
+            {label(at + width / 2, 96, inside(part.value))}
             <text x={at + width / 2} y={146} textAnchor="middle" fontSize={18} fill="#4b4a73" fontFamily="inherit">{part.name}</text>
           </g>
         );

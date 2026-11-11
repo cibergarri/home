@@ -68,6 +68,26 @@ const PRICES = table(['Básica', 'Especial'], [
   ['Niños', '4 €', '8 €'],
 ]);
 
+const ZOO = table(['Entrada', 'Con tren'], [
+  ['Adultos', '9 €', '15 €'],
+  ['Niños', '5 €', '8 €'],
+]);
+
+const CINEMA = table(['Precio'], [
+  ['Entrada', '7 €'],
+  ['Palomitas', '4 €'],
+  ['Refresco', '2 €'],
+  ['Agua', '1 €'],
+]);
+
+// A question about a price table: `prompt`, the `answer` first among the `choices`.
+const ask = scene => (prompt, answer, ...others) => ({
+  prompt, scene, choices: [answer, ...others], answer,
+});
+const dogs = ask(PRICES);
+const zoo = ask(ZOO);
+const cinema = ask(CINEMA);
+
 const euros = {
   slug: 'euros',
   title: 'Monedas y billetes',
@@ -169,7 +189,63 @@ const euros = {
           choices: ['10 € + 5 € + 2 €', '10 € + 5 € + 5 €', '5 € + 5 € + 5 €'],
           answer: '10 € + 5 € + 5 €',
         },
+        dogs('¿Cuánto cuesta una entrada especial de adulto?', '12 €', '6 €', '8 €'),
+        dogs('¿Cuánto más cuesta la entrada especial de niño que la básica de niño?', '4 €', '8 €', '2 €'),
+        dogs('Lena y su padre compran entradas especiales. ¿Cuánto pagan?', '20 €', '18 €', '10 €'),
+        dogs('Teo, Lena y su madre compran entradas básicas. ¿Cuánto pagan?', '14 €', '12 €', '16 €'),
+        dogs('Dos adultos compran entradas básicas y pagan con un billete de 20 €. ¿Cuánto les devuelven?', '8 €', '12 €', '6 €'),
+        dogs('Dos niños compran entradas especiales y pagan con un billete de 20 €. ¿Cuánto les devuelven?', '4 €', '6 €', 'Nada'),
+        dogs('Ana tiene 15 €. ¿Le llega para una entrada especial de adulto y una básica de niño?', 'No, le falta 1 €', 'Sí, le sobra 1 €', 'Sí, justo'),
+        dogs('¿Qué cuesta más: dos entradas básicas de niño o una especial de niño?', 'Cuestan lo mismo', 'Dos básicas de niño', 'Una especial de niño'),
+        dogs('Teo tiene 10 €. ¿Qué entradas puede comprar justas?', 'Una básica de adulto y una básica de niño', 'Una especial de adulto', 'Una especial y una básica de niño'),
+        {
+          prompt: '¿Dónde hay 12 euros?',
+          choices: ['10 € + 2 €', '5 € + 5 € + 1 €', '10 € + 5 €'],
+          answer: '10 € + 2 €',
+        },
       ],
+      draw: 6,
+    },
+    {
+      title: 'El zoo',
+      type: 'quiz',
+      instructions: 'Mira los precios del zoo. La entrada «con tren» incluye un paseo en el trenecito.',
+      questions: [
+        zoo('¿Cuánto cuesta una entrada de niño con tren?', '8 €', '5 €', '15 €'),
+        zoo('Mamá y Julia compran entradas sin tren. ¿Cuánto pagan?', '14 €', '18 €', '10 €'),
+        zoo('Papá compra una entrada de adulto con tren y paga con un billete de 20 €. ¿Cuánto le devuelven?', '5 €', '15 €', '11 €'),
+        zoo('Dos niños compran entradas con tren. ¿Cuánto pagan?', '16 €', '10 €', '13 €'),
+        zoo('Lucas tiene 10 €. Compra una entrada de niño con tren. ¿Cuánto le sobra?', '2 €', '5 €', 'Nada'),
+        zoo('Un adulto y un niño compran entradas con tren. ¿Cuánto pagan?', '23 €', '14 €', '20 €'),
+        zoo('¿Cuánto más cuesta la entrada de adulto con tren que sin tren?', '6 €', '9 €', '5 €'),
+        zoo('La abuela tiene 20 €. Compra dos entradas de adulto sin tren. ¿Cuánto le sobra?', '2 €', '11 €', 'Le falta dinero'),
+        zoo('Tres niños compran entradas sin tren y pagan con un billete de 20 €. ¿Cuánto les devuelven?', '5 €', '15 €', '10 €'),
+        zoo('Paula tiene 7 €. ¿Le llega para una entrada de niño con tren?', 'No, le falta 1 €', 'Sí, le sobra 1 €', 'Sí, justo'),
+        {
+          prompt: '¿Dónde hay 15 euros?',
+          choices: ['10 € + 5 €', '5 € + 5 € + 2 €', '10 € + 2 € + 2 €'],
+          answer: '10 € + 5 €',
+        },
+      ],
+      draw: 6,
+    },
+    {
+      title: 'En el cine',
+      type: 'quiz',
+      instructions: 'Mira lo que cuesta cada cosa en el cine.',
+      questions: [
+        cinema('Julia compra una entrada y unas palomitas. ¿Cuánto paga?', '11 €', '9 €', '12 €'),
+        cinema('Julia tiene 10 €. Compra una entrada y un refresco. ¿Cuánto le sobra?', '1 €', '3 €', 'Le falta dinero'),
+        cinema('¿Cuánto cuestan dos entradas?', '14 €', '12 €', '9 €'),
+        cinema('Teo compra una entrada, palomitas y un refresco, y paga con un billete de 20 €. ¿Cuánto le devuelven?', '7 €', '9 €', '13 €'),
+        cinema('Lena tiene 5 €. ¿Le llega para una entrada?', 'No, le faltan 2 €', 'Sí, le sobran 2 €', 'Sí, justo'),
+        cinema('¿Qué cuesta más: unas palomitas o dos refrescos?', 'Cuestan lo mismo', 'Las palomitas', 'Los dos refrescos'),
+        cinema('Dos amigos compran dos entradas y unas palomitas para compartir. ¿Cuánto pagan?', '18 €', '15 €', '22 €'),
+        cinema('Ana tiene 6 €. ¿Qué puede comprar justo con ese dinero?', 'Palomitas y un refresco', 'Una entrada', 'Palomitas y dos refrescos'),
+        cinema('Papá compra tres aguas y paga con una moneda de 5 €. ¿Cuánto le devuelven?', '2 €', '3 €', '1 €'),
+        cinema('¿Cuánto más cuesta la entrada que las palomitas?', '3 €', '4 €', '11 €'),
+      ],
+      draw: 6,
     },
   ],
 };
