@@ -40,7 +40,7 @@ const restarDesagrupando = {
         { story: '245 - 172 = 73. Comprueba.', prompt: '73 + 172 = ?', answer: 245 },
         { story: '747 - 162 = 585. Comprueba.', prompt: '585 + 162 = ?', answer: 747 },
         { story: '498 - 259 = 239. Comprueba.', prompt: '239 + 259 = ?', answer: 498 },
-        { story: 'En un huerto había 138 lechugas. Por la noche granizó y se perdieron 29. ¿Cuántas lechugas quedan?', prompt: 'Quedan ? lechugas.', answer: 109 },
+        { story: 'En un huerto había 138 lechugas. Por la noche granizó y se perdieron 29. ¿Cuántas lechugas quedan?', data: [[138, 'lechugas había en el huerto'], [29, 'lechugas se perdieron']], prompt: 'Quedan ? lechugas.', answer: 109 },
       ],
     },
   ],

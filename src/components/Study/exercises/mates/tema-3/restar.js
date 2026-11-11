@@ -24,16 +24,19 @@ const restar = {
       questions: [
         {
           story: 'En un huerto escolar han plantado 219 semillas y ya han germinado 103. ¿Cuántas semillas quedan por germinar?',
+          data: [[219, 'semillas plantadas'], [103, 'semillas ya han germinado']],
           prompt: 'Quedan ? semillas',
           answer: 116,
         },
         {
           story: 'En el tren Violeta caben 356 pasajeros y en el tren Rosa caben 142. ¿Cuántos pasajeros más caben en el tren Violeta?',
+          data: [[356, 'pasajeros caben en el tren Violeta'], [142, 'pasajeros caben en el tren Rosa']],
           prompt: 'Caben ? pasajeros más',
           answer: 214,
         },
         {
           story: 'Había 235 rosas en el jardín y se han secado 123. ¿Cuántas rosas quedan?',
+          data: [[235, 'rosas había en el jardín'], [123, 'rosas se han secado']],
           prompt: 'Quedan ? rosas',
           answer: 112,
         },

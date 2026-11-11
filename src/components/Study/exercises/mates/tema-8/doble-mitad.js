@@ -71,7 +71,7 @@ const dobleMitad = {
       instructions: '2 mitades hacen una naranja entera. 🍊',
       questions: [
         { story: 'Isabel hace zumo con 6 mitades de naranja. ¿Cuántas naranjas enteras son?', prompt: '? naranjas', answer: 3 },
-        { story: 'Javier usa 2 naranjas enteras e Isabel 3. ¿Cuántas naranjas más usa Isabel?', prompt: '? naranja más', answer: 1 },
+        { story: 'Javier usa 2 naranjas enteras e Isabel 3. ¿Cuántas naranjas más usa Isabel?', data: [[2, 'naranjas usa Javier'], [3, 'naranjas usa Isabel']], prompt: '? naranja más', answer: 1 },
       ],
     },
   ],

@@ -18,6 +18,7 @@ const eurosAndCents = (...values) => {
 const leftOver = (euros, wanted, ...values) => ({
   story: `Quieres tener ${euros} € y ${wanted} céntimos. ¿Cuántos céntimos sobran?`,
   prompt: 'Sobran ? céntimos',
+  data: false,
   scene: money(...values),
   answer: total(values) - (euros * 100 + wanted),
 });
@@ -59,11 +60,11 @@ const centimos = {
       instructions: '1 € = 100 céntimos. Piensa cuántas monedas hacen falta.',
       questions: [
         { prompt: '1 € = ? céntimos', answer: 100 },
-        { story: '¿Cuántas monedas de 50 céntimos hacen 1 €?', prompt: '? monedas', answer: 2 },
-        { story: '¿Cuántas monedas de 10 céntimos hacen 1 €?', prompt: '? monedas', answer: 10 },
-        { story: '¿Cuántas monedas de 20 céntimos hacen 1 €?', prompt: '? monedas', answer: 5 },
-        { story: '¿Cuántas monedas de 50 céntimos hacen 2 €?', prompt: '? monedas', answer: 4 },
-        { story: 'Tienes 70 céntimos. ¿Cuántos céntimos te faltan para tener 1 €?', prompt: '? céntimos', answer: 30 },
+        { story: '¿Cuántas monedas de 50 céntimos hacen 1 €?', data: [[50, 'céntimos vale cada moneda'], [1, '€ quieres juntar']], prompt: '? monedas', answer: 2 },
+        { story: '¿Cuántas monedas de 10 céntimos hacen 1 €?', data: [[10, 'céntimos vale cada moneda'], [1, '€ quieres juntar']], prompt: '? monedas', answer: 10 },
+        { story: '¿Cuántas monedas de 20 céntimos hacen 1 €?', data: [[20, 'céntimos vale cada moneda'], [1, '€ quieres juntar']], prompt: '? monedas', answer: 5 },
+        { story: '¿Cuántas monedas de 50 céntimos hacen 2 €?', data: [[50, 'céntimos vale cada moneda'], [2, '€ quieres juntar']], prompt: '? monedas', answer: 4 },
+        { story: 'Tienes 70 céntimos. ¿Cuántos céntimos te faltan para tener 1 €?', data: [[70, 'céntimos tienes'], [1, '€ quieres tener']], prompt: '? céntimos', answer: 30 },
       ],
     },
     {

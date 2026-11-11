@@ -42,12 +42,14 @@ const problemasCambio = {
       questions: [
         {
           story: 'Un triángulo mediano cuesta 8 € y uno grande 16 €. ¿Cuánto cuestan los dos?',
+          data: [[8, '€ cuesta el triángulo mediano'], [16, '€ cuesta el triángulo grande']],
           scene: bar({ total: '?', parts: [{ name: 'Mediano', value: '8 €', size: 8 }, { name: 'Grande', value: '16 €', size: 16 }] }),
           prompt: '? €',
           answer: 24,
         },
         {
           story: 'Teo compra 2 triángulos pequeños de 4 € y un cuadrado de 8 €. ¿Cuánto paga?',
+          data: [[2, 'triángulos pequeños'], [4, '€ cuesta cada triángulo'], [8, '€ cuesta el cuadrado']],
           scene: bar({ total: '?', parts: [{ name: 'Pequeño 1', value: '4 €', size: 4 }, { name: 'Pequeño 2', value: '4 €', size: 4 }, { name: 'Cuadrado', value: '8 €', size: 8 }] }),
           prompt: '? €',
           answer: 16,

@@ -36,6 +36,7 @@ const restarDecenas = {
         { prompt: '94 - 60 = ?', answer: 34 },
         {
           story: 'En un vivero hay 48 potos. Esta mañana han vendido 30. ¿Cuántos potos quedan?',
+          data: [[48, 'potos había en el vivero'], [30, 'potos vendidos esta mañana']],
           prompt: 'Quedan ? potos',
           answer: 18,
         },

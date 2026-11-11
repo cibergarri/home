@@ -4,6 +4,7 @@ import { blocks } from '../scenes';
 const missing = tens => ({
   story: `Hay ${tens} decenas. ¿Cuántas decenas faltan para tener 1 centena?`,
   prompt: '? decenas',
+  data: false,
   scene: blocks(tens, 0),
   answer: 10 - tens,
 });

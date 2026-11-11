@@ -91,6 +91,7 @@ const calendario = {
       questions: [
         {
           story: 'Topi y sus amigos celebran el día del «Vuelo libre» el 28 de octubre. Hoy es 19 de octubre. ¿Cuántos días faltan?',
+          data: [[28, 'de octubre es el «Vuelo libre»'], [19, 'de octubre es hoy']],
           scene: OCTUBRE,
           prompt: 'Faltan ? días',
           answer: 9,
@@ -102,10 +103,10 @@ const calendario = {
           story: '¿Cuántos lunes hay en este mes de octubre?', scene: OCTUBRE, prompt: '? lunes', answer: 4,
         },
         {
-          story: 'Hoy es 12 de octubre. ¿Qué día del mes será dentro de 7 días?', scene: OCTUBRE, prompt: 'El ? de octubre', answer: 19,
+          story: 'Hoy es 12 de octubre. ¿Qué día del mes será dentro de 7 días?', data: [[12, 'de octubre es hoy'], [7, 'días después']], scene: OCTUBRE, prompt: 'El ? de octubre', answer: 19,
         },
         {
-          story: 'Hoy es 5 de octubre. ¿Cuántos días faltan para el 31?', scene: OCTUBRE, prompt: 'Faltan ? días', answer: 26,
+          story: 'Hoy es 5 de octubre. ¿Cuántos días faltan para el 31?', data: [[5, 'de octubre es hoy'], [31, 'de octubre, el último día']], scene: OCTUBRE, prompt: 'Faltan ? días', answer: 26,
         },
       ],
     },

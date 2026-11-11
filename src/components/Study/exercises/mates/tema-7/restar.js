@@ -18,16 +18,19 @@ const restar = {
       questions: [
         {
           story: 'Teo tiene 310 bolitas y le da 125 a un amigo para su dibujo. ¿Cuántas bolitas le quedan?',
+          data: [[310, 'bolitas tiene Teo'], [125, 'bolitas le da a un amigo']],
           prompt: '? bolitas',
           answer: 185,
         },
         {
           story: 'En un edificio de oficinas había 250 luces encendidas. De repente se apagaron 75. ¿Cuántas luces siguieron encendidas?',
+          data: [[250, 'luces encendidas'], [75, 'luces se apagaron']],
           prompt: '? luces',
           answer: 175,
         },
         {
           story: 'En el concierto había 426 sillas. Se ocuparon 158. ¿Cuántas sillas quedaron vacías?',
+          data: [[426, 'sillas había en el concierto'], [158, 'sillas se ocuparon']],
           prompt: '? sillas',
           answer: 268,
         },

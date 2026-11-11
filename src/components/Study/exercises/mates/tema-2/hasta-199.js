@@ -14,6 +14,7 @@ const blockQuestion = (hundreds, tens, ones) => ({
 const more100 = (tens, ones) => ({
   story: `Es ${100 + tens * 10 + ones}, mayor que 100. ¿Cuánto más?`,
   prompt: 'Hay ? decenas y ? unidades más.',
+  data: false,
   scene: blocks(tens, ones, 1),
   answer: [tens, ones],
 });

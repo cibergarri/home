@@ -47,16 +47,19 @@ const sumar = {
       questions: [
         {
           story: 'En una floristería han vendido este mes 225 flores de pascua. Son 82 menos que el año pasado. ¿Cuántas se vendieron el año pasado?',
+          data: [[225, 'flores de pascua vendidas este mes'], [82, 'flores menos que el año pasado']],
           prompt: '? flores de pascua',
           answer: 307,
         },
         {
           story: 'En el jardín hay 235 rosas y 172 lirios. ¿Cuántas flores hay en total?',
+          data: [[235, 'rosas en el jardín'], [172, 'lirios en el jardín']],
           prompt: '? flores',
           answer: 407,
         },
         {
           story: 'Lena ha regado 148 plantas por la mañana y 136 por la tarde. ¿Cuántas plantas ha regado?',
+          data: [[148, 'plantas regadas por la mañana'], [136, 'plantas regadas por la tarde']],
           prompt: '? plantas',
           answer: 284,
         },

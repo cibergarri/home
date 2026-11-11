@@ -26,18 +26,21 @@ const barrasDinero = {
     },
     {
       story: 'Lena dona 1 carpeta, 4 tijeras y 2 lápices. ¿Cuánto gasta?',
+      data: [[1, 'carpeta'], [4, 'tijeras'], [2, 'lápices']],
       scene: bar({ total: '?', parts: [{ name: '1 carpeta', value: '2 €', size: 2 }, { name: '4 tijeras', value: '4 €', size: 4 }, { name: '2 lápices', value: '1 €', size: 1 }] }),
       prompt: '? €',
       answer: 7,
     },
     {
       story: 'Teo dona 2 carpetas, unas tijeras y 4 lápices. ¿Cuánto gasta?',
+      data: [[2, 'carpetas'], [4, 'lápices']],
       scene: bar({ total: '?', parts: [{ name: '2 carpetas', value: '4 €', size: 4 }, { name: 'Tijeras', value: '1 €', size: 1 }, { name: '4 lápices', value: '2 €', size: 2 }] }),
       prompt: '? €',
       answer: 7,
     },
     {
       story: 'Lena ha gastado 7 € y Teo 7 €. ¿Cuánto dinero han gastado entre los dos?',
+      data: [[7, '€ ha gastado Lena'], [7, '€ ha gastado Teo']],
       scene: bar({ total: '?', parts: [{ name: 'Lena', value: 7 }, { name: 'Teo', value: 7 }] }),
       prompt: '? €',
       answer: 14,
@@ -72,8 +75,8 @@ const barrasDinero = {
       write: true,
       instructions: `Los precios: ${PRICES}. Calcula lo que gasta cada uno y compara.`,
       questions: [
-        { story: 'David dona 3 tijeras, 2 rotuladores y 2 lápices. ¿Cuánto gasta?', prompt: '? €', answer: 6 },
-        { story: 'Marta dona 2 carpetas y 3 rotuladores. ¿Cuánto gasta?', prompt: '? €', answer: 7 },
+        { story: 'David dona 3 tijeras, 2 rotuladores y 2 lápices. ¿Cuánto gasta?', data: [[3, 'tijeras'], [2, 'rotuladores'], [2, 'lápices']], prompt: '? €', answer: 6 },
+        { story: 'Marta dona 2 carpetas y 3 rotuladores. ¿Cuánto gasta?', data: [[2, 'carpetas'], [3, 'rotuladores']], prompt: '? €', answer: 7 },
         {
           story: '¿Cuánto más ha gastado Marta que David?',
           scene: bar({ compare: true, difference: '?', parts: [{ name: 'Marta', value: 7 }, { name: 'David', value: 6 }] }),

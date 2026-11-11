@@ -36,9 +36,9 @@ const sumandosRepetidos = {
       write: true,
       instructions: 'Lee el problema. ¿Qué cantidad se repite? ¿Cuántas veces?',
       questions: [
-        { story: 'Mica compra 3 paquetes de 6 huevos. 🥚 ¿Cuántos huevos compra en total?', prompt: '? huevos', answer: 18 },
-        { story: 'Lena tiene 4 bolsas con 5 canicas cada una. ¿Cuántas canicas tiene?', prompt: '? canicas', answer: 20 },
-        { story: 'Teo pone 2 flores en cada uno de sus 5 jarrones. 🌷 ¿Cuántas flores pone?', prompt: '? flores', answer: 10 },
+        { story: 'Mica compra 3 paquetes de 6 huevos. 🥚 ¿Cuántos huevos compra en total?', data: [[3, 'paquetes'], [6, 'huevos en cada paquete']], prompt: '? huevos', answer: 18 },
+        { story: 'Lena tiene 4 bolsas con 5 canicas cada una. ¿Cuántas canicas tiene?', data: [[4, 'bolsas'], [5, 'canicas en cada bolsa']], prompt: '? canicas', answer: 20 },
+        { story: 'Teo pone 2 flores en cada uno de sus 5 jarrones. 🌷 ¿Cuántas flores pone?', data: [[2, 'flores en cada jarrón'], [5, 'jarrones']], prompt: '? flores', answer: 10 },
       ],
     },
   ],

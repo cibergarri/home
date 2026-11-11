@@ -39,9 +39,9 @@ const repaso = {
       write: true,
       instructions: 'Lee y calcula.',
       questions: [
-        { story: 'A Mica le quedan 28 pipas y a Topi 46. ¿Cuántas pipas más le quedan a Topi?', prompt: '? pipas más', answer: 18 },
-        { story: 'En una piscina había 345 litros de agua. Si añaden 172 litros más, ¿cuántos litros hay ahora?', prompt: 'Hay ? L.', answer: 517 },
-        { story: 'Javier hace una macedonia con 2 cuartos de kilo de manzanas, medio kilo de plátanos y 1 kilo de naranjas. ¿Cuántos kilos de fruta ha usado?', prompt: 'Ha usado ? kilos.', answer: 2 },
+        { story: 'A Mica le quedan 28 pipas y a Topi 46. ¿Cuántas pipas más le quedan a Topi?', data: [[28, 'pipas le quedan a Mica'], [46, 'pipas le quedan a Topi']], prompt: '? pipas más', answer: 18 },
+        { story: 'En una piscina había 345 litros de agua. Si añaden 172 litros más, ¿cuántos litros hay ahora?', data: [[345, 'litros había en la piscina'], [172, 'litros añaden']], prompt: 'Hay ? L.', answer: 517 },
+        { story: 'Javier hace una macedonia con 2 cuartos de kilo de manzanas, medio kilo de plátanos y 1 kilo de naranjas. ¿Cuántos kilos de fruta ha usado?', data: false, prompt: 'Ha usado ? kilos.', answer: 2 },
         { story: '¿Cuántos medios litros hay en 3 litros?', prompt: '? medios litros', answer: 6 },
         { prompt: '54 + 9 = ?   54 - 9 = ?', answer: [63, 45] },
       ],

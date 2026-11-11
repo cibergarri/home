@@ -52,9 +52,9 @@ const medir = {
       questions: [
         { story: 'El libro mide 30 cubos. ¿Cuántas barras rojas mide?', prompt: '? barras', answer: 3 },
         { story: 'El pincel mide 2 barras rojas. ¿Cuántos cubos mide?', prompt: '? cubos', answer: 20 },
-        { story: 'La regla mide 1 barra roja y 5 cubos. ¿Cuántos cubos mide en total?', prompt: '? cubos', answer: 15 },
+        { story: 'La regla mide 1 barra roja y 5 cubos. ¿Cuántos cubos mide en total?', data: [[1, 'barra roja'], [5, 'cubos sueltos']], prompt: '? cubos', answer: 15 },
         { story: 'La cuerda mide 40 cubos. ¿Cuántas barras rojas mide?', prompt: '? barras', answer: 4 },
-        { story: 'La caja mide 2 barras rojas y 3 cubos. ¿Cuántos cubos mide en total?', prompt: '? cubos', answer: 23 },
+        { story: 'La caja mide 2 barras rojas y 3 cubos. ¿Cuántos cubos mide en total?', data: [[2, 'barras rojas'], [3, 'cubos sueltos']], prompt: '? cubos', answer: 23 },
       ],
     },
   ],

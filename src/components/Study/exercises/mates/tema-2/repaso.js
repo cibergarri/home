@@ -45,6 +45,7 @@ const repaso = {
       questions: [
         {
           story: 'Claudia tiene 14 € y Aitor 25 €. ¿Cuánto dinero tienen en total?',
+          data: [[14, '€ tiene Claudia'], [25, '€ tiene Aitor']],
           prompt: '? €',
           answer: 39,
         },

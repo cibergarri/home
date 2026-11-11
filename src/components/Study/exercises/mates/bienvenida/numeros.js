@@ -57,6 +57,7 @@ const numeros = {
         { prompt: '68 - 23 = ?', answer: 45 },
         {
           story: 'Teo tiene 13 conchas de la playa y Lena le da 13 más. ¿Cuántas conchas tiene Teo?',
+          data: [[13, 'conchas tiene Teo'], [13, 'conchas le da Lena']],
           prompt: '? conchas',
           answer: 26,
         },

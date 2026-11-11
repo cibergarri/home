@@ -27,11 +27,13 @@ const dieces = {
         { prompt: '41 + 29 = ?', answer: 70 },
         {
           story: 'Por ayudar en varias misiones, Gea tiene 23 premios y Trueno tiene 17. ¿Cuántos premios tienen entre los dos?',
+          data: [[23, 'premios tiene Gea'], [17, 'premios tiene Trueno']],
           prompt: '? premios',
           answer: 40,
         },
         {
           story: 'Gea tiene 23 premios y Trueno tiene 17. ¿Cuántos premios tiene Gea más que Trueno?',
+          data: [[23, 'premios tiene Gea'], [17, 'premios tiene Trueno']],
           prompt: '? premios',
           answer: 6,
         },

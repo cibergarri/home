@@ -33,6 +33,15 @@ export const Story = styled.p`
   line-height: 1.45;
 `;
 
+// A number of a word problem's data, once written: underlined, as in the notebook.
+export const Found = styled.mark`
+  background: none;
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline 3px var(--s-accent);
+  text-underline-offset: 4px;
+`;
+
 export const Picture = styled.div`
   width: 100%;
   max-width: 460px;
@@ -233,4 +242,93 @@ export const SecretLetter = styled.span`
   ${({ $found }) => $found && css`
     color: #9b2c2c;
   `}
+`;
+
+// The data of a word problem, written before the answer.
+export const Data = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 28px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  ${Answer} {
+    min-width: 72px;
+    height: 54px;
+  }
+  ${({ $rows }) => $rows && css`
+    flex-direction: column;
+    align-items: flex-start;
+  `}
+`;
+
+// A step of a problem already solved, before the next one.
+export const StepDone = styled.p`
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--s-good);
+`;
+
+// «Respuesta:», before the answer of a word problem.
+export const AnswerLabel = styled.span`
+  font-size: 22px;
+  color: var(--s-muted);
+`;
+
+// One datum with what it means: «[25] huevos para la tortilla grande».
+export const DataRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 22px;
+  font-weight: 500;
+  color: ${({ $now }) => ($now ? 'var(--s-ink)' : 'var(--s-muted)')};
+`;
+
+export const DataLabel = styled.span`
+  flex-basis: 100%;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--s-muted);
+`;
+
+// A way to work out the answer: in columns, after saying whether to add or take away.
+export const Helper = styled.button`
+  align-self: flex-start;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 24px;
+  border: 2px solid var(--s-teal);
+  background: var(--s-card);
+  color: var(--s-teal);
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+`;
+
+export const OperationChoices = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px;
+  font-weight: 600;
+  span {
+    flex-basis: 100%;
+  }
+`;
+
+// The sum in columns, across the whole card.
+export const Columns = styled.div`
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 18px;
+  @media (min-width: 760px) {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
 `;

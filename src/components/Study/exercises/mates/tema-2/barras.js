@@ -15,61 +15,74 @@ const barras = {
   questions: [
     {
       story: 'Abel necesita huevos para dos tortillas. La tortilla grande necesita 25 huevos y la pequeña 8. ¿Cuántos huevos necesita en total?',
+      data: [[25, 'huevos para la tortilla grande'], [8, 'huevos para la tortilla pequeña']],
       scene: bar({ total: '?', parts: [{ name: 'Tortilla grande', value: 25 }, { name: 'Pequeña', value: 8 }] }),
       prompt: '? huevos',
       answer: 33,
+      then: [
+        {
+          story: 'Las gallinas han puesto 36 huevos. ¿Tiene Abel suficientes para las dos tortillas?',
+          choices: ['Sí, tiene suficientes', 'No tiene suficientes'],
+          answer: 'Sí, tiene suficientes',
+        },
+        {
+          story: '¿Cómo es 36 comparado con 33?',
+          choices: ['36 < 33 (menor que)', '36 > 33 (mayor que)', '36 = 33 (igual a)'],
+          answer: '36 > 33 (mayor que)',
+        },
+        {
+          story: '¿Cuántos huevos le sobrarán?',
+          data: [[36, 'huevos han puesto las gallinas'], [33, 'huevos necesita Abel']],
+          prompt: 'Le sobrarán ? huevos',
+          answer: 3,
+        },
+      ],
     },
     {
       story: 'En una granja-escuela han preparado 55 zumos de naranja y 28 zumos de piña. ¿Cuántos zumos hay en total?',
+      data: [[55, 'zumos de naranja'], [28, 'zumos de piña']],
       scene: bar({ total: '?', parts: [{ name: 'Naranja', value: 55 }, { name: 'Piña', value: 28 }] }),
       prompt: '? zumos',
       answer: 83,
+      then: [
+        {
+          story: 'A la granja van 80 niños y cada uno se toma un zumo. ¿Habrá zumos para todos?',
+          choices: ['Sí', 'No'],
+          answer: 'Sí',
+        },
+        {
+          story: '¿Cuántos zumos sobrarán?',
+          data: [[83, 'zumos hay'], [80, 'niños van a la granja']],
+          prompt: 'Sobrarán ? zumos',
+          answer: 3,
+        },
+      ],
     },
     {
       story: 'Ana ha ahorrado 65 € y Juan 42 €. ¿Cuánto dinero más tiene Ana que Juan?',
+      data: [[65, '€ ha ahorrado Ana'], [42, '€ ha ahorrado Juan']],
       scene: bar({ compare: true, difference: '?', parts: [{ name: 'Ana', value: 65 }, { name: 'Juan', value: 42 }] }),
       prompt: 'Ana tiene ? € más',
       answer: 23,
     },
     {
       story: 'Claudia tiene 14 € y Aitor 25 €. ¿Cuánto dinero tienen en total?',
+      data: [[14, '€ tiene Claudia'], [25, '€ tiene Aitor']],
       scene: bar({ total: '?', parts: [{ name: 'Claudia', value: 14 }, { name: 'Aitor', value: 25 }] }),
       prompt: '? €',
       answer: 39,
-    },
-    {
-      story: 'Claudia y Aitor tienen 39 € entre los dos y el tren cuesta 32 €. ¿Cuánto les sobra?',
-      scene: bar({ total: 39, parts: [{ name: 'Tren', value: 32 }, { name: 'Sobra', value: '?', size: 7 }] }),
-      prompt: 'Les sobran ? €',
-      answer: 7,
-    },
-  ],
-  more: [
-    {
-      title: '¿Hay suficientes?',
-      type: 'quiz',
-      instructions: 'Compara lo que hay con lo que hace falta.',
-      questions: [
+      then: [
         {
-          prompt: 'Abel necesita 33 huevos y las gallinas han puesto 36. ¿Tiene suficientes?',
-          choices: ['Sí, tiene suficientes', 'No tiene suficientes'],
-          answer: 'Sí, tiene suficientes',
-        },
-        {
-          prompt: '36  …  33',
-          say: false,
-          choices: ['< es menor que', '> es mayor que', '= es igual a'],
-          answer: '> es mayor que',
-        },
-        {
-          prompt: 'Hay 83 zumos y van a la granja 80 niños. ¿Habrá zumos para todos?',
+          story: 'Quieren comprar juntos un tren que cuesta 32 €. ¿Pueden comprarlo?',
           choices: ['Sí', 'No'],
           answer: 'Sí',
         },
         {
-          prompt: 'Claudia y Aitor tienen 39 €. ¿Pueden comprar juntos el tren de 32 €?',
-          choices: ['Sí', 'No'],
-          answer: 'Sí',
+          story: '¿Cuánto les sobra?',
+          data: [[39, '€ tienen entre los dos'], [32, '€ cuesta el tren']],
+          scene: bar({ total: 39, parts: [{ name: 'Tren', value: 32 }, { name: 'Sobra', value: '?', size: 7 }] }),
+          prompt: 'Les sobran ? €',
+          answer: 7,
         },
       ],
     },

@@ -47,16 +47,19 @@ const rectaCalculo = {
       questions: [
         {
           story: 'El puzle de Saturno tiene 35 piezas. El puzle de la Tierra tiene 12 piezas más. ¿Cuántas piezas tiene el puzle de la Tierra?',
+          data: [[35, 'piezas tiene el puzle de Saturno'], [12, 'piezas más tiene el de la Tierra']],
           prompt: 'Tiene ? piezas',
           answer: 47,
         },
         {
           story: 'Un día tiene 24 horas. Si ya han pasado 19 horas, ¿cuántas horas faltan para terminar el día?',
+          data: [[24, 'horas tiene un día'], [19, 'horas ya han pasado']],
           prompt: 'Faltan ? horas',
           answer: 5,
         },
         {
           story: 'Arabela ha leído 26 páginas de un libro sobre planetas y hoy lee 15 más. ¿Cuántas páginas ha leído?',
+          data: [[26, 'páginas ya ha leído'], [15, 'páginas lee hoy']],
           prompt: '? páginas',
           answer: 41,
         },

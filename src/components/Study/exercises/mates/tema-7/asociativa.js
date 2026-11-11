@@ -52,11 +52,13 @@ const asociativa = {
       questions: [
         {
           story: 'Lena y Mica preparan la clase de Música. Tienen 6 triángulos, 12 panderetas y 8 maracas. ¿Cuántos instrumentos tienen?',
+          data: [[6, 'triángulos'], [12, 'panderetas'], [8, 'maracas']],
           prompt: '? instrumentos',
           answer: 26,
         },
         {
           story: 'En el armario hay 3 flautas, 9 tambores y 7 xilófonos. ¿Cuántos instrumentos hay?',
+          data: [[3, 'flautas'], [9, 'tambores'], [7, 'xilófonos']],
           prompt: '? instrumentos',
           answer: 19,
         },

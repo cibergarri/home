@@ -15,24 +15,28 @@ const barras = {
   questions: [
     {
       story: 'El globo cuesta 30 € y Teo tiene 20 €. ¿Cuánto le falta a Teo para comprarlo él solo?',
+      data: [[30, '€ cuesta el globo'], [20, '€ tiene Teo']],
       scene: bar({ total: 30, parts: [{ name: 'Teo', value: 20 }, { name: 'Falta', value: '?', size: 10 }] }),
       prompt: 'Le faltan ? €',
       answer: 10,
     },
     {
       story: 'Teo tiene 20 € y Lena 15 €. ¿Cuánto dinero tienen entre los dos?',
+      data: [[20, '€ tiene Teo'], [15, '€ tiene Lena']],
       scene: bar({ total: '?', parts: [{ name: 'Teo', value: 20 }, { name: 'Lena', value: 15 }] }),
       prompt: 'Tienen ? €',
       answer: 35,
     },
     {
       story: 'Teo y Lena tienen 35 € y el globo cuesta 30 €. ¿Cuánto les sobrará?',
+      data: [[35, '€ tienen Teo y Lena'], [30, '€ cuesta el globo']],
       scene: bar({ total: 35, parts: [{ name: 'Globo', value: 30 }, { name: 'Sobra', value: '?', size: 5 }] }),
       prompt: 'Les sobrarán ? €',
       answer: 5,
     },
     {
       story: 'Lena tiene 15 € y Teo 20 €. ¿Cuánto dinero tiene Teo más que Lena?',
+      data: [[15, '€ tiene Lena'], [20, '€ tiene Teo']],
       scene: bar({ compare: true, difference: '?', parts: [{ name: 'Teo', value: 20 }, { name: 'Lena', value: 15 }] }),
       prompt: 'Teo tiene ? € más',
       answer: 5,
@@ -47,6 +51,7 @@ const barras = {
       questions: [
         {
           story: 'Adri tiene 10 € menos que Lucas, que tiene 40 €. ¿Cuánto tiene Adri?',
+          data: [[40, '€ tiene Lucas'], [10, '€ menos tiene Adri']],
           scene: bar({ compare: true, difference: 10, parts: [{ name: 'Lucas', value: 40 }, { name: 'Adri', value: '?', size: 30 }] }),
           prompt: 'Adri tiene ? €',
           answer: 30,

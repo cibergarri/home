@@ -41,7 +41,7 @@ const restarSaltando = {
       questions: [
         { prompt: '830 - 630 = 100 + 100 = ?', answer: 200 },
         { prompt: '750 - 450 = ?', answer: 300 },
-        { story: 'En un día de verano en Sevilla hay 37 ºC por el día y 24 ºC por la noche. ¿Cuántos grados más hay por el día?', prompt: 'Hay ? grados más.', answer: 13 },
+        { story: 'En un día de verano en Sevilla hay 37 ºC por el día y 24 ºC por la noche. ¿Cuántos grados más hay por el día?', data: [[37, 'ºC por el día'], [24, 'ºC por la noche']], prompt: 'Hay ? grados más.', answer: 13 },
       ],
     },
   ],

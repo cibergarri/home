@@ -49,11 +49,13 @@ const sumarRestar = {
       questions: [
         {
           story: 'En un museo había 762 cuadros. Prestó 183 a otra ciudad. ¿Cuántos cuadros quedan en el museo?',
+          data: [[762, 'cuadros había en el museo'], [183, 'cuadros prestados']],
           prompt: '? cuadros',
           answer: 579,
         },
         {
           story: 'Chema necesita 973 piezas para un mosaico. Ya ha usado 614. ¿Cuántas piezas le faltan?',
+          data: [[973, 'piezas necesita Chema'], [614, 'piezas ya ha usado']],
           prompt: '? piezas',
           answer: 359,
         },

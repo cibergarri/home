@@ -81,6 +81,7 @@ const restar = {
       questions: [
         {
           story: 'Coco tiene 138 puntos. Nala tiene 25 puntos menos que Coco. ¿Cuántos puntos tiene Nala?',
+          data: [[138, 'puntos tiene Coco'], [25, 'puntos menos tiene Nala']],
           prompt: '? puntos',
           answer: 113,
         },

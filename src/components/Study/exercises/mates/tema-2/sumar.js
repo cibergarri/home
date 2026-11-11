@@ -23,11 +23,13 @@ const sumar = {
       questions: [
         {
           story: 'Coco ha conseguido 122 puntos en una prueba y 16 en otra. ¿Cuántos puntos ha conseguido en total?',
+          data: [[122, 'puntos en una prueba'], [16, 'puntos en la otra prueba']],
           prompt: '? puntos',
           answer: 138,
         },
         {
           story: 'Rex ha entrenado 126 días. Guardián ha entrenado 71 días más que Rex. ¿Cuántos días lleva entrenando Guardián?',
+          data: [[126, 'días ha entrenado Rex'], [71, 'días más ha entrenado Guardián']],
           prompt: '? días',
           answer: 197,
         },

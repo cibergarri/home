@@ -35,6 +35,7 @@ const restarSaltando = {
         { prompt: '133 - 128 = ?', answer: 5 },
         {
           story: 'En un colegio hay 46 alumnos en 2.º. 32 comen en el comedor y el resto, en casa. ¿Cuántos comen en casa?',
+          data: [[46, 'alumnos en 2.º'], [32, 'alumnos comen en el comedor']],
           prompt: '? alumnos',
           answer: 14,
         },

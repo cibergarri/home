@@ -51,11 +51,13 @@ const repaso = {
       questions: [
         {
           story: 'En el colegio de Gonzalo hay 145 alumnos en Infantil y 298 en Primaria. ¿Cuántos alumnos hay en total?',
+          data: [[145, 'alumnos en Infantil'], [298, 'alumnos en Primaria']],
           prompt: '? alumnos',
           answer: 443,
         },
         {
           story: 'En el jardín mágico había 368 flores y se han secado 125. ¿Cuántas flores quedan?',
+          data: [[368, 'flores había en el jardín'], [125, 'flores se han secado']],
           prompt: 'Quedan ? flores',
           answer: 243,
         },

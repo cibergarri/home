@@ -1,4 +1,6 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import {
+  act, fireEvent, screen, within,
+} from '@testing-library/react';
 
 import { renderWithProviders } from '@/test-utils';
 import { LanguageContext } from '../language';
@@ -7,7 +9,8 @@ import restar from '../exercises/mates/restar';
 import problemas from '../exercises/mates/problemas';
 import repaso from '../exercises/mates/repaso';
 import { readNumber } from '../handwriting';
-import NumberGame from '.';
+import { ALL_SUBJECTS } from '../subjects';
+import NumberGame, { problemData, columnSumFor } from '.';
 
 jest.mock('../handwriting', () => ({
   loadNet: () => Promise.resolve('net'),
@@ -60,13 +63,192 @@ describe('NumberGame', () => {
 
   it('celebrates in Spanish after the last question', () => {
     inSpanish(<NumberGame exercise={problemas} />);
-    problemas.questions.forEach(({ answer }, index) => {
-      type(String(answer));
+    problemas.questions.forEach((question, index) => {
+      problemData(question).forEach(({ value }) => {
+        type(String(value));
+        check();
+      });
+      type(String(question.answer));
       check();
       fireEvent.click(screen.getByRole('button', { name: index + 1 < problemas.questions.length ? 'Siguiente →' : 'Terminar ✓' }));
     });
     expect(screen.getByText('¡Muy bien!')).toBeInTheDocument();
     expect(screen.getByLabelText('3 de 3 estrellas')).toBeInTheDocument();
+  });
+
+  it('finds the data of a word problem, and what each number counts', () => {
+    expect(problemData({ story: 'Hay 26 raquetas de bádminton y 32 de tenis. ¿Cuántas hay?', prompt: '? raquetas' }))
+      .toEqual([
+        {
+          value: 26, at: 4, end: 6, unit: 'raquetas',
+        },
+        {
+          value: 32, at: 31, end: 33, unit: null,
+        },
+      ]);
+    expect(problemData({ story: 'Tiene 12 € y gasta 5 €. ¿Cuánto le queda?', prompt: '? €' }).map(d => d.unit)).toEqual(['€', '€']);
+    expect(problemData({ story: '¿Qué número es el anterior a 345?', prompt: '?' })).toEqual([]);
+    expect(problemData({ story: 'Tenía 20 € y le dan 2 €. ¿Cuánto tiene?', prompt: '20 + 2 = ?' })).toEqual([]);
+    expect(problemData({ story: 'Cuesta 1,50 € y paga 2 €. ¿Cuánto le devuelven?', prompt: '? céntimos' })).toEqual([]);
+    expect(problemData({ story: 'Tiene 3 y le dan 4. ¿Cuántos tiene?', prompt: '?', data: false })).toEqual([]);
+    expect(problemData({ story: 'Hay 18 niños y 11 practican yudo. ¿Cuántos no?', prompt: '? niños' }).map(d => d.unit)).toEqual(['niños', null]);
+    expect(problemData({ story: 'En 2.º hay 46 alumnos y 32 comen en casa. ¿Cuántos no?', prompt: '?' }).map(d => d.value)).toEqual([46, 32]);
+    expect(problemData({ story: 'Hay 305 en la zona 1 y 152 en la zona 2. ¿Cuántos hay?', prompt: '?', data: [305, 152] }).map(d => d.value))
+      .toEqual([305, 152]);
+    expect(problemData({ story: 'Lena gasta 7 € y Teo 7 €. ¿Cuánto gastan?', prompt: '? €', data: [7, 7] }).map(d => d.at)).toEqual([11, 21]);
+  });
+
+  it('asks for the data of a word problem before the answer, in any order', () => {
+    jest.useFakeTimers();
+    const exercise = {
+      instructions: 'Lee y calcula.',
+      questions: [{ story: 'Lena tiene 26 cromos y Mica le regala 16. ¿Cuántos cromos tiene ahora?', prompt: '? cromos', answer: 42 }],
+    };
+    inSpanish(<NumberGame exercise={exercise} />);
+    expect(screen.getByText('Primero, los datos: escribe cada número del problema.')).toBeInTheDocument();
+    type('42');
+    check();
+    expect(screen.getByText('El 42 no está en el problema. Léelo otra vez.')).toBeInTheDocument();
+    act(() => jest.runAllTimers());
+    type('16');
+    check();
+    expect(screen.getAllByText('16')).toHaveLength(2); // underlined in the story, and written in the data
+    type('16');
+    check();
+    expect(screen.getByText('El 16 ya está escrito. Busca otro número.')).toBeInTheDocument();
+    act(() => jest.runAllTimers());
+    type('26');
+    check();
+    expect(screen.getByText('26 cromos')).toBeInTheDocument();
+    expect(screen.getByText('Datos:')).toBeInTheDocument();
+    expect(screen.getByText('Respuesta:')).toBeInTheDocument();
+    type('42');
+    check();
+    expect(screen.getByRole('button', { name: 'Terminar ✓' })).toBeInTheDocument();
+    jest.useRealTimers();
+  });
+
+  it('asks for each datum in turn when the problem says what each one means', () => {
+    jest.useFakeTimers();
+    const exercise = {
+      instructions: 'Lee y calcula.',
+      questions: [{
+        story: 'La tortilla grande necesita 25 huevos y la pequeña 8. ¿Cuántos huevos necesita?',
+        data: [[25, 'huevos para la tortilla grande'], [8, 'huevos para la tortilla pequeña']],
+        prompt: '? huevos',
+        answer: 33,
+      }],
+    };
+    inSpanish(<NumberGame exercise={exercise} />);
+    expect(screen.getByText('huevos para la tortilla grande')).toBeInTheDocument();
+    expect(screen.getByText('huevos para la tortilla pequeña')).toBeInTheDocument();
+    type('8');
+    check();
+    expect(screen.getByText('El 8 es otro dato. Busca: «huevos para la tortilla grande».')).toBeInTheDocument();
+    act(() => jest.runAllTimers());
+    type('25');
+    check();
+    type('8');
+    check();
+    type('33');
+    check();
+    expect(screen.getByRole('button', { name: 'Terminar ✓' })).toBeInTheDocument();
+    jest.useRealTimers();
+  });
+
+  it('says what each datum means in every word problem of Mates, with numbers that are in the story', () => {
+    const questions = [];
+    const seen = new Set();
+    const walk = (node) => {
+      if (!node || typeof node !== 'object' || seen.has(node)) return;
+      seen.add(node);
+      if (node.type === 'numbers' && node.questions) questions.push(...node.questions);
+      Object.values(node).forEach(walk);
+    };
+    walk(ALL_SUBJECTS.find(subject => subject.slug === 'mates'));
+    const problems = questions.filter(question => problemData(question).length);
+    expect(problems.length).toBeGreaterThan(100);
+    problems.forEach((question) => {
+      expect([question.story, Array.isArray(question.data)]).toEqual([question.story, true]);
+      expect([question.story, problemData(question).length]).toEqual([question.story, question.data.length]);
+      question.data.forEach(datum => expect([question.story, typeof datum[1]]).toEqual([question.story, 'string']));
+    });
+  });
+
+  it('goes on with the next steps of the same problem, keeping the ones done', () => {
+    const exercise = {
+      instructions: 'Lee y calcula.',
+      questions: [{
+        story: 'Claudia tiene 14 € y Aitor 25 €. ¿Cuánto tienen?',
+        data: [[14, '€ tiene Claudia'], [25, '€ tiene Aitor']],
+        prompt: '? €',
+        answer: 39,
+        then: [
+          { story: 'El tren cuesta 32 €. ¿Pueden comprarlo?', choices: ['Sí', 'No'], answer: 'Sí' },
+          {
+            story: '¿Cuánto les sobra?', data: [[39, '€ tienen'], [32, '€ cuesta el tren']], prompt: 'Les sobran ? €', answer: 7,
+          },
+        ],
+      }],
+    };
+    inSpanish(<NumberGame exercise={exercise} />);
+    ['14', '25', '39'].forEach((number) => {
+      type(number);
+      check();
+    });
+    expect(screen.getByText('✓ 39 €')).toBeInTheDocument();
+    expect(screen.getByText('El tren cuesta 32 €. ¿Pueden comprarlo?')).toBeInTheDocument();
+    expect(screen.queryByRole('group', { name: 'Teclado de números' })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'No' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Sí' }));
+    expect(screen.getByText('✓ Sí')).toBeInTheDocument();
+    expect(screen.getByText('€ cuesta el tren')).toBeInTheDocument();
+    ['39', '32', '7'].forEach((number) => {
+      type(number);
+      check();
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Terminar ✓' }));
+    expect(screen.getByText('1 fallo por el camino.')).toBeInTheDocument();
+  });
+
+  it('knows which sum in columns solves a step', () => {
+    const data = values => values.map(value => ({ value }));
+    expect(columnSumFor({ prompt: '? puntos', answer: 138 }, data([122, 16]))).toEqual({ a: 122, b: 16, op: '+' });
+    expect(columnSumFor({ prompt: '? €', answer: 23 }, data([42, 65]))).toEqual({ a: 65, b: 42, op: '-' });
+    expect(columnSumFor({ prompt: '45 + 20 = ?', answer: 65 }, [])).toEqual({
+      a: 45, b: 20, op: '+', written: true,
+    });
+    expect(columnSumFor({ prompt: '? €', answer: 9 }, data([4, 5]))).toBeNull();
+    expect(columnSumFor({ prompt: '? cromos', answer: 8 }, data([10, 5, 7]))).toBeNull();
+    expect(columnSumFor({ prompt: '? €', answer: 177 }, data([305, 128]))).toBeNull();
+  });
+
+  it('works out the answer in columns after choosing to add or take away', () => {
+    const exercise = {
+      instructions: 'Lee y calcula.',
+      questions: [{
+        story: 'Coco tiene 122 puntos en una prueba y 16 en otra. ¿Cuántos tiene en total?',
+        data: [[122, 'puntos en una prueba'], [16, 'puntos en la otra']],
+        prompt: '? puntos',
+        answer: 138,
+      }],
+    };
+    inSpanish(<NumberGame exercise={exercise} />);
+    expect(screen.queryByRole('button', { name: '🧮 Hacer la cuenta en columnas' })).not.toBeInTheDocument();
+    ['122', '16'].forEach((number) => {
+      type(number);
+      check();
+    });
+    fireEvent.click(screen.getByRole('button', { name: '🧮 Hacer la cuenta en columnas' }));
+    fireEvent.click(screen.getByRole('button', { name: '➖ Restar' }));
+    expect(screen.getByText('Piensa otra vez qué pide el problema.')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: '➕ Sumar' }));
+    const tower = screen.getByRole('group', { name: 'Operación en torre' });
+    expect(tower).toBeInTheDocument();
+    ['8', '3', '1'].forEach(digit => fireEvent.click(within(tower.parentElement).getByRole('button', { name: digit })));
+    expect(screen.queryByText(/Suma las unidades/)).not.toBeInTheDocument();
+    expect(screen.getByText('138')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Terminar ✓' })).toBeInTheDocument();
   });
 
   it('moves between questions with the arrows, in Spanish', () => {

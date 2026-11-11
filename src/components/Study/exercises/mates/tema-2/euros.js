@@ -58,9 +58,14 @@ const isItEnough = ([name, thing, item, price, has]) => ({
 });
 const backOrMissing = ([name, thing, item, price, has]) => {
   const total = sum(has);
+  const data = [[price, `€ cuesta ${thing}`], [total, `€ tiene ${name}`]];
   return total >= price
-    ? { story: `${story(name, thing, price, has)} Le llega. ¿Cuánto le devuelven?`, prompt: 'Le devuelven ? €', scene: shop(item, price, ...has), answer: total - price }
-    : { story: `${story(name, thing, price, has)} No le llega. ¿Cuánto le falta?`, prompt: 'Le falta ? €', scene: shop(item, price, ...has), answer: price - total };
+    ? {
+      story: `${story(name, thing, price, has)} Le llega. ¿Cuánto le devuelven?`, data, prompt: 'Le devuelven ? €', scene: shop(item, price, ...has), answer: total - price,
+    }
+    : {
+      story: `${story(name, thing, price, has)} No le llega. ¿Cuánto le falta?`, data, prompt: 'Le falta ? €', scene: shop(item, price, ...has), answer: price - total,
+    };
 };
 
 const PRICES = table(['Básica', 'Especial'], [

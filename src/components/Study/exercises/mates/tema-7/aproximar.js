@@ -63,16 +63,19 @@ const aproximar = {
       questions: [
         {
           story: 'Alicia tiene 124 cromos y Leo tiene 283. ¿Cuántos cromos tienen, más o menos, entre los dos?',
+          data: [[124, 'cromos tiene Alicia'], [283, 'cromos tiene Leo']],
           prompt: '? + ? = ?',
           answer: [120, 280, 400],
         },
         {
           story: 'En el concierto del cole hay 218 niños y 143 mayores. ¿Cuántas personas hay, más o menos?',
+          data: [[218, 'niños en el concierto'], [143, 'mayores en el concierto']],
           prompt: '? + ? = ?',
           answer: [220, 140, 360],
         },
         {
           story: 'Mica ha oído 336 cantos de pájaro y Lena 251. ¿Cuántos cantos han oído, más o menos, entre las dos?',
+          data: [[336, 'cantos ha oído Mica'], [251, 'cantos ha oído Lena']],
           prompt: '? + ? = ?',
           answer: [340, 250, 590],
         },

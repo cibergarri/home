@@ -50,6 +50,7 @@ const repaso = {
         { prompt: '59 - 37 = ?', answer: 22 },
         {
           story: 'Lena hace magia con 19 naranjas. En una nube desaparecen 14. ¿Cuántas naranjas quedan?',
+          data: [[19, 'naranjas al principio'], [14, 'naranjas desaparecen']],
           prompt: '? naranjas',
           answer: 5,
         },

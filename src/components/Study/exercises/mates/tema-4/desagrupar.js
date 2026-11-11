@@ -65,16 +65,19 @@ const desagrupar = {
       questions: [
         {
           story: 'Lena tenía 13 arándanos. Usó 8 en su pastel multicolor. ¿Cuántos arándanos tiene ahora?',
+          data: [[13, 'arándanos tenía Lena'], [8, 'arándanos usó en el pastel']],
           prompt: 'Tiene ? arándanos',
           answer: 5,
         },
         {
           story: 'El pastel multicolor necesita hornearse 12 horas. Ya han pasado 7. ¿Cuántas horas faltan?',
+          data: [[12, 'horas necesita el pastel en el horno'], [7, 'horas ya han pasado']],
           prompt: 'Faltan ? horas',
           answer: 5,
         },
         {
           story: 'En la clase de Teo hay 32 lápices de colores. Se llevan 15 a otra clase. ¿Cuántos lápices quedan?',
+          data: [[32, 'lápices de colores en la clase'], [15, 'lápices se llevan a otra clase']],
           prompt: 'Quedan ? lápices',
           answer: 17,
         },

@@ -79,8 +79,8 @@ const conLasManos = {
       instructions: 'Escribe la hora como en un reloj digital: primero las horas y después los minutos. Pulsa ✓ después de cada número.',
       questions: [
         write(11, 45), write(4, 15), write(3, 45), write(5, 30),
-        { story: 'Luis y sus padres entran al cine a las 4 y 45. La película dura 2 horas. ¿A qué hora salen?', prompt: '? : ?', scene: digital(4, 45), answer: [6, 45] },
-        { story: 'Salen a las 6 y 45 y tardan un cuarto de hora en llegar a casa. ¿A qué hora llegan?', prompt: '? : ?', scene: clock(6, 45), answer: [7, 0] },
+        { story: 'Luis y sus padres entran al cine a las 4 y 45. La película dura 2 horas. ¿A qué hora salen?', data: [[4, 'es la hora a la que entran'], [45, 'minutos pasada esa hora'], [2, 'horas dura la película']], prompt: '? : ?', scene: digital(4, 45), answer: [6, 45] },
+        { story: 'Salen a las 6 y 45 y tardan un cuarto de hora en llegar a casa. ¿A qué hora llegan?', data: [[6, 'es la hora a la que salen'], [45, 'minutos pasada esa hora']], prompt: '? : ?', scene: clock(6, 45), answer: [7, 0] },
       ],
     },
   ],

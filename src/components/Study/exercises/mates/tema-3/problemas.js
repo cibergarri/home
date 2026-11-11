@@ -12,30 +12,35 @@ const problemas = {
   questions: [
     {
       story: 'En el bosque se han plantado 305 árboles. En la foto de Topi se ven 203, porque puso el dedo delante. ¿Cuántos árboles ha tapado Topi?',
+      data: [[305, 'árboles plantados'], [203, 'árboles se ven en la foto']],
       scene: blocks(0, 3, 2),
       prompt: 'Topi ha tapado ? árboles',
       answer: 102,
     },
     {
       story: 'Teo y Lena han plantado 305 árboles en la zona 1. Mica y Topi han plantado 152 en la zona 2. ¿Cuántos árboles se han plantado en total?',
+      data: [[305, 'árboles en la zona 1'], [152, 'árboles en la zona 2']],
       scene: bar({ total: '?', parts: [{ name: 'Zona 1', value: 305 }, { name: 'Zona 2', value: 152 }] }),
       prompt: 'Se han plantado ? árboles',
       answer: 457,
     },
     {
       story: 'En una finca hay 700 olivos. Ya se ha recogido la aceituna de 500. ¿Cuántos olivos faltan por recoger?',
+      data: [[700, 'olivos en la finca'], [500, 'olivos ya recogidos']],
       scene: bar({ total: 700, parts: [{ name: 'Recogidos', value: 500 }, { name: 'Faltan', value: '?', size: 200 }] }),
       prompt: 'Faltan ? olivos',
       answer: 200,
     },
     {
       story: 'Hay 500 olivos con la aceituna recogida y 200 sin recoger. ¿Cuántos olivos más hay con la aceituna recogida?',
+      data: [[500, 'olivos con la aceituna recogida'], [200, 'olivos sin recoger']],
       scene: bar({ compare: true, difference: '?', parts: [{ name: 'Recogidos', value: 500 }, { name: 'Sin recoger', value: 200 }] }),
       prompt: 'Hay ? olivos más',
       answer: 300,
     },
     {
       story: 'En el colegio de Gonzalo hay 145 alumnos en Infantil y 298 en Primaria. ¿Cuántos alumnos más hay en Primaria?',
+      data: [[145, 'alumnos en Infantil'], [298, 'alumnos en Primaria']],
       scene: bar({ compare: true, difference: '?', parts: [{ name: 'Primaria', value: 298 }, { name: 'Infantil', value: 145 }] }),
       prompt: 'Hay ? alumnos más',
       answer: 153,

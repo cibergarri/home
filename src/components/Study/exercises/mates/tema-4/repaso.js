@@ -68,6 +68,7 @@ const repaso = {
       questions: [
         {
           story: 'Topi y sus amigos celebran el día del «Vuelo libre» el 28 de octubre. Si hoy es 19 de octubre, ¿cuántos días faltan?',
+          data: [[28, 'de octubre es el «Vuelo libre»'], [19, 'de octubre es hoy']],
           prompt: 'Faltan ? días',
           answer: 9,
         },
