@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.30.0](https://github.com/cibergarri/home/compare/v1.29.0...v1.30.0) (2026-11-11)
+
+
+### Features
+
+* **study-corner:** compare numbers by filling the gap with a sign, and group the money sums ([fd1f7a7](https://github.com/cibergarri/home/commit/fd1f7a7150adb96a14ef526006d32d9342912d92))
+
 # [1.29.0](https://github.com/cibergarri/home/compare/v1.28.0...v1.29.0) (2026-11-11)
 
 
