@@ -32,8 +32,8 @@ const tresCifras = {
       instructions: 'Compara primero las centenas, después las decenas y al final las unidades.',
       questions: [
         { prompt: 'Ordena de mayor a menor: 987, 879 y 978', say: false, choices: ['987 > 978 > 879', '978 > 987 > 879', '879 > 978 > 987'], answer: '987 > 978 > 879' },
-        { prompt: '978  …  879', say: false, choices: ['>', '<', '='], answer: '>' },
-        { prompt: '712  …  721', say: false, choices: ['>', '<', '='], answer: '<' },
+        { compare: [978, 879] },
+        { compare: [712, 721] },
         { prompt: '¿Qué número es el mayor?', choices: ['379', '712', '397'], answer: '712' },
         { prompt: '¿Qué número es par?', choices: ['379', '712', '247'], answer: '712' },
       ],

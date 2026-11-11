@@ -7,6 +7,7 @@ import { useStrings } from '../language';
 import {
   SpeakerIcon, WellDone, QuestionNav, useSlips, practiseItems, pickSome,
 } from '../game';
+import Compare, { signFor, sayComparison } from '../Compare';
 import { Instructions } from '../LabelMap/style';
 import {
   Card, Picture, Body, Question, Hint, Choices, Choice, ChoiceButton, SmallSpeaker, Next,
@@ -38,6 +39,9 @@ export const mixed = (choices, seed) => {
 // A question with `solved` shows (and says) that on the right answer once chosen, in place of the
 // answer itself: 'des' becomes 'descoser'.
 //
+// A question with `compare: [a, b]` shows the two numbers with a gap between them, and the signs
+// <, > and = to choose from (with `prompt`, if any, above).
+//
 // With `draw`, only that many of the questions are played, picked at random each time (the first
 // ones on the page drawn on the server, until the browser picks).
 export default function QuizGame({ exercise }) {
@@ -60,17 +64,19 @@ export default function QuizGame({ exercise }) {
 
   const order = only ?? drawn ?? all;
   const question = questions[order[index]];
-  const { scene } = question;
-  const choices = keepOrder ? question.choices : mixed(question.choices, `${question.prompt}|${question.choices.join('|')}`);
+  const { scene, compare } = question;
+  const answer = compare ? signFor(...compare) : question.answer;
+  const choices = compare || keepOrder ? question.choices : mixed(question.choices, `${question.prompt}|${question.choices.join('|')}`);
 
   const choose = (choice) => {
-    if (choice === question.answer) {
+    if (choice === answer) {
       setSolved(true);
-      speak(question.solved ?? choice, text.lang);
+      setTried(current => [...current, choice]);
+      speak(compare ? sayComparison(...compare, text.lang) : question.solved ?? choice, text.lang);
       return;
     }
     slip({
-      item: order[index], prompt: question.prompt, scene, wrong: choice, right: question.answer,
+      item: order[index], prompt: compare ? `${compare[0]} … ${compare[1]}` : question.prompt, scene, wrong: choice, right: answer,
     });
     setTried(current => [...current, choice]);
   };
@@ -117,6 +123,7 @@ export default function QuizGame({ exercise }) {
           </Picture>
         )}
         <Body>
+          {question.prompt && (
           <Question>
             <p>{question.prompt}</p>
             {question.say !== false && (
@@ -125,11 +132,13 @@ export default function QuizGame({ exercise }) {
               </SmallSpeaker>
             )}
           </Question>
+          )}
           {question.hint && <Hint>{question.hint}</Hint>}
+          {compare ? <Compare a={compare[0]} b={compare[1]} tried={tried} onChoose={choose} /> : (
           <Choices aria-label={text.answers}>
             {choices.map((choice) => {
               let state;
-              if (solved && choice === question.answer) state = 'right';
+              if (solved && choice === answer) state = 'right';
               else if (tried.includes(choice)) state = 'wrong';
               return (
                 <Choice key={choice} $state={state}>
@@ -143,6 +152,7 @@ export default function QuizGame({ exercise }) {
               );
             })}
           </Choices>
+          )}
           {solved && <Next type="button" onClick={next}>{index + 1 < order.length ? text.next : text.finish}</Next>}
         </Body>
       </Card>

@@ -185,6 +185,7 @@ describe('NumberGame', () => {
         answer: 39,
         then: [
           { story: 'El tren cuesta 32 €. ¿Pueden comprarlo?', choices: ['Sí', 'No'], answer: 'Sí' },
+          { story: '¿Qué signo va en el hueco?', compare: [39, 32] },
           {
             story: '¿Cuánto les sobra?', data: [[39, '€ tienen'], [32, '€ cuesta el tren']], prompt: 'Les sobran ? €', answer: 7,
           },
@@ -202,6 +203,8 @@ describe('NumberGame', () => {
     fireEvent.click(screen.getByRole('button', { name: 'No' }));
     fireEvent.click(screen.getByRole('button', { name: 'Sí' }));
     expect(screen.getByText('✓ Sí')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: '>' }));
+    expect(screen.getByText('✓ 39 > 32')).toBeInTheDocument();
     expect(screen.getByText('€ cuesta el tren')).toBeInTheDocument();
     ['39', '32', '7'].forEach((number) => {
       type(number);

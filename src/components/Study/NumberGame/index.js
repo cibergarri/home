@@ -10,6 +10,7 @@ import {
 import WritingPad from '../WritingPad';
 import { sayable } from './sayable';
 import ColumnSum, { fitsInColumns } from '../TowerGame/ColumnSum';
+import Compare, { signFor, sayComparison } from '../Compare';
 import { mixed } from '../QuizGame';
 import { Choices, Choice, ChoiceButton } from '../QuizGame/style';
 import { Instructions, Message } from '../LabelMap/style';
@@ -63,7 +64,7 @@ export const problemData = ({ story, prompt, data }) => {
 // («122 + 16 = ?»), or the one its two data make to give the answer (the bigger on top, to take
 // away). Only when a number has two digits or more, and the sum fits in the columns.
 export const columnSumFor = (step, data) => {
-  if (step.choices || [].concat(step.answer).length > 1) return null;
+  if (!step.prompt || [].concat(step.answer).length > 1) return null;
   const written = step.prompt.match(/^\s*(\d+)\s*([+-])\s*(\d+)\s*=\s*\?\s*$/);
   let sum = null;
   if (written) sum = { a: Number(written[1]), op: written[2], b: Number(written[3]), written: true };
@@ -131,18 +132,26 @@ export default function NumberGame({ exercise }) {
   const steps = [question, ...(question.then ?? [])];
   const step = steps[stage];
   const lastStep = stage === steps.length - 1;
-  const choosing = Boolean(step.choices);
-  const answers = [].concat(step.answer);
+  const choosing = Boolean(step.choices || step.compare);
+  const stepAnswer = one => (one.compare ? signFor(...one.compare) : one.answer);
+  const answers = [].concat(stepAnswer(step));
   const parts = choosing ? [] : step.prompt.split('?');
   const data = choosing ? [] : problemData(step);
   const findingData = dataFound.length < data.length;
   const inOrder = data.some(d => d.label); // each datum has its own box, filled one after another
   const current = filled.length;
-  const stepSolved = choosing ? tried.includes(step.answer) : !findingData && current === answers.length;
+  const stepSolved = choosing ? tried.includes(stepAnswer(step)) : !findingData && current === answers.length;
   const solved = lastStep && stepSolved;
-  const solutionOf = one => (one.choices
-    ? one.answer
-    : one.prompt.split('?').map((part, i, all) => `${part}${i < all.length - 1 ? [].concat(one.answer)[i] : ''}`).join(''));
+  const solutionOf = (one) => {
+    if (one.compare) return `${one.compare[0]} ${signFor(...one.compare)} ${one.compare[1]}`;
+    return one.choices
+      ? one.answer
+      : one.prompt.split('?').map((part, i, all) => `${part}${i < all.length - 1 ? [].concat(one.answer)[i] : ''}`).join('');
+  };
+  const spoken = (one) => {
+    if (one.compare) return sayComparison(...one.compare, text.lang);
+    return one.choices ? one.answer : sayable(solutionOf(one), text.lang);
+  };
   const solution = solutionOf(step);
   const columns = columnSumFor(step, data);
   const scene = steps.slice(0, stage + 1).reverse().find(one => one.scene)?.scene;
@@ -160,7 +169,7 @@ export default function NumberGame({ exercise }) {
 
   // A step solved: the next one, or the end of the problem.
   const stepDone = () => {
-    speak(choosing ? step.answer : sayable(solution, text.lang), text.lang);
+    speak(spoken(step), text.lang);
     if (!lastStep) {
       resetStep();
       setStage(stage + 1);
@@ -230,7 +239,7 @@ export default function NumberGame({ exercise }) {
   };
 
   const choose = (choice) => {
-    if (choice === step.answer) {
+    if (choice === stepAnswer(step)) {
       setTried(list => [...list, choice]);
       stepDone();
       return;
@@ -238,10 +247,10 @@ export default function NumberGame({ exercise }) {
     slip({
       item: order[index],
       key: `${order[index]}-${stage}`,
-      prompt: step.story,
+      prompt: step.compare ? `${step.compare[0]} … ${step.compare[1]}` : step.story,
       note: question.story,
       wrong: choice,
-      right: step.answer,
+      right: stepAnswer(step),
     });
     setTried(list => [...list, choice]);
   };
@@ -365,7 +374,8 @@ export default function NumberGame({ exercise }) {
               {data.map((d, i) => dataBox(i))}
             </Data>
           )}
-          {choosing ? (
+          {step.compare && <Compare a={step.compare[0]} b={step.compare[1]} tried={tried} onChoose={choose} />}
+          {step.choices && (
             <Choices aria-label={text.answers}>
               {mixed(step.choices, `${step.story}|${step.choices.join('|')}`).map((choice) => {
                 let choiceState;
@@ -380,7 +390,8 @@ export default function NumberGame({ exercise }) {
                 );
               })}
             </Choices>
-          ) : (
+          )}
+          {!choosing && (
             <Sum aria-live="polite">
               {(data.length > 0 || question.then) && <AnswerLabel>{text.answerLabel}</AnswerLabel>}
               {parts.map((part, i) => (
@@ -404,7 +415,7 @@ export default function NumberGame({ exercise }) {
           {step.hint && <Hint>{step.hint}</Hint>}
           {solved && (
             <Row>
-              <Listen type="button" onClick={() => speak(choosing ? step.answer : sayable(solution, text.lang), text.lang)}>
+              <Listen type="button" onClick={() => speak(spoken(step), text.lang)}>
                 <SpeakerIcon />
                 {text.listen}
               </Listen>

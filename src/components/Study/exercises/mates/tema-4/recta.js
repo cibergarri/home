@@ -7,15 +7,7 @@ const point = (from, to, mark) => ({
   story: '¿Qué número marca el punto rojo?', prompt: '?', scene: numberLine(from, to, mark, true), answer: mark,
 });
 
-const LESS = '< es menor que';
-const MORE = '> es mayor que';
-const SAME = '= es igual a';
-const compare = (a, b) => ({
-  prompt: `${a}  …  ${b}`,
-  say: false,
-  choices: [LESS, MORE, SAME],
-  answer: (a < b && LESS) || (a > b && MORE) || SAME,
-});
+const compare = (a, b) => ({ compare: [a, b] });
 
 const recta = {
   slug: 'recta',

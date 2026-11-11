@@ -1,8 +1,6 @@
 import { clock } from '../scenes';
 
 // Mates, tema 4: el repaso del final del tema, «¿Qué he aprendido?».
-const LESS = '< es menor que';
-const MORE = '> es mayor que';
 
 const repaso = {
   slug: 'repaso',
@@ -19,11 +17,11 @@ const repaso = {
     {
       title: '2. Compara',
       type: 'quiz',
-      instructions: 'Usa < o >.',
+      instructions: 'Elige el signo que va en el hueco.',
       questions: [
-        { prompt: '473  …  437', say: false, choices: [LESS, MORE], answer: MORE },
-        { prompt: '180  …  312', say: false, choices: [LESS, MORE], answer: LESS },
-        { prompt: '217  …  221', say: false, choices: [LESS, MORE], answer: LESS },
+        { compare: [473, 437] },
+        { compare: [180, 312] },
+        { compare: [217, 221] },
       ],
     },
     {

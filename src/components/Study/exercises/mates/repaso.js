@@ -20,15 +20,9 @@ const repaso = {
       type: 'quiz',
       instructions: 'Elige la respuesta correcta.',
       questions: [
-        {
-          prompt: '64  …  64', say: false, choices: ['< es menor que', '> es mayor que', '= es igual a'], answer: '= es igual a',
-        },
-        {
-          prompt: '15  …  51', say: false, choices: ['< es menor que', '> es mayor que', '= es igual a'], answer: '< es menor que',
-        },
-        {
-          prompt: '90  …  89', say: false, choices: ['< es menor que', '> es mayor que', '= es igual a'], answer: '> es mayor que',
-        },
+        { compare: [64, 64] },
+        { compare: [15, 51] },
+        { compare: [90, 89] },
         {
           prompt: '¿Qué número es «cuarenta y siete»?', scene: numberLine(40, 70, 47, true), choices: ['74', '47', '57'], answer: '47',
         },

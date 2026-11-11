@@ -26,9 +26,8 @@ const barras = {
           answer: 'Sí, tiene suficientes',
         },
         {
-          story: '¿Cómo es 36 comparado con 33?',
-          choices: ['36 < 33 (menor que)', '36 > 33 (mayor que)', '36 = 33 (igual a)'],
-          answer: '36 > 33 (mayor que)',
+          story: 'Compara los huevos que hay con los que necesita: ¿qué signo va en el hueco?',
+          compare: [36, 33],
         },
         {
           story: '¿Cuántos huevos le sobrarán?',

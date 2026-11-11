@@ -42,6 +42,18 @@ describe('QuizGame', () => {
     expect(seen.size).toBeGreaterThan(3);
   });
 
+  it('puts the sign chosen in the gap between two numbers, with no words for the signs', () => {
+    renderWithProviders(<QuizGame exercise={{ instructions: 'Compare', questions: [{ compare: [33, 36] }] }} />);
+    expect(screen.getByLabelText('33, a gap for the sign, 36')).toBeInTheDocument();
+    expect(screen.getAllByRole('button').map(button => button.textContent)).toEqual(expect.arrayContaining(['<', '>', '=']));
+    expect(screen.queryByText(/less than|greater than|menor que|mayor que/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: '>' }));
+    expect(screen.getByRole('button', { name: '>' })).toBeDisabled();
+    fireEvent.click(screen.getByRole('button', { name: '<' }));
+    expect(screen.getByLabelText('33 < 36')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Finish ✓' })).toBeInTheDocument();
+  });
+
   it('shows the whole word on the right answer when the question says so', () => {
     const exercise = {
       instructions: 'Pick',
@@ -93,6 +105,7 @@ describe('QuizGame', () => {
     [wheres, positions, review, numerosDeDosCifras, comparar, aproximar, restar, tablas, repaso, problemas].flatMap(exercise => [exercise, ...(exercise.more ?? [])])
       .filter(part => part.type === 'quiz')
       .flatMap(part => part.questions)
+      .filter(question => !question.compare)
       .forEach(({ choices, answer }) => expect(choices).toContain(answer));
   });
 
@@ -106,6 +119,7 @@ describe('QuizGame', () => {
       .flatMap(exercise => [exercise, ...(exercise.more ?? [])])
       .filter(({ type, keepOrder }) => type === 'quiz' && !keepOrder)
       .flatMap(({ questions: asked }) => asked)
+      .filter(question => !question.compare)
       .filter(({ choices: offered }) => !offered.every(choice => /^\d+$/.test(choice)));
     const first = questions.filter(({ prompt, choices: offered, answer }) => mixed(offered, `${prompt}|${offered.join('|')}`)[0] === answer);
     expect(first.length / questions.length).toBeLessThan(0.55);

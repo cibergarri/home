@@ -24,7 +24,7 @@ describe('Mates', () => {
 
   it('has the right answer among the choices of every question, and each choice once', () => {
     ofType('quiz').forEach(({ questions }) => {
-      questions.forEach(({ prompt, choices, answer }) => {
+      questions.filter(question => !question.compare).forEach(({ prompt, choices, answer }) => {
         expect(`${prompt} → ${choices.includes(answer)}`).toBe(`${prompt} → true`);
         expect(new Set(choices).size).toBe(choices.length);
       });

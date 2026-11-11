@@ -1,14 +1,5 @@
 // Mates, tema 1: comparar números con <, > e =, y ordenarlos de menor a mayor.
-const SIGNS = ['< es menor que', '> es mayor que', '= es igual a'];
-
-const compare = (a, b) => {
-  let answer = SIGNS[2];
-  if (a < b) [answer] = SIGNS;
-  else if (a > b) answer = SIGNS[1];
-  return {
-    prompt: `${a}  …  ${b}`, say: false, choices: SIGNS, answer,
-  };
-};
+const compare = (a, b) => ({ compare: [a, b] });
 
 const comparar = {
   slug: 'comparar',
