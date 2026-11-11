@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.31.0](https://github.com/cibergarri/home/compare/v1.30.0...v1.31.0) (2026-11-11)
+
+
+### Features
+
+* **study-corner:** add six new bar problems to tema 2 ([0dc1432](https://github.com/cibergarri/home/commit/0dc14329b16b97daefef3248e4ec41e44071a87b))
+* **study-corner:** start the bar problems by picking the bar, as in the book ([669e09f](https://github.com/cibergarri/home/commit/669e09fe2ffd986d83752677dcab78b8145cd5b3))
+
 # [1.30.0](https://github.com/cibergarri/home/compare/v1.29.0...v1.30.0) (2026-11-11)
 
 
