@@ -142,10 +142,10 @@ describe("Julia's study pages", () => {
     Object.entries(HIDDEN_UNITS).forEach(([subject, units]) => {
       units.forEach(unit => expect(`${subject}/${findUnit(findSubject(subject), unit)?.hidden}`).toBe(`${subject}/true`));
     });
-    expect(generateStaticParams()).toContainEqual({ subject: 'mates', unit: 'tema-3', exercise: 'sumar' });
+    expect(generateStaticParams()).toContainEqual({ subject: 'mates', unit: 'tema-4', exercise: 'barras' });
     renderWithProviders(await SubjectPage({ params: params({ subject: 'mates' }) }));
-    expect(hrefs()).toContain('/study-corner/mates/tema-2');
-    expect(hrefs()).not.toContain('/study-corner/mates/tema-3');
+    expect(hrefs()).toContain('/study-corner/mates/tema-3');
+    expect(hrefs()).not.toContain('/study-corner/mates/tema-4');
   });
 
   it('lists the hidden units too after ?all, and remembers it until ?all=0', async () => {

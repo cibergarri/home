@@ -5,8 +5,8 @@
 // To see every unit anyway, open any page with ?all (e.g. /study-corner/mates?all). The browser remembers
 // it, so the hidden units stay listed on every page after that; ?all=0 hides them again.
 export const HIDDEN_UNITS = {
-  mates: ['tema-3', 'tema-4', 'tema-5', 'tema-6', 'tema-7', 'tema-8', 'tema-9'],
-  lengua: ['tema-3', 'tema-4', 'tema-5', 'tema-6', 'tema-7', 'tema-8', 'tema-9'],
+  mates: ['tema-4', 'tema-5', 'tema-6', 'tema-7', 'tema-8', 'tema-9'],
+  lengua: ['tema-4', 'tema-5', 'tema-6', 'tema-7', 'tema-8', 'tema-9'],
   english: ['unit-3', 'unit-4', 'unit-5', 'unit-6', 'festivals'],
 };
 
