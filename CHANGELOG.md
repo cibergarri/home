@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.32.0](https://github.com/cibergarri/home/compare/v1.31.0...v1.32.0) (2026-11-12)
+
+
+### Features
+
+* **study-corner:** show tema 3 of Mates and Lengua ([4b3221a](https://github.com/cibergarri/home/commit/4b3221a9de65cde760df26cebef336cd7e8e1a08))
+
 # [1.31.0](https://github.com/cibergarri/home/compare/v1.30.0...v1.31.0) (2026-11-11)
 
 
