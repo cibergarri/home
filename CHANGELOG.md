@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.35.0](https://github.com/cibergarri/home/compare/v1.34.0...v1.35.0) (2026-11-19)
+
+
+### Features
+
+* **study-corner:** add a Diagrams page to English unit 2, with There is and There are ([e29bb4b](https://github.com/cibergarri/home/commit/e29bb4bf7814f07c602e9eeadd709e7516c90f47))
+
 # [1.34.0](https://github.com/cibergarri/home/compare/v1.33.0...v1.34.0) (2026-11-19)
 
 
