@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.34.0](https://github.com/cibergarri/home/compare/v1.33.0...v1.34.0) (2026-11-19)
+
+
+### Features
+
+* **study-corner:** add a village and city mind map, and drawings of the rules for living together ([9a85476](https://github.com/cibergarri/home/commit/9a85476303ed591c966fe09c26d4e3a3162c7b78))
+
 # [1.33.0](https://github.com/cibergarri/home/compare/v1.32.0...v1.33.0) (2026-11-19)
 
 
