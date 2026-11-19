@@ -41,7 +41,8 @@ describe("Julia's study pages", () => {
     expect(screen.getByRole('heading', { name: 'Social Science' })).toBeInTheDocument();
     expect(screen.getByText('Unit 1')).toBeInTheDocument();
     expect(screen.getByText('Unit 2')).toBeInTheDocument();
-    expect(screen.getAllByText('7 exercises')).toHaveLength(2);
+    expect(screen.getByText('7 exercises')).toBeInTheDocument();
+    expect(screen.getByText('8 exercises')).toBeInTheDocument();
     expect(hrefs()).toContain('/study-corner/social-science/unit-1');
     expect(hrefs()).toContain('/study-corner/social-science/unit-2');
   });
@@ -70,7 +71,7 @@ describe("Julia's study pages", () => {
       { subject: 'social-science', unit: 'unit-1', exercise: 'rivers' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'find-directions' },
       { subject: 'social-science', unit: 'unit-1', exercise: 'physical-and-human-features' },
-      ...['villages-and-cities', 'living-together', 'road-safety', 'local-council', 'street-map', 'safe-routes', 'review']
+      ...['villages-and-cities', 'living-together', 'road-safety', 'local-council', 'street-map', 'safe-routes', 'review', 'diagrams']
         .map(exercise => ({ subject: 'social-science', unit: 'unit-2', exercise })),
       ...[
         ['bienvenida', ['empezamos', 'numeros', 'repaso']],

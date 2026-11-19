@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import LabelMap from './LabelMap';
 import Story from './Story';
+import Diagram from './Diagram';
 import SortGame from './SortGame';
 import ColourGame from './ColourGame';
 import DirectionsGame from './DirectionsGame';
@@ -126,6 +127,7 @@ export function CardList({ cards, empty }) {
 const GAMES = {
   label: LabelMap,
   story: Story,
+  diagram: Diagram,
   sort: SortGame,
   colour: ColourGame,
   directions: DirectionsGame,

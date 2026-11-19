@@ -1,8 +1,23 @@
-import { Fredoka } from 'next/font/google';
+import { Caveat, Fredoka, Patrick_Hand } from 'next/font/google';
 
 const font = Fredoka({
   subsets: ['latin'],
   variable: '--font-study',
+  display: 'swap',
+});
+
+// The hand-drawn fonts of the sketchnotes (the mind maps in Diagrams).
+const sketchTitle = Caveat({
+  subsets: ['latin'],
+  weight: '700',
+  variable: '--font-sketch-title',
+  display: 'swap',
+});
+
+const sketch = Patrick_Hand({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-sketch',
   display: 'swap',
 });
 
@@ -13,5 +28,5 @@ export const metadata = {
 };
 
 export default function StudyCornerLayout({ children }) {
-  return <div className={font.variable}>{children}</div>;
+  return <div className={`${font.variable} ${sketchTitle.variable} ${sketch.variable}`}>{children}</div>;
 }

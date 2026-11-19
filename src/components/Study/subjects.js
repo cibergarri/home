@@ -13,6 +13,7 @@ import localCouncil from './exercises/social-science/unit-2/local-council';
 import streetMap from './exercises/social-science/unit-2/street-map';
 import safeRoutes from './exercises/social-science/unit-2/safe-routes';
 import reviewSocial2 from './exercises/social-science/unit-2/review';
+import diagramsSocial2 from './exercises/social-science/unit-2/diagrams';
 import daysOfTheWeek from './exercises/english/days-of-the-week';
 import placesAtSchool from './exercises/english/places-at-school';
 import wheres from './exercises/english/wheres';
@@ -117,7 +118,9 @@ export const ALL_SUBJECTS = [
         slug: 'unit-2',
         title: 'Unit 2',
         icon: '🏘️',
-        exercises: [villagesAndCities, livingTogether, roadSafety, localCouncil, streetMap, safeRoutes, reviewSocial2],
+        exercises: [
+          villagesAndCities, livingTogether, roadSafety, localCouncil, streetMap, safeRoutes, reviewSocial2, diagramsSocial2,
+        ],
       },
     ],
   },
