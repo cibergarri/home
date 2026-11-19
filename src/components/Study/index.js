@@ -26,7 +26,7 @@ import { LanguageContext, useStrings } from './language';
 import { loadProfile, saveProfile, useName } from './profile';
 import {
   Page, Header, Back, Titles, Kicker, Title, Main, Empty, Cards, Card, CardIcon, CardText, Part, PartTitle,
-  SettingsButton, SettingsPanel, SettingsForm, NameInput, SaveButton, SettingsNote,
+  SettingsButton, SettingsPanel, SettingsForm, NameInput, SaveButton, SettingsNote, Related,
 } from './style';
 
 // Hello to whoever is studying, by name if the settings have one.
@@ -143,17 +143,26 @@ const GAMES = {
   word: WordGame,
 };
 
-// A part with `explain: false` has no Spanish flags, where they would give the answer away.
 function Game({ part }) {
   const Kind = GAMES[part.type ?? 'label'];
-  if (part.explain === false) {
-    return (
-      <ExplainContext.Provider value={false}>
-        <Kind exercise={part} />
-      </ExplainContext.Provider>
-    );
-  }
   return <Kind exercise={part} />;
+}
+
+// An anchor for a part, from its title ("The local council" is the-local-council), for a link
+// straight to it.
+export const anchorOf = title => title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+// A link to another exercise of the unit that goes with this one, like its mind map: `related` is
+// { exercise, part (its title, if not the first), label }.
+function RelatedLink({ subject, unit, related }) {
+  const anchor = related.part ? `#${anchorOf(related.part)}` : '';
+  return (
+    <Related href={`/study-corner/${subject}/${unit}/${related.exercise}${anchor}`}>
+      <span aria-hidden="true">🗺️</span>
+      {related.label}
+    </Related>
+  );
 }
 
 // An exercise, looked up here because its drawings cannot be passed down from a server page.
@@ -171,14 +180,16 @@ export function Exercise({ subject, unit, exercise }) {
           <Explain word={found.heading} />
         </PartTitle>
       )}
+      {found.related && <RelatedLink subject={subject} unit={unit} related={found.related} />}
       <Game part={found} />
       {found.more?.map(part => (
-        <Part key={part.title}>
+        <Part key={part.title} id={anchorOf(part.title)}>
           <PartTitle>
             {part.title}
             {' '}
             <Explain word={part.title} />
           </PartTitle>
+          {part.related && <RelatedLink subject={subject} unit={unit} related={part.related} />}
           <Game part={part} />
         </Part>
       ))}

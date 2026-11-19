@@ -18,6 +18,10 @@ import {
 // Each matched pair gets its own colour, so the two halves of a pair look alike.
 const COLOURS = ['#8ec5f2', '#a6db8a', '#f7dc6f', '#f5a8c8', '#c3a6f2', '#f7b58a', '#7fd6c9', '#e8c37f'];
 
+// Which sides of the board can be joined: the word and what it means, or, with a Spanish row in
+// between, the word and its Spanish, then the Spanish and what it means.
+const LINKS = { plain: [['left', 'right']], middle: [['left', 'middle'], ['middle', 'right']] };
+
 // English on the left, Spanish on the right: tap a card on one side, then its partner on the
 // other. A right pair is coloured in and read aloud in English; a wrong one shakes. A pair with a
 // `Picture` (a drawing 160 × 110) shows it on the right instead, its Spanish kept as its label.
@@ -26,7 +30,10 @@ const COLOURS = ['#8ec5f2', '#a6db8a', '#f7dc6f', '#f5a8c8', '#c3a6f2', '#f7b58a
 //
 // With a `root`, it is a little diagram down the page: the left cards hang from the root like
 // branches, the right ones under them are what each one means, read aloud too, and a matched pair
-// is joined with a line.
+// is joined with a line. The speaker and the flag go under each card's words. When every pair has
+// a `translation`, a row of the words in Spanish goes in between: each word is joined to its
+// Spanish first, and the Spanish to what it means. A pair's `meaningEs` is what it means in
+// Spanish, behind a flag on that card.
 //
 // With `draw`, only that many of the pairs are matched, picked at random each time (the first ones
 // on the page drawn on the server, until the browser picks).
@@ -38,12 +45,19 @@ export default function MatchGame({ exercise }) {
   const playing = only ?? drawn;
   const pairs = playing ? exercise.pairs.filter(pair => playing.includes(pair.id)) : exercise.pairs;
   const text = useStrings();
-  const [leftTitle, rightTitle] = exercise.columns ?? text.columns;
+  const diagram = Boolean(exercise.root);
+  const middle = diagram && exercise.pairs.every(pair => pair.translation);
+  const links = LINKS[middle ? 'middle' : 'plain'];
+  const [leftTitle, ...otherTitles] = exercise.columns ?? text.columns;
+  const [middleTitle, rightTitle] = middle ? otherTitles : [null, otherTitles[0]];
   const pictures = pairs.every(pair => pair.Picture);
   const ids = pairs.map(pair => pair.id);
   const [left, setLeft] = useState(ids);
+  const [centre, setCentre] = useState(() => scramble(ids, ids.length + 1));
   const [right, setRight] = useState(() => scramble(ids, ids.length));
-  const [matched, setMatched] = useState([]);
+  // The pairs joined, link by link: the word and the right side, or, with the Spanish row, the
+  // word and its Spanish (first) and the Spanish and what it means (second).
+  const [joined, setJoined] = useState(() => links.map(() => []));
   const [selected, setSelected] = useState(null);
   const [wrong, setWrong] = useState([]);
   const [slips, slip, clearSlips] = useSlips();
@@ -51,7 +65,6 @@ export default function MatchGame({ exercise }) {
   const wrongTimer = useRef(null);
   const board = useRef(null);
   const [joins, setJoins] = useState([]);
-  const diagram = Boolean(exercise.root);
 
   // Picked once on the client, after the page drawn on the server has loaded.
   useEffect(() => {
@@ -60,60 +73,86 @@ export default function MatchGame({ exercise }) {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setDrawn(picked);
     setLeft(shuffle(picked));
+    setCentre(shuffle(picked));
     setRight(shuffle(picked));
   }, [draw, exercise.pairs]);
 
   const byId = Object.fromEntries(pairs.map(pair => [pair.id, pair]));
-  const finished = matched.length === pairs.length;
+  const total = links.length * pairs.length;
+  const done = joined.flat().length;
+  const finished = done === total;
+  // A pair's colour: in the order matched, or with a Spanish row, the same all along the pair.
+  const colourOf = id => COLOURS[(middle ? ids.indexOf(id) : joined[0].indexOf(id)) % COLOURS.length];
+  const linkOf = (a, b) => links.findIndex(([x, y]) => (x === a && y === b) || (x === b && y === a));
+  const sideDone = (side, id) => links.every(([a, b], n) => (a !== side && b !== side) || joined[n].includes(id));
+  const sideTouched = (side, id) => links.some(([a, b], n) => (a === side || b === side) && joined[n].includes(id));
 
-  // The lines from each matched left card to its partner, measured on the board, again when it
-  // changes size (the tablet turned round).
+  // The lines from each matched card to its partner, measured on the board, again when it changes
+  // size (the tablet turned round).
   useLayoutEffect(() => {
     if (!diagram) return undefined;
     const measure = () => {
       const { left: x0, top: y0 } = board.current.getBoundingClientRect();
       const box = (side, id) => board.current.querySelector(`[data-card="${side}-${id}"]`)?.getBoundingClientRect();
-      setJoins(matched.flatMap((id, i) => {
-        const [from, to] = [box('left', id), box('right', id)];
+      setJoins(links.flatMap(([top, bottom], n) => joined[n].flatMap((id) => {
+        const [from, to] = [box(top, id), box(bottom, id)];
         if (!from || !to) return [];
         return [{
-          id,
-          colour: COLOURS[i % COLOURS.length],
+          key: `${n}-${id}`,
+          colour: colourOf(id),
           x1: from.left + from.width / 2 - x0,
           y1: from.bottom - y0,
           x2: to.left + to.width / 2 - x0,
           y2: to.top - y0,
         }];
-      }));
+      })));
     };
     measure();
     if (typeof ResizeObserver === 'undefined') return undefined;
     const observer = new ResizeObserver(measure);
     observer.observe(board.current);
     return () => observer.disconnect();
-  }, [diagram, matched, left, right]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [diagram, joined, left, centre, right]);
+
+  // What each side of a pair says: the word, its Spanish, and what it means.
+  const says = (side, pair) => ({ left: pair.en, middle: pair.translation, right: pair.es })[side];
 
   const choose = (side, id) => {
-    if (!selected || selected.side === side) {
+    const link = selected ? linkOf(selected.side, side) : -1;
+    if (link < 0) {
       setSelected(selected?.side === side && selected.id === id ? null : { side, id });
       setMessage(null);
       return;
     }
-    setSelected(null);
-    if (selected.id === id) {
-      setMatched(current => [...current, id]);
-      setMessage({ kind: 'right', pair: byId[id] });
-      speak(diagram ? `${byId[id].en}: ${byId[id].es}` : byId[id].en, text.lang);
+    if (selected.id === id && !joined[link].includes(id)) {
+      setSelected(null);
+      setJoined(current => current.map((list, n) => (n === link ? [...list, id] : list)));
+      const pair = byId[id];
+      const [a, b] = links[link];
+      setMessage({ kind: 'right', pair, words: [says(a, pair), says(b, pair)] });
+      if (middle && link === 0) {
+        speak(pair.translation, 'es'); // one voice at a time: the English word is on its card
+      } else {
+        speak(diagram ? `${pair.en}: ${pair.es}` : pair.en, text.lang);
+      }
       return;
     }
-    // Whichever was picked first: a word put with the wrong Spanish one, or a picture with the
-    // wrong word (and then it is the picture that is shown again, with its word).
-    const [word, partner] = selected.side === 'left' ? [byId[selected.id], byId[id]] : [byId[id], byId[selected.id]];
-    slip(partner.Picture ? {
-      item: partner.id, also: [word.id], Picture: partner.Picture, wrong: word.en, right: partner.en,
-    } : {
-      item: word.id, also: [partner.id], prompt: word.en, wrong: partner.es, right: word.es, say: word.en,
-    });
+    setSelected(null);
+    if (selected.id === id) return; // already joined that way
+    // Whichever was picked first: the card nearer the top is the one asked about, and what was
+    // put with it was wrong. A picture with the wrong word shows the picture again, with its word.
+    const [a, b] = links[link];
+    const [first, second] = selected.side === a ? [byId[selected.id], byId[id]] : [byId[id], byId[selected.id]];
+    if (second.Picture) {
+      slip({
+        item: second.id, also: [first.id], Picture: second.Picture, wrong: first.en, right: second.en,
+      });
+    } else {
+      slip({
+        item: first.id, also: [second.id], prompt: says(a, first), wrong: says(b, second), right: says(b, first), say: first.en,
+      });
+    }
     setWrong([`${selected.side}-${selected.id}`, `${side}-${id}`]);
     clearTimeout(wrongTimer.current);
     wrongTimer.current = setTimeout(() => setWrong([]), 600);
@@ -128,8 +167,9 @@ export default function MatchGame({ exercise }) {
     }
     setOnly(pairsToMatch);
     setLeft(shuffle(toPlay));
+    setCentre(shuffle(toPlay));
     setRight(shuffle(toPlay));
-    setMatched([]);
+    setJoined(links.map(() => []));
     setSelected(null);
     clearSlips();
     setMessage(null);
@@ -137,8 +177,8 @@ export default function MatchGame({ exercise }) {
 
   const renderCard = (side, id) => {
     const pair = byId[id];
-    const done = matched.includes(id);
-    const said = side === 'left' ? pair.en : pair.es;
+    const said = says(side, pair);
+    const lang = side === 'middle' ? 'es' : text.lang;
     let content = said;
     if (side === 'right' && pair.Picture) {
       content = (
@@ -147,37 +187,42 @@ export default function MatchGame({ exercise }) {
         </Picture>
       );
     }
+    const tools = side === 'left' || diagram;
     return (
       <Card
         key={id}
         data-card={`${side}-${id}`}
         $branch={diagram && side === 'left'}
+        $diagram={diagram}
         $selected={selected?.side === side && selected.id === id}
-        $colour={done && COLOURS[matched.indexOf(id) % COLOURS.length]}
+        $colour={sideTouched(side, id) && colourOf(id)}
         $wrong={wrong.includes(`${side}-${id}`)}
       >
         <CardButton
           type="button"
           onClick={() => choose(side, id)}
-          disabled={done}
+          disabled={sideDone(side, id)}
           aria-pressed={selected?.side === side && selected.id === id}
           aria-label={side === 'right' && pair.Picture ? pair.es : undefined}
+          lang={side === 'middle' ? 'es' : undefined}
           $picture={side === 'right' && Boolean(pair.Picture)}
         >
           {content}
         </CardButton>
-        {(side === 'left' || diagram) && (
-          <CardTools>
-            <CardSpeaker type="button" data-speaker onClick={() => speak(said, text.lang)} aria-label={text.listenTo(said)}>
+        {tools && (
+          <CardTools $diagram={diagram}>
+            <CardSpeaker type="button" data-speaker onClick={() => speak(said, lang)} aria-label={text.listenTo(said)}>
               <SpeakerIcon />
             </CardSpeaker>
             {side === 'left' && <Explain word={pair.en} variant="chip" />}
+            {side === 'right' && pair.meaningEs && <Explain word={pair.es} meaning={{ es: pair.meaningEs }} variant="chip" />}
           </CardTools>
         )}
       </Card>
     );
   };
 
+  const rightHeading = pictures ? text.pictures : rightTitle;
   return (
     <>
       <Instructions>{instructions}</Instructions>
@@ -187,32 +232,43 @@ export default function MatchGame({ exercise }) {
             {diagram ? <Root>{exercise.root}</Root> : <Heading aria-hidden="true">{leftTitle}</Heading>}
             {left.map(id => renderCard('left', id))}
           </Column>
-          <Column aria-label={pictures ? text.pictures : rightTitle} $across={diagram && pairs.length}>
-            {!diagram && <Heading aria-hidden="true">{pictures ? text.pictures : rightTitle}</Heading>}
+          {middle && (
+            <Column aria-label={middleTitle} $across={pairs.length}>
+              {centre.map(id => renderCard('middle', id))}
+            </Column>
+          )}
+          <Column aria-label={rightHeading} $across={diagram && pairs.length}>
+            {!diagram && <Heading aria-hidden="true">{rightHeading}</Heading>}
             {right.map(id => renderCard('right', id))}
           </Column>
         </Columns>
         {diagram && (
           <Joins aria-hidden="true">
-            {joins.map(({ id, colour, ...ends }) => (
-              <g key={id} data-testid="join" stroke={colour} fill={colour}>
+            {joins.map(({ key, colour, ...ends }) => (
+              <g key={key} data-testid="join" stroke={colour} fill={colour}>
                 <line {...ends} strokeWidth="5" strokeLinecap="round" />
                 <circle cx={ends.x1} cy={ends.y1} r="6" />
                 <circle cx={ends.x2} cy={ends.y2} r="6" />
               </g>
             ))}
           </Joins>
-      )}
+        )}
       </Board>
 
       {finished ? <WellDone slips={slips} onAgain={() => playAgain()} onPractise={() => playAgain(practiseItems(slips))} /> : (
-        <Progress>{text.pairs(matched.length, pairs.length)}</Progress>
+        <Progress>{text.pairs(done, total)}</Progress>
       )}
       <div aria-live="polite">
         {message && !finished && (
           <Message $kind={message.kind}>
             {message.kind === 'right' && (
-              <span><strong>{message.pair.Picture ? `✓ ${message.pair.en}` : `✓ ${message.pair.en}${diagram ? ':' : ' ='} ${message.pair.es}`}</strong></span>
+              <span>
+                <strong>
+                  {message.pair.Picture
+                    ? `✓ ${message.pair.en}`
+                    : `✓ ${message.words[0]}${diagram && !(middle && message.words[1] === message.pair.translation) ? ':' : ' ='} ${message.words[1]}`}
+                </strong>
+              </span>
             )}
             {message.kind === 'wrong' && <span>{text.notQuitePair}</span>}
           </Message>

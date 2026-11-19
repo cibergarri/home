@@ -26,23 +26,34 @@ export const ink = {
 const TITLE_FONT = 'var(--font-sketch-title), var(--font-sketch), cursive';
 const HAND_FONT = 'var(--font-sketch), cursive';
 
+// The ink of the key words: in the text between asterisks ("*few* inhabitants"), they are written
+// in capitals, bold and in this colour, to stand out.
+export const KEY = '#c2255c';
+
+const marked = (children) => {
+  if (typeof children !== 'string' || !children.includes('*')) return children;
+  return children.split(/(\*[^*]+\*)/).filter(Boolean).map((part, n) => (part.startsWith('*')
+    ? <tspan key={`${n}-${part}`} fill={KEY} fontWeight={700}>{part.slice(1, -1).toUpperCase()}</tspan>
+    : part));
+};
+
 export function Title({
   x, y, size, mid, children,
 }) {
   return (
     <text x={x} y={y} fontSize={size} fill={INK} textAnchor={mid ? 'middle' : 'start'} style={{ fontFamily: TITLE_FONT, fontWeight: 700 }}>
-      {children}
+      {marked(children)}
     </text>
   );
 }
 
-// Handwriting; grey for the Spanish.
+// Handwriting; grey for the Spanish. Both take *key words*.
 export function Hand({
   x, y, size, mid, grey, children,
 }) {
   return (
     <text x={x} y={y} fontSize={size} fill={grey ? PENCIL : INK} textAnchor={mid ? 'middle' : 'start'} style={{ fontFamily: HAND_FONT }}>
-      {children}
+      {marked(children)}
     </text>
   );
 }

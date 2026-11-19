@@ -13,7 +13,10 @@ export const Columns = styled.div`
   gap: 14px 20px;
   margin-bottom: 16px;
   ${({ $diagram }) => $diagram && css`
-    /* A diagram goes down the page: the root, its branches, and what they mean under them. */
+    /* A diagram goes down the page: the root, its branches, and what they mean under them, above
+       the lines that join them. */
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: 56px;
@@ -48,9 +51,9 @@ export const Column = styled.ul`
     > :first-child:not([data-card]) {
       grid-column: 1 / -1;
     }
-    /* On a phone, more than three branches go in two rows. */
+    /* On a phone or a tablet held upright, more than three branches go in two rows. */
     ${$across > 3 && css`
-      @media (max-width: 560px) {
+      @media (max-width: 900px) {
         grid-template-columns: repeat(${Math.ceil($across / 2)}, minmax(0, 1fr));
         gap: 16px 10px;
         li::before, li::after {
@@ -110,6 +113,15 @@ export const Card = styled.li`
       [data-speaker] {
         display: none;
       }
+    }
+  `}
+  ${({ $diagram }) => $diagram && css`
+    /* In a diagram the cards are narrow: the speaker and the flag go under the words, and a long
+       word breaks rather than spill out. */
+    flex-direction: column;
+    button {
+      overflow-wrap: anywhere;
+      hyphens: auto;
     }
   `}
   ${({ $selected }) => $selected && css`
@@ -218,8 +230,8 @@ export const Joins = styled.svg`
   pointer-events: none;
 `;
 
-// The speaker and, for a word with a Spanish meaning, its flag: one above the other, so a card in a
-// narrow diagram row does not grow wider.
+// The speaker and, for a word with a Spanish meaning, its flag: one above the other beside the
+// words, or in a row under them in a diagram (and on a phone), so a narrow card does not grow wider.
 export const CardTools = styled.div`
   flex: none;
   display: flex;
@@ -240,4 +252,13 @@ export const CardTools = styled.div`
       min-height: 34px;
     }
   }
+  /* Under the words of a diagram's card, side by side. */
+  ${({ $diagram }) => $diagram && css`
+    flex-direction: row;
+    padding: 0 6px 6px;
+    & > * {
+      width: auto;
+      min-height: 34px;
+    }
+  `}
 `;

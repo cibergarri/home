@@ -118,6 +118,18 @@ describe("Julia's study pages", () => {
     ]);
   });
 
+  it('links an exercise to its mind map, straight to its part of the Diagrams page', () => {
+    renderWithProviders(<Exercise subject="social-science" unit="unit-2" exercise="villages-and-cities" />);
+    expect(screen.getByRole('link', { name: /mind map: village or city/ })).toHaveAttribute('href', '/study-corner/social-science/unit-2/diagrams');
+    cleanup();
+    renderWithProviders(<Exercise subject="social-science" unit="unit-2" exercise="local-council" />);
+    expect(screen.getByRole('link', { name: /mind map of the local council/ }))
+      .toHaveAttribute('href', '/study-corner/social-science/unit-2/diagrams#the-local-council');
+    cleanup();
+    renderWithProviders(<Exercise subject="social-science" unit="unit-2" exercise="diagrams" />);
+    expect(screen.getByRole('heading', { name: 'The local council' }).closest('section')).toHaveAttribute('id', 'the-local-council');
+  });
+
   it('shows the further pictures of an exercise below the first, and counts all their words', async () => {
     renderWithProviders(<Exercise subject="social-science" unit="unit-1" exercise="mountain-landscapes" />);
     expect(screen.getByRole('heading', { name: 'Parts of a mountain' })).toBeInTheDocument();

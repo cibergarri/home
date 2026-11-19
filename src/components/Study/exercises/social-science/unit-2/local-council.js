@@ -1,21 +1,59 @@
 // Social Science, unit 2, pages 30–31: the local council. We live in a municipality, governed by
 // the local council: the mayor and the councillors, in the town hall. It organises the local
-// services.
+// services. Each word is joined to its Spanish, then to what it means (in English, with a flag
+// for the Spanish).
 const localCouncil = {
   slug: 'local-council',
   title: 'The local council',
   heading: 'Who is who?',
   type: 'match',
-  instructions: 'Tap a word, then what it means.',
+  related: { exercise: 'diagrams', part: 'The local council', label: 'Look at the mind map of the local council' },
+  instructions: 'Tap a word, then the same word in Spanish. Then tap the Spanish, then what it means.',
   root: 'The local council',
-  columns: ['Word', 'What is it?'],
+  columns: ['Word', 'In Spanish', 'What is it?'],
   pairs: [
-    { id: 'municipality', en: 'Municipality', es: 'One or more villages or towns and the area around them.' },
-    { id: 'council', en: 'Local council', es: 'The people who govern the municipality.' },
-    { id: 'mayor', en: 'Mayor', es: 'The head of the local council.' },
-    { id: 'councillors', en: 'Councillors', es: 'The people who help the mayor.' },
-    { id: 'town-hall', en: 'Town hall', es: 'The building where the local council works.' },
-    { id: 'services', en: 'Local services', es: 'Things the council organises for everybody, like libraries and parks.' },
+    {
+      id: 'municipality',
+      en: 'Municipality',
+      translation: 'municipio',
+      es: 'One or more villages or towns and the area around them.',
+      meaningEs: 'Uno o varios pueblos o ciudades y el campo de alrededor.',
+    },
+    {
+      id: 'council',
+      en: 'Local council',
+      translation: 'ayuntamiento',
+      es: 'The people who govern the municipality.',
+      meaningEs: 'Las personas que gobiernan el municipio.',
+    },
+    {
+      id: 'mayor',
+      en: 'Mayor',
+      translation: 'alcalde o alcaldesa',
+      es: 'The head of the local council.',
+      meaningEs: 'La persona que dirige el ayuntamiento.',
+    },
+    {
+      id: 'councillors',
+      en: 'Councillors',
+      translation: 'concejales',
+      es: 'The people who help the mayor.',
+      meaningEs: 'Las personas que ayudan al alcalde o a la alcaldesa.',
+    },
+    {
+      id: 'town-hall',
+      en: 'Town hall',
+      translation: 'el edificio del ayuntamiento',
+      es: 'The building where the local council works.',
+      meaningEs: 'El edificio donde trabaja el ayuntamiento.',
+    },
+    {
+      id: 'services',
+      en: 'Local services',
+      translation: 'servicios municipales',
+      es: 'Things the council organises for everybody, like libraries and parks.',
+      meaningEs: 'Lo que el ayuntamiento organiza para todos, como las bibliotecas y los parques.',
+    },
   ],
   more: [
     {

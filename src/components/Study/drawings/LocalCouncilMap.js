@@ -38,13 +38,13 @@ export default function LocalCouncilMap() {
         <ellipse cx={603} cy={421} rx={207} ry={104} strokeWidth={THIN} />
       </g>
       <Title x={600} y={410} size={56} mid>The local council</Title>
-      <Hand x={600} y={452} size={27} mid>governs the municipality</Hand>
+      <Hand x={600} y={452} size={27} mid>*governs* the *municipality*</Hand>
       <Hand x={600} y={484} size={23} mid grey>el ayuntamiento</Hand>
 
       {/* Municipality */}
-      <Marker x={54} y={50} width={196} colour={MINT} tilt={-1.5} />
-      <Title x={60} y={76} size={44}>Municipality</Title>
-      <Hand x={262} y={74} size={22} grey>el municipio</Hand>
+      <Marker x={54} y={50} width={276} colour={MINT} tilt={-1.5} />
+      <Title x={60} y={76} size={44}>*Municipality*</Title>
+      <Hand x={342} y={74} size={22} grey>el municipio</Hand>
       <g {...ink} filter="url(#local-council-rough)">
         <path d="M60 190 Q 120 118 200 186" strokeWidth={THIN} />
         <path d="M58 190 Q 220 176 392 190" />
@@ -78,12 +78,12 @@ export default function LocalCouncilMap() {
         <path d="M992 112 Q 950 92 912 112" strokeWidth={THIN} markerEnd="url(#local-council-head)" />
       </g>
       <Hand x={952} y={92} size={19} mid grey>help</Hand>
-      <Title x={842} y={250} size={34}>Mayor</Title>
-      <Hand x={820} y={274} size={20}>the head</Hand>
+      <Title x={842} y={250} size={34}>*Mayor*</Title>
+      <Hand x={820} y={274} size={20}>the *head*</Hand>
       <Hand x={820} y={296} size={19} grey>alcalde · alcaldesa</Hand>
-      <Title x={990} y={250} size={34}>Councillors</Title>
-      <Hand x={990} y={274} size={20}>they help the mayor</Hand>
-      <Hand x={990} y={296} size={19} grey>concejales · concejalas</Hand>
+      <Title x={980} y={250} size={31}>*Councillors*</Title>
+      <Hand x={980} y={274} size={20}>they *help* the mayor</Hand>
+      <Hand x={980} y={296} size={19} grey>concejales · concejalas</Hand>
 
       {/* Who chooses them */}
       <Marker x={894} y={356} width={268} colour={SKY} tilt={-1} />
@@ -97,8 +97,8 @@ export default function LocalCouncilMap() {
       </g>
       <Title x={1100} y={474} size={44} mid>4</Title>
       <Hand x={1100} y={512} size={21} mid>years</Hand>
-      <Hand x={900} y={540} size={25}>The people vote</Hand>
-      <Hand x={900} y={566} size={25}>every 4 years.</Hand>
+      <Hand x={900} y={540} size={25}>The people *vote*</Hand>
+      <Hand x={900} y={566} size={25}>every *4 years*.</Hand>
       <Hand x={900} y={590} size={20} grey>votamos cada 4 años</Hand>
 
       {/* Where */}
@@ -115,13 +115,13 @@ export default function LocalCouncilMap() {
         <rect x={158} y={474} width={24} height={38} fill={SKY} />
         <path d="M70 514 L270 514 M62 524 L278 524" />
       </g>
-      <Title x={60} y={562} size={34}>Town hall</Title>
+      <Title x={60} y={562} size={34}>*Town hall*</Title>
       <Hand x={60} y={586} size={21}>where the council works</Hand>
       <Hand x={60} y={608} size={19} grey>el ayuntamiento (el edificio)</Hand>
 
       {/* Local services */}
-      <Marker x={400} y={602} width={400} colour={YELLOW} tilt={-0.8} />
-      <Title x={600} y={628} size={40} mid>It organises the local services</Title>
+      <Marker x={360} y={602} width={480} colour={YELLOW} tilt={-0.8} />
+      <Title x={600} y={628} size={40} mid>It organises the *local services*</Title>
       <Hand x={600} y={656} size={21} mid grey>los servicios municipales</Hand>
       <g {...ink} strokeDasharray="2 7" strokeWidth={2.5}>
         <path d="M520 664 Q 300 668 120 694" />

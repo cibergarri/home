@@ -245,3 +245,25 @@ export const PartTitle = styled.h2`
   font-size: clamp(22px, 3.4vw, 28px);
   font-weight: 600;
 `;
+
+/* A link to what goes with an exercise, like its mind map. */
+export const Related = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: #e6f5f3;
+  color: var(--s-teal);
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:focus-visible {
+    outline: 3px solid var(--s-teal);
+    outline-offset: 2px;
+  }
+`;

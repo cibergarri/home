@@ -43,11 +43,16 @@ describe('Explain', () => {
     rules.cards.forEach(({ text }) => expect([text, typeof meaningOf(text)?.drawing]).toEqual([text, 'function']));
   });
 
-  it('leaves the flags out of Choose the rule, where they would give the answer away', () => {
+  it('has a flag on every answer of Choose the rule, the good ones and the bad ones', () => {
     renderWithProviders(<Exercise subject="social-science" unit="unit-2" exercise="living-together" />);
-    expect(screen.getByRole('button', { name: '¿Qué significa Walk your dog on a lead?' })).toBeInTheDocument();
     const quiz = screen.getByRole('heading', { name: 'Choose the rule' }).parentElement;
-    expect(within(quiz).queryAllByRole('button', { name: /^¿Qué significa/ })).toHaveLength(0);
+    const answers = within(quiz).getByRole('list', { name: /answers|respuestas/i });
+    const flags = within(answers).getAllByRole('button', { name: /^¿Qué significa/ });
+    expect(flags).toHaveLength(2);
+    fireEvent.click(flags[0]);
+    expect(within(screen.getByRole('dialog')).getByText(/basura|asiento|paredes|perro/)).toBeInTheDocument();
+    const rules = findSubject('social-science').units[1].exercises.find(({ slug }) => slug === 'living-together').more[0];
+    rules.questions.flatMap(({ choices }) => choices).forEach(choice => expect(rules.translations).toHaveProperty([choice]));
   });
 
   it('shows the drawing in the bubble when the word has one', () => {

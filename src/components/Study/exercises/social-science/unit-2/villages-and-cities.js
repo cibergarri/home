@@ -5,6 +5,7 @@ const villagesAndCities = {
   title: 'Villages, towns and cities',
   heading: 'Village or city?',
   type: 'sort',
+  related: { exercise: 'diagrams', label: 'Look at the mind map: village or city?' },
   instructions: 'The place we live in can be a village, a town or a city. Drag each card to the place it tells you about.',
   columns: [
     { id: 'village', title: 'Village', subtitle: 'Small and quiet' },

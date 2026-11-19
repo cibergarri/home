@@ -34,14 +34,15 @@ const placeFor = (flag, photo) => {
 // A Spanish flag beside a word: tapped, a bubble says in Spanish, in a few words, what it means,
 // shows a photo or a drawing of it when there is one, and can read it aloud. Nothing when the subject does not explain its words or the word is not in
 // the glossary. `variant` sizes the flag for where it sits: a word card, a coloured tile, a box on
-// a picture or a line of text.
-export default function Explain({ word, variant = 'inline' }) {
+// a picture or a line of text. `meaning` gives the Spanish straight away, for a sentence that is not
+// in the glossary ({ es } with an optional `text`).
+export default function Explain({ word, variant = 'inline', meaning: given }) {
   const explain = useContext(ExplainContext);
   const [place, setPlace] = useState(null);
   const flagRef = useRef(null);
   const bubbleRef = useRef(null);
   const id = useId();
-  const meaning = explain ? meaningOf(word) : undefined;
+  const meaning = explain ? (given ?? meaningOf(word)) : undefined;
 
   // Closed by tapping anywhere else, Escape, or the page moving under it.
   useEffect(() => {
@@ -103,8 +104,8 @@ export default function Explain({ word, variant = 'inline' }) {
               <meaning.drawing />
             </Sketch>
           )}
-          <BubbleText>{meaning.text}</BubbleText>
-          <BubbleListen type="button" onClick={() => speak(`${meaning.es}. ${meaning.text}`, 'es')}>
+          {meaning.text && <BubbleText>{meaning.text}</BubbleText>}
+          <BubbleListen type="button" onClick={() => speak(meaning.text ? `${meaning.es}. ${meaning.text}` : meaning.es, 'es')}>
             <SpeakerIcon />
             Escuchar
           </BubbleListen>

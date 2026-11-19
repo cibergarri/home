@@ -44,10 +44,15 @@ export const mixed = (choices, seed) => {
 // <, > and = to choose from (with `prompt`, if any, above).
 //
 // With `draw`, only that many of the questions are played, picked at random each time (the first
-// ones on the page drawn on the server, until the browser picks).
+// ones on the page drawn on the server, until the browser picks). With `translations`, each answer
+// has its Spanish behind a flag.
 export default function QuizGame({ exercise }) {
-  const { instructions, questions, keepOrder, draw } = exercise;
+  const {
+    instructions, questions, keepOrder, draw, translations,
+  } = exercise;
   const text = useStrings();
+  // An answer's Spanish, when the part gives it (`translations`, by answer), for its flag.
+  const translated = choice => (translations?.[choice] ? { es: translations[choice] } : undefined);
   const [index, setIndex] = useState(0);
   const [tried, setTried] = useState([]);
   const [solved, setSolved] = useState(false);
@@ -149,7 +154,7 @@ export default function QuizGame({ exercise }) {
                   <SmallSpeaker type="button" onClick={() => speak(choice, text.lang)} aria-label={text.listenTo(choice)}>
                     <SpeakerIcon />
                   </SmallSpeaker>
-                  <Explain word={choice} variant="chip" />
+                  <Explain word={choice} meaning={translated(choice)} variant="chip" />
                 </Choice>
               );
             })}
