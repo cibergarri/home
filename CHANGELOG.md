@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.33.0](https://github.com/cibergarri/home/compare/v1.32.0...v1.33.0) (2026-11-19)
+
+
+### Features
+
+* **study-corner:** add a Diagrams page to Social Science unit 2, with a local council mind map ([75bbe6f](https://github.com/cibergarri/home/commit/75bbe6fa94a8b0b539fe7e3fa1a8b59ba0ea8543))
+
 # [1.32.0](https://github.com/cibergarri/home/compare/v1.31.0...v1.32.0) (2026-11-12)
 
 
