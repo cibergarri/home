@@ -2,74 +2,11 @@
 // felt-tip, with the Spanish in grey under each word. 1200 × 870: the council in the middle, then
 // the municipality (top left), who is in it (top right), where it works (left), who chooses it
 // (right) and the local services along the bottom. The two hand fonts come from the study corner's
-// layout (--font-sketch-title, --font-sketch).
+// layout, through ./sketch.
 
-const INK = '#263043';
-const PENCIL = '#6b7487';
-const PAPER = '#fdfdfb';
-const YELLOW = '#ffe066';
-const MINT = '#a8e6c9';
-const PINK = '#ffb3c7';
-const SKY = '#9fd3f5';
-const ORANGE = '#ffc98b';
-const RED = '#f2635f';
-const GREEN = '#4cc38a';
-
-const TITLE_FONT = 'var(--font-sketch-title), var(--font-sketch), cursive';
-const HAND_FONT = 'var(--font-sketch), cursive';
-
-const ink = {
-  stroke: INK, strokeWidth: 3, fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round',
-};
-const THIN = 2;
-
-function Title({
-  x, y, size, mid, children,
-}) {
-  return (
-    <text x={x} y={y} fontSize={size} fill={INK} textAnchor={mid ? 'middle' : 'start'} style={{ fontFamily: TITLE_FONT, fontWeight: 700 }}>
-      {children}
-    </text>
-  );
-}
-
-function Hand({
-  x, y, size, mid, grey, children,
-}) {
-  return (
-    <text x={x} y={y} fontSize={size} fill={grey ? PENCIL : INK} textAnchor={mid ? 'middle' : 'start'} style={{ fontFamily: HAND_FONT }}>
-      {children}
-    </text>
-  );
-}
-
-// A highlighter stroke behind a title.
-function Marker({
-  x, y, width, colour, tilt,
-}) {
-  return (
-    <rect
-      x={x}
-      y={y}
-      width={width}
-      height={30}
-      rx={6}
-      fill={colour}
-      opacity={0.75}
-      transform={`rotate(${tilt} ${x + width / 2} ${y + 15})`}
-    />
-  );
-}
-
-function Stick({ x, y, r }) {
-  const body = r * 2.8;
-  return (
-    <g>
-      <circle cx={x} cy={y} r={r} fill={PAPER} />
-      <path d={`M${x} ${y + r} L${x} ${y + r + body} M${x - r * 1.4} ${y + r + body * 0.35} L${x + r * 1.4} ${y + r + body * 0.35} M${x} ${y + r + body} L${x - r * 0.9} ${y + r + body + r * 1.8} M${x} ${y + r + body} L${x + r * 0.9} ${y + r + body + r * 1.8}`} />
-    </g>
-  );
-}
+import {
+  INK, PAPER, YELLOW, MINT, PINK, SKY, ORANGE, RED, GREEN, THIN, ink, Title, Hand, Marker, SketchDefs, Stick,
+} from './sketch';
 
 const SERVICES = [
   { x: 120, en: ['Libraries'], es: 'bibliotecas' },
@@ -84,15 +21,7 @@ const SERVICES = [
 export default function LocalCouncilMap() {
   return (
     <g>
-      <defs>
-        <filter id="local-council-rough" x="-5%" y="-5%" width="110%" height="110%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" />
-        </filter>
-        <marker id="local-council-head" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
-          <path d="M1 1 L10 6 L1 11" fill="none" stroke={INK} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-        </marker>
-      </defs>
+      <SketchDefs id="local-council" />
 
       {/* Arrows out of the centre */}
       <g {...ink} filter="url(#local-council-rough)" markerEnd="url(#local-council-head)">

@@ -9,7 +9,7 @@ import { speak } from '../speech';
 import { SpeakerIcon } from '../game';
 import { meaningOf } from '../exercises/glossary';
 import {
-  Flag, Bubble, BubbleHead, BubblePhoto, Photo, BubbleText, BubbleListen,
+  Flag, Bubble, BubbleHead, BubblePhoto, Photo, Sketch, BubbleText, BubbleListen,
 } from './style';
 
 // Whether the words of the subject being studied are explained in Spanish.
@@ -32,7 +32,7 @@ const placeFor = (flag, photo) => {
 };
 
 // A Spanish flag beside a word: tapped, a bubble says in Spanish, in a few words, what it means,
-// shows a photo of it when there is one, and can read it aloud. Nothing when the subject does not explain its words or the word is not in
+// shows a photo or a drawing of it when there is one, and can read it aloud. Nothing when the subject does not explain its words or the word is not in
 // the glossary. `variant` sizes the flag for where it sits: a word card, a coloured tile, a box on
 // a picture or a line of text.
 export default function Explain({ word, variant = 'inline' }) {
@@ -70,7 +70,7 @@ export default function Explain({ word, variant = 'inline' }) {
   // On the page itself, above any transformed or contained box that would trap a fixed bubble.
   const toggle = () => setPlace(place ? null : {
     host: flagRef.current.closest('[data-study-page]') ?? document.body,
-    style: placeFor(flagRef.current, Boolean(meaning.photo)),
+    style: placeFor(flagRef.current, Boolean(meaning.photo || meaning.drawing)),
   });
 
   return (
@@ -97,6 +97,11 @@ export default function Explain({ word, variant = 'inline' }) {
               <Photo src={meaning.photo.src} alt={meaning.es} />
               <figcaption>{`Foto: ${meaning.photo.credit}`}</figcaption>
             </BubblePhoto>
+          )}
+          {meaning.drawing && (
+            <Sketch viewBox="0 0 300 200" role="img" aria-label={meaning.es}>
+              <meaning.drawing />
+            </Sketch>
           )}
           <BubbleText>{meaning.text}</BubbleText>
           <BubbleListen type="button" onClick={() => speak(`${meaning.es}. ${meaning.text}`, 'es')}>

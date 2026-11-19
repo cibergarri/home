@@ -143,8 +143,16 @@ const GAMES = {
   word: WordGame,
 };
 
+// A part with `explain: false` has no Spanish flags, where they would give the answer away.
 function Game({ part }) {
   const Kind = GAMES[part.type ?? 'label'];
+  if (part.explain === false) {
+    return (
+      <ExplainContext.Provider value={false}>
+        <Kind exercise={part} />
+      </ExplainContext.Provider>
+    );
+  }
   return <Kind exercise={part} />;
 }
 

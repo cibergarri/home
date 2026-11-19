@@ -115,6 +115,22 @@ export const Photo = styled.img`
   background: #f3ead2;
 `;
 
+// A drawing in place of a photo, on a squared notebook page like the mind maps.
+export const Sketch = styled.svg`
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  margin: 6px 0 10px;
+  border-radius: 12px;
+  background-color: #fdfdfb;
+  background-image:
+    linear-gradient(#dbe6f2 1px, transparent 1px),
+    linear-gradient(90deg, #dbe6f2 1px, transparent 1px);
+  background-size: 14px 14px;
+  box-shadow: inset 0 0 0 2px #dbe6f2;
+`;
+
 export const BubbleText = styled.p`
   margin: 0 0 10px;
   font-size: 19px;

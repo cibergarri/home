@@ -1,5 +1,8 @@
+import { RULES } from '../drawings/LivingTogether';
+
 // What the Social Science words mean, in Spanish and in a few words, for Julia to look up, most with
-// a real photo from Wikimedia Commons (see public/study-corner/photos/CREDITS.md). Keyed by the English
+// a real photo from Wikimedia Commons (see public/study-corner/photos/CREDITS.md) and some with a
+// drawing (a component, drawn 300 × 200). Keyed by the English
 // word, in lower case and in the singular unless it is only used in the plural.
 export const GLOSSARY = {
   landscape: {
@@ -343,6 +346,57 @@ export const GLOSSARY = {
     es: 'servicios municipales',
     text: 'Lo que el ayuntamiento organiza para todos: bibliotecas, parques, autobuses, las bicis de Bicibur…',
     photo: { src: '/study-corner/photos/local-services.jpg', credit: 'Jardoz, CC BY-SA 3.0' },
+  },
+  // Rules for living together: a drawing instead of a photo (see ../drawings/LivingTogether).
+  'use the bins and keep the streets clean': {
+    es: 'usar las papeleras y mantener limpias las calles',
+    text: 'Tiramos los papeles a la papelera.',
+    drawing: RULES.bins,
+  },
+  'separate your rubbish into different containers': {
+    es: 'separar la basura en distintos contenedores',
+    text: 'Amarillo: plásticos y latas. Azul: papel y cartón. Verde: vidrio.',
+    drawing: RULES.separate,
+  },
+  'walk your dog on a lead': {
+    es: 'pasear al perro con correa',
+    text: 'El perro va atado con la correa.',
+    drawing: RULES.lead,
+  },
+  'clean up after your dog': {
+    es: 'recoger lo que ensucia tu perro',
+    text: 'Recogemos la caca del perro con una bolsa.',
+    drawing: RULES.cleanUp,
+  },
+  'look after the things we share': {
+    es: 'cuidar las cosas que compartimos',
+    text: 'Los columpios, los bancos y las fuentes son de todos.',
+    drawing: RULES.lookAfter,
+  },
+  'offer your seat to people who need it': {
+    es: 'ceder tu asiento a quien lo necesita',
+    text: 'Dejamos el asiento a una persona mayor.',
+    drawing: RULES.seat,
+  },
+  'drop litter on the street': {
+    es: 'tirar basura a la calle',
+    text: 'Tirar papeles y latas al suelo.',
+    drawing: RULES.litter,
+  },
+  'paint on the walls': {
+    es: 'pintar en las paredes',
+    text: 'Hacer pintadas en las paredes.',
+    drawing: RULES.walls,
+  },
+  'shout and disturb other people at night': {
+    es: 'gritar y molestar a los demás por la noche',
+    text: 'Hacer ruido cuando los vecinos duermen.',
+    drawing: RULES.shout,
+  },
+  'break the swings in the park': {
+    es: 'romper los columpios del parque',
+    text: 'Estropear los columpios que usamos todos.',
+    drawing: RULES.break,
   },
   'cardinal points': { es: 'puntos cardinales', text: 'Norte, sur, este y oeste. Nos ayudan a orientarnos.' },
   north: { es: 'norte', text: 'Hacia arriba en el mapa.' },

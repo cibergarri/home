@@ -26,6 +26,7 @@ const livingTogether = {
     {
       title: 'Choose the rule',
       type: 'quiz',
+      explain: false, // the flags and drawings would show which rule is the good one
       instructions: 'Which one is the good rule?',
       questions: [
         { prompt: 'Litter on the street', choices: ['Don’t drop litter on the street.', 'Drop litter on the street.'], answer: 'Don’t drop litter on the street.' },

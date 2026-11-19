@@ -4,6 +4,7 @@ import { renderWithProviders } from '@/test-utils';
 import { findSubject } from '../subjects';
 import { GLOSSARY, meaningOf } from '../exercises/glossary';
 import Explain, { ExplainContext } from '.';
+import { Exercise } from '..';
 
 const explaining = ui => renderWithProviders(<ExplainContext.Provider value>{ui}</ExplainContext.Provider>);
 
@@ -22,19 +23,39 @@ describe('Explain', () => {
       .forEach(({ word }) => expect([word, meaningOf(word)]).toEqual([word, expect.objectContaining({ es: expect.any(String) })]));
   });
 
-  it('has a photo for each word it explains, apart from the directions and the parts', () => {
+  it('has a photo or a drawing for each word it explains, apart from the directions and the parts', () => {
     const fs = jest.requireActual('fs');
     const path = jest.requireActual('path');
     Object.entries(GLOSSARY).filter(([, { photo }]) => photo).forEach(([word, { photo }]) => {
       expect([word, fs.existsSync(path.join(process.cwd(), 'public', photo.src))]).toEqual([word, true]);
       expect(photo.credit).toMatch(/, (CC|FAL)/);
     });
-    expect(Object.keys(GLOSSARY).filter(word => !GLOSSARY[word].photo)).toEqual(
+    expect(Object.keys(GLOSSARY).filter(word => !GLOSSARY[word].photo && !GLOSSARY[word].drawing)).toEqual(
       [
         'parts of a mountain', 'parts of a river',
         'cardinal points', 'north', 'south', 'east', 'west',
       ],
     );
+  });
+
+  it('has a drawing for every card of the rules for living together', () => {
+    const rules = findSubject('social-science').units[1].exercises.find(({ slug }) => slug === 'living-together');
+    rules.cards.forEach(({ text }) => expect([text, typeof meaningOf(text)?.drawing]).toEqual([text, 'function']));
+  });
+
+  it('leaves the flags out of Choose the rule, where they would give the answer away', () => {
+    renderWithProviders(<Exercise subject="social-science" unit="unit-2" exercise="living-together" />);
+    expect(screen.getByRole('button', { name: '¿Qué significa Walk your dog on a lead?' })).toBeInTheDocument();
+    const quiz = screen.getByRole('heading', { name: 'Choose the rule' }).parentElement;
+    expect(within(quiz).queryAllByRole('button', { name: /^¿Qué significa/ })).toHaveLength(0);
+  });
+
+  it('shows the drawing in the bubble when the word has one', () => {
+    explaining(<Explain word="Clean up after your dog" />);
+    fireEvent.click(screen.getByRole('button', { name: '¿Qué significa Clean up after your dog?' }));
+    const bubble = screen.getByRole('dialog', { name: 'Clean up after your dog' });
+    expect(within(bubble).getByRole('img', { name: 'recoger lo que ensucia tu perro' }).tagName).toBe('svg');
+    expect(within(bubble).queryByText(/^Foto: /)).not.toBeInTheDocument();
   });
 
   it('looks words up in the plural, in brackets or with an article', () => {
