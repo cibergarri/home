@@ -2,6 +2,7 @@ import { screen } from '@testing-library/react';
 
 import { renderWithProviders } from '@/test-utils';
 import diagrams from '../exercises/social-science/unit-2/diagrams';
+import englishDiagrams from '../exercises/english/unit-2/diagrams';
 import Diagram from '.';
 
 describe('Diagram', () => {
@@ -19,5 +20,13 @@ describe('Diagram', () => {
     expect(screen.getByRole('img', { name: /The local council governs the municipality/ })).toBeInTheDocument();
     expect(screen.getByText('Town hall')).toBeInTheDocument();
     expect(screen.getByText('recogida de basura')).toBeInTheDocument();
+  });
+
+  it('shows There is and There are, with the short answers', () => {
+    renderWithProviders(<Diagram exercise={englishDiagrams} />);
+    expect(screen.getByRole('img', { name: /Are there two bathrooms\?/ })).toBeInTheDocument();
+    expect(screen.getByText('There aren’t')).toBeInTheDocument();
+    expect(screen.getByText('No, there isn’t.')).toBeInTheDocument();
+    expect(screen.getByText('Yes, there are.')).toBeInTheDocument();
   });
 });

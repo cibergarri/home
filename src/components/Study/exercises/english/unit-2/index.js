@@ -5,7 +5,8 @@ import whereDoYouLive from './where-do-you-live';
 import furniture from './furniture';
 import materials from './materials';
 import review from './review';
+import diagrams from './diagrams';
 
-const unit2 = [rooms, theresThereAre, story, whereDoYouLive, furniture, materials, review];
+const unit2 = [rooms, theresThereAre, story, whereDoYouLive, furniture, materials, review, diagrams];
 
 export default unit2;

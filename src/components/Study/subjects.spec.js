@@ -108,7 +108,7 @@ describe("Julia's study pages", () => {
       ...[
         ['welcome', ['family', 'greetings', 'whos-that', 'story', 'review']],
         ['unit-1', ['days-of-the-week', 'places-at-school', 'wheres', 'positions', 'rules-and-games', 'story-phrases', 'numbers', 'review']],
-        ['unit-2', ['rooms', 'theres-there-are', 'story', 'where-do-you-live', 'furniture', 'materials', 'review']],
+        ['unit-2', ['rooms', 'theres-there-are', 'story', 'where-do-you-live', 'furniture', 'materials', 'review', 'diagrams']],
         ['unit-3', ['clothes', 'what-are-you-wearing', 'the-scarecrow', 'put-on-your-sweater', 'new-and-old', 'seasons', 'school-uniforms', 'review']],
         ['unit-4', ['hair', 'hes-got', 'a-new-star', 'im-brave', 'has-she-got', 'portraits', 'dressing-up', 'review']],
         ['unit-5', ['camp-activities', 'i-want-to', 'fun-at-camp', 'whose-turn', 'do-you-want-to', 'lets-move', 'countryside', 'unit-review']],
