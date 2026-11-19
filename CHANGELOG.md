@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.36.0](https://github.com/cibergarri/home/compare/v1.35.0...v1.36.0) (2026-11-19)
+
+
+### Features
+
+* **study-corner:** ask Is the (bed) in the (attic)? on the house, as on English activity book p18 ([dc4c076](https://github.com/cibergarri/home/commit/dc4c076ff6d7a35941d123a5b16dc34469f24e3b))
+
 # [1.35.0](https://github.com/cibergarri/home/compare/v1.34.0...v1.35.0) (2026-11-19)
 
 
