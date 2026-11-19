@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.37.0](https://github.com/cibergarri/home/compare/v1.36.0...v1.37.0) (2026-11-19)
+
+
+### Features
+
+* **study-corner:** match the local council through Spanish, highlight key words, link to the maps ([9c4cf7d](https://github.com/cibergarri/home/commit/9c4cf7d706e84103fd6ee1b8213a37806e832a2b))
+
 # [1.36.0](https://github.com/cibergarri/home/compare/v1.35.0...v1.36.0) (2026-11-19)
 
 
