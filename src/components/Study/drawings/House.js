@@ -171,3 +171,33 @@ export default function House() {
     </g>
   );
 }
+
+// Where each room is on the house, to light it up.
+const ROOMS = {
+  attic: 'M318,205 L525,62 L732,205 Z',
+  bedroom: 'M302,207 h296 v171 h-296 Z',
+  bathroom: 'M602,207 h196 v171 h-196 Z',
+  hall: 'M302,382 h136 v176 h-136 Z',
+  'living room': 'M442,382 h176 v176 h-176 Z',
+  kitchen: 'M622,382 h176 v176 h-176 Z',
+  garage: 'M798,388 h188 v172 h-188 Z',
+  garden: 'M10,215 h270 v345 h-270 Z',
+};
+
+export const ROOM_NAMES = Object.keys(ROOMS);
+
+// The house with one room lit up and the rest dimmed, for Is the (bed) in the (attic)?
+export function HouseRoom({ room }) {
+  const id = `house-room-${room.replace(' ', '-')}`;
+  return (
+    <g>
+      <House />
+      <mask id={id}>
+        <rect width={1000} height={640} fill="#fff" />
+        <path d={ROOMS[room]} fill="#000" />
+      </mask>
+      <rect width={1000} height={640} fill="#24324a" opacity={0.55} mask={`url(#${id})`} />
+      <path d={ROOMS[room]} fill="none" stroke="#ffd23f" strokeWidth={8} strokeLinejoin="round" />
+    </g>
+  );
+}

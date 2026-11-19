@@ -11,6 +11,8 @@ import restar from '../exercises/mates/restar';
 import tablas from '../exercises/mates/tablas';
 import repaso from '../exercises/mates/repaso';
 import problemas from '../exercises/mates/problemas';
+import isItIn from '../exercises/english/unit-2/is-it-in';
+import { ROOM_NAMES } from '../drawings/House';
 import { ALL_SUBJECTS } from '../subjects';
 import QuizGame, { mixed } from '.';
 
@@ -107,6 +109,21 @@ describe('QuizGame', () => {
       .flatMap(part => part.questions)
       .filter(question => !question.compare)
       .forEach(({ choices, answer }) => expect(choices).toContain(answer));
+  });
+
+  it('asks if each thing is in a room of the house, and lights that room up', () => {
+    const where = {
+      bed: 'bedroom', sofa: 'living room', shower: 'bathroom', fridge: 'kitchen', cooker: 'kitchen', car: 'garage',
+    };
+    isItIn.questions.forEach(({ prompt, scene, answer }) => {
+      const [, thing, room] = prompt.match(/^Is the (\w+) in the ([\w ]+)\?$/);
+      expect(ROOM_NAMES).toContain(room);
+      expect(scene.props.room).toBe(room);
+      expect([prompt, answer]).toEqual([prompt, where[thing] === room ? 'Yes, it is.' : 'No, it isn’t.']);
+    });
+    renderWithProviders(<QuizGame exercise={isItIn} />);
+    expect(screen.getByRole('img')).toBeInTheDocument();
+    expect(screen.getByText(/^Is the \w+ in the [\w ]+\?$/)).toBeInTheDocument();
   });
 
   it('mixes the choices, the same way every time, so the right one is not always first', () => {
