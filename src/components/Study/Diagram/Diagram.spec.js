@@ -3,6 +3,7 @@ import { screen } from '@testing-library/react';
 import { renderWithProviders } from '@/test-utils';
 import diagrams from '../exercises/social-science/unit-2/diagrams';
 import englishDiagrams from '../exercises/english/unit-2/diagrams';
+import verbToBe from '../exercises/english/class-notes/verb-to-be';
 import { KEY } from '../drawings/sketch';
 import Diagram from '.';
 
@@ -30,5 +31,12 @@ describe('Diagram', () => {
     expect(screen.getByText('There aren’t')).toBeInTheDocument();
     expect(screen.getByText('No, there isn’t.')).toBeInTheDocument();
     expect(screen.getByText('Yes, there are.')).toBeInTheDocument();
+  });
+
+  it('shows the verb to be from the class notes', () => {
+    renderWithProviders(<Diagram exercise={verbToBe} />);
+    expect(screen.getByRole('img', { name: /Am goes with I/ })).toBeInTheDocument();
+    expect(screen.getByText('nosotros somos / estamos')).toBeInTheDocument();
+    expect(screen.getByText('Which one?')).toBeInTheDocument();
   });
 });

@@ -21,8 +21,16 @@ import {
 // a right one stays, a wrong one shakes the box and goes back. With `draw`, only that many rows,
 // picked at random each time. At the end, the rows gone wrong can be looked at again, and filled
 // in again on their own.
+//
+// A row can instead have its `words`, one for every column, and `given`, the column of the one
+// shown: the others are to find, as in a table with the word given in any column (a diminutive,
+// the word, or an augmentative).
 const cellId = (rowId, column) => `${rowId}:${column}`;
-const tilesFor = rows => rows.flatMap(row => row.cells.map((word, column) => ({ id: cellId(row.id, column), word })));
+const wordsOf = row => row.words ?? [row.word, ...row.cells];
+const givenOf = row => row.given ?? 0;
+const tilesFor = rows => rows.flatMap(row => wordsOf(row)
+  .map((word, column) => ({ id: cellId(row.id, column), word }))
+  .filter((tile, column) => column !== givenOf(row)));
 
 export default function TableGame({ exercise }) {
   const strings = useStrings();
@@ -66,15 +74,16 @@ export default function TableGame({ exercise }) {
     setSelected(null);
     const [rowId, column] = boxId.split(':');
     const row = rowsById[rowId];
-    const wanted = row.cells[Number(column)];
+    const wanted = wordsOf(row)[Number(column)];
+    const prompt = `${columns[Number(column)]} de ${wordsOf(row)[givenOf(row)]}`;
     if (tiles[tileId].word === wanted) {
       setFilled(current => ({ ...current, [boxId]: tileId }));
       speak(wanted, strings.lang);
-      setMessage({ kind: 'right', text: `${columns[Number(column) + 1]} de ${row.word}: ${wanted}` });
+      setMessage({ kind: 'right', text: `${prompt}: ${wanted}` });
       return;
     }
     slip({
-      item: rowId, prompt: `${columns[Number(column) + 1]} de ${row.word}`, wrong: tiles[tileId].word, right: wanted,
+      item: rowId, prompt, wrong: tiles[tileId].word, right: wanted,
     });
     setWrong(boxId);
     clearTimeout(wrongTimer.current);
@@ -116,34 +125,35 @@ export default function TableGame({ exercise }) {
       <Instructions>{instructions}</Instructions>
       <Table $count={columns.length} role="table" aria-label={columns.join(', ')}>
         {columns.map(title => <Heading key={title} role="columnheader">{title}</Heading>)}
-        {rows.map(row => [
-          <RowWord key={row.id} type="button" onClick={() => speak(row.word, strings.lang)}>{row.word}</RowWord>,
-          ...row.cells.map((word, column) => {
-            const id = cellId(row.id, column);
-            const label = `${columns[column + 1]} de ${row.word}`;
-            if (filled[id]) {
-              return (
-                <FilledCell key={id} type="button" onClick={() => speak(word, strings.lang)} aria-label={`${label}: ${word}`}>
-                  {`✓ ${word}`}
-                </FilledCell>
-              );
-            }
+        {rows.map(row => wordsOf(row).map((word, column) => {
+          const shown = wordsOf(row)[givenOf(row)];
+          if (column === givenOf(row)) {
+            return <RowWord key={row.id} type="button" onClick={() => speak(word, strings.lang)}>{word}</RowWord>;
+          }
+          const id = cellId(row.id, column);
+          const label = `${columns[column]} de ${shown}`;
+          if (filled[id]) {
             return (
-              <EmptyCell
-                key={id}
-                ref={(element) => { boxes.current[id] = element; }}
-                type="button"
-                onClick={() => onBoxClick(id)}
-                aria-label={label}
-                $ready={Boolean(selected)}
-                $over={over === id}
-                $wrong={wrong === id}
-              >
-                ?
-              </EmptyCell>
+              <FilledCell key={id} type="button" onClick={() => speak(word, strings.lang)} aria-label={`${label}: ${word}`}>
+                {`✓ ${word}`}
+              </FilledCell>
             );
-          }),
-        ])}
+          }
+          return (
+            <EmptyCell
+              key={id}
+              ref={(element) => { boxes.current[id] = element; }}
+              type="button"
+              onClick={() => onBoxClick(id)}
+              aria-label={label}
+              $ready={Boolean(selected)}
+              $over={over === id}
+              $wrong={wrong === id}
+            >
+              ?
+            </EmptyCell>
+          );
+        }))}
       </Table>
 
       <Bottom>

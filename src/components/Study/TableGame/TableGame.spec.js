@@ -63,4 +63,21 @@ describe('TableGame', () => {
     expect(screen.getAllByRole('button', { name: /^Sinónimo de / })).toHaveLength(1);
     expect(screen.getByText('0 of 2 done')).toBeInTheDocument();
   });
+
+  it('shows the word of a row in any column, and asks for the other two', () => {
+    const table = {
+      instructions: 'Completa el cuadro.',
+      columns: ['Diminutivo', 'Palabra', 'Aumentativo'],
+      rows: [{ id: 'tortuga', words: ['tortuguita', 'tortuga', 'tortugaza'], given: 0 }],
+    };
+    renderWithProviders(<TableGame exercise={table} />);
+    expect(screen.getByRole('button', { name: 'tortuguita' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'tortugaza' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Palabra de tortuguita' }));
+    expect(screen.getByRole('button', { name: 'Palabra de tortuguita' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'tortuga' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Palabra de tortuguita' }));
+    expect(screen.getByText('✓ Palabra de tortuguita: tortuga')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Palabra de tortuguita: tortuga' })).toBeInTheDocument();
+  });
 });

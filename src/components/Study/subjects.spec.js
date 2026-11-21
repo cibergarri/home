@@ -114,6 +114,7 @@ describe("Julia's study pages", () => {
         ['unit-5', ['camp-activities', 'i-want-to', 'fun-at-camp', 'whose-turn', 'do-you-want-to', 'lets-move', 'countryside', 'unit-review']],
         ['unit-6', ['summer-places', 'in-summer', 'a-safari-adventure', 'wheres-the-funfair', 'by-car', 'moving-around', 'summer-activities', 'unit-review', 'review']],
         ['festivals', ['halloween', 'christmas', 'holi']],
+        ['class-notes', ['verb-to-be']],
       ].flatMap(([unit, exercises]) => exercises.map(exercise => ({ subject: 'english', unit, exercise }))),
     ]);
   });

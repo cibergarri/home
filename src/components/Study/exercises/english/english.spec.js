@@ -9,7 +9,7 @@ const ofType = type => parts.filter(part => (part.type ?? 'label') === type);
 
 describe('English', () => {
   it('has every unit of the book, in order', () => {
-    expect(units.map(unit => unit.slug)).toEqual(['welcome', 'unit-1', 'unit-2', 'unit-3', 'unit-4', 'unit-5', 'unit-6', 'festivals']);
+    expect(units.map(unit => unit.slug)).toEqual(['welcome', 'unit-1', 'unit-2', 'unit-3', 'unit-4', 'unit-5', 'unit-6', 'festivals', 'class-notes']);
   });
 
   it('has exercises with different names in each unit', () => {

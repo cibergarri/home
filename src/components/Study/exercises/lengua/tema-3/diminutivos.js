@@ -3,6 +3,12 @@
 const DIMINUTIVO = { id: 'dim', title: 'Diminutivo (más pequeño)', colour: '#a6db8a' };
 const AUMENTATIVO = { id: 'aum', title: 'Aumentativo (más grande)', colour: '#f5a8c8' };
 
+// A row of the table on the worksheet: the diminutive, the word and the augmentative, with only the
+// one in the column `given` shown.
+const row = (diminutivo, palabra, aumentativo, given) => ({
+  id: palabra.normalize('NFD').replace(/[\u0300-\u036f]/g, ''), words: [diminutivo, palabra, aumentativo], given,
+});
+
 const diminutivos = {
   slug: 'diminutivos',
   title: 'Diminutivos y aumentativos',
@@ -25,6 +31,28 @@ const diminutivos = {
     { id: 'animalillos', word: 'animalillos', crayon: 'dim' },
   ],
   more: [
+    {
+      title: 'Completa el cuadro',
+      type: 'table',
+      instructions: 'Como en la ficha: casita es más pequeño que casa, y casota más grande. En cada fila hay una palabra; busca las otras dos. Arrastra cada palabra a su caja, o tócala y después toca la caja.',
+      columns: ['Diminutivo', 'Palabra', 'Aumentativo'],
+      draw: 6,
+      rows: [
+        row('nubecita', 'nube', 'nubarrón', 1),
+        row('tortuguita', 'tortuga', 'tortugaza', 0),
+        row('cucharita', 'cuchara', 'cucharón', 2),
+        row('fresita', 'fresa', 'fresaza', 0),
+        row('cochecito', 'coche', 'cochazo', 1),
+        row('perrito', 'perro', 'perrazo', 2),
+        row('pelotita', 'pelota', 'pelotaza', 1),
+        row('peliculita', 'película', 'peliculón', 2),
+        row('jaboncillo', 'jabón', 'jabonazo', 0),
+        row('tacita', 'taza', 'tazón', 1),
+        row('manita', 'mano', 'manaza', 2),
+        row('barquito', 'barco', 'barcazo', 0),
+        row('pisito', 'piso', 'pisazo', 2),
+      ],
+    },
     {
       title: 'Respeta el parque natural',
       type: 'quiz',

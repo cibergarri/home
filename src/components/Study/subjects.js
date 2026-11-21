@@ -29,6 +29,7 @@ import englishUnit3 from './exercises/english/unit-3';
 import englishUnit4 from './exercises/english/unit-4';
 import englishUnit5 from './exercises/english/unit-5';
 import englishUnit6 from './exercises/english/unit-6';
+import englishClassNotes from './exercises/english/class-notes';
 import numerosDeDosCifras from './exercises/mates/numeros-de-dos-cifras';
 import comparar from './exercises/mates/comparar';
 import aproximar from './exercises/mates/aproximar';
@@ -343,6 +344,12 @@ export const ALL_SUBJECTS = [
         title: 'Festivals',
         icon: '🎉',
         exercises: englishFestivals,
+      },
+      {
+        slug: 'class-notes',
+        title: 'Class notes',
+        icon: '📒',
+        exercises: englishClassNotes,
       },
     ],
   },

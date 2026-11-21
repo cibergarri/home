@@ -29,7 +29,9 @@ describe('Lengua', () => {
 
   it('has a word for every column of a table, and a row only once', () => {
     ofType('table').forEach(({ columns, rows }) => {
-      rows.forEach(({ word, cells }) => expect(`${word} → ${cells.length}`).toBe(`${word} → ${columns.length - 1}`));
+      rows.forEach(({
+        id, word, cells, words,
+      }) => expect(`${id} → ${words?.length ?? [word, ...cells].length}`).toBe(`${id} → ${columns.length}`));
       const ids = rows.map(({ id }) => id);
       expect(new Set(ids).size).toBe(ids.length);
     });
