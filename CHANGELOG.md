@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.38.0](https://github.com/cibergarri/home/compare/v1.37.0...v1.38.0) (2026-11-21)
+
+
+### Features
+
+* **study-corner:** add English class notes with the verb to be, and the Lengua worksheet table ([30ea63d](https://github.com/cibergarri/home/commit/30ea63d0e4ed238fcc086b7add2bd3d53bd6e508))
+
 # [1.37.0](https://github.com/cibergarri/home/compare/v1.36.0...v1.37.0) (2026-11-19)
 
 
