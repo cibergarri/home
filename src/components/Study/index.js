@@ -19,6 +19,7 @@ import MoneyGame from './MoneyGame';
 import TableGame from './TableGame';
 import GapsGame from './GapsGame';
 import JoinGame from './JoinGame';
+import SpotGame from './SpotGame';
 import WordGame from './WordGame';
 import ScrapPaper from './ScrapPaper';
 import Explain, { ExplainContext } from './Explain';
@@ -144,6 +145,7 @@ const GAMES = {
   table: TableGame,
   gaps: GapsGame,
   join: JoinGame,
+  spot: SpotGame,
   word: WordGame,
 };
 

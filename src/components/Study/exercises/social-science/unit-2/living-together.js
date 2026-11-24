@@ -1,6 +1,8 @@
+import Neighbourhood, { BEHAVIOURS } from '../../../drawings/Neighbourhood';
+
 // Social Science, unit 2, pages 26–27: rules for living together. Our neighbours are the people
 // who live near us; we respect each other and follow rules in the neighbourhood. First the rules of
-// page 26 with their Spanish.
+// page 26 with their Spanish, then the good and bad behaviours of page 27 in a street.
 const livingTogether = {
   slug: 'living-together',
   title: 'Rules for living together',
@@ -19,6 +21,20 @@ const livingTogether = {
     { id: 'help', en: 'Help our neighbours.', es: 'Ayuda a tus vecinos.' },
   ],
   more: [
+    {
+      title: 'Good or bad behaviour?',
+      type: 'spot',
+      instructions: 'As on page 27: find the good and the bad behaviours in the street.',
+      hint: 'Tap a person in the picture.',
+      width: 1200,
+      height: 640,
+      Drawing: Neighbourhood,
+      answers: [
+        { id: 'good', label: '⭕ Good behaviour', mark: 'circle' },
+        { id: 'bad', label: '❌ Bad behaviour', mark: 'cross' },
+      ],
+      spots: BEHAVIOURS.map(({ good, ...spot }) => ({ ...spot, answer: good ? 'good' : 'bad' })),
+    },
     {
       title: 'Choose the rule',
       type: 'quiz',
@@ -42,17 +58,6 @@ const livingTogether = {
         { prompt: 'The walls', choices: ['Don’t paint on the walls.', 'Paint on the walls.'], answer: 'Don’t paint on the walls.' },
         { prompt: 'Your dog', choices: ['Walk your dog on a lead.', 'Let your dog run anywhere.'], answer: 'Walk your dog on a lead.' },
         { prompt: 'Rubbish', choices: ['Separate your rubbish into different containers.', 'Put all your rubbish on the pavement.'], answer: 'Separate your rubbish into different containers.' },
-      ],
-    },
-    {
-      title: 'Our neighbours',
-      type: 'quiz',
-      instructions: 'Our neighbours are the people who live near us. Read and choose.',
-      questions: [
-        { prompt: 'Who are our neighbours?', choices: ['The people who live near us', 'The people who live in another country'], answer: 'The people who live near us' },
-        { prompt: 'How can you help your neighbours?', choices: ['Say hello and be kind', 'Make a lot of noise'], answer: 'Say hello and be kind' },
-        { prompt: 'What do good neighbours do?', choices: ['They respect each other', 'They disturb other people'], answer: 'They respect each other' },
-        { prompt: 'In the neighbourhood, good neighbours follow the…', choices: ['rules', 'cars', 'birds'], answer: 'rules' },
       ],
     },
   ],

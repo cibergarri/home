@@ -46,7 +46,8 @@ describe('Explain', () => {
     expect(flags).toHaveLength(2);
     fireEvent.click(flags[0]);
     expect(within(screen.getByRole('dialog')).getByText(/basura|asiento|paredes|perro/)).toBeInTheDocument();
-    const rules = findSubject('social-science').units[1].exercises.find(({ slug }) => slug === 'living-together').more[0];
+    const rules = findSubject('social-science').units[1].exercises.find(({ slug }) => slug === 'living-together')
+      .more.find(({ title }) => title === 'Choose the rule');
     rules.questions.flatMap(({ choices }) => choices).forEach(choice => expect(rules.translations).toHaveProperty([choice]));
   });
 
