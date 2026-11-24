@@ -12,13 +12,14 @@ import {
   Instructions, Chip, Word, Speaker, Ghost, Message, Progress,
 } from '../LabelMap/style';
 import {
-  Columns, Column, ColumnButton, Sorted, SortedCard, SmallSpeaker, Bottom, Cards,
+  Columns, Column, ColumnButton, Sorted, SortedCard, SmallSpeaker, Bottom, Cards, CardPicture,
 } from './style';
 
 // Cards to sort into columns: each card is dragged (or tapped, then a column's name tapped) into
 // the column it belongs to. A card can belong to more than one column (`columns`), and then any
 // of them is right. A right card stays in its column, a wrong one goes back. At the end, the
-// cards gone wrong can be looked at again, and sorted again on their own.
+// cards gone wrong can be looked at again, and sorted again on their own. A card's `Picture` (a
+// little drawing, 60 × 40) goes before its words.
 export default function SortGame({ exercise }) {
   const strings = useStrings();
   const { instructions, columns } = exercise;
@@ -103,9 +104,10 @@ export default function SortGame({ exercise }) {
             </ColumnButton>
             <Sorted>
               {order.filter(cardId => sorted[cardId] === id).map((cardId) => {
-                const { text } = byId[cardId];
+                const { text, Picture } = byId[cardId];
                 return (
                   <SortedCard key={cardId}>
+                    {Picture && <CardPicture viewBox="0 0 60 40" aria-hidden="true"><Picture /></CardPicture>}
                     {text}
                     <SmallSpeaker type="button" onClick={() => speak(text, strings.lang)} aria-label={strings.listenTo(text)}>
                       <SpeakerIcon />
@@ -124,10 +126,11 @@ export default function SortGame({ exercise }) {
           <>
             <Cards aria-label={strings.cardsTray}>
               {order.filter(id => !sorted[id]).map((id) => {
-                const { text } = byId[id];
+                const { text, Picture } = byId[id];
                 return (
                   <Chip key={id} $selected={selected === id} $dragging={drag?.id === id}>
                     <Word type="button" aria-pressed={selected === id} {...handlersFor(id)} onClick={event => onCardClick(event, id)}>
+                      {Picture && <CardPicture viewBox="0 0 60 40" aria-hidden="true"><Picture /></CardPicture>}
                       {text}
                     </Word>
                     <Speaker type="button" onClick={() => speak(text, strings.lang)} aria-label={strings.listenTo(text)}>

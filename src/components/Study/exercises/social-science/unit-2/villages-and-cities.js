@@ -1,5 +1,8 @@
 // Social Science, unit 2 (We love our neighbourhood), pages 24–25: villages, towns and cities.
-// Cities and towns are large and busy; villages are small and quiet.
+// Cities and towns are large and busy; villages are small and quiet. With exercises 1 and 2 of
+// page 25: join each picture to village or city, and each to what it is like.
+import { Village, City, LIKE } from '../../../drawings/VillageOrCity';
+
 const villagesAndCities = {
   slug: 'villages-and-cities',
   title: 'Villages, towns and cities',
@@ -12,19 +15,67 @@ const villagesAndCities = {
     { id: 'city', title: 'City or town', subtitle: 'Large and busy' },
   ],
   cards: [
-    { id: 'few-inhabitants', text: 'There are few inhabitants', columns: ['village'] },
-    { id: 'many-inhabitants', text: 'There are many inhabitants', columns: ['city'] },
-    { id: 'low-buildings', text: 'Most of the buildings are low', columns: ['village'] },
-    { id: 'tall-buildings', text: 'Most of the buildings are tall', columns: ['city'] },
-    { id: 'narrow-streets', text: 'The streets are narrow and short', columns: ['village'] },
-    { id: 'wide-streets', text: 'The streets are long and wide', columns: ['city'] },
-    { id: 'little-traffic', text: 'There is not much traffic', columns: ['village'] },
-    { id: 'lots-of-traffic', text: 'There is a lot of traffic', columns: ['city'] },
-    { id: 'few-houses', text: 'Few houses', columns: ['village'] },
-    { id: 'many-houses', text: 'Many houses', columns: ['city'] },
-    { id: 'neighbourhoods', text: 'It has different neighbourhoods', columns: ['city'] },
+    {
+      id: 'few-inhabitants', text: 'There are few inhabitants', columns: ['village'], Picture: LIKE.fewPeople,
+    },
+    {
+      id: 'many-inhabitants', text: 'There are many inhabitants', columns: ['city'], Picture: LIKE.manyPeople,
+    },
+    {
+      id: 'low-buildings', text: 'Most of the buildings are low', columns: ['village'], Picture: LIKE.lowBuildings,
+    },
+    {
+      id: 'tall-buildings', text: 'Most of the buildings are tall', columns: ['city'], Picture: LIKE.tallBuildings,
+    },
+    {
+      id: 'narrow-streets', text: 'The streets are narrow and short', columns: ['village'], Picture: LIKE.narrowStreets,
+    },
+    {
+      id: 'wide-streets', text: 'The streets are long and wide', columns: ['city'], Picture: LIKE.wideStreets,
+    },
+    {
+      id: 'little-traffic', text: 'There is not much traffic', columns: ['village'], Picture: LIKE.littleTraffic,
+    },
+    {
+      id: 'lots-of-traffic', text: 'There is a lot of traffic', columns: ['city'], Picture: LIKE.lotsOfTraffic,
+    },
+    {
+      id: 'few-houses', text: 'Few houses', columns: ['village'], Picture: LIKE.fewHouses,
+    },
+    {
+      id: 'many-houses', text: 'Many houses', columns: ['city'], Picture: LIKE.manyHouses,
+    },
+    {
+      id: 'neighbourhoods', text: 'It has different neighbourhoods', columns: ['city'], Picture: LIKE.neighbourhoods,
+    },
   ],
   more: [
+    {
+      title: 'Which one is it?',
+      type: 'join',
+      instructions: 'As on page 25: is it a village or a city? Tap a picture, then join it to its word.',
+      left: [{ id: 'village', text: 'village' }, { id: 'city', text: 'city' }],
+      right: [
+        {
+          id: 'city-picture', to: 'city', text: 'Many tall buildings, a wide street and a lot of traffic.', Drawing: City,
+        },
+        {
+          id: 'village-picture', to: 'village', text: 'A few low houses, a little church and green hills.', Drawing: Village,
+        },
+      ],
+    },
+    {
+      title: 'What are they like?',
+      type: 'join',
+      instructions: 'As on page 25: what are cities and villages like? Tap a word, then join it to villages or cities.',
+      left: [{ id: 'villages', text: 'villages' }, { id: 'cities', text: 'cities' }],
+      right: [
+        { id: 'few-houses', text: 'few houses', to: 'villages' },
+        { id: 'many-houses', text: 'many houses', to: 'cities' },
+        { id: 'tall-buildings', text: 'tall buildings', to: 'cities' },
+        { id: 'low-buildings', text: 'low buildings', to: 'villages' },
+      ],
+    },
     {
       title: 'Busy or quiet?',
       type: 'quiz',

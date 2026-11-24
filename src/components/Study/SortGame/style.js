@@ -89,6 +89,15 @@ export const SortedCard = styled.li`
   line-height: 1.25;
 `;
 
+/* A card's little picture, before its words. */
+export const CardPicture = styled.svg`
+  flex: none;
+  width: 60px;
+  height: 40px;
+  margin-right: 8px;
+  vertical-align: middle;
+`;
+
 export const SmallSpeaker = styled.button`
   flex: none;
   display: flex;
