@@ -1,6 +1,7 @@
 // Social Science, unit 2, page 33 (Language makers): safe routes. Kelly's route to school by bike,
-// read and answered, then where cars, bikes and pedestrians go. The story is told in the
-// instructions so it stays on screen while she answers.
+// read and answered, then where cars, bikes and pedestrians go: the rules of the page, with the
+// words dragged into their gaps, and then as questions. The story is told in the instructions so
+// it stays on screen while she answers.
 const safeRoutes = {
   slug: 'safe-routes',
   title: 'Safe routes',
@@ -16,6 +17,16 @@ const safeRoutes = {
     { prompt: 'When do they cross the road?', choices: ['When the traffic lights turn green', 'When the traffic lights are red'], answer: 'When the traffic lights turn green' },
   ],
   more: [
+    {
+      title: 'Complete the rules',
+      type: 'gaps',
+      instructions: 'As on page 33: drag each word to its gap, or tap it and then tap the gap.',
+      sentences: [
+        'Cars drive on the [road].',
+        'Bikes ride on the [cycle lane].',
+        'Pedestrians walk on the [pavement].',
+      ],
+    },
     {
       title: 'Who goes where?',
       type: 'quiz',

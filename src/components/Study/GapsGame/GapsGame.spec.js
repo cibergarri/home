@@ -1,6 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 
 import { renderWithProviders } from '@/test-utils';
+import safeRoutes from '../exercises/social-science/unit-2/safe-routes';
 import localCouncil from '../exercises/social-science/unit-2/local-council';
 import GapsGame from '.';
 
@@ -28,5 +29,13 @@ describe('GapsGame', () => {
     expect(speak).toHaveBeenLastCalledWith(expect.objectContaining({ text: 'The mayor is the head of the local council.' }));
     expect(screen.getAllByRole('button', { name: /^Gap/ })).toHaveLength(6);
     expect(screen.getByText('1 of 7 done')).toBeInTheDocument();
+  });
+
+  it('completes the road safety rules of page 33', () => {
+    renderWithProviders(<GapsGame exercise={safeRoutes.more[0]} />);
+    expect(screen.getAllByRole('button', { name: /^Gap/ })).toHaveLength(3);
+    fireEvent.click(screen.getByRole('button', { name: 'cycle lane' }));
+    fireEvent.click(screen.getAllByRole('button', { name: 'Gap 1' })[1]);
+    expect(screen.getByText('✓ Bikes ride on the cycle lane.')).toBeInTheDocument();
   });
 });
