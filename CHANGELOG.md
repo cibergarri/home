@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.40.0](https://github.com/cibergarri/home/compare/v1.39.0...v1.40.0) (2026-11-24)
+
+
+### Features
+
+* **study-corner:** draw the road safety rules of page 28, and drop Kelly's route to school ([da78ee0](https://github.com/cibergarri/home/commit/da78ee090402c06913a4d868adf57e6c13beb3a7))
+* **study-corner:** join the village and city of page 25, with little pictures on the cards ([6828fc6](https://github.com/cibergarri/home/commit/6828fc64b1a065daddc8b951bf072a03290d4716))
+* **study-corner:** put the safe routes of page 33 at the end of Road safety ([41ffe78](https://github.com/cibergarri/home/commit/41ffe78b97d012d1e62ec37f3ce91ce4101ceaf7))
+
 # [1.39.0](https://github.com/cibergarri/home/compare/v1.38.0...v1.39.0) (2026-11-24)
 
 
