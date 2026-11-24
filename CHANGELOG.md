@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.39.0](https://github.com/cibergarri/home/compare/v1.38.0...v1.39.0) (2026-11-24)
+
+
+### Features
+
+* **study-corner:** complete the road safety rules of page 33 by dragging the words into the gaps ([9d23f35](https://github.com/cibergarri/home/commit/9d23f35bc70c0d1d6a0f7b369c23655fe58f9e93))
+* **study-corner:** split the local council into Spanish and meaning matches, add gaps of p31 ([db0eb47](https://github.com/cibergarri/home/commit/db0eb47c763488090e58dacbb491124d09072da6))
+
 # [1.38.0](https://github.com/cibergarri/home/compare/v1.37.0...v1.38.0) (2026-11-21)
 
 
