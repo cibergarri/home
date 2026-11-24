@@ -33,7 +33,8 @@ const LINKS = { plain: [['left', 'right']], middle: [['left', 'middle'], ['middl
 // is joined with a line. The speaker and the flag go under each card's words. When every pair has
 // a `translation`, a row of the words in Spanish goes in between: each word is joined to its
 // Spanish first, and the Spanish to what it means. A pair's `meaningEs` is what it means in
-// Spanish, behind a flag on that card.
+// Spanish, behind a flag on that card (on a plain board too). With `explain: false`, the words have
+// no flag: when the Spanish is what is matched, it would give it away.
 //
 // With `draw`, only that many of the pairs are matched, picked at random each time (the first ones
 // on the page drawn on the server, until the browser picks).
@@ -187,7 +188,7 @@ export default function MatchGame({ exercise }) {
         </Picture>
       );
     }
-    const tools = side === 'left' || diagram;
+    const tools = side === 'left' || diagram || (side === 'right' && Boolean(pair.meaningEs));
     return (
       <Card
         key={id}
@@ -214,7 +215,7 @@ export default function MatchGame({ exercise }) {
             <CardSpeaker type="button" data-speaker onClick={() => speak(said, lang)} aria-label={text.listenTo(said)}>
               <SpeakerIcon />
             </CardSpeaker>
-            {side === 'left' && <Explain word={pair.en} variant="chip" />}
+            {side === 'left' && exercise.explain !== false && <Explain word={pair.en} variant="chip" />}
             {side === 'right' && pair.meaningEs && <Explain word={pair.es} meaning={{ es: pair.meaningEs }} variant="chip" />}
           </CardTools>
         )}

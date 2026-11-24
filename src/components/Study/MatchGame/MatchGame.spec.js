@@ -104,7 +104,15 @@ describe('MatchGame', () => {
   });
 
   it('joins each word to its Spanish first, then the Spanish to what it means, with a flag for its Spanish', () => {
-    renderWithProviders(<ExplainContext.Provider value><MatchGame exercise={localCouncil} /></ExplainContext.Provider>);
+    // The words of the local council, the way it was matched before: through a Spanish row.
+    const [whoIsWho] = localCouncil.more;
+    const throughSpanish = {
+      ...whoIsWho,
+      root: 'The local council',
+      columns: ['Word', 'In Spanish', 'What is it?'],
+      pairs: whoIsWho.pairs.map(pair => ({ ...pair, translation: localCouncil.pairs.find(({ id }) => id === pair.id).es })),
+    };
+    renderWithProviders(<ExplainContext.Provider value><MatchGame exercise={throughSpanish} /></ExplainContext.Provider>);
     const words = screen.getByRole('list', { name: 'Word' });
     const spanishRow = screen.getByRole('list', { name: 'In Spanish' });
     const meanings = screen.getByRole('list', { name: 'What is it?' });
@@ -134,5 +142,31 @@ describe('MatchGame', () => {
 
     fireEvent.click(within(meanings).getByRole('button', { name: '¿Qué significa The head of the local council.?' }));
     expect(within(screen.getByRole('dialog')).getByText('La persona que dirige el ayuntamiento.')).toBeInTheDocument();
+  });
+
+  it('matches the local council words to their Spanish with no flags, then to what they mean with one', () => {
+    const { unmount } = renderWithProviders(<ExplainContext.Provider value><MatchGame exercise={localCouncil} /></ExplainContext.Provider>);
+    expect(screen.queryByRole('button', { name: /Qué significa/ })).not.toBeInTheDocument();
+    fireEvent.click(within(screen.getByRole('list', { name: 'Word' })).getByRole('button', { name: 'Mayor' }));
+    fireEvent.click(within(screen.getByRole('list', { name: 'In Spanish' })).getByRole('button', { name: 'alcalde o alcaldesa' }));
+    expect(screen.getByText('✓ Mayor = alcalde o alcaldesa')).toBeInTheDocument();
+    unmount();
+
+    renderWithProviders(<ExplainContext.Provider value><MatchGame exercise={localCouncil.more[0]} /></ExplainContext.Provider>);
+    const meanings = screen.getByRole('list', { name: 'What is it?' });
+    expect(screen.queryAllByTestId('join')).toHaveLength(0); // side by side, not a diagram
+    fireEvent.click(within(meanings).getByRole('button', { name: '¿Qué significa The head of the local council.?' }));
+    expect(within(screen.getByRole('dialog')).getByText('La persona que dirige el ayuntamiento.')).toBeInTheDocument();
+  });
+
+  it('matches the local services to their Spanish', () => {
+    const services = localCouncil.more[1];
+    expect(services.pairs.map(pair => pair.en)).toEqual([
+      'Public transport', 'Rubbish collection', 'Cultural events', 'Museums and libraries', 'Parks and gardens', 'Police and traffic',
+    ]);
+    renderWithProviders(<MatchGame exercise={services} />);
+    fireEvent.click(within(screen.getByRole('list', { name: 'Local service' })).getByRole('button', { name: 'Parks and gardens' }));
+    fireEvent.click(within(screen.getByRole('list', { name: 'In Spanish' })).getByRole('button', { name: 'parques y jardines' }));
+    expect(screen.getByText('✓ Parks and gardens = parques y jardines')).toBeInTheDocument();
   });
 });

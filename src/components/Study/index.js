@@ -17,6 +17,7 @@ import TowerGame from './TowerGame';
 import LetterGame from './LetterGame';
 import MoneyGame from './MoneyGame';
 import TableGame from './TableGame';
+import GapsGame from './GapsGame';
 import WordGame from './WordGame';
 import ScrapPaper from './ScrapPaper';
 import Explain, { ExplainContext } from './Explain';
@@ -140,6 +141,7 @@ const GAMES = {
   letters: LetterGame,
   money: MoneyGame,
   table: TableGame,
+  gaps: GapsGame,
   word: WordGame,
 };
 
