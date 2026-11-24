@@ -66,27 +66,6 @@ const localCouncil = {
       pairs: SERVICES,
     },
     {
-      title: 'Local services',
-      type: 'sort',
-      instructions: 'The local council organises the local services. Is it a local service?',
-      columns: [
-        { id: 'service', title: '✅ Local service' },
-        { id: 'not', title: '❌ Not a local service' },
-      ],
-      cards: [
-        { id: 'library', text: 'Libraries', columns: ['service'] },
-        { id: 'museum', text: 'Museums', columns: ['service'] },
-        { id: 'parks', text: 'Parks and gardens', columns: ['service'] },
-        { id: 'police', text: 'Police and traffic', columns: ['service'] },
-        { id: 'bus', text: 'Public transport', columns: ['service'] },
-        { id: 'rubbish', text: 'Rubbish collection', columns: ['service'] },
-        { id: 'events', text: 'Cultural events', columns: ['service'] },
-        { id: 'kitchen', text: 'The kitchen at home', columns: ['not'] },
-        { id: 'toys', text: 'My toys', columns: ['not'] },
-        { id: 'bedroom', text: 'My bedroom', columns: ['not'] },
-      ],
-    },
-    {
       title: 'Complete the sentences',
       type: 'gaps',
       instructions: 'As on page 31: drag each word to its gap, or tap it and then tap the gap.',
