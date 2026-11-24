@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.43.0](https://github.com/cibergarri/home/compare/v1.42.0...v1.43.0) (2026-11-24)
+
+
+### Bug Fixes
+
+* **study-corner:** point the road label at the road, not at the car ([651a6fc](https://github.com/cibergarri/home/commit/651a6fcc6ce6ab008c8a0cb8dbafad2a537a8e4e))
+
+
+### Features
+
+* **study-corner:** show English unit 3 ([30a8852](https://github.com/cibergarri/home/commit/30a8852908500895ff6d137886d0332149a86b79))
+
 # [1.42.0](https://github.com/cibergarri/home/compare/v1.41.0...v1.42.0) (2026-11-24)
 
 
