@@ -8,6 +8,7 @@ const light = go => ({ Drawing: PedestrianLight, ...LIGHT, props: { go } });
 const roadSafety = {
   slug: 'road-safety',
   title: 'Road safety',
+  related: { exercise: 'diagrams', part: 'Road safety rules', label: 'Look at the road safety rules' },
   instructions: 'Drag each word to its box on the street. Tap the speaker to hear it.',
   width: 1000,
   height: 640,

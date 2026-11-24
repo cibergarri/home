@@ -19,7 +19,7 @@ describe('Diagram', () => {
   });
 
   it('shows the mind map of the local council', () => {
-    renderWithProviders(<Diagram exercise={diagrams.more[0]} />);
+    renderWithProviders(<Diagram exercise={diagrams.more.find(part => part.title === 'The local council')} />);
     expect(screen.getByRole('img', { name: /The local council governs the municipality/ })).toBeInTheDocument();
     expect(screen.getByText('TOWN HALL')).toHaveAttribute('fill', KEY);
     expect(screen.getByText('recogida de basura')).toBeInTheDocument();
@@ -38,5 +38,12 @@ describe('Diagram', () => {
     expect(screen.getByRole('img', { name: /Am goes with I/ })).toBeInTheDocument();
     expect(screen.getByText('nosotros somos / estamos')).toBeInTheDocument();
     expect(screen.getByText('Which one?')).toBeInTheDocument();
+  });
+
+  it('shows the road safety rules of page 28', () => {
+    renderWithProviders(<Diagram exercise={diagrams.more.find(part => part.title === 'Road safety rules')} />);
+    expect(screen.getByRole('img', { name: /Always wear a seatbelt in the car/ })).toBeInTheDocument();
+    expect(screen.getByText('SEATBELT')).toHaveAttribute('fill', KEY);
+    expect(screen.getByText('Cruza por los pasos de peatones.')).toBeInTheDocument();
   });
 });

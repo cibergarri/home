@@ -32,7 +32,7 @@ describe('GapsGame', () => {
   });
 
   it('completes the road safety rules of page 33', () => {
-    renderWithProviders(<GapsGame exercise={safeRoutes.more[0]} />);
+    renderWithProviders(<GapsGame exercise={safeRoutes} />);
     expect(screen.getAllByRole('button', { name: /^Gap/ })).toHaveLength(3);
     fireEvent.click(screen.getByRole('button', { name: 'cycle lane' }));
     fireEvent.click(screen.getAllByRole('button', { name: 'Gap 1' })[1]);

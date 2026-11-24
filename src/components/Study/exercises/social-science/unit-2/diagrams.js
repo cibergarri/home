@@ -1,8 +1,10 @@
 import VillagesAndCitiesMap from '../../../drawings/VillagesAndCitiesMap';
+import RoadSafetyRules from '../../../drawings/RoadSafetyRules';
 import LocalCouncilMap from '../../../drawings/LocalCouncilMap';
 
 // Social Science, unit 2: mind maps to look at, to go over the unit, in the order of the book:
-// villages, towns and cities (pages 24–25), then the local council (pages 30–31).
+// villages, towns and cities (pages 24–25), the road safety rules (page 28), then the local council
+// (pages 30–31).
 const diagrams = {
   slug: 'diagrams',
   title: 'Diagrams',
@@ -17,6 +19,19 @@ const diagrams = {
     + 'inhabitants, tall buildings, long and wide streets, a lot of traffic, and many houses in different neighbourhoods.',
   note: 'Grey words are in Spanish.',
   more: [
+    {
+      title: 'Road safety rules',
+      type: 'diagram',
+      instructions: 'Look at the rules of page 28. Which ones do you follow on your way to school?',
+      width: 1200,
+      height: 940,
+      Drawing: RoadSafetyRules,
+      description: 'Road safety rules. To avoid road accidents, obey the rules and respect the road signs. '
+        + '1. Always walk on the pavements, not in the road. 2. Cross the road at the pedestrian crossings. '
+        + '3. Always respect the traffic lights and road signs. 4. Wear protection when riding a bike or a scooter. '
+        + '5. Always wear a seatbelt in the car. 6. Get out on the safer side of the car.',
+      note: 'Grey words are in Spanish.',
+    },
     {
       title: 'The local council',
       type: 'diagram',
