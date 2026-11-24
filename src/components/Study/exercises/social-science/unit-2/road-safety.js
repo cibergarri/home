@@ -49,8 +49,8 @@ const roadSafety = {
           id: 'road',
           word: 'Road',
           definition: 'Where cars, buses and lorries drive.',
-          dot: [150, 410],
-          box: [180, 560],
+          dot: [300, 410],
+          box: [300, 560],
         },
         {
           id: 'road-sign',
