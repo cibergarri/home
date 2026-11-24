@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.41.0](https://github.com/cibergarri/home/compare/v1.40.0...v1.41.0) (2026-11-24)
+
+
+### Features
+
+* **study-corner:** draw the rules for living together, match them to Spanish, flag village cards ([4be6573](https://github.com/cibergarri/home/commit/4be6573337566723565d6eb35cabf15d3c795e40))
+* **study-corner:** drop the Find it on the map questions from Read a street map ([06535f3](https://github.com/cibergarri/home/commit/06535f36dad5cffc1f18caee46b49e7b647a4215))
+* **study-corner:** drop the local service or not sorting from The local council ([b6ff3d5](https://github.com/cibergarri/home/commit/b6ff3d5e595f0685b6b3d9831bd163542d5d4f5a))
+
 # [1.40.0](https://github.com/cibergarri/home/compare/v1.39.0...v1.40.0) (2026-11-24)
 
 
