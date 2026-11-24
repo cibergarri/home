@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.42.0](https://github.com/cibergarri/home/compare/v1.41.0...v1.42.0) (2026-11-24)
+
+
+### Features
+
+* **study-corner:** find good and bad behaviours in a street, match road safety rules to Spanish ([15cdb02](https://github.com/cibergarri/home/commit/15cdb02e08764583bfe3bd040f842f7ce26d8eb6))
+* **study-corner:** highlight the key words on the cards of Village or city? ([1bfbd8e](https://github.com/cibergarri/home/commit/1bfbd8e867c180e225321f87767db49049a3f1c4))
+
 # [1.41.0](https://github.com/cibergarri/home/compare/v1.40.0...v1.41.0) (2026-11-24)
 
 
