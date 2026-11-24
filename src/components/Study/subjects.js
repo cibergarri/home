@@ -11,7 +11,6 @@ import livingTogether from './exercises/social-science/unit-2/living-together';
 import roadSafety from './exercises/social-science/unit-2/road-safety';
 import localCouncil from './exercises/social-science/unit-2/local-council';
 import streetMap from './exercises/social-science/unit-2/street-map';
-import safeRoutes from './exercises/social-science/unit-2/safe-routes';
 import reviewSocial2 from './exercises/social-science/unit-2/review';
 import diagramsSocial2 from './exercises/social-science/unit-2/diagrams';
 import daysOfTheWeek from './exercises/english/days-of-the-week';
@@ -120,7 +119,7 @@ export const ALL_SUBJECTS = [
         title: 'Unit 2',
         icon: '🏘️',
         exercises: [
-          villagesAndCities, livingTogether, roadSafety, localCouncil, streetMap, safeRoutes, reviewSocial2, diagramsSocial2,
+          villagesAndCities, livingTogether, roadSafety, localCouncil, streetMap, reviewSocial2, diagramsSocial2,
         ],
       },
     ],

@@ -2,7 +2,8 @@ import Street, { PedestrianLight, LIGHT } from '../../../drawings/Street';
 
 // Social Science, unit 2, pages 28–29: road safety. To avoid road accidents, we obey the road safety
 // rules and respect road signs. First the street is labelled (the workbook's "observe and write the
-// numbers"), then when to cross, then the rules. `dot` and `box` are in the drawing's 1000 × 640.
+// numbers"), then when to cross, then the rules, and at the end the safe routes of page 33: where
+// cars, bikes and pedestrians go. `dot` and `box` are in the drawing's 1000 × 640.
 const light = go => ({ Drawing: PedestrianLight, ...LIGHT, props: { go } });
 
 const roadSafety = {
@@ -82,6 +83,28 @@ const roadSafety = {
         { prompt: 'How do you get out of the car?', choices: ['On the safer side, by the pavement', 'On the side of the road'], answer: 'On the safer side, by the pavement' },
         { prompt: 'What do you always respect?', choices: ['The traffic lights and road signs', 'Only the cars'], answer: 'The traffic lights and road signs' },
         { prompt: 'Why do we follow road safety rules?', choices: ['To avoid road accidents', 'To get there first'], answer: 'To avoid road accidents' },
+      ],
+    },
+    {
+      title: 'Safe routes',
+      type: 'gaps',
+      instructions: 'As on page 33: complete the rules. Drag each word to its gap, or tap it and then tap the gap.',
+      sentences: [
+        'Cars drive on the [road].',
+        'Bikes ride on the [cycle lane].',
+        'Pedestrians walk on the [pavement].',
+      ],
+    },
+    {
+      title: 'Who goes where?',
+      type: 'quiz',
+      instructions: 'Complete the rules about road safety.',
+      keepOrder: true,
+      questions: [
+        { prompt: 'Cars drive on the …', choices: ['road', 'cycle lane', 'pavement'], answer: 'road' },
+        { prompt: 'Bikes ride on the …', choices: ['road', 'cycle lane', 'pavement'], answer: 'cycle lane' },
+        { prompt: 'Pedestrians walk on the …', choices: ['road', 'cycle lane', 'pavement'], answer: 'pavement' },
+        { prompt: 'Before you cross: stop and …', choices: ['look', 'run', 'jump'], answer: 'look' },
       ],
     },
   ],

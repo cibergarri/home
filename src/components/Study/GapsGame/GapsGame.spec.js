@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 
 import { renderWithProviders } from '@/test-utils';
-import safeRoutes from '../exercises/social-science/unit-2/safe-routes';
+import roadSafety from '../exercises/social-science/unit-2/road-safety';
 import localCouncil from '../exercises/social-science/unit-2/local-council';
 import GapsGame from '.';
 
@@ -32,7 +32,7 @@ describe('GapsGame', () => {
   });
 
   it('completes the road safety rules of page 33', () => {
-    renderWithProviders(<GapsGame exercise={safeRoutes} />);
+    renderWithProviders(<GapsGame exercise={roadSafety.more.find(part => part.title === 'Safe routes')} />);
     expect(screen.getAllByRole('button', { name: /^Gap/ })).toHaveLength(3);
     fireEvent.click(screen.getByRole('button', { name: 'cycle lane' }));
     fireEvent.click(screen.getAllByRole('button', { name: 'Gap 1' })[1]);
