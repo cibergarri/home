@@ -16,47 +16,47 @@ const villagesAndCities = {
   ],
   cards: [
     {
-      id: 'few-inhabitants', text: 'There are few inhabitants', columns: ['village'], Picture: LIKE.fewPeople,
+      id: 'few-inhabitants', text: 'There are *few inhabitants*', columns: ['village'], Picture: LIKE.fewPeople,
       es: 'Hay pocos habitantes',
     },
     {
-      id: 'many-inhabitants', text: 'There are many inhabitants', columns: ['city'], Picture: LIKE.manyPeople,
+      id: 'many-inhabitants', text: 'There are *many inhabitants*', columns: ['city'], Picture: LIKE.manyPeople,
       es: 'Hay muchos habitantes',
     },
     {
-      id: 'low-buildings', text: 'Most of the buildings are low', columns: ['village'], Picture: LIKE.lowBuildings,
+      id: 'low-buildings', text: 'Most of the buildings are *low*', columns: ['village'], Picture: LIKE.lowBuildings,
       es: 'La mayoría de los edificios son bajos',
     },
     {
-      id: 'tall-buildings', text: 'Most of the buildings are tall', columns: ['city'], Picture: LIKE.tallBuildings,
+      id: 'tall-buildings', text: 'Most of the buildings are *tall*', columns: ['city'], Picture: LIKE.tallBuildings,
       es: 'La mayoría de los edificios son altos',
     },
     {
-      id: 'narrow-streets', text: 'The streets are narrow and short', columns: ['village'], Picture: LIKE.narrowStreets,
+      id: 'narrow-streets', text: 'The streets are *narrow* and *short*', columns: ['village'], Picture: LIKE.narrowStreets,
       es: 'Las calles son estrechas y cortas',
     },
     {
-      id: 'wide-streets', text: 'The streets are long and wide', columns: ['city'], Picture: LIKE.wideStreets,
+      id: 'wide-streets', text: 'The streets are *long* and *wide*', columns: ['city'], Picture: LIKE.wideStreets,
       es: 'Las calles son largas y anchas',
     },
     {
-      id: 'little-traffic', text: 'There is not much traffic', columns: ['village'], Picture: LIKE.littleTraffic,
+      id: 'little-traffic', text: 'There is *not much* traffic', columns: ['village'], Picture: LIKE.littleTraffic,
       es: 'No hay mucho tráfico',
     },
     {
-      id: 'lots-of-traffic', text: 'There is a lot of traffic', columns: ['city'], Picture: LIKE.lotsOfTraffic,
+      id: 'lots-of-traffic', text: 'There is *a lot of* traffic', columns: ['city'], Picture: LIKE.lotsOfTraffic,
       es: 'Hay mucho tráfico',
     },
     {
-      id: 'few-houses', text: 'Few houses', columns: ['village'], Picture: LIKE.fewHouses,
+      id: 'few-houses', text: '*Few* houses', columns: ['village'], Picture: LIKE.fewHouses,
       es: 'Pocas casas',
     },
     {
-      id: 'many-houses', text: 'Many houses', columns: ['city'], Picture: LIKE.manyHouses,
+      id: 'many-houses', text: '*Many* houses', columns: ['city'], Picture: LIKE.manyHouses,
       es: 'Muchas casas',
     },
     {
-      id: 'neighbourhoods', text: 'It has different neighbourhoods', columns: ['city'], Picture: LIKE.neighbourhoods,
+      id: 'neighbourhoods', text: 'It has different *neighbourhoods*', columns: ['city'], Picture: LIKE.neighbourhoods,
       es: 'Tiene distintos barrios',
     },
   ],

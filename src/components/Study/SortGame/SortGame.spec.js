@@ -2,6 +2,7 @@ import { fireEvent, screen, within } from '@testing-library/react';
 
 import { renderWithProviders } from '@/test-utils';
 import rivers from '../exercises/rivers';
+import villagesAndCities from '../exercises/social-science/unit-2/villages-and-cities';
 import SortGame from '.';
 
 const sorting = rivers.more.find(part => part.type === 'sort');
@@ -40,5 +41,12 @@ describe('SortGame', () => {
     sorting.cards.forEach(({ text, columns }) => sortInto(text, columns[0]));
     expect(screen.getByText('Well done!')).toBeInTheDocument();
     expect(screen.getByLabelText('3 out of 3 stars')).toBeInTheDocument();
+  });
+
+  it('highlights the key words of a card, and says it without the stars', () => {
+    renderWithProviders(<SortGame exercise={villagesAndCities} />);
+    expect(screen.getByText('a lot of').tagName).toBe('MARK');
+    expect(screen.getByRole('button', { name: 'There is a lot of traffic', pressed: false })).toBeInTheDocument();
+    expect(screen.getByText('many inhabitants').tagName).toBe('MARK');
   });
 });

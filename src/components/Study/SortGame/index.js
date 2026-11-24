@@ -12,8 +12,12 @@ import {
   Instructions, Chip, Word, Speaker, Ghost, Message, Progress,
 } from '../LabelMap/style';
 import {
-  Columns, Column, ColumnButton, Sorted, SortedCard, SmallSpeaker, Bottom, Cards, CardPicture,
+  Columns, Column, ColumnButton, Sorted, SortedCard, SmallSpeaker, Bottom, Cards, CardPicture, Key,
 } from './style';
+
+// The words of a card with its key words, between stars ("There is *a lot of* traffic"), highlighted.
+const marked = text => text.split(/(\*[^*]+\*)/).filter(Boolean)
+  .map((part, n) => (part.startsWith('*') ? <Key key={`${n}-${part}`}>{part.slice(1, -1)}</Key> : part));
 
 // Cards to sort into columns: each card is dragged (or tapped, then a column's name tapped) into
 // the column it belongs to. A card can belong to more than one column (`columns`), and then any
@@ -36,7 +40,8 @@ export default function SortGame({ exercise }) {
   const zones = useRef({});
   const wrongTimer = useRef(null);
 
-  const byId = Object.fromEntries(cards.map(card => [card.id, card]));
+  // The words as said, without the stars round the key words, which are shown highlighted.
+  const byId = Object.fromEntries(cards.map(card => [card.id, { ...card, text: card.text.replace(/\*/g, ''), shown: card.text }]));
   const sortedCount = Object.keys(sorted).length;
   const finished = sortedCount === cards.length;
 
@@ -105,11 +110,11 @@ export default function SortGame({ exercise }) {
             </ColumnButton>
             <Sorted>
               {order.filter(cardId => sorted[cardId] === id).map((cardId) => {
-                const { text, Picture } = byId[cardId];
+                const { text, shown, Picture } = byId[cardId];
                 return (
                   <SortedCard key={cardId}>
                     {Picture && <CardPicture viewBox="0 0 60 40" aria-hidden="true"><Picture /></CardPicture>}
-                    {text}
+                    <span>{marked(shown)}</span>
                     <SmallSpeaker type="button" onClick={() => speak(text, strings.lang)} aria-label={strings.listenTo(text)}>
                       <SpeakerIcon />
                     </SmallSpeaker>
@@ -127,12 +132,12 @@ export default function SortGame({ exercise }) {
           <>
             <Cards aria-label={strings.cardsTray}>
               {order.filter(id => !sorted[id]).map((id) => {
-                const { text, Picture } = byId[id];
+                const { text, shown, Picture } = byId[id];
                 return (
                   <Chip key={id} $selected={selected === id} $dragging={drag?.id === id}>
                     <Word type="button" aria-pressed={selected === id} {...handlersFor(id)} onClick={event => onCardClick(event, id)}>
                       {Picture && <CardPicture viewBox="0 0 60 40" aria-hidden="true"><Picture /></CardPicture>}
-                      {text}
+                      {marked(shown)}
                     </Word>
                     <Speaker type="button" onClick={() => speak(text, strings.lang)} aria-label={strings.listenTo(text)}>
                       <SpeakerIcon />

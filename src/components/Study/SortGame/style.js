@@ -89,6 +89,15 @@ export const SortedCard = styled.li`
   line-height: 1.25;
 `;
 
+/* A key word of a card, highlighted like a marker pen. */
+export const Key = styled.mark`
+  padding: 0 3px;
+  border-radius: 5px;
+  background: #ffe08a;
+  color: #c2255c;
+  font-weight: 800;
+`;
+
 /* A card's little picture, before its words. */
 export const CardPicture = styled.svg`
   flex: none;
