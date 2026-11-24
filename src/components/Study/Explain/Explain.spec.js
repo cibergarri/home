@@ -38,11 +38,6 @@ describe('Explain', () => {
     );
   });
 
-  it('has a drawing for every card of the rules for living together', () => {
-    const rules = findSubject('social-science').units[1].exercises.find(({ slug }) => slug === 'living-together');
-    rules.cards.forEach(({ text }) => expect([text, typeof meaningOf(text)?.drawing]).toEqual([text, 'function']));
-  });
-
   it('has a flag on every answer of Choose the rule, the good ones and the bad ones', () => {
     renderWithProviders(<Exercise subject="social-science" unit="unit-2" exercise="living-together" />);
     const quiz = screen.getByRole('heading', { name: 'Choose the rule' }).parentElement;
@@ -53,6 +48,12 @@ describe('Explain', () => {
     expect(within(screen.getByRole('dialog')).getByText(/basura|asiento|paredes|perro/)).toBeInTheDocument();
     const rules = findSubject('social-science').units[1].exercises.find(({ slug }) => slug === 'living-together').more[0];
     rules.questions.flatMap(({ choices }) => choices).forEach(choice => expect(rules.translations).toHaveProperty([choice]));
+  });
+
+  it('has the Spanish of every card of Village or city?, behind its flag', () => {
+    renderWithProviders(<Exercise subject="social-science" unit="unit-2" exercise="villages-and-cities" />);
+    fireEvent.click(screen.getByRole('button', { name: '¿Qué significa There are few inhabitants?' }));
+    expect(within(screen.getByRole('dialog')).getByText('Hay pocos habitantes')).toBeInTheDocument();
   });
 
   it('shows the drawing in the bubble when the word has one', () => {

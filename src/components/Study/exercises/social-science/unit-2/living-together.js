@@ -1,26 +1,22 @@
 // Social Science, unit 2, pages 26–27: rules for living together. Our neighbours are the people
-// who live near us; we respect each other and follow rules in the neighbourhood.
+// who live near us; we respect each other and follow rules in the neighbourhood. First the rules of
+// page 26 with their Spanish.
 const livingTogether = {
   slug: 'living-together',
   title: 'Rules for living together',
-  heading: 'Good or bad behaviour?',
-  type: 'sort',
-  instructions: 'The people who live near us are our neighbours. We respect each other. Drag each card: is it good or bad behaviour?',
-  columns: [
-    { id: 'good', title: '✅ Good behaviour', subtitle: 'Good neighbours do it' },
-    { id: 'bad', title: '❌ Bad behaviour', subtitle: 'Good neighbours don’t' },
-  ],
-  cards: [
-    { id: 'bins', text: 'Use the bins and keep the streets clean', columns: ['good'] },
-    { id: 'separate', text: 'Separate your rubbish into different containers', columns: ['good'] },
-    { id: 'lead', text: 'Walk your dog on a lead', columns: ['good'] },
-    { id: 'clean-up', text: 'Clean up after your dog', columns: ['good'] },
-    { id: 'look-after', text: 'Look after the things we share', columns: ['good'] },
-    { id: 'seat', text: 'Offer your seat to people who need it', columns: ['good'] },
-    { id: 'litter', text: 'Drop litter on the street', columns: ['bad'] },
-    { id: 'walls', text: 'Paint on the walls', columns: ['bad'] },
-    { id: 'shout', text: 'Shout and disturb other people at night', columns: ['bad'] },
-    { id: 'break', text: 'Break the swings in the park', columns: ['bad'] },
+  heading: 'Rules in the neighbourhood',
+  type: 'match',
+  related: { exercise: 'diagrams', part: 'Rules for living together', label: 'Look at the rules for living together' },
+  instructions: 'The people who live near us are our neighbours. We respect each other. Tap a rule, then the same rule in Spanish.',
+  explain: false, // the flags would give the Spanish away
+  columns: ['Rule', 'In Spanish'],
+  pairs: [
+    { id: 'bins', en: 'Use the bins and keep the streets clean.', es: 'Usa las papeleras y mantén limpias las calles.' },
+    { id: 'separate', en: 'Separate your rubbish into different containers.', es: 'Separa la basura en distintos contenedores.' },
+    { id: 'dog', en: 'Walk your dog on a lead. Clean up after them.', es: 'Pasea a tu perro con correa y recoge lo que ensucie.' },
+    { id: 'disturb', en: 'Don’t disturb other people.', es: 'No molestes a los demás.' },
+    { id: 'facilities', en: 'Look after the facilities we share.', es: 'Cuida las instalaciones que compartimos.' },
+    { id: 'help', en: 'Help our neighbours.', es: 'Ayuda a tus vecinos.' },
   ],
   more: [
     {

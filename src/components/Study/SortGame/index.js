@@ -19,7 +19,8 @@ import {
 // the column it belongs to. A card can belong to more than one column (`columns`), and then any
 // of them is right. A right card stays in its column, a wrong one goes back. At the end, the
 // cards gone wrong can be looked at again, and sorted again on their own. A card's `Picture` (a
-// little drawing, 60 × 40) goes before its words.
+// little drawing, 60 × 40) goes before its words; its `es` is what it says in Spanish, behind its
+// flag (otherwise the flag is the glossary's, if it has the words).
 export default function SortGame({ exercise }) {
   const strings = useStrings();
   const { instructions, columns } = exercise;
@@ -112,7 +113,7 @@ export default function SortGame({ exercise }) {
                     <SmallSpeaker type="button" onClick={() => speak(text, strings.lang)} aria-label={strings.listenTo(text)}>
                       <SpeakerIcon />
                     </SmallSpeaker>
-                    <Explain word={text} variant="tile" />
+                    <Explain word={text} meaning={byId[cardId].es && { es: byId[cardId].es }} variant="tile" />
                   </SortedCard>
                 );
               })}
@@ -136,7 +137,7 @@ export default function SortGame({ exercise }) {
                     <Speaker type="button" onClick={() => speak(text, strings.lang)} aria-label={strings.listenTo(text)}>
                       <SpeakerIcon />
                     </Speaker>
-                    <Explain word={text} variant="chip" />
+                    <Explain word={text} meaning={byId[id].es && { es: byId[id].es }} variant="chip" />
                   </Chip>
                 );
               })}

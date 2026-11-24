@@ -46,4 +46,11 @@ describe('Diagram', () => {
     expect(screen.getByText('SEATBELT')).toHaveAttribute('fill', KEY);
     expect(screen.getByText('Cruza por los pasos de peatones.')).toBeInTheDocument();
   });
+
+  it('shows the rules for living together of page 26', () => {
+    renderWithProviders(<Diagram exercise={diagrams.more.find(part => part.title === 'Rules for living together')} />);
+    expect(screen.getByRole('img', { name: /Look after the facilities we share/ })).toBeInTheDocument();
+    expect(screen.getByText('FACILITIES')).toHaveAttribute('fill', KEY);
+    expect(screen.getByText('Cuida las instalaciones que compartimos.')).toBeInTheDocument();
+  });
 });

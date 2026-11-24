@@ -1,10 +1,11 @@
 import VillagesAndCitiesMap from '../../../drawings/VillagesAndCitiesMap';
+import LivingTogetherRules from '../../../drawings/LivingTogetherRules';
 import RoadSafetyRules from '../../../drawings/RoadSafetyRules';
 import LocalCouncilMap from '../../../drawings/LocalCouncilMap';
 
 // Social Science, unit 2: mind maps to look at, to go over the unit, in the order of the book:
-// villages, towns and cities (pages 24–25), the road safety rules (page 28), then the local council
-// (pages 30–31).
+// villages, towns and cities (pages 24–25), the rules for living together (page 26), the road safety
+// rules (page 28), then the local council (pages 30–31).
 const diagrams = {
   slug: 'diagrams',
   title: 'Diagrams',
@@ -19,6 +20,19 @@ const diagrams = {
     + 'inhabitants, tall buildings, long and wide streets, a lot of traffic, and many houses in different neighbourhoods.',
   note: 'Grey words are in Spanish.',
   more: [
+    {
+      title: 'Rules for living together',
+      type: 'diagram',
+      instructions: 'Look at the rules of page 26. What can you do to help your neighbours?',
+      width: 1200,
+      height: 940,
+      Drawing: LivingTogetherRules,
+      description: 'Rules for living together. The people who live near us are our neighbours. We respect each other. '
+        + 'We have rules to live together. 1. Use the bins and keep the streets clean. 2. Separate your rubbish into '
+        + 'different containers. 3. Walk your dog on a lead. Clean up after them. 4. Don’t disturb other people. '
+        + '5. Look after the facilities we share. 6. Help our neighbours.',
+      note: 'Grey words are in Spanish.',
+    },
     {
       title: 'Road safety rules',
       type: 'diagram',

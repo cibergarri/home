@@ -1,12 +1,12 @@
 // Social Science, unit 2, page 28: the road safety rules, drawn as a sketchnote with the Spanish in
-// grey. 1200 × 940: the question at the top, then the six rules of the page in two rows of three,
-// each a little picture over its rule, with the key words to remember.
+// grey, on a ./RuleSheet: the six rules of the page, each a little picture over its rule, with the
+// key words to remember.
 import {
   INK, PAPER, YELLOW, MINT, PINK, SKY, ORANGE, RED, GREEN, BLUE, BROWN, GREY, THIN,
-  ink, Title, Hand, Marker, SketchDefs, Person, Car,
+  ink, Hand, Person, Car,
 } from './sketch';
+import RuleSheet from './RuleSheet';
 
-const ROUGH = 'url(#road-rules-rough)';
 const HEAD = 'url(#road-rules-head)';
 const TARMAC = '#9aa3b2';
 
@@ -158,46 +158,14 @@ const RULES = [
   },
 ];
 
-const COLUMNS = [30, 430, 830];
-const ROWS = [210, 580];
-
 export default function RoadSafetyRules() {
   return (
-    <g>
-      <SketchDefs id="road-rules" />
-
-      {/* The question */}
-      <g {...ink} filter={ROUGH}>
-        <ellipse cx={600} cy={84} rx={250} ry={58} fill={YELLOW} />
-        <ellipse cx={603} cy={81} rx={256} ry={61} strokeWidth={THIN} />
-      </g>
-      <Title x={600} y={86} size={44} mid>Road safety rules</Title>
-      <Hand x={600} y={118} size={21} mid grey>las normas de seguridad vial</Hand>
-      <Hand x={600} y={180} size={26} mid>To avoid road *accidents*: obey the *rules* and respect the *road signs*!</Hand>
-
-      {RULES.map(({
-        Picture, colour, en, es,
-      }, n) => {
-        const [x, y] = [COLUMNS[n % 3], ROWS[Math.floor(n / 3)]];
-        return (
-          <g key={es}>
-            <g {...ink} filter={ROUGH}>
-              <rect x={x} y={y} width={340} height={350} rx={20} fill={PAPER} stroke={INK} />
-            </g>
-            <g transform={`translate(${x} ${y + 8})`}>
-              <svg width={340} height={200} viewBox="0 0 340 200" overflow="hidden">
-                <g filter={ROUGH}>
-                  <Picture />
-                </g>
-              </svg>
-            </g>
-            <Marker x={x + 14} y={y + 14} width={36} height={36} colour={colour} tilt={-4} />
-            <Title x={x + 32} y={y + 42} size={30} mid>{n + 1}</Title>
-            {en.map((line, k) => <Hand key={line} x={x + 170} y={y + 248 + k * 32} size={25} mid>{line}</Hand>)}
-            <Hand x={x + 170} y={y + 320} size={18} mid grey>{es}</Hand>
-          </g>
-        );
-      })}
-    </g>
+    <RuleSheet
+      id="road-rules"
+      title="Road safety rules"
+      es="las normas de seguridad vial"
+      intro={['To avoid road *accidents*: obey the *rules* and respect the *road signs*!']}
+      rules={RULES}
+    />
   );
 }
