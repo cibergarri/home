@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.44.0](https://github.com/cibergarri/home/compare/v1.43.0...v1.44.0) (2026-11-26)
+
+
+### Features
+
+* **study-corner:** add Naturales tema 3 and more Naturales tema 2 practice ([a4aaec5](https://github.com/cibergarri/home/commit/a4aaec5528ea401e39dbb82d2812ed534c049055))
+
 # [1.43.0](https://github.com/cibergarri/home/compare/v1.42.0...v1.43.0) (2026-11-24)
 
 
