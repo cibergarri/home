@@ -44,13 +44,52 @@ const alimentacion = {
     {
       title: 'Compara los menús',
       type: 'quiz',
-      instructions: 'MENÚ 1: espaguetis con nata, tortilla de patatas, yogur natural con fruta, agua y pan. MENÚ 2: lentejas con chorizo, filete empanado con patatas, bizcocho, refresco y pan. MENÚ 3: crema de coliflor y patata, salmón con espinacas, macedonia de frutas, agua y pan integral.',
+      instructions: 'Mira los tres menús y contesta.',
+      tables: [
+        {
+          title: 'Menú 1',
+          rows: [
+            ['Primer plato', 'Espaguetis con nata'],
+            ['Segundo plato', 'Tortilla de patatas'],
+            ['Postre', 'Yogur natural con fruta'],
+            ['Para beber', 'Agua y pan'],
+          ],
+        },
+        {
+          title: 'Menú 2',
+          rows: [
+            ['Primer plato', 'Lentejas con chorizo'],
+            ['Segundo plato', 'Filete empanado con patatas'],
+            ['Postre', 'Bizcocho'],
+            ['Para beber', 'Refresco y pan'],
+          ],
+        },
+        {
+          title: 'Menú 3',
+          rows: [
+            ['Primer plato', 'Crema de coliflor y patata'],
+            ['Segundo plato', 'Salmón con espinacas'],
+            ['Postre', 'Macedonia de frutas'],
+            ['Para beber', 'Agua y pan integral'],
+          ],
+        },
+      ],
       keepOrder: true,
       questions: [
+        { prompt: '¿Qué menús contienen alimentos de los tres grupos?', choices: ['Menú 1 y menú 3', 'Solo el menú 2', 'Los tres menús'], answer: 'Menú 1 y menú 3' },
         { prompt: '¿Qué menú no tiene frutas ni verduras?', choices: ['Menú 1', 'Menú 2', 'Menú 3'], answer: 'Menú 2' },
         { prompt: '¿Cuál es el menú menos variado?', choices: ['Menú 1', 'Menú 2', 'Menú 3'], answer: 'Menú 2' },
         { prompt: '¿Qué menú lleva pescado y verdura?', choices: ['Menú 1', 'Menú 2', 'Menú 3'], answer: 'Menú 3' },
         { prompt: '¿Qué menú es más sano?', choices: ['Menú 1', 'Menú 2', 'Menú 3'], answer: 'Menú 3' },
+        {
+          prompt: '¿Por qué el menú 3 es más sano?',
+          choices: [
+            'Tiene verduras, pescado, fruta, pan integral y agua, y nada frito ni con nata',
+            'Porque tiene mucha nata y bizcocho',
+            'Porque se bebe un refresco',
+          ],
+          answer: 'Tiene verduras, pescado, fruta, pan integral y agua, y nada frito ni con nata',
+        },
         { prompt: '¿Qué bebida es menos sana?', choices: ['El refresco', 'El agua'], answer: 'El refresco' },
       ],
     },

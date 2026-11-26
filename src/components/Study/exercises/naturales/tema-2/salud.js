@@ -16,6 +16,30 @@ const salud = {
   ],
   more: [
     {
+      title: 'Completa',
+      type: 'gaps',
+      instructions: 'Lleva cada palabra a su hueco.',
+      sentences: [
+        'Para prevenir enfermedades nos ponemos [vacunas].',
+        'Para curar enfermedades tomamos [medicinas].',
+      ],
+    },
+    {
+      title: '¿Qué profesional es?',
+      type: 'join',
+      instructions: 'Toca lo que hace y únelo al profesional de la salud que corresponda.',
+      left: [
+        { id: 'medico', text: 'Médico' },
+        { id: 'psicologa', text: 'Psicóloga' },
+        { id: 'enfermera', text: 'Enfermera' },
+      ],
+      right: [
+        { id: 'curas', text: 'Realiza las curas y administra las vacunas.', to: 'enfermera' },
+        { id: 'averigua', text: 'Averigua qué enfermedad tenemos y decide cómo curarla.', to: 'medico' },
+        { id: 'emociones', text: 'Nos ayuda cuando tenemos problemas emocionales.', to: 'psicologa' },
+      ],
+    },
+    {
       title: 'Salud y enfermedad',
       type: 'quiz',
       instructions: 'Lee y elige la respuesta correcta.',

@@ -1,3 +1,7 @@
+import {
+  EatingFruit, HealthyPlate, Football, SkippingRope, BrushingTeeth, WashingHands,
+} from '../../../drawings/HealthyHabits';
+
 // Naturales, tema 2: comprueba tu progreso, y «Mi cuestionario de salud» con la respuesta más
 // saludable de cada pregunta.
 const repaso = {
@@ -15,6 +19,24 @@ const repaso = {
     { prompt: 'Las vacunas sirven para…', choices: ['prevenir enfermedades', 'curar una herida'], answer: 'prevenir enfermedades' },
   ],
   more: [
+    {
+      title: 'Alimentación, ejercicio e higiene',
+      type: 'join',
+      instructions: 'Mira cada dibujo. ¿Es un hábito de alimentación, de ejercicio o de higiene? Toca un dibujo y únelo a su hábito.',
+      left: [
+        { id: 'alimentacion', text: 'Alimentación' },
+        { id: 'ejercicio', text: 'Ejercicio' },
+        { id: 'higiene', text: 'Higiene' },
+      ],
+      right: [
+        { id: 'dientes', to: 'higiene', text: 'Se cepilla los dientes.', Drawing: BrushingTeeth },
+        { id: 'futbol', to: 'ejercicio', text: 'Juega al fútbol.', Drawing: Football },
+        { id: 'fruta', to: 'alimentacion', text: 'Come fruta.', Drawing: EatingFruit },
+        { id: 'manos', to: 'higiene', text: 'Se lava las manos con jabón.', Drawing: WashingHands },
+        { id: 'comba', to: 'ejercicio', text: 'Salta a la comba.', Drawing: SkippingRope },
+        { id: 'plato', to: 'alimentacion', text: 'Un plato con pescado y verduras, y agua.', Drawing: HealthyPlate },
+      ],
+    },
     {
       title: 'Mi cuestionario de salud',
       type: 'quiz',

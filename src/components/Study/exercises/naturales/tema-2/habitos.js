@@ -1,3 +1,7 @@
+import {
+  Toothbrush, Toothpaste, Shampoo, Soap, Towel, Comb,
+} from '../../../drawings/Hygiene';
+
 // Naturales, tema 2: ¿tenemos hábitos saludables? La higiene, el ejercicio, las posturas, el
 // descanso y la alimentación.
 const habitos = {
@@ -35,6 +39,27 @@ const habitos = {
         { id: 'dientes-una-vez', text: 'Lavarse los dientes una vez al día', columns: ['no'] },
         { id: 'chuches', text: 'Comer chucherías todos los días', columns: ['no'] },
         { id: 'pantallas', text: 'Pasar toda la tarde con la tableta', columns: ['no'] },
+      ],
+    },
+    {
+      title: '¿Qué es cada cosa?',
+      type: 'join',
+      instructions: 'Usamos estas cosas para nuestra higiene. Toca un nombre y únelo a su dibujo.',
+      left: [
+        { id: 'cepillo', text: 'Cepillo de dientes' },
+        { id: 'pasta', text: 'Pasta de dientes' },
+        { id: 'champu', text: 'Champú' },
+        { id: 'jabon', text: 'Jabón' },
+        { id: 'toalla', text: 'Toalla' },
+        { id: 'peine', text: 'Peine' },
+      ],
+      right: [
+        { id: 'cepillo-dibujo', to: 'cepillo', text: 'Un cepillo de dientes.', Drawing: Toothbrush },
+        { id: 'pasta-dibujo', to: 'pasta', text: 'Un tubo de pasta de dientes.', Drawing: Toothpaste },
+        { id: 'champu-dibujo', to: 'champu', text: 'Un bote de champú con espuma.', Drawing: Shampoo },
+        { id: 'jabon-dibujo', to: 'jabon', text: 'Una pastilla de jabón con burbujas.', Drawing: Soap },
+        { id: 'toalla-dibujo', to: 'toalla', text: 'Una toalla colgada.', Drawing: Towel },
+        { id: 'peine-dibujo', to: 'peine', text: 'Un peine.', Drawing: Comb },
       ],
     },
     {

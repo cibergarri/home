@@ -94,6 +94,14 @@ import accidentes from './exercises/naturales/tema-2/accidentes';
 import ejercicioEmociones from './exercises/naturales/tema-2/ejercicio-emociones';
 import menuSaludable from './exercises/naturales/tema-2/menu-saludable';
 import repasoNaturales2 from './exercises/naturales/tema-2/repaso';
+import clasificamos from './exercises/naturales/tema-3/clasificamos';
+import mamiferosAves from './exercises/naturales/tema-3/mamiferos-aves';
+import pecesReptilesAnfibios from './exercises/naturales/tema-3/peces-reptiles-anfibios';
+import invertebrados from './exercises/naturales/tema-3/invertebrados';
+import habitats from './exercises/naturales/tema-3/habitats';
+import clave from './exercises/naturales/tema-3/clave';
+import cuidamos from './exercises/naturales/tema-3/cuidamos';
+import repasoNaturales3 from './exercises/naturales/tema-3/repaso';
 
 // What Julia is studying: subjects, their units, and the exercises of each unit. A new exercise
 // goes in ./exercises and is listed under its unit here; the pages are generated from this list.
@@ -286,6 +294,12 @@ export const ALL_SUBJECTS = [
         title: 'Tema 2',
         icon: '🩺',
         exercises: [salud, habitos, alimentacion, accidentes, ejercicioEmociones, menuSaludable, repasoNaturales2],
+      },
+      {
+        slug: 'tema-3',
+        title: 'Tema 3',
+        icon: '🐾',
+        exercises: [clasificamos, mamiferosAves, pecesReptilesAnfibios, invertebrados, habitats, clave, cuidamos, repasoNaturales3],
       },
     ],
   },

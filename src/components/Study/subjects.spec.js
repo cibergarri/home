@@ -104,6 +104,8 @@ describe("Julia's study pages", () => {
       { subject: 'naturales', unit: 'tema-1', exercise: 'repaso' },
       ...['salud', 'habitos', 'alimentacion', 'accidentes', 'ejercicio-emociones', 'menu-saludable', 'repaso']
         .map(exercise => ({ subject: 'naturales', unit: 'tema-2', exercise })),
+      ...['clasificamos', 'mamiferos-aves', 'peces-reptiles-anfibios', 'invertebrados', 'habitats', 'clave', 'cuidamos', 'repaso']
+        .map(exercise => ({ subject: 'naturales', unit: 'tema-3', exercise })),
       ...[
         ['welcome', ['family', 'greetings', 'whos-that', 'story', 'review']],
         ['unit-1', ['days-of-the-week', 'places-at-school', 'wheres', 'positions', 'rules-and-games', 'story-phrases', 'numbers', 'review']],

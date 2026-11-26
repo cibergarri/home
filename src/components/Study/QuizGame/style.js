@@ -148,3 +148,40 @@ export const Next = styled.button`
     box-shadow: 0 1px 0 #d95c3d;
   }
 `;
+
+// Tables to look at while answering, side by side when there is room.
+export const Tables = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+`;
+
+export const Table = styled.table`
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--s-card);
+  border: 2px solid var(--s-line);
+  caption {
+    caption-side: top;
+    padding: 8px 12px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-align: left;
+  }
+  th, td {
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+    border-top: 1px solid var(--s-line);
+  }
+  th {
+    width: 42%;
+    font-size: 0.85rem;
+    font-weight: 700;
+    opacity: 0.7;
+  }
+`;

@@ -12,6 +12,7 @@ import Compare, { signFor, sayComparison } from '../Compare';
 import { Instructions } from '../LabelMap/style';
 import {
   Card, Picture, Body, Question, Hint, Choices, Choice, ChoiceButton, SmallSpeaker, Next,
+  Tables, Table,
 } from './style';
 
 // The choices of a question in a mixed order, so the right one is not always first: the same order
@@ -45,10 +46,11 @@ export const mixed = (choices, seed) => {
 //
 // With `draw`, only that many of the questions are played, picked at random each time (the first
 // ones on the page drawn on the server, until the browser picks). With `translations`, each answer
-// has its Spanish behind a flag.
+// has its Spanish behind a flag. With `tables` (each a `title` and `rows` of a label and its
+// value), they stay above the questions to look at while answering: three menus to compare.
 export default function QuizGame({ exercise }) {
   const {
-    instructions, questions, keepOrder, draw, translations,
+    instructions, questions, keepOrder, draw, translations, tables,
   } = exercise;
   const text = useStrings();
   // An answer's Spanish, when the part gives it (`translations`, by answer), for its flag.
@@ -120,6 +122,23 @@ export default function QuizGame({ exercise }) {
   return (
     <>
       <Instructions>{instructions}</Instructions>
+      {tables && (
+        <Tables>
+          {tables.map(({ title, rows }) => (
+            <Table key={title}>
+              <caption>{title}</caption>
+              <tbody>
+                {rows.map(([label, value]) => (
+                  <tr key={label}>
+                    <th scope="row">{label}</th>
+                    <td>{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          ))}
+        </Tables>
+      )}
       <Card $picture={Boolean(scene)}>
         {scene && (
           <Picture $ratio={`${scene.width} / ${scene.height}`}>
